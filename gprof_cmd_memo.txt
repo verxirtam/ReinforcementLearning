@@ -1,0 +1,40 @@
+grep -F "`head -20 gmon_201401210353.txt | head -6 | tail -1 | sed -e "s/  */ /g" | cut -d " " -f 8-`" gmon_201401210353.txt | grep ^[[]
+
+
+grep -10 ^[[][^a-z]*RL::RandomIdx::Get\(\) gmon_201401210353.txt 
+
+
+daisuke@daisuke-ubuntu:~/workspace/ReinforcementLearning$ head -10 gmon_201401210353.txt 
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 13.19      1.12     1.12 28681488     0.00     0.00  RL::Random::UniformIdx(int)
+  9.78      1.95     0.83 14225742     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  8.72      2.69     0.74 28641484     0.00     0.00  RL::RandomIdx::Get() const
+  6.12      3.21     0.52        8    65.00   541.55  RL::EpsilonSoftOnPolicyMonteCarlo<RL::SimpleMDP>::PolicyEvaluation(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, unsigned int) const
+  5.65      3.69     0.48 52084669     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+daisuke@daisuke-ubuntu:~/workspace/ReinforcementLearning$ 
+
+
+
+-----------------------------------------------
+                0.00    0.00       4/28681488     EpsilonSoftOnPolicyMonteCarloTest_PolicyIteration_Test::TestBody() [5]
+                0.00    0.00   40000/28681488     RandomTest_UniformIdx_Test::TestBody() [236]
+                1.12    0.00 28641484/28681488     RL::RandomIdx::Get() const [7]
+[13]    13.2    1.12    0.00 28681488         RL::Random::UniformIdx(int) [13]
+-----------------------------------------------
+
+
+-----------------------------------------------
+                0.00    0.00    50000/28641484     RandomIdxTest_StatTest_Test::TestBody() [195]
+                0.00    0.01   140000/28641484     RL::SimpleMDP::GetEpisode(RL::Episode&) const [2]
+                0.74    1.48 28451484/28641484     RL::SimpleMDP::GetNextStep(RL::Step const&) const [4]
+[7]     26.2    0.74    1.49 28641484              RL::RandomIdx::Get() const [7]
+                1.12    0.00 28641484/28681488     RL::Random::UniformIdx(int) [13]
+                0.30    0.00 56541184/65393504     std::vector<unsigned int, std::allocator<unsigned int> >::operator[](unsigned int) const [18]
+                0.04    0.00   741784/ 1142005     RL::Random::UniformReal() [48]
+                0.02    0.00  3264132/ 3817244     std::vector<double, std::allocator<double> >::operator[](unsigned int) const [85]
+                0.01    0.00  1632066/ 1777517     std::vector<double, std::allocator<double> >::size() const [150]
+-----------------------------------------------

@@ -1,0 +1,311 @@
+[==========] Running 132 tests from 14 test cases.
+[----------] Global test environment set-up.
+[----------] 2 tests from Policy
+[ RUN      ] Policy.DefaultConstructor
+[       OK ] Policy.DefaultConstructor (0 ms)
+[ RUN      ] Policy.init_exception
+[       OK ] Policy.init_exception (0 ms)
+[----------] 2 tests from Policy (0 ms total)
+
+[----------] 3 tests from StochasticPolicy
+[ RUN      ] StochasticPolicy.Constructor0
+[       OK ] StochasticPolicy.Constructor0 (1 ms)
+[ RUN      ] StochasticPolicy.init_exception
+[       OK ] StochasticPolicy.init_exception (1 ms)
+[ RUN      ] StochasticPolicy.DefaultConstructor
+[       OK ] StochasticPolicy.DefaultConstructor (0 ms)
+[----------] 3 tests from StochasticPolicy (2 ms total)
+
+[----------] 1 test from StepTest
+[ RUN      ] StepTest.EqualityOperator
+[       OK ] StepTest.EqualityOperator (0 ms)
+[----------] 1 test from StepTest (1 ms total)
+
+[----------] 2 tests from EpisodeTest
+[ RUN      ] EpisodeTest.init_exception
+[       OK ] EpisodeTest.init_exception (0 ms)
+[ RUN      ] EpisodeTest.DefaultConstructor
+[       OK ] EpisodeTest.DefaultConstructor (0 ms)
+[----------] 2 tests from EpisodeTest (0 ms total)
+
+[----------] 1 test from SimpleMDPTest
+[ RUN      ] SimpleMDPTest.Constructor0
+[       OK ] SimpleMDPTest.Constructor0 (0 ms)
+[----------] 1 test from SimpleMDPTest (0 ms total)
+
+[----------] 1 test from RandomIdxTest
+[ RUN      ] RandomIdxTest.Constructor
+[       OK ] RandomIdxTest.Constructor (8 ms)
+[----------] 1 test from RandomIdxTest (8 ms total)
+
+[----------] 4 tests from EV3LineTracerTest
+[ RUN      ] EV3LineTracerTest.Constructor
+[       OK ] EV3LineTracerTest.Constructor (0 ms)
+[ RUN      ] EV3LineTracerTest.Init
+[       OK ] EV3LineTracerTest.Init (1 ms)
+[ RUN      ] EV3LineTracerTest.Init_Exception
+[       OK ] EV3LineTracerTest.Init_Exception (6 ms)
+[ RUN      ] EV3LineTracerTest.GetRegularPolicy
+[       OK ] EV3LineTracerTest.GetRegularPolicy (0 ms)
+[----------] 4 tests from EV3LineTracerTest (7 ms total)
+
+[----------] 20 tests from InstantiatePolicyTest/PolicyTest
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyConstructor/0
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyConstructor/0 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyConstructor/1
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyConstructor/1 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyConstructor/2
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyConstructor/2 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyConstructor/3
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyConstructor/3 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/0
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/0 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/1
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/1 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/2
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/2 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/3
+[       OK ] InstantiatePolicyTest/PolicyTest.CopyAssignmentOperator/3 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.EqualityOperator/0
+[       OK ] InstantiatePolicyTest/PolicyTest.EqualityOperator/0 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.EqualityOperator/1
+[       OK ] InstantiatePolicyTest/PolicyTest.EqualityOperator/1 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.EqualityOperator/2
+[       OK ] InstantiatePolicyTest/PolicyTest.EqualityOperator/2 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.EqualityOperator/3
+[       OK ] InstantiatePolicyTest/PolicyTest.EqualityOperator/3 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.init/0
+[       OK ] InstantiatePolicyTest/PolicyTest.init/0 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.init/1
+[       OK ] InstantiatePolicyTest/PolicyTest.init/1 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.init/2
+[       OK ] InstantiatePolicyTest/PolicyTest.init/2 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.init/3
+[       OK ] InstantiatePolicyTest/PolicyTest.init/3 (1 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.change/0
+[       OK ] InstantiatePolicyTest/PolicyTest.change/0 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.change/1
+[       OK ] InstantiatePolicyTest/PolicyTest.change/1 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.change/2
+[       OK ] InstantiatePolicyTest/PolicyTest.change/2 (0 ms)
+[ RUN      ] InstantiatePolicyTest/PolicyTest.change/3
+[       OK ] InstantiatePolicyTest/PolicyTest.change/3 (0 ms)
+[----------] 20 tests from InstantiatePolicyTest/PolicyTest (2 ms total)
+
+[----------] 24 tests from InstantiateStochasticPolicyTest/StochasticPolicyTest
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/0
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/0 (0 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/1
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/1 (2 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/2
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/2 (18 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/3
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.Constructor1/3 (70 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/0
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/0 (0 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/1
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/1 (1 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/2
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/2 (9 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/3
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyConstructor/3 (37 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/0
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/0 (0 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/1
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/1 (1 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/2
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/2 (10 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/3
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.CopyAssignmentOperator/3 (35 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/0
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/0 (0 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/1
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/1 (2 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/2
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/2 (27 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/3
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.EqualityOperator/3 (102 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/0
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/0 (0 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/1
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/1 (1 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/2
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/2 (10 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/3
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability0/3 (34 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/0
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/0 (0 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/1
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/1 (2 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/2
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/2 (17 ms)
+[ RUN      ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/3
+[       OK ] InstantiateStochasticPolicyTest/StochasticPolicyTest.SetProbability1/3 (65 ms)
+[----------] 24 tests from InstantiateStochasticPolicyTest/StochasticPolicyTest (444 ms total)
+
+[----------] 24 tests from InstantiateEpisodeTest/EpisodeTest
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.Constructor0/0
+[       OK ] InstantiateEpisodeTest/EpisodeTest.Constructor0/0 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.Constructor0/1
+[       OK ] InstantiateEpisodeTest/EpisodeTest.Constructor0/1 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.Constructor0/2
+[       OK ] InstantiateEpisodeTest/EpisodeTest.Constructor0/2 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.Constructor0/3
+[       OK ] InstantiateEpisodeTest/EpisodeTest.Constructor0/3 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/0
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/0 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/1
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/1 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/2
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/2 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/3
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyConstructor/3 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/0
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/0 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/1
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/1 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/2
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/2 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/3
+[       OK ] InstantiateEpisodeTest/EpisodeTest.CopyAssignmentOperator/3 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/0
+[       OK ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/0 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/1
+[       OK ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/1 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/2
+[       OK ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/2 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/3
+[       OK ] InstantiateEpisodeTest/EpisodeTest.EqualityOperator/3 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.SetStep/0
+[       OK ] InstantiateEpisodeTest/EpisodeTest.SetStep/0 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.SetStep/1
+[       OK ] InstantiateEpisodeTest/EpisodeTest.SetStep/1 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.SetStep/2
+[       OK ] InstantiateEpisodeTest/EpisodeTest.SetStep/2 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.SetStep/3
+[       OK ] InstantiateEpisodeTest/EpisodeTest.SetStep/3 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.AddStep/0
+[       OK ] InstantiateEpisodeTest/EpisodeTest.AddStep/0 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.AddStep/1
+[       OK ] InstantiateEpisodeTest/EpisodeTest.AddStep/1 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.AddStep/2
+[       OK ] InstantiateEpisodeTest/EpisodeTest.AddStep/2 (0 ms)
+[ RUN      ] InstantiateEpisodeTest/EpisodeTest.AddStep/3
+[       OK ] InstantiateEpisodeTest/EpisodeTest.AddStep/3 (0 ms)
+[----------] 24 tests from InstantiateEpisodeTest/EpisodeTest (2 ms total)
+
+[----------] 21 tests from InstantiateSimpleMDPTest/SimpleMDPTest
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.Constructor1/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.Constructor1/0 (0 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.Constructor1/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.Constructor1/1 (1 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.Constructor1/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.Constructor1/2 (3 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetPolicy/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetPolicy/0 (1 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetPolicy/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetPolicy/1 (1 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetPolicy/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetPolicy/2 (3 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetRegularPolicy/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetRegularPolicy/0 (0 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetRegularPolicy/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetRegularPolicy/1 (1 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetRegularPolicy/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetRegularPolicy/2 (3 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetDiscountRate/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetDiscountRate/0 (0 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetDiscountRate/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetDiscountRate/1 (2 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetDiscountRate/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetDiscountRate/2 (3 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetNextStep/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetNextStep/0 (76 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetNextStep/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetNextStep/1 (376 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetNextStep/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetNextStep/2 (752 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode0/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode0/0 (126 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode0/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode0/1 (494 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode0/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode0/2 (835 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode1/0
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode1/0 (125 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode1/1
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode1/1 (1270 ms)
+[ RUN      ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode1/2
+[       OK ] InstantiateSimpleMDPTest/SimpleMDPTest.GetEpisode1/2 (3011 ms)
+[----------] 21 tests from InstantiateSimpleMDPTest/SimpleMDPTest (7085 ms total)
+
+[----------] 8 tests from InstantiateRandomTest/RandomTest
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformIdx/0
+[       OK ] InstantiateRandomTest/RandomTest.UniformIdx/0 (2 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformIdx/1
+[       OK ] InstantiateRandomTest/RandomTest.UniformIdx/1 (1 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformIdx/2
+[       OK ] InstantiateRandomTest/RandomTest.UniformIdx/2 (2 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformIdx/3
+[       OK ] InstantiateRandomTest/RandomTest.UniformIdx/3 (1 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformReal/0
+[       OK ] InstantiateRandomTest/RandomTest.UniformReal/0 (17 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformReal/1
+[       OK ] InstantiateRandomTest/RandomTest.UniformReal/1 (17 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformReal/2
+[       OK ] InstantiateRandomTest/RandomTest.UniformReal/2 (17 ms)
+[ RUN      ] InstantiateRandomTest/RandomTest.UniformReal/3
+[       OK ] InstantiateRandomTest/RandomTest.UniformReal/3 (18 ms)
+[----------] 8 tests from InstantiateRandomTest/RandomTest (75 ms total)
+
+[----------] 5 tests from InstantiateRandomIdxTest/RandomIdxTest
+[ RUN      ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/0
+[       OK ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/0 (3 ms)
+[ RUN      ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/1
+[       OK ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/1 (3 ms)
+[ RUN      ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/2
+[       OK ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/2 (4 ms)
+[ RUN      ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/3
+[       OK ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/3 (32 ms)
+[ RUN      ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/4
+[       OK ] InstantiateRandomIdxTest/RandomIdxTest.StatTest/4 (73 ms)
+[----------] 5 tests from InstantiateRandomIdxTest/RandomIdxTest (115 ms total)
+
+[----------] 16 tests from InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/0
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/0 (4 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/1
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/1 (39 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/2
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/2 (928 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/3
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyIteration/3 (1864 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/0
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/0 (2 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/1
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/1 (7 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/2
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/2 (38 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/3
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.EpsilonGreedy/3 (83 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/0
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/0 (212 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/1
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/1 (552 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/2
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/2 (2130 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/3
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyEvaluation/3 (4035 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/0
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/0 (1 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/1
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/1 (27 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/2
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/2 (869 ms)
+[ RUN      ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/3
+[       OK ] InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest.PolicyImprovement/3 (3633 ms)
+[----------] 16 tests from InstantiateEpsilonSoftOnPolicyMonteCarloTest/EpsilonSoftOnPolicyMonteCarloTest (14424 ms total)
+
+[----------] Global test environment tear-down
+[==========] 132 tests from 14 test cases ran. (22167 ms total)
+[  PASSED  ] 132 tests.

@@ -1,0 +1,85 @@
+==> gmon_201401210351.txt <==
+
+==> gmon_201401210353.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 13.19      1.12     1.12 28681488     0.00     0.00  RL::Random::UniformIdx(int)
+  9.78      1.95     0.83 14225742     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  8.72      2.69     0.74 28641484     0.00     0.00  RL::RandomIdx::Get() const
+  6.12      3.21     0.52        8    65.00   541.55  RL::EpsilonSoftOnPolicyMonteCarlo<RL::SimpleMDP>::PolicyEvaluation(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, unsigned int) const
+  5.65      3.69     0.48 52084669     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+
+==> gmon_201401210443.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 13.28      1.13     1.13 27864896     0.00     0.00  RL::Random::UniformIdx(int)
+  9.64      1.95     0.82 27824892     0.00     0.00  RL::RandomIdx::Get() const
+  9.52      2.76     0.81 13817446     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  6.46      3.31     0.55        8    68.75   545.58  RL::EpsilonSoftOnPolicyMonteCarlo<RL::SimpleMDP>::PolicyEvaluation(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, unsigned int) const
+  5.52      3.78     0.47 50873765     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+
+==> gmon_201401210449.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 13.28      1.13     1.13 27864896     0.00     0.00  RL::Random::UniformIdx(int)
+  9.64      1.95     0.82 27824892     0.00     0.00  RL::RandomIdx::Get() const
+  9.52      2.76     0.81 13817446     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  6.46      3.31     0.55        8    68.75   545.58  RL::EpsilonSoftOnPolicyMonteCarlo<RL::SimpleMDP>::PolicyEvaluation(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, unsigned int) const
+  5.52      3.78     0.47 50873765     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+
+==> gmon_201401210453.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 13.28      1.13     1.13 27864896     0.00     0.00  RL::Random::UniformIdx(int)
+  9.64      1.95     0.82 27824892     0.00     0.00  RL::RandomIdx::Get() const
+  9.52      2.76     0.81 13817446     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  6.46      3.31     0.55        8    68.75   545.58  RL::EpsilonSoftOnPolicyMonteCarlo<RL::SimpleMDP>::PolicyEvaluation(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, unsigned int) const
+  5.52      3.78     0.47 50873765     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+
+==> gmon_201401210454.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 13.28      1.13     1.13 27864896     0.00     0.00  RL::Random::UniformIdx(int)
+  9.64      1.95     0.82 27824892     0.00     0.00  RL::RandomIdx::Get() const
+  9.52      2.76     0.81 13817446     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  6.46      3.31     0.55        8    68.75   545.58  RL::EpsilonSoftOnPolicyMonteCarlo<RL::SimpleMDP>::PolicyEvaluation(std::vector<std::vector<double, std::allocator<double> >, std::allocator<std::vector<double, std::allocator<double> > > >&, unsigned int) const
+  5.52      3.78     0.47 50873765     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+
+==> gmon_201401210524.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 30.19      6.12     6.12 14842258     0.00     0.00  RL::RandomIdx::GetProbability(unsigned int) const
+ 12.81      8.72     2.60 292883060     0.00     0.00  std::vector<unsigned int, std::allocator<unsigned int> >::operator[](unsigned int) const
+  7.10     10.16     1.44 28076176     0.00     0.00  RL::Random::UniformIdx(int)
+  4.73     11.12     0.96 28036172     0.00     0.00  RL::RandomIdx::Get() const
+  4.24     11.98     0.86 13923086     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+
+==> gmon_201401210607.txt <==
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls  ms/call  ms/call  name    
+ 12.28      1.18     1.18 30204528     0.00     0.00  RL::Random::UniformIdx(int)
+  8.38      1.99     0.81 14987262     0.00     0.00  RL::SimpleMDP::GetNextStep(RL::Step const&) const
+  7.34      2.69     0.70 30164524     0.00     0.00  RL::RandomIdx::Get() const
+  5.15      3.19     0.49 54386145     0.00     0.00  std::vector<RL::Step, std::allocator<RL::Step> >::operator[](unsigned int) const
+  4.79      3.65     0.46 54386145     0.00     0.00  RL::Episode::operator[](unsigned int) const
