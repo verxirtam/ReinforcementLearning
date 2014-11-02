@@ -1,0 +1,62 @@
+GoogleTestの設定メモ
+
+
+daisuke@daisuke-ubuntu:/usr/local$ 
+daisuke@daisuke-ubuntu:/usr/local$ 
+daisuke@daisuke-ubuntu:/usr/local$ pwd
+/usr/local
+daisuke@daisuke-ubuntu:/usr/local$ 
+daisuke@daisuke-ubuntu:/usr/local$ ls -ltr | grep gtest
+lrwxrwxrwx  1 root    root      11 11月  2 13:02 gtest -> gtest-1.7.0
+drwxr-xr-x 16 daisuke daisuke 4096 11月  2 13:11 gtest-1.7.0
+daisuke@daisuke-ubuntu:/usr/local$ 
+
+daisuke@daisuke-ubuntu:/usr/local/include$ ls -ltr
+合計 0
+lrwxrwxrwx 1 root root 22 11月  2 13:19 gtest -> ../gtest/include/gtest
+daisuke@daisuke-ubuntu:/usr/local/include$ 
+daisuke@daisuke-ubuntu:/usr/local/include$ 
+
+
+daisuke@daisuke-ubuntu:/usr/local$ ls -ltr lib/
+合計 8
+drwxrwsr-x 4 root staff 4096  3月 22  2014 python2.7
+drwxrwsr-x 3 root staff 4096  3月 22  2014 python3.3
+lrwxrwxrwx 1 root root    19 11月  2 13:07 libgtest.a -> ../gtest/libgtest.a
+lrwxrwxrwx 1 root root    24 11月  2 13:07 libgtest_main.a -> ../gtest/libgtest_main.a
+daisuke@daisuke-ubuntu:/usr/local$ 
+daisuke@daisuke-ubuntu:/usr/local$ 
+daisuke@daisuke-ubuntu:/usr/local$ cd gtest-1.7.0/
+daisuke@daisuke-ubuntu:/usr/local/gtest-1.7.0$ 
+daisuke@daisuke-ubuntu:/usr/local/gtest-1.7.0$ ls -ltr
+合計 1740
+-r--r--r-- 1 daisuke daisuke   2574  9月 19  2013 configure.ac
+-r--r--r-- 1 daisuke daisuke  16090  9月 19  2013 README
+-r--r--r-- 1 daisuke daisuke   9739  9月 19  2013 Makefile.am
+-r--r--r-- 1 daisuke daisuke   1475  9月 19  2013 LICENSE
+-r--r--r-- 1 daisuke daisuke   1358  9月 19  2013 CONTRIBUTORS
+-r--r--r-- 1 daisuke daisuke   9120  9月 19  2013 CMakeLists.txt
+-r--r--r-- 1 daisuke daisuke   6645  9月 19  2013 CHANGES
+-rw-r--r-- 1 daisuke daisuke  43769  9月 19  2013 aclocal.m4
+-rwxr-xr-x 1 daisuke daisuke 564464  9月 19  2013 configure
+-rw-r--r-- 1 daisuke daisuke  59044  9月 19  2013 Makefile.in
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 cmake
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 build-aux
+drwxr-xr-x 3 daisuke daisuke   4096 11月  2 10:38 fused-src
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 codegear
+drwxr-xr-x 3 daisuke daisuke   4096 11月  2 10:38 include
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 make
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 m4
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 msvc
+drwxr-xr-x 3 daisuke daisuke   4096 11月  2 10:38 scripts
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 samples
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 src
+drwxr-xr-x 2 daisuke daisuke   4096 11月  2 10:38 test
+drwxr-xr-x 7 daisuke daisuke   4096 11月  2 10:38 xcode
+-rw-rw-r-- 1 daisuke daisuke  12054 11月  2 11:41 CMakeCache.txt
+-rw-rw-r-- 1 daisuke daisuke   1648 11月  2 11:41 cmake_install.cmake
+-rw-rw-r-- 1 daisuke daisuke   6110 11月  2 11:41 Makefile
+-rw-rw-r-- 1 daisuke daisuke 960574 11月  2 11:41 libgtest.a
+-rw-rw-r-- 1 daisuke daisuke   2816 11月  2 11:41 libgtest_main.a
+drwxrwxr-x 6 daisuke daisuke   4096 11月  2 11:41 CMakeFiles
+daisuke@daisuke-ubuntu:/usr/local/gtest-1.7.0$ 
