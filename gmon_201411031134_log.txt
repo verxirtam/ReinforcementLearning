@@ -1,0 +1,29 @@
+PWD=/home/daisuke/git/ReinforcementLearning
+_=./Debug/ReinforcementLearning
+0
+Note: Google Test filter = *EV3LineTracerTest*
+[==========] Running 4 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 4 tests from EV3LineTracerTest
+[ RUN      ] EV3LineTracerTest.Constructor
+[       OK ] EV3LineTracerTest.Constructor (0 ms)
+[ RUN      ] EV3LineTracerTest.Init
+unknown file: Failure
+C++ exception with description "EV3LineTracer::Init() : can not open /home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer.ini" thrown in the test body.
+[  FAILED  ] EV3LineTracerTest.Init (0 ms)
+[ RUN      ] EV3LineTracerTest.Init_Exception
+[       OK ] EV3LineTracerTest.Init_Exception (1 ms)
+[ RUN      ] EV3LineTracerTest.GetRegularPolicy
+unknown file: Failure
+C++ exception with description "EV3LineTracer::Init() : can not open /home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer.ini" thrown in the test body.
+[  FAILED  ] EV3LineTracerTest.GetRegularPolicy (0 ms)
+[----------] 4 tests from EV3LineTracerTest (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 4 tests from 1 test case ran. (1 ms total)
+[  PASSED  ] 2 tests.
+[  FAILED  ] 2 tests, listed below:
+[  FAILED  ] EV3LineTracerTest.Init
+[  FAILED  ] EV3LineTracerTest.GetRegularPolicy
+
+ 2 FAILED TESTS
