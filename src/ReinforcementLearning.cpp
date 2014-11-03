@@ -1438,6 +1438,8 @@ TEST(EV3LineTracerTest,GetRegularPolicy)
 //単体テストの実行
 int main(int argc, char** argv)
 {
+	cout<<system("printenv | grep ReinforcementLearning | sort")<<endl;
+
 	//::testing::GTEST_FLAG(filter)="*RandomIdxTest*";
 	::testing::GTEST_FLAG(filter)="*EV3LineTracerTest*";
 
