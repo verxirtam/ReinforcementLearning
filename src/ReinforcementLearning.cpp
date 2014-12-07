@@ -9,6 +9,8 @@
 #include <gtest/gtest.h>
 
 #include <iostream>
+#include <sstream>
+
 #include "Policy.h"
 #include "Episode.h"
 #include "SimpleMDP.h"
@@ -1354,8 +1356,10 @@ TEST(EV3LineTracerTest,Init)
 	//存在しないファイル名を指定したコンストラクタの場合→例外発生
 	EV3LineTracer ev3_1("/notexist.ini");
 	EXPECT_THROW(ev3_1.Init(),std::ios_base::failure);
+
+
 	//ファイルが存在する場合は例外発生なし
-	EV3LineTracer ev3_2("/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer.ini");
+	EV3LineTracer ev3_2("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	//EXPECT_NO_THROW(ev3_2.Init());
 	ev3_2.Init();
 	EXPECT_EQ(ev3_2.GetInterval(),11);
@@ -1372,29 +1376,29 @@ TEST(EV3LineTracerTest,Init_Exception)
 	vector<EV3LineTracer> ev3(testcount);
 	vector<string> configfilepath(testcount);
 
-	configfilepath[ 0]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR000_FormatIdentifier.ini";
-	configfilepath[ 1]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR100_StateCount.ini";
-	configfilepath[ 2]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR101_StateCount_UnnecessaryData.ini";
-	configfilepath[ 3]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR200_State_StateIndex.ini";
-	configfilepath[ 4]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR201_State_RefMax.ini";
-	configfilepath[ 5]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR202_State_ControlCount.ini";
-	configfilepath[ 6]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR203_State_UnnecessaryData.ini";
-	configfilepath[ 7]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR204_State_InvalidData1.ini";
-	configfilepath[ 8]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR205_State_InvalidData2.ini";
-	configfilepath[ 9]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR300_Control_ControlIndex.ini";
-	configfilepath[10]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR301_Control_StateIndex.ini";
-	configfilepath[11]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR302_Control_LMotorSpeed.ini";
-	configfilepath[12]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR303_Control_RMotorSpeed.ini";
-	configfilepath[13]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR304_Control_UnnecessaryData.ini";
-	configfilepath[14]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR305_Control_InvalidData1.ini";
-	configfilepath[15]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR306_Control_InvalidData2.ini";
-	configfilepath[16]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR400_RegularPolicy_StateIndex.ini";
-	configfilepath[17]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR401_RegularPolicy_Control.ini";
-	configfilepath[18]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR402_RegularPolicy_UnnecessaryData.ini";
-	configfilepath[19]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR403_RegularPolicy_InvalidData1.ini";
-	configfilepath[20]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR404_RegularPolicy_InvalidData2.ini";
-	configfilepath[21]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR500_RegularPolicy_InvalidData.ini";
-	configfilepath[22]="/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer_ERR501_RegularPolicy_UnnecessaryData.ini";
+	configfilepath[ 0]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR000_FormatIdentifier.ini";
+	configfilepath[ 1]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR100_StateCount.ini";
+	configfilepath[ 2]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR101_StateCount_UnnecessaryData.ini";
+	configfilepath[ 3]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR200_State_StateIndex.ini";
+	configfilepath[ 4]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR201_State_RefMax.ini";
+	configfilepath[ 5]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR202_State_ControlCount.ini";
+	configfilepath[ 6]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR203_State_UnnecessaryData.ini";
+	configfilepath[ 7]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR204_State_InvalidData1.ini";
+	configfilepath[ 8]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR205_State_InvalidData2.ini";
+	configfilepath[ 9]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR300_Control_ControlIndex.ini";
+	configfilepath[10]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR301_Control_StateIndex.ini";
+	configfilepath[11]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR302_Control_LMotorSpeed.ini";
+	configfilepath[12]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR303_Control_RMotorSpeed.ini";
+	configfilepath[13]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR304_Control_UnnecessaryData.ini";
+	configfilepath[14]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR305_Control_InvalidData1.ini";
+	configfilepath[15]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR306_Control_InvalidData2.ini";
+	configfilepath[16]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR400_RegularPolicy_StateIndex.ini";
+	configfilepath[17]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR401_RegularPolicy_Control.ini";
+	configfilepath[18]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR402_RegularPolicy_UnnecessaryData.ini";
+	configfilepath[19]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR403_RegularPolicy_InvalidData1.ini";
+	configfilepath[20]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR404_RegularPolicy_InvalidData2.ini";
+	configfilepath[21]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR500_RegularPolicy_InvalidData.ini";
+	configfilepath[22]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR501_RegularPolicy_UnnecessaryData.ini";
 
 
 	for(idx i=0;i<testcount;i++)
@@ -1407,7 +1411,7 @@ TEST(EV3LineTracerTest,Init_Exception)
 
 TEST(EV3LineTracerTest,GetRegularPolicy)
 {
-	EV3LineTracer ev3("/home/daisuke/workspace/ReinforcementLearning/res/EV3LineTracer.ini");
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
 	Policy p;
 	ev3.GetRegularPolicy(p);
@@ -1438,10 +1442,9 @@ TEST(EV3LineTracerTest,GetRegularPolicy)
 //単体テストの実行
 int main(int argc, char** argv)
 {
-	cout<<system("printenv | grep ReinforcementLearning | sort")<<endl;
 
 	//::testing::GTEST_FLAG(filter)="*RandomIdxTest*";
-	::testing::GTEST_FLAG(filter)="*EV3LineTracerTest*";
+	//::testing::GTEST_FLAG(filter)="*EV3LineTracerTest*";
 
 
 	::testing::InitGoogleTest(&argc,argv);
