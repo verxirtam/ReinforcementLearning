@@ -1495,12 +1495,13 @@ TEST(TSVInputContextTest,nextToken2)
 }
 TEST(TSVInputContextTest,skipToken)
 {
-	string teststring="AAA\tBBB\tCCC";
+	string teststring="AAA\tBBB\tCCC\tDDD";
 	std::istringstream is(teststring);
 	RL::TSVInputContext tic(is);
 	EXPECT_NO_THROW(tic.skipToken("AAA"));
 	EXPECT_NO_THROW(tic.skipToken("BBB"));
 	EXPECT_NO_THROW(tic.skipToken("CCC"));
+	EXPECT_THROW(tic.skipToken("ZZZ"), std::exception);
 }
 TEST(TSVInputContextTest,skipToken_Exception)
 {
