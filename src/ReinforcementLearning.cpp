@@ -16,7 +16,9 @@
 #include "SimpleMDP.h"
 #include "Random.h"
 #include "EpsilonSoftOnPolicyMonteCarlo.h"
-#include "EV3LineTracer.h"
+#include "EV3LineTracer/EV3LineTracer.h"
+#include "Communication/TSVOutputContext.h"
+#include "Communication/TSVInputContext.h"
 
 using namespace std;
 using namespace RL;
@@ -1433,6 +1435,108 @@ TEST(EV3LineTracerTest,GetRegularPolicy)
 		EXPECT_EQ(p[i],c[i]);
 	}
 }
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+// RL::TSVOutputContext
+/////////////////////////////////////////////////////////////////////
+TEST(TSVOutputContextTest,Constructor)
+{
+	EXPECT_NO_THROW(RL::TSVOutputContext toc(std::ostringstream()));
+
+}
+
+TEST(TSVOutputContextTest,writeToken)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	toc.writeToken("AAA");
+	os.flush();
+	EXPECT_TRUE(0==os.str().compare("AAA"));
+}
+TEST(TSVOutputContextTest,newLine)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	toc.writeToken("AAA");
+	toc.newLine();
+	toc.writeToken("BBB");
+	os.flush();
+	EXPECT_TRUE(0==os.str().compare("AAA\nBBB"));
+}
+/////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+// RL::TSVInputContext
+/////////////////////////////////////////////////////////////////////
+TEST(TSVInputContextTest,Constructor)
+{
+	EXPECT_NO_THROW(RL::TSVInputContext tic(std::istringstream()));
+
+}
+
+TEST(TSVInputContextTest,nextToken1)
+{
+	string aaa="AAA";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	string s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare(aaa));
+}
+TEST(TSVInputContextTest,nextToken2)
+{
+	string teststring="AAA\tBBB\tCCC";
+	std::istringstream is(teststring);
+	RL::TSVInputContext tic(is);
+	string s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("AAA"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("BBB"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("CCC"));
+}
+TEST(TSVInputContextTest,skipToken)
+{
+	string teststring="AAA\tBBB\tCCC";
+	std::istringstream is(teststring);
+	RL::TSVInputContext tic(is);
+	EXPECT_NO_THROW(tic.skipToken("AAA"));
+	EXPECT_NO_THROW(tic.skipToken("BBB"));
+	EXPECT_NO_THROW(tic.skipToken("CCC"));
+}
+TEST(TSVInputContextTest,skipToken_Exception)
+{
+	string teststring="AAA\tBBB\tCCC";
+	std::istringstream is(teststring);
+	RL::TSVInputContext tic(is);
+	EXPECT_NO_THROW(tic.skipToken("AAA"));
+	EXPECT_THROW(tic.skipToken("DDD"), std::exception);
+}
+TEST(TSVInputContextTest,skipReturn)
+{
+	string aaa="AAA\nBBB";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	string s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("AAA"));
+	tic.skipReturn();
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("BBB"));
+}
+TEST(TSVInputContextTest,hasNextToken)
+{
+	string aaa="AAA\tBBB\nCCC";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	EXPECT_TRUE(tic.hasNextToken());
+	string s=tic.nextToken();//"AAA"を取得
+	EXPECT_TRUE(tic.hasNextToken());
+	s=tic.nextToken();//"BBB"を取得
+	EXPECT_FALSE(tic.hasNextToken());
+	tic.skipReturn();//2行目に移動
+	EXPECT_TRUE(tic.hasNextToken());
+	s=tic.nextToken();//"CCC"を取得
+	EXPECT_FALSE(tic.hasNextToken());
+}
+
 
 /////////////////////////////////////////////////////////////////////
 
@@ -1445,6 +1549,8 @@ int main(int argc, char** argv)
 
 	//::testing::GTEST_FLAG(filter)="*RandomIdxTest*";
 	//::testing::GTEST_FLAG(filter)="*EV3LineTracerTest*";
+	//::testing::GTEST_FLAG(filter)="*TSVOutputContext*";
+	::testing::GTEST_FLAG(filter)="*TSVInputContext*";
 
 
 	::testing::InitGoogleTest(&argc,argv);
