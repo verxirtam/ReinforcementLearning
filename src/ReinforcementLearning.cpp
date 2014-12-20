@@ -1493,6 +1493,18 @@ TEST(TSVInputContextTest,nextToken2)
 	s=tic.nextToken();
 	EXPECT_TRUE(0==s.compare("CCC"));
 }
+TEST(TSVInputContextTest,nextToken3)
+{
+	string teststring="AAA\tB B\tC  ";
+	std::istringstream is(teststring);
+	RL::TSVInputContext tic(is);
+	string s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("AAA"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("B B"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("C  "));
+}
 TEST(TSVInputContextTest,skipToken)
 {
 	string teststring="AAA\tBBB\tCCC\tDDD";
@@ -1536,6 +1548,39 @@ TEST(TSVInputContextTest,hasNextToken)
 	EXPECT_TRUE(tic.hasNextToken());
 	s=tic.nextToken();//"CCC"を取得
 	EXPECT_FALSE(tic.hasNextToken());
+}
+
+TEST(TSVInputContextTest,deleteComment)
+{
+	string aaa="AAA\tBBB\tCCC\t\t;Comment\tComment";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	EXPECT_TRUE(tic.hasNextToken());
+	string s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("AAA"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("BBB"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("CCC"));
+	EXPECT_TRUE(false==tic.hasNextToken());
+}
+TEST(TSVInputContextTest,deleteComment2)
+{
+	string aaa="AAA\tBBB\tCCC\t\t   ;Comment\tComment";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	EXPECT_TRUE(tic.hasNextToken());
+	string s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("AAA"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("BBB"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("CCC"));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare(""));
+	s=tic.nextToken();
+	EXPECT_TRUE(0==s.compare("   "));
+	EXPECT_TRUE(false==tic.hasNextToken());
 }
 
 
