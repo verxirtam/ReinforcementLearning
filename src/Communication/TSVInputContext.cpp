@@ -46,20 +46,28 @@ void TSVInputContext::newLine()
 
 	//コメントを含む一行分の文字列
 	string linestring_with_comment;
-	//入力ストリームから一行分を取得
-	getline(input, linestring_with_comment);
+	if(input.eof())
+	{
+		linestring_with_comment="";
+	}
+	else
+	{
+		//入力ストリームから一行分を取得
+		getline(input, linestring_with_comment);
 
+		//ストリームからの取得に失敗した場合は例外発出
+		// TODO 初めて終端に達した時は例外を出さないようにする。
+		if (!input)
+		{
+			std::string msg("invalid file format ( can not read line )");
+			throw std::ios_base::failure(msg);
+		}
+	}
 	//コメントを除いた一行分の文字列
 	string linestring;
 	//コメントを除いた行を取得
 	deleteComment(linestring_with_comment,linestring);
 
-	//ストリームからの取得に失敗した場合は例外発出
-	if (!input)
-	{
-		std::string msg("invalid file format ( can not read line )");;
-		throw std::ios_base::failure(msg);
-	}
 
 	//現在行の内容をクリアする
 	line.clear();
@@ -112,7 +120,7 @@ std::string TSVInputContext::nextToken()
 }
 
 // 現在のTokenがskipStringであることを確認し現在のTokenを1つ進める
-void TSVInputContext::skipToken(std::string skipString)
+void TSVInputContext::skipToken(const std::string skipString)
 {
 	// 次のTokenが無ければ例外発生
 	if (!hasNextToken())
@@ -133,7 +141,7 @@ void TSVInputContext::skipToken(std::string skipString)
 
 }
 
-// 次のTokenが行末であることを確認し現在のTokenを次の行の初めに進める
+// 次のTokenが行末であることを確認し現在のTokenを次の行の先頭に進める
 void TSVInputContext::skipReturn(void)
 {
 	//現在位置が行末かを確認

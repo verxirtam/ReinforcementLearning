@@ -17,7 +17,6 @@
 #include "../Policy.h"
 
 
-
 namespace RL
 {
 
@@ -197,6 +196,11 @@ public:
 	{
 		p.Verify(*this);
 		this->CurrentPolicy=p;
+	}
+	//Intervalの設定
+	void setInterval(idx i)
+	{
+		Interval=i;
 	}
 
 };

@@ -19,6 +19,8 @@
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "Communication/TSVOutputContext.h"
 #include "Communication/TSVInputContext.h"
+#include "EV3LineTracer/InputEV3Linetracer_1_0.h"
+#include "EV3LineTracer/InputConfigFile.h"
 
 using namespace std;
 using namespace RL;
@@ -1583,6 +1585,27 @@ TEST(TSVInputContextTest,deleteComment2)
 	EXPECT_TRUE(false==tic.hasNextToken());
 }
 
+TEST(InputConfigFileTest,Constractor)
+{
+	string aaa="EV3LineTracer_1.0\n10\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::InputEV3Linetracer_1_0 iev3(ev3);
+	RL::InputConfigFile icf(iev3);
+}
+TEST(InputConfigFileTest,process)
+{
+	string aaa="EV3LineTracer_1.0\n10\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::InputEV3Linetracer_1_0 iev3(ev3);
+	RL::InputConfigFile icf(iev3);
+	iev3.process(tic);
+}
+
+
 
 /////////////////////////////////////////////////////////////////////
 
@@ -1596,7 +1619,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*RandomIdxTest*";
 	//::testing::GTEST_FLAG(filter)="*EV3LineTracerTest*";
 	//::testing::GTEST_FLAG(filter)="*TSVOutputContext*";
-	::testing::GTEST_FLAG(filter)="*TSVInputContext*";
+	::testing::GTEST_FLAG(filter)="*Input*";
 
 
 	::testing::InitGoogleTest(&argc,argv);

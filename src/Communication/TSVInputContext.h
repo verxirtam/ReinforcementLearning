@@ -44,7 +44,7 @@ public:
 	virtual std::string nextToken();
 
 	// 次のTokenがskipStringであることを確認し現在のTokenを1つ進める
-	virtual void skipToken(std::string skipString);
+	virtual void skipToken(const std::string skipString);
 
 	// 次のTokenが行末であることを確認し現在のTokenを次の行の初めに進める
 	virtual void skipReturn(void);
