@@ -17,6 +17,7 @@
 #include "../Policy.h"
 
 
+
 namespace RL
 {
 
@@ -201,6 +202,11 @@ public:
 	void setInterval(idx i)
 	{
 		Interval=i;
+	}
+	//StateCountの設定
+	void setStateCount(idx sc)
+	{
+		StateCount=sc;
 	}
 
 };

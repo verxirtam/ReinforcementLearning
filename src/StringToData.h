@@ -9,6 +9,7 @@
 #define STRINGTODATA_H_
 
 #include <string>
+#include <sstream>
 #include "RLUtility.h"
 
 namespace RL
@@ -38,6 +39,10 @@ T StringToData::parseTo(const std::string &s)
 	T t;
 	std::istringstream iss(s);
 	iss >> t;
+	if(iss.fail())
+	{
+		throw std::ios_base::failure("invalid token.");
+	}
 	return t;
 }
 

@@ -32,6 +32,8 @@ private:
 	void deleteComment(const std::string& line, std::string& out);
 	//一行分の文字列の初期化
 	void newLine();
+	void splitLineString(const std::string& linestring);
+
 public:
 	TSVInputContext(std::istream &is):position(0),separater('\t'),input(is),line()
 	{

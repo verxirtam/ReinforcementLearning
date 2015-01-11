@@ -21,6 +21,7 @@
 #include "Communication/TSVInputContext.h"
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
+#include "EV3LineTracer/ReadStateCount.h"
 
 using namespace std;
 using namespace RL;
@@ -1585,6 +1586,53 @@ TEST(TSVInputContextTest,deleteComment2)
 	EXPECT_TRUE(false==tic.hasNextToken());
 }
 
+TEST(ReadIntervalTest,Constractor)
+{
+	string aaa="10\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadInterval ri(ev3);
+}
+TEST(ReadIntervalTest,Process)
+{
+	string aaa="10\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadInterval ri(ev3);
+	ri.process(tic);
+	EXPECT_EQ(ev3.GetInterval(),10);
+}
+TEST(ReadIntervalTest,Process_Exception)
+{
+	string aaa="aa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadInterval ri(ev3);
+	EXPECT_THROW(ri.process(tic),std::ios_base::failure);
+}
+TEST(ReadStateCountTest,Process)
+{
+	string aaa="11\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadStateCount rsc(ev3);
+	rsc.process(tic);
+	EXPECT_EQ(ev3.GetStateCount(),11);
+}
+TEST(ReadStateCountTest,Process_Exception)
+{
+	string aaa="aa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadStateCount rsc(ev3);
+	EXPECT_THROW(rsc.process(tic),std::ios_base::failure);
+}
+
 TEST(InputConfigFileTest,Constractor)
 {
 	string aaa="EV3LineTracer_1.0\n10\n";
@@ -1596,13 +1644,13 @@ TEST(InputConfigFileTest,Constractor)
 }
 TEST(InputConfigFileTest,process)
 {
-	string aaa="EV3LineTracer_1.0\n10\n";
+	string aaa="EV3LineTracer_1.0\n10\n11\n";
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
 	RL::InputEV3Linetracer_1_0 iev3(ev3);
 	RL::InputConfigFile icf(iev3);
-	iev3.process(tic);
+	icf.process(tic);
 }
 
 
@@ -1619,7 +1667,8 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*RandomIdxTest*";
 	//::testing::GTEST_FLAG(filter)="*EV3LineTracerTest*";
 	//::testing::GTEST_FLAG(filter)="*TSVOutputContext*";
-	::testing::GTEST_FLAG(filter)="*Input*";
+	//::testing::GTEST_FLAG(filter)="*Input*";
+	//::testing::GTEST_FLAG(filter)="*Read*";
 
 
 	::testing::InitGoogleTest(&argc,argv);
