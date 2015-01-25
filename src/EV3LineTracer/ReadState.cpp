@@ -27,6 +27,7 @@ ReadState::~ReadState()
  */
 void ReadState::process(InputContext &input)
 {
+	//State[stateindex]を読み取りev3LineTracerに設定する
 	idx stateindex;
 	real refmax;
 	idx controlcount;

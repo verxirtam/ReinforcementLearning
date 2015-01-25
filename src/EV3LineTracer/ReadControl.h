@@ -1,14 +1,12 @@
 /*
- * ReadState.h
+ * ReadControl.h
  *
- *  Created on: 2015/01/24
+ *  Created on: 2015/01/25
  *      Author: daisuke
  */
 
-#ifndef READSTATE_H_
-#define READSTATE_H_
-
-#include "../RLUtility.h"
+#ifndef READCONTROL_H_
+#define READCONTROL_H_
 #include "../Communication/InputContext.h"
 #include "../Communication/InputProcedure.h"
 #include "../StringToData.h"
@@ -17,16 +15,16 @@
 namespace RL
 {
 
-class ReadState: public InputProcedure
+class ReadControl: public InputProcedure
 {
 private:
 	EV3LineTracer &ev3LineTracer;
 public:
-	ReadState(EV3LineTracer &ev3);
-	virtual ~ReadState();
+	ReadControl(EV3LineTracer &ev3);
+	virtual ~ReadControl();
 	virtual void process(InputContext &input);
 };
 
 } /* namespace RL */
 
-#endif /* READSTATE_H_ */
+#endif /* READCONTROL_H_ */

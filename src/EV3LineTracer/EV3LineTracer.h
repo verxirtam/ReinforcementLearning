@@ -48,6 +48,7 @@ class EV3LineTracer
 	friend class ReadInterval;
 	friend class ReadStateCount;
 	friend class ReadState;
+	friend class ReadControl;
 
 private:
 	//データメンバ
@@ -129,12 +130,7 @@ private:
 	void setState(idx stateindex,real refmax,idx controlcount)
 	{
 		//stateindexのチェック
-		if(stateindex < 0 || this->StateCount <= stateindex )
-		{
-			std::stringstream msg;
-			msg<<"stateindex is valid: stateindex = " << stateindex << ".";
-			throw std::ios_base::failure(msg.str());
-		}
+		checkStateIndex(stateindex);
 		//refmaxのチェック
 		if(refmax<0.0 || 1.0 < refmax)
 		{
@@ -146,9 +142,43 @@ private:
 		}
 		//State[stateindex]の設定
 		State[stateindex].RefMax = refmax;
+		//ControlCountの設定
+		ControlCount[stateindex] = controlcount;
 		//Control[stateindex]のサイズを変更
 		Control[stateindex].resize(controlcount);
 
+	}
+	void setControl(idx stateindex,idx controlindex,idx lmoterspeed,idx rmoterspeed)
+	{
+		//stateindex, controlindexのチェック
+		checkIndex(stateindex,controlindex);
+
+		Control[stateindex][controlindex].LMotorSpeed = lmoterspeed;
+		Control[stateindex][controlindex].RMotorSpeed = rmoterspeed;
+
+	}
+
+	void checkStateIndex(idx stateindex)
+	{
+		//stateindexのチェック
+		if (stateindex < 0 || this->StateCount <= stateindex)
+		{
+			std::stringstream msg;
+			msg << "stateindex is valid: stateindex = " << stateindex << ".";
+			throw std::ios_base::failure(msg.str());
+		}
+	}
+	void checkIndex(idx stateindex, idx controlindex)
+	{
+		//stateindexのチェック
+		checkStateIndex(stateindex);
+		//controlindexのチェック
+		if (controlindex < 0 || this->ControlCount[stateindex] <= controlindex)
+		{
+			std::stringstream msg;
+			msg << "controlindex is valid: controlindex = " << controlindex << ".";
+			throw std::ios_base::failure(msg.str());
+		}
 	}
 public:
 	//デフォルトコンストラクタ
@@ -195,10 +225,13 @@ public:
 	}
 	inline EV3LineTracerState GetState(idx i)const
 	{
-		EV3LineTracerState out;
-		out.RefMax=State[i].RefMax;
-		return out;
+		return State[i];
 	}
+	inline EV3LineTracerControl getControl(idx i,idx u)const
+	{
+		return Control[i][u];
+	}
+
 	inline idx GetControlCount(idx i)const
 	{
 		return ControlCount[i];
