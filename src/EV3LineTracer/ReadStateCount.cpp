@@ -18,7 +18,6 @@ ReadStateCount::ReadStateCount(EV3LineTracer &ev3):ev3LineTracer(ev3)
 
 ReadStateCount::~ReadStateCount()
 {
-	// TODO Auto-generated destructor stub
 }
 
 void ReadStateCount::process(InputContext &input)

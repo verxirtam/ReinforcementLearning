@@ -24,6 +24,13 @@ void TSVInputContext::deleteComment(const std::string& line, std::string& out)
 			break;
 		}
 	}
+	//";"がない場合(i==line.length())は終了
+	if(i==line.length())
+	{
+		//lineをそのまま返却
+		out = line;
+		return;
+	}
 	//iを";"(または行末)の1つ手前にする
 	i--;
 	//";"の手前のWSの1つ手前の位置を取得

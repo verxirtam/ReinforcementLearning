@@ -21,6 +21,7 @@
 #include "Communication/TSVInputContext.h"
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
+#include "EV3LineTracer/ReadState.h"
 #include "EV3LineTracer/ReadStateCount.h"
 
 using namespace std;
@@ -1624,6 +1625,33 @@ TEST(ReadStateCountTest,Process)
 	EXPECT_EQ(ev3.GetStateCount(),11);
 }
 TEST(ReadStateCountTest,Process_Exception)
+{
+	string aaa="aa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadStateCount rsc(ev3);
+	EXPECT_THROW(rsc.process(tic),std::ios_base::failure);
+}
+TEST(ReadStateTest,Process)
+{
+
+	string aaa="11\n10\n4	0.5	2\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadInterval(ev3).process(tic);
+	ReadStateCount(ev3).process(tic);
+	ReadState rs(ev3);
+	cout<<"process() start"<<endl;
+	rs.process(tic);
+	cout<<"process() end"<<endl;
+	EV3LineTracerState ev3s =ev3.GetState(4);
+	real refmax = ev3s.RefMax;
+	EXPECT_NEAR(refmax,0.5,0.0625);
+	EXPECT_EQ(ev3.GetControlCount(4),2);
+}
+TEST(ReadStateTest,Process_Exception)
 {
 	string aaa="aa\n";
 	std::istringstream is(aaa);

@@ -40,9 +40,15 @@ struct EV3LineTracerControl
 };
 
 
-
 class EV3LineTracer
 {
+	//フレンドクラス
+	//InputProsedureクラスの派生クラスで
+	//EV3LineTracerクラスにアクセスするものを宣言
+	friend class ReadInterval;
+	friend class ReadStateCount;
+	friend class ReadState;
+
 private:
 	//データメンバ
 	/////////////////////////////
@@ -100,6 +106,50 @@ private:
 	void ReadToken(std::istringstream& linestream, const std::string& elementname,T& val);
 	//行内に余計な情報が残っていないかをチェックする
 	void CheckUnnecessaryData(std::istringstream& linestream);
+
+	//Intervalの設定
+	void setInterval(idx i)
+	{
+		Interval=i;
+	}
+	//StateCountの設定
+	void setStateCount(idx sc)
+	{
+		//StateCountの設定
+		StateCount=sc;
+		//State[]のサイズを変更
+		State.resize(StateCount);
+		//ControlCount[]のサイズを変更
+		ControlCount.resize(StateCount);
+		//Control[]のサイズを変更
+		Control.resize(StateCount);
+
+	}
+	//State[stateindex]の設定
+	void setState(idx stateindex,real refmax,idx controlcount)
+	{
+		//stateindexのチェック
+		if(stateindex < 0 || this->StateCount <= stateindex )
+		{
+			std::stringstream msg;
+			msg<<"stateindex is valid: stateindex = " << stateindex << ".";
+			throw std::ios_base::failure(msg.str());
+		}
+		//refmaxのチェック
+		if(refmax<0.0 || 1.0 < refmax)
+		{
+			std::stringstream msg;
+			msg<<"refmax is valid: refmax = " << refmax << ".";
+
+			throw std::ios_base::failure(msg.str());
+
+		}
+		//State[stateindex]の設定
+		State[stateindex].RefMax = refmax;
+		//Control[stateindex]のサイズを変更
+		Control[stateindex].resize(controlcount);
+
+	}
 public:
 	//デフォルトコンストラクタ
 	EV3LineTracer():
@@ -142,6 +192,12 @@ public:
 	inline idx GetStateCount()const
 	{
 		return StateCount;
+	}
+	inline EV3LineTracerState GetState(idx i)const
+	{
+		EV3LineTracerState out;
+		out.RefMax=State[i].RefMax;
+		return out;
 	}
 	inline idx GetControlCount(idx i)const
 	{
@@ -197,16 +253,6 @@ public:
 	{
 		p.Verify(*this);
 		this->CurrentPolicy=p;
-	}
-	//Intervalの設定
-	void setInterval(idx i)
-	{
-		Interval=i;
-	}
-	//StateCountの設定
-	void setStateCount(idx sc)
-	{
-		StateCount=sc;
 	}
 
 };
