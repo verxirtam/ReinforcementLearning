@@ -42,7 +42,7 @@ public:
 	}
 	//CurrentPolicyを
 	//control-value functionに基づいて改善したPolicyを求める
-	Policy& PolicyImprovement(const std::vector<std::vector<real> > Q,Policy& out)const
+	Policy& PolicyImprovement(const std::vector<std::vector<real> >& Q,Policy& out)const
 	{
 		//state数の取得
 		idx statecount=Mdp.GetStateCount();
