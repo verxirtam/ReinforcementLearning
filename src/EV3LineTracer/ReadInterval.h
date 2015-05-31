@@ -19,7 +19,7 @@ namespace RL
 class ReadInterval: public InputProcedure
 {
 private:
-	EV3LineTracer &ev3LineTracer;
+	EV3LineTracer& ev3LineTracer;
 public:
 	ReadInterval(EV3LineTracer &ev3);
 	virtual ~ReadInterval();

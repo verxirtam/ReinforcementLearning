@@ -49,6 +49,7 @@ class EV3LineTracer
 	friend class ReadStateCount;
 	friend class ReadSingleState;
 	friend class ReadSingleControl;
+	friend class ReadRegularPolicy;
 
 private:
 	//データメンバ
@@ -156,6 +157,10 @@ private:
 		Control[stateindex][controlindex].LMotorSpeed = lmoterspeed;
 		Control[stateindex][controlindex].RMotorSpeed = rmoterspeed;
 
+	}
+	void setRegularPolicy(const Policy& p)
+	{
+		RegularPolicy=p;
 	}
 
 	void checkStateIndex(idx stateindex)

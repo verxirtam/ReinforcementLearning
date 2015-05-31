@@ -20,7 +20,7 @@ namespace RL
 class ReadSingleState: public InputProcedure
 {
 private:
-	EV3LineTracer &ev3LineTracer;
+	EV3LineTracer& ev3LineTracer;
 	idx stateIndex;
 public:
 	ReadSingleState(EV3LineTracer &ev3,idx i = 0);

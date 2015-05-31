@@ -40,5 +40,9 @@ void InputEV3Linetracer_1_0::process(InputContext &input)
 	//Controlの読み取り
 	ReadControl rc(ev3LineTracer);
 	rc.process(input);
+
+	//RegularPolicyの読み取り
+	ReadRegularPolicy rrp(ev3LineTracer);
+	rrp.process(input);
 }
 } /* namespace RL */

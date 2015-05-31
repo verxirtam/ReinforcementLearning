@@ -19,7 +19,7 @@ namespace RL
 class ReadControl: public InputProcedure
 {
 private:
-	EV3LineTracer &ev3LineTracer;
+	EV3LineTracer& ev3LineTracer;
 public:
 	ReadControl(EV3LineTracer &ev3);
 	virtual ~ReadControl();

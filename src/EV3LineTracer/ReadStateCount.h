@@ -20,7 +20,7 @@ namespace RL
 class ReadStateCount: public InputProcedure
 {
 private:
-	EV3LineTracer &ev3LineTracer;
+	EV3LineTracer& ev3LineTracer;
 public:
 	ReadStateCount(EV3LineTracer &ev3);
 	virtual ~ReadStateCount();

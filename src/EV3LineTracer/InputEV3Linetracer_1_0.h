@@ -17,6 +17,7 @@
 #include "ReadStateCount.h"
 #include "ReadState.h"
 #include "ReadControl.h"
+#include "ReadRegularPolicy.h"
 
 
 namespace RL
@@ -25,7 +26,7 @@ namespace RL
 class InputEV3Linetracer_1_0: public InputProcedure
 {
 private:
-	EV3LineTracer &ev3LineTracer;
+	EV3LineTracer& ev3LineTracer;
 public:
 	static const std::string VERSION_STRING;
 	InputEV3Linetracer_1_0(EV3LineTracer &ev3);

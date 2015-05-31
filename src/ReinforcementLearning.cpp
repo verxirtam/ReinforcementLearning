@@ -1737,6 +1737,8 @@ TEST(InputConfigFileTest,process)
 	aaa += "0	0	10	100\n";
 	aaa += "1	0	20	200\n";
 	aaa += "1	1	21	201\n";
+	aaa += "0	0\n";
+	aaa += "1	1\n";
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
@@ -1752,7 +1754,12 @@ TEST(InputConfigFileTest,process)
 	EXPECT_EQ(ev3.getControl(1,0).LMotorSpeed, 20);
 	EXPECT_EQ(ev3.getControl(1,0).RMotorSpeed,200);
 	EXPECT_EQ(ev3.getControl(1,1).LMotorSpeed, 21);
-	EXPECT_EQ(ev3.getControl(1,1).RMotorSpeed,201);
+	Policy p(ev3.GetStateCount());
+	ev3.GetRegularPolicy(p);
+	EXPECT_EQ(p.GetStateCount(),2);
+	EXPECT_EQ(p[0],0);
+	EXPECT_EQ(p[1],1);
+
 }
 
 

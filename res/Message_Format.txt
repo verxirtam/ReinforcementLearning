@@ -79,11 +79,12 @@
 <RMotorSpeed>::=DIGIT
 
 <RegularPolicy>::=
-	N(<SinglePolicy><endl>);RegularPolicyの定義(StateIndexは0からN-1まで順に並ぶ(N=StateCount))
+	N(<SinglePolicy>);RegularPolicyの定義(StateIndexは0からN-1まで順に並ぶ(N=StateCount))
 
 <SinglePolicy>::=
 	<StateIndex><tab>;StateIndex
 	<ControlIndex>;ControlIndex
+	<endl>
 
 <SetMDPResult>::=
 	(

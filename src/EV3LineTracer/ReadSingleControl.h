@@ -18,7 +18,7 @@ namespace RL
 class ReadSingleControl: public InputProcedure
 {
 private:
-	EV3LineTracer &ev3LineTracer;
+	EV3LineTracer& ev3LineTracer;
 	idx stateIndex;
 	idx controlIndex;
 public:
