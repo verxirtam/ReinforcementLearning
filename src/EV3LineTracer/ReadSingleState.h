@@ -17,13 +17,18 @@
 namespace RL
 {
 
-class ReadState: public InputProcedure
+class ReadSingleState: public InputProcedure
 {
 private:
 	EV3LineTracer &ev3LineTracer;
+	idx stateIndex;
 public:
-	ReadState(EV3LineTracer &ev3);
-	virtual ~ReadState();
+	ReadSingleState(EV3LineTracer &ev3,idx i = 0);
+	void SetStateIndex(idx i)
+	{
+		stateIndex = i;
+	}
+	virtual ~ReadSingleState();
 	virtual void process(InputContext &input);
 };
 

@@ -47,7 +47,7 @@ class EV3LineTracer
 	//EV3LineTracerクラスにアクセスするものを宣言
 	friend class ReadInterval;
 	friend class ReadStateCount;
-	friend class ReadState;
+	friend class ReadSingleState;
 	friend class ReadControl;
 
 private:

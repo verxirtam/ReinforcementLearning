@@ -22,7 +22,7 @@
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
 #include "EV3LineTracer/ReadControl.h"
-#include "EV3LineTracer/ReadState.h"
+#include "EV3LineTracer/ReadSingleState.h"
 #include "EV3LineTracer/ReadStateCount.h"
 
 using namespace std;
@@ -1643,7 +1643,7 @@ TEST(ReadStateTest,Process)
 	RL::EV3LineTracer ev3;
 	ReadInterval(ev3).process(tic);
 	ReadStateCount(ev3).process(tic);
-	ReadState rs(ev3);
+	ReadSingleState rs(ev3,4);
 	rs.process(tic);
 	EXPECT_NEAR(ev3.GetState(4).RefMax,0.5,0.0625);
 	EXPECT_EQ(ev3.GetControlCount(4),2);
@@ -1654,7 +1654,7 @@ TEST(ReadStateTest,Process_Exception)
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
-	ReadState rs(ev3);
+	ReadSingleState rs(ev3);
 	EXPECT_THROW(rs.process(tic),std::ios_base::failure);
 }
 TEST(ReadControlTest,Process)
@@ -1669,7 +1669,7 @@ TEST(ReadControlTest,Process)
 	RL::EV3LineTracer ev3;
 	ReadInterval(ev3).process(tic);
 	ReadStateCount(ev3).process(tic);
-	ReadState(ev3).process(tic);
+	ReadSingleState(ev3,4).process(tic);
 	ReadControl rc(ev3);
 	rc.process(tic);
 	rc.process(tic);
