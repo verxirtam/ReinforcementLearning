@@ -1761,6 +1761,77 @@ TEST(InputConfigFileTest,process)
 	EXPECT_EQ(p[1],1);
 
 }
+TEST(InputConfigFileTest,process_INIFile)
+{
+	ifstream ifs("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	RL::TSVInputContext tic(ifs);
+	RL::EV3LineTracer ev3;
+	RL::InputEV3Linetracer_1_0 iev3(ev3);
+	RL::InputConfigFile icf(iev3);
+	icf.process(tic);
+	EXPECT_EQ(ev3.GetInterval()  ,11);
+	EXPECT_EQ(ev3.GetStateCount(),10);
+	EXPECT_EQ(ev3.GetState(4).RefMax,0.5);
+	EXPECT_EQ(ev3.getControl(9,1).LMotorSpeed, 5);
+	EXPECT_EQ(ev3.getControl(9,1).RMotorSpeed,10);
+	Policy p(ev3.GetStateCount());
+	EXPECT_EQ(ev3.GetRegularPolicy(p)[9],1);
+
+}
+
+
+//値をパラメータ化したテストのためのクラスの定義
+class InputConfigFileErrorTest : public ::testing::Test , public ::testing::WithParamInterface<int>
+{
+protected:
+	vector<string> configfilepath;
+	void SetUp(){
+		configfilepath.resize(23);
+		configfilepath[ 0]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR000_FormatIdentifier.ini";
+		configfilepath[ 1]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR100_StateCount.ini";
+		configfilepath[ 2]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR101_StateCount_UnnecessaryData.ini";
+		configfilepath[ 3]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR200_State_StateIndex.ini";
+		configfilepath[ 4]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR201_State_RefMax.ini";
+		configfilepath[ 5]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR202_State_ControlCount.ini";
+		configfilepath[ 6]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR203_State_UnnecessaryData.ini";
+		configfilepath[ 7]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR204_State_InvalidData1.ini";
+		configfilepath[ 8]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR205_State_InvalidData2.ini";
+		configfilepath[ 9]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR300_Control_ControlIndex.ini";
+		configfilepath[10]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR301_Control_StateIndex.ini";
+		configfilepath[11]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR302_Control_LMotorSpeed.ini";
+		configfilepath[12]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR303_Control_RMotorSpeed.ini";
+		configfilepath[13]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR304_Control_UnnecessaryData.ini";
+		configfilepath[14]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR305_Control_InvalidData1.ini";
+		configfilepath[15]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR306_Control_InvalidData2.ini";
+		configfilepath[16]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR400_RegularPolicy_StateIndex.ini";
+		configfilepath[17]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR401_RegularPolicy_Control.ini";
+		configfilepath[18]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR402_RegularPolicy_UnnecessaryData.ini";
+		configfilepath[19]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR403_RegularPolicy_InvalidData1.ini";
+		configfilepath[20]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR404_RegularPolicy_InvalidData2.ini";
+		configfilepath[21]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR500_RegularPolicy_InvalidData.ini";
+		configfilepath[22]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR501_RegularPolicy_UnnecessaryData.ini";
+	}
+	void TearDown(){}
+};
+
+//パラメータの定義
+//正常系のテストを行う要素数の定義
+INSTANTIATE_TEST_CASE_P(
+		InstantiateInputConfigFileErrorTest,
+		InputConfigFileErrorTest,
+		::testing::Range(0, 23,1)
+);
+
+
+TEST_P(InputConfigFileErrorTest,process_INIFile_error)
+{
+	ifstream ifs(configfilepath[GetParam()].c_str());
+	RL::TSVInputContext tic(ifs);
+	RL::EV3LineTracer ev3;
+	RL::InputEV3Linetracer_1_0 iev3(ev3);
+	RL::InputConfigFile icf(iev3);
+	EXPECT_THROW(icf.process(tic),std::ios_base::failure);
+}
 
 
 
@@ -1778,6 +1849,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*TSVOutputContext*";
 	//::testing::GTEST_FLAG(filter)="*Input*";
 	//::testing::GTEST_FLAG(filter)="*Read*";
+	::testing::GTEST_FLAG(filter)="*INI*";
 
 
 	::testing::InitGoogleTest(&argc,argv);
