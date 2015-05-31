@@ -1731,13 +1731,28 @@ TEST(InputConfigFileTest,Constractor)
 }
 TEST(InputConfigFileTest,process)
 {
-	string aaa="EV3LineTracer_1.0\n10\n11\n";
+	string aaa="EV3LineTracer_1.0\n10\n2\n";
+	aaa += "0	0.1	1\n";
+	aaa += "1	0.2	2\n";
+	aaa += "0	0	10	100\n";
+	aaa += "1	0	20	200\n";
+	aaa += "1	1	21	201\n";
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
 	RL::InputEV3Linetracer_1_0 iev3(ev3);
 	RL::InputConfigFile icf(iev3);
 	icf.process(tic);
+	EXPECT_EQ(ev3.GetInterval(),10);
+	EXPECT_EQ(ev3.GetStateCount(),2);
+	EXPECT_EQ(ev3.GetControlCount(0),1);
+	EXPECT_EQ(ev3.GetControlCount(1),2);
+	EXPECT_EQ(ev3.getControl(0,0).LMotorSpeed, 10);
+	EXPECT_EQ(ev3.getControl(0,0).RMotorSpeed,100);
+	EXPECT_EQ(ev3.getControl(1,0).LMotorSpeed, 20);
+	EXPECT_EQ(ev3.getControl(1,0).RMotorSpeed,200);
+	EXPECT_EQ(ev3.getControl(1,1).LMotorSpeed, 21);
+	EXPECT_EQ(ev3.getControl(1,1).RMotorSpeed,201);
 }
 
 

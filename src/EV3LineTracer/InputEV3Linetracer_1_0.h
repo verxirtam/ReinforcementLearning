@@ -16,6 +16,7 @@
 #include "ReadInterval.h"
 #include "ReadStateCount.h"
 #include "ReadState.h"
+#include "ReadControl.h"
 
 
 namespace RL

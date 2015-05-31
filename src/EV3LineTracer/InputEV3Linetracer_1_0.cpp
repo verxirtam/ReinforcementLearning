@@ -31,12 +31,14 @@ void InputEV3Linetracer_1_0::process(InputContext &input)
 
 	//State数の読み取り
 	ReadStateCount rsc(ev3LineTracer);
-	ri.process(input);
+	rsc.process(input);
 
 	//Stateの読み取り
 	ReadState rs(ev3LineTracer);
 	rs.process(input);
 
-
+	//Controlの読み取り
+	ReadControl rc(ev3LineTracer);
+	rc.process(input);
 }
 } /* namespace RL */
