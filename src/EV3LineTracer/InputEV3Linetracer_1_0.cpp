@@ -34,8 +34,8 @@ void InputEV3Linetracer_1_0::process(InputContext &input)
 	ri.process(input);
 
 	//Stateの読み取り
-	//ReadSingleState rs(ev3LineTracer);
-	//rs.process(input);
+	ReadState rs(ev3LineTracer);
+	rs.process(input);
 
 
 }

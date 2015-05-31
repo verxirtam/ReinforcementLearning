@@ -5,8 +5,8 @@
  *      Author: daisuke
  */
 
-#ifndef READSTATE_H_
-#define READSTATE_H_
+#ifndef READSINGLESTATE_H_
+#define READSINGLESTATE_H_
 
 #include "../RLUtility.h"
 #include "../Communication/InputContext.h"

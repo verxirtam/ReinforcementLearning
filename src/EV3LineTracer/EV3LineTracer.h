@@ -48,7 +48,7 @@ class EV3LineTracer
 	friend class ReadInterval;
 	friend class ReadStateCount;
 	friend class ReadSingleState;
-	friend class ReadControl;
+	friend class ReadSingleControl;
 
 private:
 	//データメンバ

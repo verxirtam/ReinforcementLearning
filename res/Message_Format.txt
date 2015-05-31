@@ -50,19 +50,20 @@
 	<RegularPolicy>;RegularPolicyの定義
 
 <State>::=
-	N(<SingleState><endl>);Stateの定義 (StateIndexは0からN-1まで順に並ぶ(N=StateCount))
+	N(<SingleState>);Stateの定義 (StateIndexは0からN-1まで順に並ぶ(N=StateCount))
 
 <SingleState>::=
 	<StateIndex><tab>;StateIndex
 	<RefMax><tab>;RefMax
 	<ControlCount>;ControlCount
+	<endl>
 
 <StateIndex>::=DIGIT
 <RefMax>::=DIGIT"."DIGIT
 <ControlCount>::=DIGIT
 
 <Control>::=
-	M(<SingleControl><endl>)
+	M(<SingleControl>)
 		;(Controlの定義 StateIndexは0からN-1まで順に並ぶ(N=StateCount)
 		   ControlIndexは０からStateのControlCount-1まで順に並ぶ)
 
@@ -71,6 +72,7 @@
 	<ControlIndex><tab>	;ControlIndex
 	<LMotorSpeed><tab>	;LMotorSpeed
 	<RMotorSpeed>			;RMotorSpeed
+	<endl>
 
 <ControlIndex>::=DIGIT
 <LMotorSpeed>::=DIGIT

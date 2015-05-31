@@ -21,7 +21,7 @@
 #include "Communication/TSVInputContext.h"
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
-#include "EV3LineTracer/ReadControl.h"
+#include "EV3LineTracer/ReadSingleControl.h"
 #include "EV3LineTracer/ReadSingleState.h"
 #include "EV3LineTracer/ReadStateCount.h"
 
@@ -1634,7 +1634,7 @@ TEST(ReadStateCountTest,Process_Exception)
 	ReadStateCount rsc(ev3);
 	EXPECT_THROW(rsc.process(tic),std::ios_base::failure);
 }
-TEST(ReadStateTest,Process)
+TEST(ReadSingleStateTest,Process)
 {
 
 	string aaa="11\n10\n4	0.5	2\n";
@@ -1648,7 +1648,7 @@ TEST(ReadStateTest,Process)
 	EXPECT_NEAR(ev3.GetState(4).RefMax,0.5,0.0625);
 	EXPECT_EQ(ev3.GetControlCount(4),2);
 }
-TEST(ReadStateTest,Process_Exception)
+TEST(ReadSingleStateTest,Process_Exception)
 {
 	string aaa="aa\n";
 	std::istringstream is(aaa);
@@ -1657,6 +1657,33 @@ TEST(ReadStateTest,Process_Exception)
 	ReadSingleState rs(ev3);
 	EXPECT_THROW(rs.process(tic),std::ios_base::failure);
 }
+TEST(ReadStateTest,Process)
+{
+
+	string aaa="11\n2\n0	0.5	2\n1	0.5	2\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadInterval(ev3).process(tic);
+	ReadStateCount(ev3).process(tic);
+	ReadState rs(ev3);
+	rs.process(tic);
+	EXPECT_NEAR(ev3.GetState(0).RefMax,0.5,0.0625);
+	EXPECT_NEAR(ev3.GetState(1).RefMax,0.5,0.0625);
+	EXPECT_EQ(ev3.GetControlCount(0),2);
+	EXPECT_EQ(ev3.GetControlCount(1),2);
+}
+TEST(ReadStateTest,Process_Exception)
+{
+	string aaa="10\naa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadStateCount(ev3).process(tic);
+	ReadState rs(ev3);
+	EXPECT_THROW(rs.process(tic),std::ios_base::failure);
+}
+
 TEST(ReadControlTest,Process)
 {
 
@@ -1670,9 +1697,11 @@ TEST(ReadControlTest,Process)
 	ReadInterval(ev3).process(tic);
 	ReadStateCount(ev3).process(tic);
 	ReadSingleState(ev3,4).process(tic);
-	ReadControl rc(ev3);
-	rc.process(tic);
-	rc.process(tic);
+	ReadSingleControl rsc(ev3);
+	rsc.setIndex(4,0);
+	rsc.process(tic);
+	rsc.setIndex(4,1);
+	rsc.process(tic);
 	EV3LineTracerControl ev3control[2];
 	ev3control[0] = ev3.getControl(4,0);
 	ev3control[1] = ev3.getControl(4,1);
@@ -1687,7 +1716,7 @@ TEST(ReadControlTest,Process_Exception)
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
-	ReadControl rc(ev3);
+	ReadSingleControl rc(ev3);
 	EXPECT_THROW(rc.process(tic),std::ios_base::failure);
 }
 

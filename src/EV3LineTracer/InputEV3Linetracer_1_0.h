@@ -15,7 +15,7 @@
 #include "EV3LineTracer.h"
 #include "ReadInterval.h"
 #include "ReadStateCount.h"
-#include "ReadSingleState.h"
+#include "ReadState.h"
 
 
 namespace RL
