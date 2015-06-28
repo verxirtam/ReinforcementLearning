@@ -117,14 +117,20 @@ public:
 		double d=DecimalTotal*Random::UniformReal();
 		//線形探索で適合する区間を求める
 		//この方法が遅い場合は2分探索を検討する
-		for(idx i=0;i<Decimal.size()-1;i++)
+		//dが最も(数直線上で)左側の区間かその左側の場合0を返す
+		if(d<Decimal[1])
 		{
-			if((Decimal[i]<=d)&&(d<Decimal[i+1]))
+			return 0;
+		}
+		//(数直線上の)左側から順に区間に含まれるか確認し、含まれる区間のインデックスを返す
+		for(idx i=1;i<Decimal.size()-1;i++)
+		{
+			if(d<Decimal[i+1])
 			{
 				return i;
 			}
 		}
-		//どの区間にも含まれない場合は最大値を返す
+		//(数直線上で)最も右側の区間の右側の場合は最大値を返す
 		return ValueMax-1;
 	}
 	idx GetValueMax()const
