@@ -1830,7 +1830,6 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 	RL::EV3LineTracer ev3;
 	RL::InputEV3Linetracer_1_0 iev3(ev3);
 	RL::InputConfigFile icf(iev3);
-	//TODO :configfilepath[12]:EV3LineTracer_ERR303_Control_RMotorSpeed.ini:値域外の値のエラー
 	//TODO :configfilepath[14]:EV3LineTracer_ERR305_Control_InvalidData1.ini:1項中にスペースが含まれている
 	//TODO :configfilepath[15]:EV3LineTracer_ERR306_Control_InvalidData2.ini:不要な文字が含まれている
 	EXPECT_THROW(icf.process(tic),std::ios_base::failure);

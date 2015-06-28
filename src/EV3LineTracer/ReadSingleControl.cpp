@@ -26,6 +26,9 @@ void ReadSingleControl::process(InputContext &input)
 	idx controlindex;
 	real lmoterspeed;
 	real rmoterspeed;
+	real motorspeedmin = ev3LineTracer.getMotorSpeedMin();
+	real motorspeedmax = ev3LineTracer.getMotorSpeedMax();
+
 
 	stateindex = StringToData::parseTo<idx>(input.nextToken());
 	//読み取ったstateindexとstateIndexが異なっていれば例外発生
@@ -43,9 +46,22 @@ void ReadSingleControl::process(InputContext &input)
 		throw std::ios_base::failure(msg);
 	}
 
-	lmoterspeed = StringToData::parseTo<idx>(input.nextToken());
-	rmoterspeed = StringToData::parseTo<idx>(input.nextToken());
-	input.skipReturn();
+	lmoterspeed = StringToData::parseTo<real>(input.nextToken());
+	if ((lmoterspeed < motorspeedmin) || ((motorspeedmax < lmoterspeed)))
+	{
+		std::string msg("invalid lmoterspeed");
+		throw std::ios_base::failure(msg);
+	}
+
+	rmoterspeed = StringToData::parseTo<real>(input.nextToken());
+	if ((rmoterspeed < motorspeedmin) || ((motorspeedmax < rmoterspeed)))
+	{
+		std::string msg("invalid rmoterspeed");
+		throw std::ios_base::failure(msg);
+	}
+
+
+		input.skipReturn();
 
 	ev3LineTracer.setControl(stateindex,controlindex,lmoterspeed,rmoterspeed);
 }

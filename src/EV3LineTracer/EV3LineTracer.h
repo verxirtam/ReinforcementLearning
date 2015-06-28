@@ -292,6 +292,14 @@ public:
 		p.Verify(*this);
 		this->CurrentPolicy=p;
 	}
+	inline real getMotorSpeedMax(void)
+	{
+		return 1000.0;
+	}
+	inline real getMotorSpeedMin(void)
+	{
+		return -1000.0;
+	}
 
 };
 
