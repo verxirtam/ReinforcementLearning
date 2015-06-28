@@ -1833,6 +1833,12 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 	EXPECT_THROW(icf.process(tic),std::ios_base::failure);
 }
 
+TEST(ExecNullCommandTest,process)
+{
+	RL::EV3LineTracer ev3;
+	ev3.Init();
+	ev3.execNullCommand();
+}
 
 
 /////////////////////////////////////////////////////////////////////

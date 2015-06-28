@@ -72,42 +72,10 @@ private:
 	real CostMax;
 	//設定ファイルのパス
 	std::string ConfigFilePath;
-	//エラーメッセージ用の文字列
-	static const std::string ELEMENTNAME_STATE;
-	static const std::string ELEMENTNAME_STATEINDEX;
-	static const std::string ELEMENTNAME_STATECOUNT;
-	static const std::string ELEMENTNAME_STATE_REFMAX;
-	static const std::string ELEMENTNAME_CONTROL;
-	static const std::string ELEMENTNAME_CONTROLINDEX;
-	static const std::string ELEMENTNAME_CONTROL_LMOTORSPEED;
-	static const std::string ELEMENTNAME_CONTROL_RMOTORSPEED;
-	static const std::string ELEMENTNAME_CONTROLCOUNT;
-	static const std::string ELEMENTNAME_REGULARPOLICY;
 	//モータに与える速度の最大値
 	static const speed SPEEDMAX=600;
 	//メンバ関数
 	/////////////////////////////
-	//設定ファイルの1行分読み込み
-	void ReadLine(std::ifstream& fin,std::istringstream& linestream);
-	//1行分のstringからコメント(";"の手前のWSから行末まで)を削除
-	void DeleteComment(const std::string& line, std::string& out);
-	//設定ファイル読み込み フォーマット識別子確認
-	void CheckFormatIdentifier(std::ifstream& fin);
-	//設定ファイル読み込み Interval取得
-	void ReadInterval(std::ifstream& fin);
-	//設定ファイル読み込み StateCount取得
-	void ReadStateCount(std::ifstream& fin);
-	//設定ファイル読み込み StateとControlCount取得
-	void ReadStateAndControlCount(std::ifstream& fin);
-	//設定ファイル読み込み Control取得
-	void ReadControl(std::ifstream& fin);
-	//設定ファイル読み込み RegularPolicy取得
-	void ReadRegularPolicy(std::ifstream& fin);
-	//WS(スペースまたはタブ)区切りのトークンを変数に読み込む
-	template<typename T>
-	void ReadToken(std::istringstream& linestream, const std::string& elementname,T& val);
-	//行内に余計な情報が残っていないかをチェックする
-	void CheckUnnecessaryData(std::istringstream& linestream);
 
 	//Intervalの設定
 	void setInterval(idx i)
@@ -292,38 +260,28 @@ public:
 		p.Verify(*this);
 		this->CurrentPolicy=p;
 	}
-	inline real getMotorSpeedMax(void)
+	inline real getMotorSpeedMax(void) const
 	{
-		return 1000.0;
+		return SPEEDMAX;
 	}
-	inline real getMotorSpeedMin(void)
+	inline real getMotorSpeedMin(void) const
 	{
-		return -1000.0;
+		return -SPEEDMAX;
 	}
-
+	//何もしないコマンドを発行する
+	//通信の確率の確認に使用する
+	void execNullCommand()
+	{
+		throw std::ios::failure("未実装");
+		//TODO Init()にEV3へのコネクションを貼るコードを書く
+		//TODO コネクションはデータメンバとして保持する
+		//TODO EV3への送信用のデータ(NULLコマンド)を作成
+		//TODO EV3へ送信
+		//TODO EV3からの返信を受信する
+		//TODO 結果を読み取る
+		//TODO 結果に応じた処理を実行する
+	}
 };
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-// EV3LineTracer テンプレート関数の実体定義
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-//WS(スペースまたはタブ)区切りのトークンを変数に読み込む
-template<typename T>
-void EV3LineTracer::ReadToken(std::istringstream& linestream, const std::string& elementname,T& val)
-{
-	//linestreamから読み取り
-	linestream>>val;
-	//valの読み込みに失敗した場合
-	if(!linestream)
-	{
-		std::string msg
-			="invalid file format (input error of "
-					+ elementname
-					+ ") : "
-					+ ConfigFilePath;
-		throw std::ios_base::failure(msg);
-	}
-}
 
 
 
