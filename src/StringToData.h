@@ -43,6 +43,11 @@ T StringToData::parseTo(const std::string &s)
 	{
 		throw std::ios_base::failure("invalid token.");
 	}
+	if( !( iss.eof() ) )
+	{
+		std::string msg("token remained.");
+		throw std::ios_base::failure(msg);
+	}
 	return t;
 }
 

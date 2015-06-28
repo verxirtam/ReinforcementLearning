@@ -1830,8 +1830,6 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 	RL::EV3LineTracer ev3;
 	RL::InputEV3Linetracer_1_0 iev3(ev3);
 	RL::InputConfigFile icf(iev3);
-	//TODO :configfilepath[14]:EV3LineTracer_ERR305_Control_InvalidData1.ini:1項中にスペースが含まれている
-	//TODO :configfilepath[15]:EV3LineTracer_ERR306_Control_InvalidData2.ini:不要な文字が含まれている
 	EXPECT_THROW(icf.process(tic),std::ios_base::failure);
 }
 
@@ -1851,7 +1849,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*TSVOutputContext*";
 	//::testing::GTEST_FLAG(filter)="*Input*";
 	//::testing::GTEST_FLAG(filter)="*Read*";
-	::testing::GTEST_FLAG(filter)="*INI*";
+	//::testing::GTEST_FLAG(filter)="*INI*";
 
 
 	::testing::InitGoogleTest(&argc,argv);
