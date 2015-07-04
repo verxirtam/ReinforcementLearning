@@ -8,9 +8,9 @@
 #ifndef READSTATE_H_
 #define READSTATE_H_
 
-#include "../RLUtility.h"
-#include "../Communication/InputProcedure.h"
-#include "EV3LineTracer.h"
+#include "../../../RLUtility.h"
+#include "../../../Communication/InputProcedure.h"
+#include "../../EV3LineTracer.h"
 #include "ReadSingleState.h"
 
 namespace RL

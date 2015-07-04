@@ -8,12 +8,12 @@
 #ifndef READSINGLEPOLICY_H_
 #define READSINGLEPOLICY_H_
 
-#include "../Communication/InputProcedure.h"
-#include "../Communication/InputContext.h"
-#include "../Policy.h"
-#include "../RLUtility.h"
-#include "../StringToData.h"
-#include "EV3LineTracer.h"
+#include "../../../Communication/InputProcedure.h"
+#include "../../../Communication/InputContext.h"
+#include "../../../Policy.h"
+#include "../../../RLUtility.h"
+#include "../../../StringToData.h"
+#include "../../EV3LineTracer.h"
 
 namespace RL
 {

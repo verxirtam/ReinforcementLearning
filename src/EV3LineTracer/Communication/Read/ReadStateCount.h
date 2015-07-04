@@ -8,10 +8,10 @@
 #ifndef READSTATECOUNT_H_
 #define READSTATECOUNT_H_
 
-#include "../RLUtility.h"
-#include "../StringToData.h"
-#include "EV3LineTracer.h"
-#include "../Communication/InputProcedure.h"
+#include "../../../RLUtility.h"
+#include "../../../StringToData.h"
+#include "../../../Communication/InputProcedure.h"
+#include "../../EV3LineTracer.h"
 
 namespace RL
 {

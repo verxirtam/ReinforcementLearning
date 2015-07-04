@@ -8,11 +8,11 @@
 #ifndef READSINGLESTATE_H_
 #define READSINGLESTATE_H_
 
-#include "../RLUtility.h"
-#include "../Communication/InputContext.h"
-#include "../Communication/InputProcedure.h"
-#include "../StringToData.h"
-#include "EV3LineTracer.h"
+#include "../../../RLUtility.h"
+#include "../../../Communication/InputContext.h"
+#include "../../../Communication/InputProcedure.h"
+#include "../../../StringToData.h"
+#include "../../EV3LineTracer.h"
 
 namespace RL
 {

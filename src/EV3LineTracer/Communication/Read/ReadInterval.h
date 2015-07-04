@@ -8,10 +8,10 @@
 #ifndef READINTERVAL_H_
 #define READINTERVAL_H_
 
-#include "../RLUtility.h"
-#include "../StringToData.h"
-#include "EV3LineTracer.h"
-#include "../Communication/InputProcedure.h"
+#include "../../../RLUtility.h"
+#include "../../../StringToData.h"
+#include "../../EV3LineTracer.h"
+#include "../../../Communication/InputProcedure.h"
 
 namespace RL
 {

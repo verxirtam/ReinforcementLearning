@@ -21,9 +21,9 @@
 #include "Communication/TSVInputContext.h"
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
-#include "EV3LineTracer/ReadSingleControl.h"
-#include "EV3LineTracer/ReadSingleState.h"
-#include "EV3LineTracer/ReadStateCount.h"
+#include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
+#include "EV3LineTracer/Communication/Read/ReadSingleState.h"
+#include "EV3LineTracer/Communication/Read/ReadStateCount.h"
 
 using namespace std;
 using namespace RL;

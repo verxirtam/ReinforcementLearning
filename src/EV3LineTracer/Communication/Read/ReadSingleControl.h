@@ -7,10 +7,10 @@
 
 #ifndef READSINGLECONTROL_H_
 #define READSINGLECONTROL_H_
-#include "../Communication/InputContext.h"
-#include "../Communication/InputProcedure.h"
-#include "../StringToData.h"
-#include "EV3LineTracer.h"
+#include "../../../Communication/InputContext.h"
+#include "../../../Communication/InputProcedure.h"
+#include "../../../StringToData.h"
+#include "../../EV3LineTracer.h"
 
 namespace RL
 {

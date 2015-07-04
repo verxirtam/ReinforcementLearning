@@ -13,11 +13,11 @@
 #include "../Communication/InputProcedure.h"
 #include <string>
 #include "EV3LineTracer.h"
-#include "ReadInterval.h"
-#include "ReadStateCount.h"
-#include "ReadState.h"
-#include "ReadControl.h"
-#include "ReadRegularPolicy.h"
+#include "Communication/Read/ReadInterval.h"
+#include "Communication/Read/ReadStateCount.h"
+#include "Communication/Read/ReadState.h"
+#include "Communication/Read/ReadControl.h"
+#include "Communication/Read/ReadRegularPolicy.h"
 
 
 namespace RL

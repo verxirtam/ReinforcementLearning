@@ -8,9 +8,9 @@
 #ifndef READCONTROL_H_
 #define READCONTROL_H_
 
-#include "../Communication/InputProcedure.h"
-#include "../RLUtility.h"
-#include "EV3LineTracer.h"
+#include "../../../Communication/InputProcedure.h"
+#include "../../../RLUtility.h"
+#include "../../EV3LineTracer.h"
 #include "ReadSingleControl.h"
 
 namespace RL
