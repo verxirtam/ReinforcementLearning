@@ -1,0 +1,24 @@
+<map id="StringToData.h" name="StringToData.h">
+<area shape="rect" id="node2" href="$ReadSingleControl_8h.html" title="EV3LineTracer/Communication\l/Read/ReadSingleControl.h" alt="" coords="187,81,389,122"/>
+<area shape="rect" id="node12" href="$ReadInterval_8h.html" title="EV3LineTracer/Communication\l/Read/ReadInterval.h" alt="" coords="936,81,1139,122"/>
+<area shape="rect" id="node14" href="$ReadRegularPolicy_8h.html" title="EV3LineTracer/Communication\l/Read/ReadRegularPolicy.h" alt="" coords="527,171,729,213"/>
+<area shape="rect" id="node16" href="$ReadSinglePolicy_8h.html" title="EV3LineTracer/Communication\l/Read/ReadSinglePolicy.h" alt="" coords="709,81,912,122"/>
+<area shape="rect" id="node18" href="$ReadSingleState_8h.html" title="EV3LineTracer/Communication\l/Read/ReadSingleState.h" alt="" coords="1597,81,1800,122"/>
+<area shape="rect" id="node22" href="$ReadStateCount_8h.html" title="EV3LineTracer/Communication\l/Read/ReadStateCount.h" alt="" coords="1257,171,1460,213"/>
+<area shape="rect" id="node3" href="$ReadControl_8h.html" title="EV3LineTracer/Communication\l/Read/ReadControl.h" alt="" coords="300,171,503,213"/>
+<area shape="rect" id="node9" href="$ReinforcementLearning_8cpp.html" title="ReinforcementLearning.cpp" alt="" coords="859,451,1040,477"/>
+<area shape="rect" id="node11" href="$ReadSingleControl_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadSingleControl.cpp" alt="" coords="73,171,276,213"/>
+<area shape="rect" id="node4" href="$ReadControl_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadControl.cpp" alt="" coords="300,262,503,303"/>
+<area shape="rect" id="node5" href="$InputEV3Linetracer__1__0_8h.html" title="EV3LineTracer/InputEV3Linetracer\l_1_0.h" alt="" coords="754,262,976,303"/>
+<area shape="rect" id="node6" href="$InputConfigFile_8h.html" title="EV3LineTracer/InputConfig\lFile.h" alt="" coords="153,353,332,394"/>
+<area shape="rect" id="node7" href="$EV3LineTracer_8cpp.html" title="EV3LineTracer/EV3LineTracer.cpp" alt="" coords="5,451,227,477"/>
+<area shape="rect" id="node10" href="$InputEV3Linetracer__1__0_8cpp.html" title="EV3LineTracer/InputEV3Linetracer\l_1_0.cpp" alt="" coords="690,353,912,394"/>
+<area shape="rect" id="node8" href="$InputConfigFile_8cpp.html" title="EV3LineTracer/InputConfig\lFile.cpp" alt="" coords="252,443,431,485"/>
+<area shape="rect" id="node13" href="$ReadInterval_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadInterval.cpp" alt="" coords="1031,171,1233,213"/>
+<area shape="rect" id="node15" href="$ReadRegularPolicy_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadRegularPolicy.cpp" alt="" coords="527,262,729,303"/>
+<area shape="rect" id="node17" href="$ReadSinglePolicy_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadSinglePolicy.cpp" alt="" coords="753,171,956,213"/>
+<area shape="rect" id="node19" href="$ReadSingleState_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadSingleState.cpp" alt="" coords="1711,171,1913,213"/>
+<area shape="rect" id="node20" href="$ReadState_8h.html" title="EV3LineTracer/Communication\l/Read/ReadState.h" alt="" coords="1484,171,1687,213"/>
+<area shape="rect" id="node21" href="$ReadState_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadState.cpp" alt="" coords="1484,262,1687,303"/>
+<area shape="rect" id="node23" href="$ReadStateCount_8cpp.html" title="EV3LineTracer/Communication\l/Read/ReadStateCount.cpp" alt="" coords="1257,262,1460,303"/>
+</map>
