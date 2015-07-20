@@ -1,0 +1,7 @@
+<map id="Communication/TCPConnection.h" name="Communication/TCPConnection.h">
+<area shape="rect" id="node2" href="$TCPClient_8h.html" title="Communication/TCPClient.h" alt="" coords="12,155,201,181"/>
+<area shape="rect" id="node4" href="$TCPStreamBuf_8h.html" title="Communication/TCPStreamBuf.h" alt="" coords="145,80,361,107"/>
+<area shape="rect" id="node6" href="$TCPConnection_8cpp.html" title="Communication/TCPConnection.cpp" alt="" coords="387,80,620,107"/>
+<area shape="rect" id="node3" href="$TCPClient_8cpp.html" title="Communication/TCPClient.cpp" alt="" coords="5,229,208,256"/>
+<area shape="rect" id="node5" href="$TCPStreamBuf_8cpp.html" title="Communication/TCPStreamBuf.cpp" alt="" coords="226,155,456,181"/>
+</map>

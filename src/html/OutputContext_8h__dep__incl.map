@@ -1,5 +1,7 @@
 <map id="Communication/OutputContext.h" name="Communication/OutputContext.h">
-<area shape="rect" id="node2" href="$TSVOutputContext_8h.html" title="Communication/TSVOutputContext.h" alt="" coords="133,80,371,107"/>
-<area shape="rect" id="node3" href="$TSVOutputContext_8cpp.html" title="Communication/TSVOutputContext.cpp" alt="" coords="5,155,259,181"/>
-<area shape="rect" id="node4" href="$ReinforcementLearning_8cpp.html" title="ReinforcementLearning.cpp" alt="" coords="283,155,464,181"/>
+<area shape="rect" id="node2" href="$TSVOutputContext_8h.html" title="Communication/TSVOutputContext.h" alt="" coords="233,80,471,107"/>
+<area shape="rect" id="node3" href="$TCPClient_8h.html" title="Communication/TCPClient.h" alt="" coords="12,155,201,181"/>
+<area shape="rect" id="node5" href="$TSVOutputContext_8cpp.html" title="Communication/TSVOutputContext.cpp" alt="" coords="225,155,479,181"/>
+<area shape="rect" id="node6" href="$ReinforcementLearning_8cpp.html" title="ReinforcementLearning.cpp" alt="" coords="503,155,684,181"/>
+<area shape="rect" id="node4" href="$TCPClient_8cpp.html" title="Communication/TCPClient.cpp" alt="" coords="5,229,208,256"/>
 </map>

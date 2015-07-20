@@ -8,10 +8,14 @@
 #ifndef TCPCLIENT_H_
 #define TCPCLIENT_H_
 
+#include <sys/types.h>
 #include <iostream>
+#include <string>
 
 #include "TCPConnection.h"
 #include "TCPStreamBuf.h"
+#include "TSVInputContext.h"
+#include "TSVOutputContext.h"
 
 namespace RL
 {
@@ -22,12 +26,18 @@ private:
 	TCPConnection tcpConnection;
 	TCPStreamBuf tcpStreamBuf;
 	std::iostream ioTcpStream;
+	TSVInputContext tsvInputContext;
+	TSVOutputContext tsvOutputContext;
 public:
 	TCPClient(std::string server_adress, int port, uint beffer_size);
 	virtual ~TCPClient();
-	const std::iostream& getIOTcpStream() const
+	InputContext& getInputContext()
 	{
-		return ioTcpStream;
+		return tsvInputContext;
+	}
+	OutputContext& getOutputContext()
+	{
+		return tsvOutputContext;
 	}
 };
 

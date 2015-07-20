@@ -14,6 +14,9 @@ var searchData=
   ['_7ereadsinglestate',['~ReadSingleState',['../classRL_1_1ReadSingleState.html#a859f8363304eecb479928b93c641835a',1,'RL::ReadSingleState']]],
   ['_7ereadstate',['~ReadState',['../classRL_1_1ReadState.html#a8c9618571c5c0b9056c0708eddbf6f85',1,'RL::ReadState']]],
   ['_7ereadstatecount',['~ReadStateCount',['../classRL_1_1ReadStateCount.html#ad47333acd7de0e49483640b7afc40ea7',1,'RL::ReadStateCount']]],
+  ['_7etcpclient',['~TCPClient',['../classRL_1_1TCPClient.html#a77e281ddff16082765a1e98ea3e47875',1,'RL::TCPClient']]],
+  ['_7etcpconnection',['~TCPConnection',['../classRL_1_1TCPConnection.html#a7f2296eed377c359900994a404a0eaf9',1,'RL::TCPConnection']]],
+  ['_7etcpstreambuf',['~TCPStreamBuf',['../classRL_1_1TCPStreamBuf.html#abdccd06d12311c937a37249155f5c649',1,'RL::TCPStreamBuf']]],
   ['_7etsvinputcontext',['~TSVInputContext',['../classRL_1_1TSVInputContext.html#afc440b934e567ca8cce160d432a891a3',1,'RL::TSVInputContext']]],
   ['_7etsvoutputcontext',['~TSVOutputContext',['../classRL_1_1TSVOutputContext.html#aceda5dee13561270b9499d305f1df82b',1,'RL::TSVOutputContext']]]
 ];

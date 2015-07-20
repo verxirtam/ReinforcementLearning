@@ -3,7 +3,7 @@ var searchData=
   ['setcontrolindex',['setControlIndex',['../classRL_1_1ReadSingleControl.html#aa84491ef2657c1339523896f470a4c91',1,'RL::ReadSingleControl']]],
   ['setcurrentpolicy',['SetCurrentPolicy',['../classRL_1_1EpsilonSoftOnPolicyMonteCarlo.html#a892b6b06ed6214ae7ccf3e892c9ec3a2',1,'RL::EpsilonSoftOnPolicyMonteCarlo::SetCurrentPolicy(const Policy &amp;p)'],['../classRL_1_1EpsilonSoftOnPolicyMonteCarlo.html#a2a34acfa3024d4037e283e47da8758a6',1,'RL::EpsilonSoftOnPolicyMonteCarlo::SetCurrentPolicy(const StochasticPolicy &amp;sp)'],['../classRL_1_1EV3LineTracer.html#ab316caaa5f4664347a64d18113df4fb2',1,'RL::EV3LineTracer::SetCurrentPolicy(const Policy &amp;p)'],['../classRL_1_1EV3LineTracer.html#aa9ac0140bc28aab2c901aa9523266ab4',1,'RL::EV3LineTracer::SetCurrentPolicy(const StochasticPolicy &amp;p)'],['../classRL_1_1SimpleMDP.html#a29674210a69c23a5b18d642ceee8f74d',1,'RL::SimpleMDP::SetCurrentPolicy(const Policy &amp;p)'],['../classRL_1_1SimpleMDP.html#a813b0276a4061b5c66deb64f05c0d5c1',1,'RL::SimpleMDP::SetCurrentPolicy(const StochasticPolicy &amp;p)']]],
   ['setindex',['setIndex',['../classRL_1_1ReadSingleControl.html#a1ecfbbf8a2fc66d69afb345ac301fbae',1,'RL::ReadSingleControl']]],
-  ['setpolicy',['setPolicy',['../classRL_1_1ReadSinglePolicy.html#a48da5f2ab48a2248f380cd12c8ccfc38',1,'RL::ReadSinglePolicy::setPolicy()'],['../classRL_1_1Policy.html#a103d1bb9daee756168c9340f7ddde196',1,'RL::Policy::SetPolicy()']]],
+  ['setpolicy',['SetPolicy',['../classRL_1_1Policy.html#a103d1bb9daee756168c9340f7ddde196',1,'RL::Policy::SetPolicy()'],['../classRL_1_1ReadSinglePolicy.html#a48da5f2ab48a2248f380cd12c8ccfc38',1,'RL::ReadSinglePolicy::setPolicy()']]],
   ['setprobability',['SetProbability',['../classRL_1_1StochasticPolicy.html#a732bf27fda9b6d7925ebfcc49e29583f',1,'RL::StochasticPolicy']]],
   ['setstateindex',['setStateIndex',['../classRL_1_1ReadSingleControl.html#a690edd127a054f3b64a5ea9e3ddc407d',1,'RL::ReadSingleControl::setStateIndex()'],['../classRL_1_1ReadSinglePolicy.html#a42ed2725405b45d7a54783cb16148e84',1,'RL::ReadSinglePolicy::setStateIndex()'],['../classRL_1_1ReadSingleState.html#a4ee6e8ae472542d395f209b22d63d9c5',1,'RL::ReadSingleState::SetStateIndex()']]],
   ['setstep',['SetStep',['../classRL_1_1Episode.html#afaf2590a78e6c3c9313403a06fbb7da5',1,'RL::Episode::SetStep(idx stepindex, idx state, idx control, real cost)'],['../classRL_1_1Episode.html#a2b9de88bfbbde44699d8a736d582a975',1,'RL::Episode::SetStep(idx stepindex, const Step &amp;step)']]],
@@ -24,5 +24,6 @@ var searchData=
   ['stochasticpolicydata',['StochasticPolicyData',['../namespaceRL.html#a84e387b82c46ab1f96fe03380edee475',1,'RL']]],
   ['stochasticpolicytest',['StochasticPolicyTest',['../classStochasticPolicyTest.html',1,'']]],
   ['stringtodata',['StringToData',['../classRL_1_1StringToData.html',1,'RL']]],
-  ['stringtodata_2eh',['StringToData.h',['../StringToData_8h.html',1,'']]]
+  ['stringtodata_2eh',['StringToData.h',['../StringToData_8h.html',1,'']]],
+  ['sync',['sync',['../classRL_1_1TCPStreamBuf.html#a57fb905a70ae14e4d9c943ff04541bb2',1,'RL::TCPStreamBuf']]]
 ];

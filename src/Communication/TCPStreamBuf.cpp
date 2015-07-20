@@ -68,7 +68,9 @@ TCPStreamBuf::TCPStreamBuf(TCPConnection& tcpconnection, uint buffersize):
 	catch(...)
 	{
 		delete[] readBuffer;
+		readBuffer=NULL;
 		delete[] writeBuffer;
+		writeBuffer=NULL;
 		throw;
 	}
 }
@@ -76,7 +78,9 @@ TCPStreamBuf::TCPStreamBuf(TCPConnection& tcpconnection, uint buffersize):
 TCPStreamBuf::~TCPStreamBuf()
 {
 	delete[] readBuffer;
+	readBuffer=NULL;
 	delete[] writeBuffer;
+	writeBuffer=NULL;
 }
 
 } /* namespace RL */

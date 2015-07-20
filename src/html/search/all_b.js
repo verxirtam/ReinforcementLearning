@@ -7,6 +7,7 @@ var searchData=
   ['randomidx',['RandomIdx',['../classRL_1_1RandomIdx.html#a551db1a43c2f8268a6fa2ec727b6a84f',1,'RL::RandomIdx::RandomIdx()'],['../classRL_1_1RandomIdx.html#ab914cbc6d94cfa9c70702da28f9779ac',1,'RL::RandomIdx::RandomIdx(const std::vector&lt; real &gt; &amp;prob, idx part_count=16)']]],
   ['randomidxtest',['RandomIdxTest',['../classRandomIdxTest.html',1,'']]],
   ['randomtest',['RandomTest',['../classRandomTest.html',1,'']]],
+  ['read',['read',['../classRL_1_1TCPConnection.html#aade44f3d8365e4ce3f88956fd6135079',1,'RL::TCPConnection']]],
   ['readconfigfile',['ReadConfigFile',['../classRL_1_1EV3LineTracer.html#adf54ac559fd0d1a35b49dee941fd3f3f',1,'RL::EV3LineTracer']]],
   ['readcontrol',['ReadControl',['../classRL_1_1ReadControl.html#a99e1ad6dae654c6698d1b52814d79ac0',1,'RL::ReadControl']]],
   ['readcontrol',['ReadControl',['../classRL_1_1ReadControl.html',1,'RL']]],

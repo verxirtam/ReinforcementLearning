@@ -13,13 +13,14 @@ namespace RL
 TCPClient::TCPClient(std::string server_adress, int port, uint beffer_size):
 		tcpConnection(server_adress, port),
 		tcpStreamBuf(tcpConnection,beffer_size),
-		ioTcpStream(&tcpStreamBuf)
+		ioTcpStream(&tcpStreamBuf),
+		tsvInputContext(ioTcpStream),
+		tsvOutputContext(ioTcpStream)
 {
 }
 
 TCPClient::~TCPClient()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace RL */
