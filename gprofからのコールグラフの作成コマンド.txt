@@ -1,0 +1,10 @@
+
+下記パスに以下のスクリプトが配置されている時に有効
+gprof2dot.py
+
+$ pwd
+/home/daisuke/git/ReinforcementLearning
+
+下記コマンドでコールグラフのpngファイルがカレントフォルダに生成される
+$ gprof ./Debug/ReinforcementLearning | ./gprof2dot.py | dot -Tpng -o output.png
+

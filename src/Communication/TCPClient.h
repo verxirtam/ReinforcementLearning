@@ -23,10 +23,15 @@ namespace RL
 class TCPClient
 {
 private:
+	//TCP接続
 	TCPConnection tcpConnection;
+	//TCP送受信データのバッファ
 	TCPStreamBuf tcpStreamBuf;
+	//TCP接続の入出力
 	std::iostream ioTcpStream;
+	//TCP接続のTSVとしての入力
 	TSVInputContext tsvInputContext;
+	//TCP接続のTSVとしての出力
 	TSVOutputContext tsvOutputContext;
 public:
 	TCPClient(std::string server_adress, int port, uint beffer_size);
