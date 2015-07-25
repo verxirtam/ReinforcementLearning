@@ -161,9 +161,11 @@ public:
 	EV3LineTracer():
 		Interval(0),
 		StateCount(0),
+		State(),
 		ControlCount(),
 		Control(),
 		CurrentPolicy(),
+		RegularPolicy(),
 		CostMax(0.0),
 		ConfigFilePath(),
 		tcpClient("localhost",50000,1024)
@@ -173,9 +175,11 @@ public:
 	EV3LineTracer(std::string configfilepath):
 		Interval(0),
 		StateCount(0),
+		State(),
 		ControlCount(),
 		Control(),
 		CurrentPolicy(),
+		RegularPolicy(),
 		CostMax(0.0),
 		ConfigFilePath(configfilepath),
 		tcpClient("localhost",50000,1024)

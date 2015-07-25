@@ -14,12 +14,14 @@ namespace RL
 
 
 SimpleMDP::SimpleMDP(idx length):
-	StateCount(length)//状態数の初期化
+	StateCount(length),//状態数の初期化
+	TransitionProb(0.75),//RegularPolicyがterminate stateに向かう推移確率
+	Prob(),//(state,control)に対する推移確率を格納するvector
+	CurrentPolicy()//現在設定されているPolicy
 {
 	//(state,control)に対する推移確率を格納するvector
 	std::vector<std::vector<std::vector<real> > > prob0;
 
-	TransitionProb=0.75;
 
 	//各Controlの推移確率を格納する
 	prob0.resize(StateCount);

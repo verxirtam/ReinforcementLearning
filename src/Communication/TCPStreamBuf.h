@@ -27,6 +27,12 @@ private:
 	char* writeBuffer;
 	//対応するコネクション
 	TCPConnection& tcpConnection;
+	//コピーコンストラクタ
+	//コネクションはコピーできないため使用禁止
+	TCPStreamBuf(const TCPStreamBuf&);
+	//代入演算子
+	//コネクションはコピーできないため使用禁止
+	TCPStreamBuf& operator=(const TCPStreamBuf&);
 protected:
 	virtual int_type underflow();
 	virtual int_type overflow(int_type __c = traits_type::eof());

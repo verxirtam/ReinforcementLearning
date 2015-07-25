@@ -28,8 +28,11 @@ TCPStreamBuf::int_type TCPStreamBuf::underflow()
 
 	//読み込めた文字数に応じて読み込みバッファを設定
 	this->setg(this->eback(),this->eback(),this->eback()+read_result);
+
+	//最初に読み込んだ文字へのポインタ
+	char* gptr=this->gptr();
 	//読み込んた最初の文字の値をint_typeで返却
-	return traits_type::to_int_type(*this->gptr());
+	return traits_type::to_int_type(*gptr);
 }
 
 TCPStreamBuf::int_type TCPStreamBuf::overflow(int_type __c)
@@ -56,14 +59,20 @@ int TCPStreamBuf::sync()
 
 TCPStreamBuf::TCPStreamBuf(TCPConnection& tcpconnection, uint buffersize):
 		bufferSize(buffersize),
+		readBuffer(NULL),
+		writeBuffer(NULL),
 		tcpConnection(tcpconnection)
 {
-	readBuffer = NULL;
-	writeBuffer = NULL;
 	try
 	{
 		readBuffer = new char[bufferSize];
 		writeBuffer = new char[bufferSize];
+
+		//読み込み対象の文字列を設定する
+		//ここでは即座にアンダーフローさせるために全て同じアドレスを指定する
+		setg(readBuffer, readBuffer, readBuffer);
+		//書き込み対象の文字列を設定する
+		setp(writeBuffer, writeBuffer + bufferSize);
 	}
 	catch(...)
 	{

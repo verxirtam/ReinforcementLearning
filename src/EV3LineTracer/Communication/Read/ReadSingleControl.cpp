@@ -11,7 +11,9 @@ namespace RL
 {
 
 ReadSingleControl::ReadSingleControl(EV3LineTracer &ev3,idx si, idx ci) :
-		ev3LineTracer(ev3)
+		ev3LineTracer(ev3),
+		stateIndex(0),
+		controlIndex(0)
 {
 		setIndex(si, ci);
 }

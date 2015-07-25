@@ -35,6 +35,13 @@ private:
 
 	//サーバとの接続を確立する
 	void init();
+
+	//代入演算子(使用禁止)
+	TCPConnection& operator=(const TCPConnection&);
+	//コピーコンストラクタ(使用禁止)
+	TCPConnection(const TCPConnection&);
+
+
 public:
 	TCPConnection(std::string serveraddress,int port):
 		ClientSocket(-1),

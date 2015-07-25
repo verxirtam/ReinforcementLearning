@@ -26,7 +26,8 @@ RandomIdx::RandomIdx(const std::vector<real>& prob, idx part_count):
 		ValueMax(prob.size()),
 		Value(part_count),
 		Decimal(ValueMax+1),
-		PartitionCount(part_count)
+		PartitionCount(part_count),
+		DecimalTotal()
 {
 
 	//part_countが不正な値なら例外発生

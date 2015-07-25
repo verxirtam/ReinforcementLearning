@@ -50,15 +50,14 @@ private:
 	EpisodeData Steps;
 public:
 	//デフォルトコンストラクタ
-	Episode()
+	Episode():Steps()
 	{
 
 	}
 	//コンストラクタ
 	//EpisodeData
-	Episode(EpisodeData ed)
+	Episode(EpisodeData ed):Steps(ed)
 	{
-		Steps=ed;
 	}
 	//エピソードの長さを取得する
 	inline idx GetStepCount()const

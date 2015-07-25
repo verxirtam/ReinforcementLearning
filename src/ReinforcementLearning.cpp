@@ -556,6 +556,12 @@ protected:
 		}
 	}
 	void TearDown(){}
+public:
+	EpisodeTest():
+		Steps(),
+		imax(0)
+	{
+	}
 
 
 };
@@ -1380,7 +1386,6 @@ TEST(EV3LineTracerTest,Init_Exception)
 {
 	//デフォルトコンストラクタの場合→例外発生
 	const idx testcount=23;
-	vector<EV3LineTracer> ev3(testcount);
 	vector<string> configfilepath(testcount);
 
 	configfilepath[ 0]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR000_FormatIdentifier.ini";
@@ -1410,8 +1415,8 @@ TEST(EV3LineTracerTest,Init_Exception)
 
 	for(idx i=0;i<testcount;i++)
 	{
-		ev3[i]=EV3LineTracer(configfilepath[i]);
-		EXPECT_THROW(ev3[i].Init(),std::ios_base::failure);
+		EV3LineTracer ev3(configfilepath[i]);
+		EXPECT_THROW(ev3.Init(),std::ios_base::failure);
 	}
 
 }
@@ -1812,6 +1817,11 @@ protected:
 		configfilepath[22]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR501_RegularPolicy_UnnecessaryData.ini";
 	}
 	void TearDown(){}
+public:
+	InputConfigFileErrorTest():
+		configfilepath()
+	{
+	}
 };
 
 //パラメータの定義

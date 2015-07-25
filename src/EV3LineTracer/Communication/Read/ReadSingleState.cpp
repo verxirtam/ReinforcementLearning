@@ -11,7 +11,8 @@ namespace RL
 {
 
 ReadSingleState::ReadSingleState(EV3LineTracer &ev3,idx i) :
-		ev3LineTracer(ev3)
+		ev3LineTracer(ev3),
+		stateIndex(0)
 {
 		SetStateIndex(i);
 }

@@ -109,14 +109,13 @@ public:
 
 	//デフォルトコンストラクタ
 	//Controlは空のvectorとするので何もしない
-	StochasticPolicy()
+	StochasticPolicy():Control()
 	{
 	}
 
 	//コンストラクタ 引数：countrolのvector (const StochasticPolicyData&)
-	StochasticPolicy(const StochasticPolicyData& control)
+	StochasticPolicy(const StochasticPolicyData& control):Control(control)
 	{
-		Control=control;
 		Correct();
 	}
 

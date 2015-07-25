@@ -85,6 +85,8 @@ private:
 public:
 	RandomIdx():
 		ValueMax(0),
+		Value(),
+		Decimal(),
 		PartitionCount(0),
 		DecimalTotal(0.0)
 	{

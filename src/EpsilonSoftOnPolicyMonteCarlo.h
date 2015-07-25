@@ -36,9 +36,8 @@ class EpsilonSoftOnPolicyMonteCarlo
 private:
 	MDP Mdp;
 public:
-	EpsilonSoftOnPolicyMonteCarlo(const MDP& mdp)
+	EpsilonSoftOnPolicyMonteCarlo(const MDP& mdp):Mdp(mdp)
 	{
-		Mdp=mdp;
 	}
 	//CurrentPolicyを
 	//control-value functionに基づいて改善したPolicyを求める

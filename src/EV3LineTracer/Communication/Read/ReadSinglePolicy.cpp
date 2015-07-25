@@ -14,7 +14,10 @@
 namespace RL
 {
 
-ReadSinglePolicy::ReadSinglePolicy(EV3LineTracer& ev3, Policy& p, idx i) : ev3LineTracer(ev3),policy(p)
+ReadSinglePolicy::ReadSinglePolicy(EV3LineTracer& ev3, Policy& p, idx i) :
+		ev3LineTracer(ev3),
+		policy(p),
+		stateIndex(0)
 {
 	setStateIndex(i);
 
