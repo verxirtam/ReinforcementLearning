@@ -125,36 +125,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">//サーバとの接続を確立する</span></div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> init();</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classRL_1_1TCPConnection.html#a94d6ba5dd617ac1e47647bbd2fe47b77">   39</a></span>&#160;    <a class="code" href="classRL_1_1TCPConnection.html#a94d6ba5dd617ac1e47647bbd2fe47b77">TCPConnection</a>(std::string serveraddress,<span class="keywordtype">int</span> port):</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        ClientSocket(-1),</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        Port(port),</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        ServerName(serveraddress)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    {</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        this-&gt;init();</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classRL_1_1TCPConnection.html#a7f2296eed377c359900994a404a0eaf9">~TCPConnection</a>();</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="comment">//受信結果の読み取り</span></div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="comment">//Read NBYTES into BUF from FD.</span></div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="comment">//Return the number read, -1 for errors or 0 for EOF.</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    ssize_t <a class="code" href="classRL_1_1TCPConnection.html#aade44f3d8365e4ce3f88956fd6135079">read</a>(<span class="keywordtype">char</span>* buffer, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="comment">//接続先へのデータの送信</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    ssize_t <a class="code" href="classRL_1_1TCPConnection.html#a3da4b90bbc991b3984355c77324efe54">write</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* buffer, <span class="keywordtype">size_t</span> size);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;} <span class="comment">/* namespace RL */</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* TCPCONNECTION_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="comment">//代入演算子(使用禁止)</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classRL_1_1TCPConnection.html">TCPConnection</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classRL_1_1TCPConnection.html">TCPConnection</a>&amp;);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="comment">//コピーコンストラクタ(使用禁止)</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="classRL_1_1TCPConnection.html">TCPConnection</a>(<span class="keyword">const</span> <a class="code" href="classRL_1_1TCPConnection.html">TCPConnection</a>&amp;);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classRL_1_1TCPConnection.html#a94d6ba5dd617ac1e47647bbd2fe47b77">   46</a></span>&#160;    <a class="code" href="classRL_1_1TCPConnection.html#a94d6ba5dd617ac1e47647bbd2fe47b77">TCPConnection</a>(std::string serveraddress,<span class="keywordtype">int</span> port):</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        ClientSocket(-1),</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        Port(port),</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        ServerName(serveraddress)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        this-&gt;init();</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    }</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classRL_1_1TCPConnection.html#a7f2296eed377c359900994a404a0eaf9">~TCPConnection</a>();</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="comment">//受信結果の読み取り</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    <span class="comment">//Read NBYTES into BUF from FD.</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">//Return the number read, -1 for errors or 0 for EOF.</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    ssize_t <a class="code" href="classRL_1_1TCPConnection.html#aade44f3d8365e4ce3f88956fd6135079">read</a>(<span class="keywordtype">char</span>* buffer, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">//接続先へのデータの送信</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    ssize_t <a class="code" href="classRL_1_1TCPConnection.html#a3da4b90bbc991b3984355c77324efe54">write</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* buffer, <span class="keywordtype">size_t</span> size);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;} <span class="comment">/* namespace RL */</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* TCPCONNECTION_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classRL_1_1TCPConnection_html"><div class="ttname"><a href="classRL_1_1TCPConnection.html">RL::TCPConnection</a></div><div class="ttdef"><b>Definition:</b> TCPConnection.h:26</div></div>
 <div class="ttc" id="classRL_1_1TCPConnection_html_a3da4b90bbc991b3984355c77324efe54"><div class="ttname"><a href="classRL_1_1TCPConnection.html#a3da4b90bbc991b3984355c77324efe54">RL::TCPConnection::write</a></div><div class="ttdeci">ssize_t write(const char *buffer, size_t size)</div><div class="ttdef"><b>Definition:</b> TCPConnection.cpp:89</div></div>
 <div class="ttc" id="classRL_1_1TCPConnection_html_aade44f3d8365e4ce3f88956fd6135079"><div class="ttname"><a href="classRL_1_1TCPConnection.html#aade44f3d8365e4ce3f88956fd6135079">RL::TCPConnection::read</a></div><div class="ttdeci">ssize_t read(char *buffer, size_t size)</div><div class="ttdef"><b>Definition:</b> TCPConnection.cpp:74</div></div>
 <div class="ttc" id="classRL_1_1TCPConnection_html_a7f2296eed377c359900994a404a0eaf9"><div class="ttname"><a href="classRL_1_1TCPConnection.html#a7f2296eed377c359900994a404a0eaf9">RL::TCPConnection::~TCPConnection</a></div><div class="ttdeci">virtual ~TCPConnection()</div><div class="ttdef"><b>Definition:</b> TCPConnection.cpp:65</div></div>
-<div class="ttc" id="classRL_1_1TCPConnection_html_a94d6ba5dd617ac1e47647bbd2fe47b77"><div class="ttname"><a href="classRL_1_1TCPConnection.html#a94d6ba5dd617ac1e47647bbd2fe47b77">RL::TCPConnection::TCPConnection</a></div><div class="ttdeci">TCPConnection(std::string serveraddress, int port)</div><div class="ttdef"><b>Definition:</b> TCPConnection.h:39</div></div>
+<div class="ttc" id="classRL_1_1TCPConnection_html_a94d6ba5dd617ac1e47647bbd2fe47b77"><div class="ttname"><a href="classRL_1_1TCPConnection.html#a94d6ba5dd617ac1e47647bbd2fe47b77">RL::TCPConnection::TCPConnection</a></div><div class="ttdeci">TCPConnection(std::string serveraddress, int port)</div><div class="ttdef"><b>Definition:</b> TCPConnection.h:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Jul 20 2015 18:20:24 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Jul 26 2015 14:10:03 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

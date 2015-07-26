@@ -1,5 +1,12 @@
 <map id="EV3LineTracer/EV3LineTracer.h" name="EV3LineTracer/EV3LineTracer.h">
-<area shape="rect" id="node6" href="$RLUtility_8h.html" title="../RLUtility.h" alt="" coords="499,229,595,256"/>
-<area shape="rect" id="node7" href="$Policy_8h.html" title="../Policy.h" alt="" coords="302,80,383,107"/>
-<area shape="rect" id="node9" href="$Random_8h.html" title="Random.h" alt="" coords="301,155,383,181"/>
+<area shape="rect" id="node6" href="$TCPClient_8h.html" title="../Communication/TCPClient.h" alt="" coords="575,80,776,107"/>
+<area shape="rect" id="node24" href="$RLUtility_8h.html" title="../RLUtility.h" alt="" coords="1711,229,1807,256"/>
+<area shape="rect" id="node25" href="$Policy_8h.html" title="../Policy.h" alt="" coords="1437,80,1517,107"/>
+<area shape="rect" id="node9" href="$TCPConnection_8h.html" title="TCPConnection.h" alt="" coords="251,229,377,256"/>
+<area shape="rect" id="node16" href="$TCPStreamBuf_8h.html" title="TCPStreamBuf.h" alt="" coords="555,155,677,181"/>
+<area shape="rect" id="node18" href="$TSVInputContext_8h.html" title="TSVInputContext.h" alt="" coords="790,155,924,181"/>
+<area shape="rect" id="node21" href="$TSVOutputContext_8h.html" title="TSVOutputContext.h" alt="" coords="1033,155,1177,181"/>
+<area shape="rect" id="node20" href="$InputContext_8h.html" title="InputContext.h" alt="" coords="914,229,1021,256"/>
+<area shape="rect" id="node23" href="$OutputContext_8h.html" title="OutputContext.h" alt="" coords="1046,229,1164,256"/>
+<area shape="rect" id="node27" href="$Random_8h.html" title="Random.h" alt="" coords="1436,155,1517,181"/>
 </map>

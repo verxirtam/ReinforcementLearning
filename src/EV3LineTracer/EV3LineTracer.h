@@ -168,7 +168,7 @@ public:
 		RegularPolicy(),
 		CostMax(0.0),
 		ConfigFilePath(),
-		tcpClient("localhost",50000,1024)
+		tcpClient()
 	{
 	}
 	//コンストラクタ

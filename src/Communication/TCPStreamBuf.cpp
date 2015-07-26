@@ -53,6 +53,8 @@ int TCPStreamBuf::sync()
 {
 	//書き込みバッファの内容を書き出す
 	tcpConnection.write(this->pbase(), this->pptr() - this->pbase());
+	//書き込みバッファの設定を初期化する
+	setp(writeBuffer, writeBuffer + this->bufferSize);
 
 	return 0;
 }
@@ -91,5 +93,65 @@ TCPStreamBuf::~TCPStreamBuf()
 	delete[] writeBuffer;
 	writeBuffer=NULL;
 }
+
+void TCPStreamBuf::setBufferSize(uint buffersize)
+{
+	//バッファのサイズを小さくするような変更は無視する
+	if(buffersize <= this->bufferSize)
+	{
+		return;
+	}
+	//新しいバッファサイズの反映
+	this -> bufferSize = buffersize;
+
+	//新たに確保するバッファのポインタ
+	char* new_read_buffer = NULL;
+	char* new_write_buffer = NULL;
+
+	try
+	{
+		//書き込みバッファの内容を同期する
+		this->sync();
+
+		//新しい読み込みバッファの確保
+		new_read_buffer = new char[bufferSize];
+		//バッファに読み込み済みの文字数を取得
+		int read_current = this->gptr() - this->eback();
+		//バッファに読み込み済みの文字数を取得
+		int read_size = this->egptr() - this->eback();
+
+		//readBufferの内容をコピーする
+		for(int i=0;i<read_size;i++)
+		{
+			new_read_buffer[i] = readBuffer[i];
+		}
+
+		//古い読み込みバッファの開放
+		delete[] readBuffer;readBuffer=NULL;
+		//新しい書き込みバッファへのポインタを設定する
+		readBuffer = new_read_buffer;
+		//読み込み対象の文字列を設定する
+		setg(readBuffer, readBuffer+read_current, readBuffer+read_size);
+
+		//新しい書き込みバッファの確保
+		new_write_buffer = new char[bufferSize];
+		//古い書き込みバッファの開放
+		delete[] writeBuffer;writeBuffer=NULL;
+		//新しい書き込みバッファへのポインタを設定する
+		writeBuffer = new_write_buffer;
+		//書き込み対象の文字列を設定する
+		//sync()済みなのでバッファのコピーは不要
+		setp(writeBuffer, writeBuffer + bufferSize);
+	}
+	catch(...)
+	{
+		delete[] new_read_buffer;
+		new_read_buffer=NULL;
+		delete[] new_write_buffer;
+		new_write_buffer=NULL;
+		throw;
+	}
+}
+
 
 } /* namespace RL */

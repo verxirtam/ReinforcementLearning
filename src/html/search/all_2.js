@@ -4,7 +4,7 @@ var searchData=
   ['episode',['Episode',['../classRL_1_1Episode.html#ad81defef377ddc66a06f890180fa1829',1,'RL::Episode::Episode()'],['../classRL_1_1Episode.html#aaa2e45a5c765f8b8496bdde5adaf2a2c',1,'RL::Episode::Episode(EpisodeData ed)']]],
   ['episode_2eh',['Episode.h',['../Episode_8h.html',1,'']]],
   ['episodedata',['EpisodeData',['../namespaceRL.html#a87a14abca0767240b657259ec945c3cc',1,'RL']]],
-  ['episodetest',['EpisodeTest',['../classEpisodeTest.html',1,'']]],
+  ['episodetest',['EpisodeTest',['../classEpisodeTest.html',1,'EpisodeTest'],['../classEpisodeTest.html#a763bd386882e46d6210014033e703631',1,'EpisodeTest::EpisodeTest()']]],
   ['epsilongreedy',['EpsilonGreedy',['../classRL_1_1EpsilonSoftOnPolicyMonteCarlo.html#ab427f35287fb70010bbc71232da2322f',1,'RL::EpsilonSoftOnPolicyMonteCarlo']]],
   ['epsilonsoftonpolicymontecarlo',['EpsilonSoftOnPolicyMonteCarlo',['../classRL_1_1EpsilonSoftOnPolicyMonteCarlo.html',1,'RL']]],
   ['epsilonsoftonpolicymontecarlo',['EpsilonSoftOnPolicyMonteCarlo',['../classRL_1_1EpsilonSoftOnPolicyMonteCarlo.html#a21bf9124a39c4ba232215edef0ade9ce',1,'RL::EpsilonSoftOnPolicyMonteCarlo']]],

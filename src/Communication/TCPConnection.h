@@ -43,12 +43,40 @@ private:
 
 
 public:
+	TCPConnection():
+		ClientSocket(-1),
+		Port(-1),
+		ServerName("")
+	{
+	}
 	TCPConnection(std::string serveraddress,int port):
 		ClientSocket(-1),
 		Port(port),
 		ServerName(serveraddress)
 	{
 		this->init();
+	}
+	void connect(std::string serveraddress,int port)
+	{
+		//接続済みのソケットのクローズ
+		this->close();
+
+		//ポート、サーバ名の設定
+		Port = port;
+		ServerName = serveraddress;
+
+		//新規の接続設定
+		this->init();
+	}
+	void close()
+	{
+		if(ClientSocket < 0)
+		{
+			//接続を終了する。
+			::close(ClientSocket);
+			ClientSocket = -1;
+
+		}
 	}
 	virtual ~TCPConnection();
 	//受信結果の読み取り

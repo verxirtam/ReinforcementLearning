@@ -34,7 +34,27 @@ private:
 	//TCP接続のTSVとしての出力
 	TSVOutputContext tsvOutputContext;
 public:
-	TCPClient(std::string server_adress, int port, uint beffer_size);
+	TCPClient():
+		tcpConnection(),
+		tcpStreamBuf(tcpConnection),
+		ioTcpStream(&tcpStreamBuf),
+		tsvInputContext(ioTcpStream),
+		tsvOutputContext(ioTcpStream)
+	{
+	}
+	TCPClient(std::string server_adress, int port, uint buffer_size):
+			tcpConnection(server_adress, port),
+			tcpStreamBuf(tcpConnection,buffer_size),
+			ioTcpStream(&tcpStreamBuf),
+			tsvInputContext(ioTcpStream),
+			tsvOutputContext(ioTcpStream)
+	{
+	}
+	void connect(std::string server_adress, int port, uint buffer_size)
+	{
+		tcpConnection.connect(server_adress,port);
+		tcpStreamBuf.setBufferSize(buffer_size);
+	}
 	virtual ~TCPClient();
 	InputContext& getInputContext()
 	{

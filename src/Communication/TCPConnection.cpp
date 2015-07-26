@@ -49,7 +49,7 @@ void TCPConnection::init()
 		else
 		{
 			//サーバへ接続
-			if (connect(ClientSocket, (sockaddr *)&server_inf2, sizeof(server_inf2)) == -1)
+			if (::connect(ClientSocket, (sockaddr *)&server_inf2, sizeof(server_inf2)) == -1)
 			{
 				ClientSocket = -1;
 				std::string msg("***error***  サーバへの接続に失敗しました\n");
@@ -64,8 +64,7 @@ void TCPConnection::init()
 
 TCPConnection::~TCPConnection()
 {
-	//接続を終了する。
-	::close(ClientSocket);
+	this->close();
 }
 
 //受信結果の読み取り

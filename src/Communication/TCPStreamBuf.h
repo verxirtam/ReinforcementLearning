@@ -20,7 +20,7 @@ namespace RL
 class TCPStreamBuf: public std::streambuf
 {
 private:
-	const int bufferSize;
+	uint bufferSize;
 	//読み込み用文字列バッファ
 	char* readBuffer;
 	//書き込み用文字列バッファ
@@ -38,8 +38,9 @@ protected:
 	virtual int_type overflow(int_type __c = traits_type::eof());
 	virtual int sync();
 public:
-	TCPStreamBuf(TCPConnection& tcpconnection, uint buffersize);
+	TCPStreamBuf(TCPConnection& tcpconnection, uint buffersize = 1024);
 	virtual ~TCPStreamBuf();
+	void setBufferSize(uint buffersize);
 };
 
 } /* namespace RL */
