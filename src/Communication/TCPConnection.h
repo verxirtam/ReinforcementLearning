@@ -70,7 +70,7 @@ public:
 	}
 	void close()
 	{
-		if(ClientSocket < 0)
+		if(ClientSocket >= 0)
 		{
 			//接続を終了する。
 			::close(ClientSocket);

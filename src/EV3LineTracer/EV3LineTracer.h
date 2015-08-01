@@ -12,6 +12,7 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <memory>
 
 #include "../Communication/TCPClient.h"
 #include "../RLUtility.h"
@@ -76,7 +77,7 @@ private:
 	//モータに与える速度の最大値
 	static const speed SPEEDMAX=600;
 	//TCP接続のクライアント
-	TCPClient tcpClient;
+	std::unique_ptr<TCPClient> tcpClient;
 	//メンバ関数
 	/////////////////////////////
 
@@ -182,7 +183,7 @@ public:
 		RegularPolicy(),
 		CostMax(0.0),
 		ConfigFilePath(configfilepath),
-		tcpClient("localhost",50000,1024)
+		tcpClient()
 	{
 	}
 	//コピーコンストラクタ→動的確保するメンバ変数は無いので不要

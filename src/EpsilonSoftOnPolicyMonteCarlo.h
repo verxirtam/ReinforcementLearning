@@ -20,6 +20,7 @@ namespace RL
 	イプシロンソフト方策オン型モンテカルロ法
 
 	typename MDPに必要なメンバ関数
+	Mdp.Init()
 	Mdp.GetStateCount()const
 	Mdp.GetControlCount(i)
 	Mdp.GetRegularPolicy(out)
