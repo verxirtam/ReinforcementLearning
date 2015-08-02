@@ -157,6 +157,11 @@ private:
 			throw std::ios_base::failure(msg.str());
 		}
 	}
+	//コピーコンストラクタ→TCPConnectionのコピーを禁じるため禁止する
+	EV3LineTracer(const EV3LineTracer &);
+	//コピー代入演算子→TCPConnectionのコピーを禁じるため禁止する
+	EV3LineTracer& operator=(const EV3LineTracer &);
+
 public:
 	//デフォルトコンストラクタ
 	EV3LineTracer():
@@ -186,8 +191,6 @@ public:
 		tcpClient()
 	{
 	}
-	//コピーコンストラクタ→動的確保するメンバ変数は無いので不要
-	//コピー代入演算子→動的確保するメンバ変数は無いので不要
 	//設定ファイル読み込みを行う
 	void ReadConfigFile();
 
@@ -280,17 +283,7 @@ public:
 	}
 	//何もしないコマンドを発行する
 	//通信の確率の確認に使用する
-	void execNullCommand()
-	{
-		throw std::ios::failure("未実装");
-		//TODO Init()にEV3へのコネクションを貼るコードを書く
-		//TODO コネクションはデータメンバとして保持する
-		//TODO EV3への送信用のデータ(NULLコマンド)を作成
-		//TODO EV3へ送信
-		//TODO EV3からの返信を受信する
-		//TODO 結果を読み取る
-		//TODO 結果に応じた処理を実行する
-	}
+	void execNullCommand();
 };
 
 

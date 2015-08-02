@@ -1845,7 +1845,7 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 
 TEST(ExecNullCommandTest,process)
 {
-	RL::EV3LineTracer ev3;
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
 	ev3.execNullCommand();
 }
@@ -1866,6 +1866,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Input*";
 	//::testing::GTEST_FLAG(filter)="*Read*";
 	//::testing::GTEST_FLAG(filter)="*INI*";
+	::testing::GTEST_FLAG(filter)="*Null*";
 
 
 	::testing::InitGoogleTest(&argc,argv);

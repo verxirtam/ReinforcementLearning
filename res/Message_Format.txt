@@ -8,6 +8,8 @@
 <MessageBody>::=<MessageBodyVersion><endl>;バージョン
 						<Command>|<Result>;コマンド|コマンドの結果
 
+<MessageBodyVersion>::="EV3LineTracer_1.0"
+
 <Command>::=
 (
 	"SetMDP"<endl>;MDPを設定

@@ -75,6 +75,43 @@ void EV3LineTracer::Init()
 	this->InitEV3();
 
 }
+void EV3LineTracer::execNullCommand()
+{
+	//throw std::ios::failure("未実装");
+	//EV3への送信用のデータ(NULLコマンド)を作成
+	stringstream null_command_string("");
+	null_command_string<<"MESSAGE_1.0"<<endl;
+	null_command_string<<"EV3LineTracer_1.0"<<endl;
+	null_command_string<<"NullCommand"<<endl;
+	null_command_string<<endl;
+
+	//EV3へ送信
+	OutputContext &oc = tcpClient->getOutputContext();
+	oc.writeToken(null_command_string.str());
+
+	//TODO EV3からの返信を受信する
+	InputContext &ic = tcpClient->getInputContext();
+	string s[4];
+	s[0] = ic.nextToken();ic.skipReturn();
+	s[1] = ic.nextToken();ic.skipReturn();
+	s[2] = ic.nextToken();ic.skipReturn();
+	s[3] = ic.nextToken();ic.skipReturn();
+
+	if(
+		!(
+			s[0]==string("MESSAGE_1.0")
+			&& s[1]==string("EV3LineTracer_1.0")
+			&& s[2]==string("NullCommand")
+			&& s[3]==string("OK")
+		)
+	)
+	{
+		throw std::ios::failure("返信メッセージが不正です");
+	}
+
+	//TODO 結果を読み取る
+	//TODO 結果に応じた処理を実行する
+}
 
 
 }
