@@ -20,6 +20,9 @@ namespace RL
 class TSVInputContext: public InputContext
 {
 private:
+	//読み込み開始したかを表す
+	//最初のnewLine()を行うかの判断に利用する
+	bool isBeginning;
 	//行中の位置を表す
 	std::vector<std::string>::size_type position;
 	//区切り文字を表す
@@ -33,12 +36,29 @@ private:
 	//一行分の文字列の初期化
 	void newLine();
 	void splitLineString(const std::string& linestring);
+	//読み込み開始のため最初の行を読み込む
+	//読み込み開始済みなら何もしない
+	void begin()
+	{
+		//読み込み前の場合は最初の行を読み込む
+		if(isBeginning)
+		{
+			//最初の行を読み込む
+			newLine();
+			//isBeginningを読み込み開始済みに設定する
+			isBeginning=false;
+		}
+	}
+	// 現在の行で次のTokenがあるかどうかを確認する
+	// isBeginningのチェックをしない
+	bool hasNextTokenPrivate(void)
+	{
+		return position != line.size();
+	}
 
 public:
-	TSVInputContext(std::istream &is):position(0),separater('\t'),input(is),line()
+	TSVInputContext(std::istream &is):isBeginning(true),position(0),separater('\t'),input(is),line()
 	{
-		//最初の行の読み込み
-		newLine();
 	}
 	virtual ~TSVInputContext(){}
 
@@ -52,7 +72,19 @@ public:
 	virtual void skipReturn(void);
 
 	// 現在の行で次のTokenがあるかどうかを確認する
-	virtual bool hasNextToken(void);
+	// isBeginningのチェックを行う
+	virtual bool hasNextToken(void)
+	{
+		//読み込み前の場合は最初の行を読み込む
+		begin();
+		return hasNextTokenPrivate();
+	}
+	//入力バッファと同期を取る
+	virtual void sync()
+	{
+		input.sync();
+	}
+
 };
 
 } /* namespace RL */

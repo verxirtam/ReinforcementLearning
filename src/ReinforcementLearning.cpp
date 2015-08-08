@@ -1866,7 +1866,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Input*";
 	//::testing::GTEST_FLAG(filter)="*Read*";
 	//::testing::GTEST_FLAG(filter)="*INI*";
-	::testing::GTEST_FLAG(filter)="*Null*";
+	//::testing::GTEST_FLAG(filter)="*Null*:*TSVInputContextTest*:*EV3LineTracerTest*";
 
 
 	::testing::InitGoogleTest(&argc,argv);

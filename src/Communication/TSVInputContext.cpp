@@ -119,8 +119,10 @@ void TSVInputContext::newLine()
 // 次のTokenを取得し現在のTokenを1つ進める
 std::string TSVInputContext::nextToken()
 {
+	//読み込み前の場合は最初の行を読み込む
+	begin();
 	// 現在位置が行末か確認
-	if (!hasNextToken())
+	if (!hasNextTokenPrivate())
 	{
 		// 行末なら例外発生
 		std::string msg("invalid file format ( end of line )");
@@ -135,8 +137,10 @@ std::string TSVInputContext::nextToken()
 // 現在のTokenがskipStringであることを確認し現在のTokenを1つ進める
 void TSVInputContext::skipToken(const std::string skipString)
 {
+	//読み込み前の場合は最初の行を読み込む
+	begin();
 	// 次のTokenが無ければ例外発生
-	if (!hasNextToken())
+	if (!hasNextTokenPrivate())
 	{
 		std::string msg("invalid file format ( end of line )");
 		throw std::ios_base::failure(msg);
@@ -159,6 +163,8 @@ void TSVInputContext::skipToken(const std::string skipString)
 // 次のTokenが行末であることを確認し現在のTokenを次の行の先頭に進める
 void TSVInputContext::skipReturn(void)
 {
+	//読み込み前の場合は最初の行を読み込む
+	begin();
 	//現在位置が行末かを確認
 	if (position == line.size())
 	{
@@ -173,10 +179,5 @@ void TSVInputContext::skipReturn(void)
 	}
 }
 
-// 現在の行で次のTokenがあるかどうかを確認する
-bool TSVInputContext::hasNextToken(void)
-{
-	return position != line.size();
-}
 
 } /* namespace RL */

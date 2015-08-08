@@ -88,6 +88,7 @@ void EV3LineTracer::execNullCommand()
 	//EV3へ送信
 	OutputContext &oc = tcpClient->getOutputContext();
 	oc.writeToken(null_command_string.str());
+	oc.flush();
 
 	//TODO EV3からの返信を受信する
 	InputContext &ic = tcpClient->getInputContext();

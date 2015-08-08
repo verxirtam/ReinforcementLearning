@@ -26,6 +26,11 @@ public:
 	virtual ~TSVOutputContext(){}
 	virtual void writeToken(std::string s);
 	virtual void newLine(void);
+	//書き込みバッファの内容を反映する
+	virtual void flush()
+	{
+		output.flush();
+	}
 };
 
 } /* namespace RL */

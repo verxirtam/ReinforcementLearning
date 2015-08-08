@@ -29,6 +29,9 @@ public:
 
 	// 現在の行で次のTokenがあるかどうかを確認する
 	virtual bool hasNextToken(void)=0;
+
+	//入力バッファと同期を取る
+	virtual void sync()=0;
 };
 
 } /* namespace RL */
