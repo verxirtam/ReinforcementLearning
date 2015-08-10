@@ -24,6 +24,9 @@
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
+#include "EV3LineTracer/Communication/Write/WriteInterval.h"
+#include "EV3LineTracer/Communication/Write/WriteStateCount.h"
+#include "EV3LineTracer/Communication/Write/WriteSingleState.h"
 
 using namespace std;
 using namespace RL;
@@ -1850,7 +1853,97 @@ TEST(ExecNullCommandTest,process)
 	ev3.execNullCommand();
 }
 
+TEST(WriteIntervalTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteInterval wi(ev3);
+}
 
+TEST(WriteIntervalTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	RL::WriteInterval wi(ev3);
+	wi.process(toc);
+	EXPECT_EQ(os.str(),std::to_string(ev3.GetInterval())+"\n");
+}
+
+TEST(WriteStateCountTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteStateCount wsc(ev3);
+}
+
+TEST(WriteStateCountTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	RL::WriteStateCount wsc(ev3);
+	ev3.Init();
+	wsc.process(toc);
+	EXPECT_EQ(os.str(),std::to_string(ev3.GetStateCount())+"\n");
+}
+TEST(WriteSingleStateTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteSingleState wss(ev3,0);
+}
+
+TEST(WriteSingleStateTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	idx i=0;
+	RL::WriteSingleState wss(ev3,i);
+	wss.process(toc);
+	EXPECT_EQ(
+			os.str(),
+			std::to_string(i)
+				+'\t'
+				+std::to_string(ev3.GetState(i).RefMax)
+				+'\t'
+				+std::to_string(ev3.GetControlCount(i))
+				+"\n"
+			);
+}
+TEST(WriteStateTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteState wss(ev3);
+}
+
+TEST(WriteStateTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	//テスト対象：WriteState
+	RL::WriteState wss(ev3);
+	//書き込み処理の実行
+	wss.process(toc);
+	//出力される想定の文字列
+	std::ostringstream state_string;
+	//state数
+	int state_count = ev3.GetStateCount();
+	//出力される想定の文字列の作成
+	for(int i=0; i<state_count; i++)
+	{
+		state_string<<std::to_string(i);
+		state_string<<'\t';
+		state_string<<ev3.GetState(i).RefMax;
+		state_string<<'\t';
+		state_string<<ev3.GetControlCount(i);
+		state_string<<endl;
+	}
+	//想定通りの文字列が出力されているか確認する
+	EXPECT_EQ(os.str(),state_string.str());
+}
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////

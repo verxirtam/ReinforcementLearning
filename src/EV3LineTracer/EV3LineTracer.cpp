@@ -55,7 +55,7 @@ void EV3LineTracer::ReadConfigFile()
 void EV3LineTracer::InitEV3()
 {
 	//EV3への接続を確立
-	tcpClient=auto_ptr<TCPClient>(new TCPClient("192.168.0.8",50000,1024));
+	tcpClient=auto_ptr<TCPClient>(new TCPClient("localhost",50000,1024));//"192.168.0.8",50000,1024));
 	//TODO MDP(State[], Control[][])を送信(CostMaxは-1として送信)
 	//TODO CurrentPolicyをRegularPolicyとする
 	//TODO EV3に1-Episode実行させる(GetEpisode()を実行)
