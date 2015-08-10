@@ -1,8 +1,0 @@
-<map id="RL::EV3LineTracer::GetStateCount" name="RL::EV3LineTracer::GetStateCount">
-<area shape="rect" id="node2" href="$classRL_1_1ReadControl.html#a046f4e72a7fe12141ba90a9ec68b3454" title="RL::ReadControl::process" alt="" coords="195,5,370,32"/>
-<area shape="rect" id="node4" href="$classRL_1_1ReadRegularPolicy.html#a121d62de9d9773cd94d5a9dd6e0a6d65" title="RL::ReadRegularPolicy\l::process" alt="" coords="203,57,362,98"/>
-<area shape="rect" id="node5" href="$classRL_1_1ReadState.html#ad0307541670334319f61661a64fe2fcc" title="RL::ReadState::process" alt="" coords="201,123,364,149"/>
-<area shape="rect" id="node7" href="$ReinforcementLearning_8cpp.html#a672e29e029c76ccf4da22db7883319bc" title="TEST" alt="" coords="255,173,311,200"/>
-<area shape="rect" id="node3" href="$classRL_1_1InputEV3Linetracer__1__0.html#a41ef05c192d8e82ed353220c3c161fbd" title="RL::InputEV3Linetracer\l_1_0::process" alt="" coords="419,57,578,98"/>
-<area shape="rect" id="node6" href="$ReinforcementLearning_8cpp.html#a0e3e7b7f311321e280ba5db35b2b0dbd" title="TEST" alt="" coords="471,123,527,149"/>
-</map>

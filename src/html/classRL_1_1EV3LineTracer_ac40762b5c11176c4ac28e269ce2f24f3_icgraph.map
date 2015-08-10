@@ -1,9 +1,0 @@
-<map id="RL::EV3LineTracer::GetControlCount" name="RL::EV3LineTracer::GetControlCount">
-<area shape="rect" id="node2" href="$classRL_1_1ReadControl.html#a046f4e72a7fe12141ba90a9ec68b3454" title="RL::ReadControl::process" alt="" coords="395,5,570,32"/>
-<area shape="rect" id="node4" href="$classRL_1_1ReadSinglePolicy.html#aee072902f3daf75e10c2f88baea8f343" title="RL::ReadSinglePolicy\l::process" alt="" coords="195,57,346,98"/>
-<area shape="rect" id="node6" href="$classRL_1_1EV3LineTracer.html#a8225bb058890def8ad571340dfa79c13" title="RL::EV3LineTracer::\lGetStochasticPolicy" alt="" coords="200,122,341,163"/>
-<area shape="rect" id="node8" href="$ReinforcementLearning_8cpp.html#a05bb651c93a2da017d9652df77cafae7" title="TEST" alt="" coords="243,188,299,215"/>
-<area shape="rect" id="node3" href="$classRL_1_1InputEV3Linetracer__1__0.html#a41ef05c192d8e82ed353220c3c161fbd" title="RL::InputEV3Linetracer\l_1_0::process" alt="" coords="619,27,778,69"/>
-<area shape="rect" id="node5" href="$classRL_1_1ReadRegularPolicy.html#a121d62de9d9773cd94d5a9dd6e0a6d65" title="RL::ReadRegularPolicy\l::process" alt="" coords="403,57,562,98"/>
-<area shape="rect" id="node7" href="$classRL_1_1EV3LineTracer.html#ab316caaa5f4664347a64d18113df4fb2" title="RL::EV3LineTracer::\lSetCurrentPolicy" alt="" coords="412,122,553,163"/>
-</map>

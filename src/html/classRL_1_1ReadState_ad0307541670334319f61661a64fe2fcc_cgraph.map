@@ -1,7 +1,0 @@
-<map id="RL::ReadState::process" name="RL::ReadState::process">
-<area shape="rect" id="node2" href="$classRL_1_1EV3LineTracer.html#abbbe6ee86ee54a06830da26b6f0c1701" title="RL::EV3LineTracer::\lGetStateCount" alt="" coords="219,5,360,46"/>
-<area shape="rect" id="node3" href="$classRL_1_1ReadSingleState.html#a4ee6e8ae472542d395f209b22d63d9c5" title="RL::ReadSingleState\l::SetStateIndex" alt="" coords="217,70,362,111"/>
-<area shape="rect" id="node4" href="$classRL_1_1ReadSingleState.html#a3460955ed791f010590b62868836f5d5" title="RL::ReadSingleState\l::process" alt="" coords="217,135,362,177"/>
-<area shape="rect" id="node5" href="$classRL_1_1InputContext.html#a65dd5ee03e713126594686e0fb55d7cd" title="RL::InputContext::nextToken" alt="" coords="413,117,603,144"/>
-<area shape="rect" id="node6" href="$classRL_1_1InputContext.html#af406d55b68a82a8b72e44ce4bd8e418c" title="RL::InputContext::skipReturn" alt="" coords="411,168,605,195"/>
-</map>
