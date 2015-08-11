@@ -25,6 +25,10 @@ public:
 	{
 
 	}
+	void setStateIndex(idx i)
+	{
+		index=i;
+	}
 	virtual ~WriteSingleState(){}
 	virtual void process(OutputContext& output);
 };

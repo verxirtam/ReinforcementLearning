@@ -27,6 +27,8 @@
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleState.h"
+#include "EV3LineTracer/Communication/Write/WriteState.h"
+#include "EV3LineTracer/Communication/Write/WriteSingleControl.h"
 
 using namespace std;
 using namespace RL;
@@ -1898,7 +1900,7 @@ TEST(WriteSingleStateTest,Process)
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
-	idx i=0;
+	idx i=ev3.GetStateCount()/2;
 	RL::WriteSingleState wss(ev3,i);
 	wss.process(toc);
 	EXPECT_EQ(
@@ -1936,7 +1938,7 @@ TEST(WriteStateTest,Process)
 	{
 		state_string<<std::to_string(i);
 		state_string<<'\t';
-		state_string<<ev3.GetState(i).RefMax;
+		state_string<<std::to_string(ev3.GetState(i).RefMax);
 		state_string<<'\t';
 		state_string<<ev3.GetControlCount(i);
 		state_string<<endl;
@@ -1944,6 +1946,81 @@ TEST(WriteStateTest,Process)
 	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),state_string.str());
 }
+
+
+TEST(WriteSingleControlTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteSingleControl wsc(ev3,0,0);
+}
+
+TEST(WriteSingleControlTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	idx i=ev3.GetStateCount()/2;
+	idx u=ev3.GetControlCount(i)/2;
+	RL::WriteSingleControl wsc(ev3,i,u);
+	wsc.process(toc);
+	EV3LineTracerControl control = ev3.getControl(i,u);
+	EXPECT_EQ(
+			os.str(),
+			std::to_string(i)
+				+'\t'
+				+std::to_string(u)
+				+'\t'
+				+std::to_string(control.LMotorSpeed)
+				+'\t'
+				+std::to_string(control.RMotorSpeed)
+				+"\n"
+			);
+}
+
+
+TEST(WriteControlTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteControl wc(ev3);
+}
+
+TEST(WriteControlTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	//テスト対象：WriteState
+	RL::WriteControl wc(ev3);
+	//書き込み処理の実行
+	wc.process(toc);
+	//出力される想定の文字列
+	std::ostringstream state_string;
+	//state数
+	idx state_count = ev3.GetStateCount();
+	//出力される想定の文字列の作成
+	for(idx i=0; i<state_count; i++)
+	{
+		idx control_count = ev3.GetControlCount(i);
+		for(idx u = 0; u<control_count; u++)
+		{
+			EV3LineTracerControl control = ev3.getControl(i,u);
+
+			state_string<<std::to_string(i);
+			state_string<<'\t';
+			state_string<<std::to_string(u);
+			state_string<<'\t';
+			state_string<<std::to_string(control.LMotorSpeed);
+			state_string<<'\t';
+			state_string<<std::to_string(control.RMotorSpeed);
+			state_string<<endl;
+		}
+	}
+	//想定通りの文字列が出力されているか確認する
+	EXPECT_EQ(os.str(),state_string.str());
+}
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
@@ -1960,6 +2037,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Read*";
 	//::testing::GTEST_FLAG(filter)="*INI*";
 	//::testing::GTEST_FLAG(filter)="*Null*:*TSVInputContextTest*:*EV3LineTracerTest*";
+	//::testing::GTEST_FLAG(filter)="*Write*";
 
 
 	::testing::InitGoogleTest(&argc,argv);
