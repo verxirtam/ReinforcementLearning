@@ -77,7 +77,7 @@ void EV3LineTracer::Init()
 }
 void EV3LineTracer::execNullCommand()
 {
-	//throw std::ios::failure("未実装");
+	throw std::ios::failure("未実装。NullCommandクラスを作成すること。");
 	//EV3への送信用のデータ(NULLコマンド)を作成
 	stringstream null_command_string("");
 	null_command_string<<"MESSAGE_1.0"<<endl;
