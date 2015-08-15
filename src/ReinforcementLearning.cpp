@@ -30,6 +30,7 @@
 #include "EV3LineTracer/Communication/Write/WriteState.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleControl.h"
 #include "EV3LineTracer/Communication/Write/WriteControl.h"
+#include "EV3LineTracer/Communication/Write/WriteSinglePolicy.h"
 
 using namespace std;
 using namespace RL;
@@ -2020,6 +2021,32 @@ TEST(WriteControlTest,Process)
 	}
 	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),state_string.str());
+}
+
+TEST(WriteSinglePolicyTest,Constractor)
+{
+	RL::Policy policy;
+	RL::WriteSinglePolicy wsp(policy,0);
+}
+
+TEST(WriteSinglePolicyTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	idx i=ev3.GetStateCount()/2;
+	Policy policy;
+	ev3.GetRegularPolicy(policy);
+	RL::WriteSinglePolicy wsp(policy,i);
+	wsp.process(toc);
+	EXPECT_EQ(
+			os.str(),
+			std::to_string(i)
+				+'\t'
+				+std::to_string(policy[i])
+				+"\n"
+			);
 }
 
 /////////////////////////////////////////////////////////////////////
