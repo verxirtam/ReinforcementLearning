@@ -29,6 +29,7 @@
 #include "EV3LineTracer/Communication/Write/WriteSingleState.h"
 #include "EV3LineTracer/Communication/Write/WriteState.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleControl.h"
+#include "EV3LineTracer/Communication/Write/WriteControl.h"
 
 using namespace std;
 using namespace RL;
