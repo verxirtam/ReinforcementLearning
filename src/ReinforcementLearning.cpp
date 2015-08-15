@@ -31,6 +31,7 @@
 #include "EV3LineTracer/Communication/Write/WriteSingleControl.h"
 #include "EV3LineTracer/Communication/Write/WriteControl.h"
 #include "EV3LineTracer/Communication/Write/WriteSinglePolicy.h"
+#include "EV3LineTracer/Communication/Write/WriteRegularPolicy.h"
 
 using namespace std;
 using namespace RL;
@@ -2047,6 +2048,39 @@ TEST(WriteSinglePolicyTest,Process)
 				+std::to_string(policy[i])
 				+"\n"
 			);
+}
+TEST(WriteRegularPolicyTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteRegularPolicy wrp(ev3);
+}
+
+TEST(WriteRegularPolicyTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.Init();
+	//テスト対象：RegularPolicy
+	RL::WriteRegularPolicy wrp(ev3);
+	//書き込み処理の実行
+	wrp.process(toc);
+	//出力される想定の文字列
+	std::ostringstream state_string;
+	//state数
+	int state_count = ev3.GetStateCount();
+	Policy regular_policy;
+	ev3.GetRegularPolicy(regular_policy);
+	//出力される想定の文字列の作成
+	for(int i=0; i<state_count; i++)
+	{
+		state_string<<std::to_string(i);
+		state_string<<'\t';
+		state_string<<std::to_string(regular_policy[i]);
+		state_string<<endl;
+	}
+	//想定通りの文字列が出力されているか確認する
+	EXPECT_EQ(os.str(),state_string.str());
 }
 
 /////////////////////////////////////////////////////////////////////

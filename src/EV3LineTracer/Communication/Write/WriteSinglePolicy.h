@@ -31,6 +31,10 @@ public:
 	{
 	}
 	virtual void process(OutputContext& output);
+	void setStateIndex(idx i)
+	{
+		stateIndex = i;
+	}
 };
 
 } /* namespace RL */
