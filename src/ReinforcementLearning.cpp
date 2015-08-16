@@ -2096,6 +2096,26 @@ TEST(OutputNullCommandTest,Process)
 	onc.process(toc);
 	EXPECT_EQ(os.str(),"NullCommand\n");
 }
+TEST(OutputEV3LineTracer_1_0Test,Constractor)
+{
+	RL::OutputNullCommand onc();
+	RL::OutputEV3LineTracer_1_0 oelt10(onc);
+}
+
+TEST(OutputEV3LineTracer_1_0Test,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::OutputNullCommand onc();
+	RL::OutputEV3LineTracer_1_0 oelt10(onc);
+	oelt10.process(toc);
+	ostringstream output_string;
+	output_string<<"EV3LineTracer_1.0";
+	output_string<<endl;
+	output_string<<"NullCommand";
+	output_string<<endl;
+	EXPECT_EQ(os.str(),output_string.str());
+}
 
 /////////////////////////////////////////////////////////////////////
 

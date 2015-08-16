@@ -22,7 +22,9 @@
 
 namespace RL
 {
-
+// TODO クラス 「InputEV3Linetracer_1_0」がファイル読み込み専用のクラスになっているので
+// EV3のバージョンを読み取る専用のものに改めること。
+// ※「OutputEV3Linetracer_1_0」と揃えるため
 class InputEV3Linetracer_1_0: public InputProcedure
 {
 private:
