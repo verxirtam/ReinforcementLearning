@@ -16,9 +16,9 @@ namespace RL
 class OutputEV3LineTracer_1_0: public OutputProcedure
 {
 private:
-	OutputProcedure& output;
+	OutputProcedure& outputProcedure;
 public:
-	OutputEV3LineTracer_1_0(OutputProcedure& o):output(o)
+	OutputEV3LineTracer_1_0(OutputProcedure& o):outputProcedure(o)
 	{
 	}
 	virtual ~OutputEV3LineTracer_1_0()

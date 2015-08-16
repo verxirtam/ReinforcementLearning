@@ -9,13 +9,13 @@
 
 namespace RL
 {
-void OutputEV3LineTracer_1_0::process(OutputContext& o)
+void OutputEV3LineTracer_1_0::process(OutputContext& output)
 {
 	//EV3のヴァージョンの書き込み
-	o.writeToken("EV3LineTracer_1.0");
-	o.newLine();
+	output.writeToken("EV3LineTracer_1.0");
+	output.newLine();
 
 	//後続の処理の実行
-	this->output.process(o);
+	this->outputProcedure.process(output);
 }
 } /* namespace RL */
