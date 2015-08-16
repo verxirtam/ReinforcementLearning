@@ -22,6 +22,7 @@
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
 #include "EV3LineTracer/OutputNullCommand.h"
+#include "EV3LineTracer/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -2098,7 +2099,7 @@ TEST(OutputNullCommandTest,Process)
 }
 TEST(OutputEV3LineTracer_1_0Test,Constractor)
 {
-	RL::OutputNullCommand onc();
+	RL::OutputNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 }
 
@@ -2106,7 +2107,7 @@ TEST(OutputEV3LineTracer_1_0Test,Process)
 {
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
-	RL::OutputNullCommand onc();
+	RL::OutputNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 	oelt10.process(toc);
 	ostringstream output_string;
