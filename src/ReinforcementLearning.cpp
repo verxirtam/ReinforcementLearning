@@ -21,6 +21,7 @@
 #include "Communication/TSVInputContext.h"
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
+#include "EV3LineTracer/OutputNullCommand.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -2081,6 +2082,19 @@ TEST(WriteRegularPolicyTest,Process)
 	}
 	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),state_string.str());
+}
+TEST(OutputNullCommandTest,Constractor)
+{
+	RL::OutputNullCommand onc();
+}
+
+TEST(OutputNullCommandTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::OutputNullCommand onc;
+	onc.process(toc);
+	EXPECT_EQ(os.str(),"NullCommand\n");
 }
 
 /////////////////////////////////////////////////////////////////////
