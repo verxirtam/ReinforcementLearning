@@ -2086,35 +2086,78 @@ TEST(WriteRegularPolicyTest,Process)
 }
 TEST(OutputNullCommandTest,Constractor)
 {
+	//OutputContextの初期化
 	RL::OutputNullCommand onc();
 }
 
 TEST(OutputNullCommandTest,Process)
 {
+	//OutputContextの初期化
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::OutputNullCommand onc;
+	//処理の実行
 	onc.process(toc);
+
 	EXPECT_EQ(os.str(),"NullCommand\n");
 }
 TEST(OutputEV3LineTracer_1_0Test,Constractor)
 {
+	//OutputContextの初期化
 	RL::OutputNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 }
 
 TEST(OutputEV3LineTracer_1_0Test,Process)
 {
+	//OutputContextの初期化
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::OutputNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
+
+	//処理の実行
 	oelt10.process(toc);
+
+	//出力される想定の文字列
 	ostringstream output_string;
 	output_string<<"EV3LineTracer_1.0";
 	output_string<<endl;
 	output_string<<"NullCommand";
 	output_string<<endl;
+	//想定通りの文字列が出力されているか確認する
+	EXPECT_EQ(os.str(),output_string.str());
+}
+TEST(OutputMessageTest,Constractor)
+{
+	//OutputContextの初期化
+	RL::OutputNullCommand onc;
+	RL::OutputEV3LineTracer_1_0 oelt10(onc);
+	RL::OutputMessage om(oelt10);
+}
+
+TEST(OutputMessageTest,Process)
+{
+	//OutputContextの初期化
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::OutputNullCommand onc;
+	RL::OutputEV3LineTracer_1_0 oelt10(onc);
+	RL::OutputMessage om(oelt10);
+
+	//処理の実行
+	om.process(toc);
+
+	//出力される想定の文字列
+	ostringstream output_string;
+	output_string<<"MESSAGE_1.0";
+	output_string<<endl;
+	output_string<<"EV3LineTracer_1.0";
+	output_string<<endl;
+	output_string<<"NullCommand";
+	output_string<<endl;
+
+	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),output_string.str());
 }
 
