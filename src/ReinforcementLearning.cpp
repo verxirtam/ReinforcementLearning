@@ -2157,6 +2157,7 @@ TEST(OutputMessageTest,Process)
 	output_string<<endl;
 	output_string<<"NullCommand";
 	output_string<<endl;
+	output_string<<endl;
 
 	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),output_string.str());

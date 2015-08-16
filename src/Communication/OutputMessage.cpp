@@ -14,7 +14,12 @@ void OutputMessage::process(OutputContext& output)
 	output.writeToken("MESSAGE_1.0");
 	output.newLine();
 
-	this->outputProcedure.process(output);
+	this->messageBody.process(output);
+
+	//空行
+	output.newLine();
+
+	output.flush();
 }
 
 } /* namespace RL */

@@ -16,9 +16,9 @@ namespace RL
 class OutputMessage: public OutputProcedure
 {
 private:
-	OutputProcedure& outputProcedure;
+	OutputProcedure& messageBody;
 public:
-	OutputMessage(OutputProcedure& output):outputProcedure(output)
+	OutputMessage(OutputProcedure& output):messageBody(output)
 	{
 	}
 	virtual ~OutputMessage()

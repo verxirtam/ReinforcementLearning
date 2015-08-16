@@ -6,12 +6,11 @@
  */
 
 #include "EV3LineTracer.h"
+#include "InputEV3Linetracer_1_0.h"//相互参照防止
+#include "InputConfigFile.h"//相互参照防止
 
-#include <iostream>//TODO
 
-#include "../Communication/TSVInputContext.h"
-#include "InputConfigFile.h"
-#include "InputEV3Linetracer_1_0.h"
+
 
 using namespace std;
 
@@ -77,26 +76,24 @@ void EV3LineTracer::Init()
 }
 void EV3LineTracer::execNullCommand()
 {
-	throw std::ios::failure("未実装。NullCommandクラスを作成すること。");
 	//EV3への送信用のデータ(NULLコマンド)を作成
-	stringstream null_command_string("");
-	null_command_string<<"MESSAGE_1.0"<<endl;
-	null_command_string<<"EV3LineTracer_1.0"<<endl;
-	null_command_string<<"NullCommand"<<endl;
-	null_command_string<<endl;
+	RL::OutputNullCommand o_null_command;
+	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_null_command);
+	RL::OutputMessage o_message(o_ev3_1_0);
 
 	//EV3へ送信
 	OutputContext &oc = tcpClient->getOutputContext();
-	oc.writeToken(null_command_string.str());
-	oc.flush();
+	o_message.process(oc);
 
 	//TODO EV3からの返信を受信する
 	InputContext &ic = tcpClient->getInputContext();
-	string s[4];
+	string s[5];
 	s[0] = ic.nextToken();ic.skipReturn();
 	s[1] = ic.nextToken();ic.skipReturn();
 	s[2] = ic.nextToken();ic.skipReturn();
 	s[3] = ic.nextToken();ic.skipReturn();
+	s[4] = ic.nextToken();ic.skipReturn();
+
 
 	if(
 		!(
@@ -104,6 +101,7 @@ void EV3LineTracer::execNullCommand()
 			&& s[1]==string("EV3LineTracer_1.0")
 			&& s[2]==string("NullCommand")
 			&& s[3]==string("OK")
+			&& s[4]==string("")
 		)
 	)
 	{

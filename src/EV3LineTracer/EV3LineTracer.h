@@ -14,11 +14,14 @@
 #include <sstream>
 #include <memory>
 
+#include "../Communication/OutputMessage.h"
+#include "../Communication/TSVInputContext.h"
 #include "../Communication/TCPClient.h"
 #include "../RLUtility.h"
 #include "../Policy.h"
 
-
+#include "OutputEV3LineTracer_1_0.h"
+#include "OutputNullCommand.h"
 
 namespace RL
 {
