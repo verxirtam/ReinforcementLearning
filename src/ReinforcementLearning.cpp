@@ -1758,8 +1758,7 @@ TEST(InputConfigFileTest,process)
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
-	RL::InputEV3Linetracer_1_0 iev3(ev3);
-	RL::InputConfigFile icf(iev3);
+	RL::InputConfigFile icf(ev3);
 	icf.process(tic);
 	EXPECT_EQ(ev3.GetInterval(),10);
 	EXPECT_EQ(ev3.GetStateCount(),2);
@@ -1782,8 +1781,7 @@ TEST(InputConfigFileTest,process_INIFile)
 	ifstream ifs("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	RL::TSVInputContext tic(ifs);
 	RL::EV3LineTracer ev3;
-	RL::InputEV3Linetracer_1_0 iev3(ev3);
-	RL::InputConfigFile icf(iev3);
+	RL::InputConfigFile icf(ev3);
 	icf.process(tic);
 	EXPECT_EQ(ev3.GetInterval()  ,11);
 	EXPECT_EQ(ev3.GetStateCount(),10);
@@ -1849,8 +1847,7 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 	ifstream ifs(configfilepath[GetParam()].c_str());
 	RL::TSVInputContext tic(ifs);
 	RL::EV3LineTracer ev3;
-	RL::InputEV3Linetracer_1_0 iev3(ev3);
-	RL::InputConfigFile icf(iev3);
+	RL::InputConfigFile icf(ev3);
 	EXPECT_THROW(icf.process(tic),std::ios_base::failure);
 }
 
@@ -2162,6 +2159,8 @@ TEST(OutputMessageTest,Process)
 	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),output_string.str());
 }
+
+
 
 /////////////////////////////////////////////////////////////////////
 
