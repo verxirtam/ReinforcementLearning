@@ -2159,6 +2159,22 @@ TEST(OutputMessageTest,Process)
 	EXPECT_EQ(os.str(),output_string.str());
 }
 
+TEST(InputNullCommandTest,Constractor)
+{
+	//InputContextの初期化
+	RL::InputNullCommand inc;
+}
+
+TEST(InputNullCommandTest,Process)
+{
+	//InputContextの初期化
+	std::istringstream is("NullCommand\nOK\n");
+	RL::TSVInputContext tic(is);
+	RL::InputNullCommand inc;
+	//処理の実行
+	inc.process(tic);
+
+}
 
 
 /////////////////////////////////////////////////////////////////////
