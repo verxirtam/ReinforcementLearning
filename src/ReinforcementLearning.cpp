@@ -2162,18 +2162,37 @@ TEST(OutputMessageTest,Process)
 
 TEST(InputCommandCommandNullCommandTest,Constractor)
 {
-	//InputContextの初期化
+	//InputCommandNullCommandの初期化
 	RL::InputCommandNullCommand inc;
 }
 
 TEST(InputCommandNullCommandTest,Process)
 {
-	//InputContextの初期化
+	//InputCommandNullCommandの初期化
 	std::istringstream is("NullCommand\nOK\n");
 	RL::TSVInputContext tic(is);
 	RL::InputCommandNullCommand inc;
 	//処理の実行
 	inc.process(tic);
+
+}
+TEST(InputEV3LineTracer_1_0Test,Constractor)
+{
+	//InputEV3LineTracer_1_0の初期化
+	RL::InputCommandNullCommand inc;
+	RL::InputEV3LineTracer_1_0 iev3(inc);
+
+}
+
+TEST(InputEV3LineTracer_1_0Test,Process)
+{
+	//InputContextの初期化
+	std::istringstream is("EV3LineTracer_1.0\nNullCommand\nOK\n");
+	RL::TSVInputContext tic(is);
+	RL::InputCommandNullCommand inc;
+	RL::InputEV3LineTracer_1_0 iev3(inc);
+	//処理の実行
+	iev3.process(tic);
 
 }
 
