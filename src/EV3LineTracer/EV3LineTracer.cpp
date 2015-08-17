@@ -82,31 +82,15 @@ void EV3LineTracer::execNullCommand()
 	OutputContext &oc = tcp_client.getOutputContext();
 	o_message.process(oc);
 
-	//TODO EV3からの返信を受信する
+	//EV3からの返信を受信する
 	InputContext &ic = tcp_client.getInputContext();
-	string s[5];
-	s[0] = ic.nextToken();ic.skipReturn();
-	s[1] = ic.nextToken();ic.skipReturn();
-	s[2] = ic.nextToken();ic.skipReturn();
-	s[3] = ic.nextToken();ic.skipReturn();
-	s[4] = ic.nextToken();ic.skipReturn();
 
+	//メッセージ受信用の
+	RL::InputCommandNullCommand i_null_command;
+	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_null_command);
+	RL::InputMessage_1_0 i_message(i_ev3_1_0);
 
-	if(
-		!(
-			s[0]==string("MESSAGE_1.0")
-			&& s[1]==string("EV3LineTracer_1.0")
-			&& s[2]==string("NullCommand")
-			&& s[3]==string("OK")
-			&& s[4]==string("")
-		)
-	)
-	{
-		throw std::ios::failure("返信メッセージが不正です");
-	}
-
-	//TODO 結果を読み取る
-	//TODO 結果に応じた処理を実行する
+	i_message.process(ic);
 }
 
 

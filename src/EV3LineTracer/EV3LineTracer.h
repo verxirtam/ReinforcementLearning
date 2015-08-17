@@ -14,12 +14,15 @@
 #include <sstream>
 #include <memory>
 
+#include "../Communication/InputMessage_1_0.h"
 #include "../Communication/OutputMessage_1_0.h"
 #include "../Communication/TSVInputContext.h"
 #include "../Communication/TCPClient.h"
 #include "../RLUtility.h"
 #include "../Policy.h"
 
+#include "InputEV3LineTracer_1_0.h"
+#include "InputCommandNullCommand.h"
 #include "OutputEV3LineTracer_1_0.h"
 #include "OutputCommandNullCommand.h"
 
