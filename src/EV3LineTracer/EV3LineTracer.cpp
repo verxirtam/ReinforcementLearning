@@ -76,7 +76,7 @@ void EV3LineTracer::execNullCommand()
 	//EV3への送信用のデータ(NULLコマンド)を作成
 	RL::OutputCommandNullCommand o_null_command;
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_null_command);
-	RL::OutputMessage o_message(o_ev3_1_0);
+	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
 
 	//EV3へ送信
 	OutputContext &oc = tcp_client.getOutputContext();

@@ -5,23 +5,23 @@
  *      Author: daisuke
  */
 
-#ifndef OUTPUTMESSAGE_H_
-#define OUTPUTMESSAGE_H_
+#ifndef OUTPUTMESSAGE_1_0_H_
+#define OUTPUTMESSAGE_1_0_H_
 
 #include "OutputProcedure.h"
 
 namespace RL
 {
 
-class OutputMessage: public OutputProcedure
+class OutputMessage_1_0: public OutputProcedure
 {
 private:
 	OutputProcedure& messageBody;
 public:
-	OutputMessage(OutputProcedure& output):messageBody(output)
+	OutputMessage_1_0(OutputProcedure& output):messageBody(output)
 	{
 	}
-	virtual ~OutputMessage()
+	virtual ~OutputMessage_1_0()
 	{
 	}
 	virtual void process(OutputContext& output);

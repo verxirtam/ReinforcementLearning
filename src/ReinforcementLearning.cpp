@@ -18,12 +18,13 @@
 #include "EpsilonSoftOnPolicyMonteCarlo.h"
 #include "Communication/TSVOutputContext.h"
 #include "Communication/TSVInputContext.h"
-#include "Communication/OutputMessage.h"
+#include "Communication/InputMessage_1_0.h"
+#include "Communication/OutputMessage_1_0.h"
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "EV3LineTracer/InputConfigFile.h"
 #include "EV3LineTracer/InputConfigFileEV3Linetracer_1_0.h"
-#include "EV3LineTracer/InputCommandNullCommand.h"
 #include "EV3LineTracer/InputEV3LineTracer_1_0.h"
+#include "EV3LineTracer/InputCommandNullCommand.h"
 #include "EV3LineTracer/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
@@ -2132,7 +2133,7 @@ TEST(OutputMessageTest,Constractor)
 	//OutputContextの初期化
 	RL::OutputCommandNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
-	RL::OutputMessage om(oelt10);
+	RL::OutputMessage_1_0 om(oelt10);
 }
 
 TEST(OutputMessageTest,Process)
@@ -2142,7 +2143,7 @@ TEST(OutputMessageTest,Process)
 	RL::TSVOutputContext toc(os);
 	RL::OutputCommandNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
-	RL::OutputMessage om(oelt10);
+	RL::OutputMessage_1_0 om(oelt10);
 
 	//処理の実行
 	om.process(toc);
@@ -2197,6 +2198,27 @@ TEST(InputEV3LineTracer_1_0Test,Process)
 
 }
 
+TEST(InputMessage_1_0Test,Constractor)
+{
+	//InputMessage_1_0の初期化
+	RL::InputCommandNullCommand inc;
+	RL::InputEV3LineTracer_1_0 iev3(inc);
+	RL::InputMessage_1_0 im(iev3);
+}
+
+TEST(InputMessage_1_0Test,Process)
+{
+	//InputContextの初期化
+	std::istringstream is("MESSAGE_1.0\nEV3LineTracer_1.0\nNullCommand\nOK\n\n");
+	RL::TSVInputContext tic(is);
+	RL::InputCommandNullCommand inc;
+	RL::InputEV3LineTracer_1_0 iev3(inc);
+	RL::InputMessage_1_0 im(iev3);
+
+	//処理の実行
+	im.process(tic);
+
+}
 
 /////////////////////////////////////////////////////////////////////
 

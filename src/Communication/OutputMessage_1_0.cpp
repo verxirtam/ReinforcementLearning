@@ -5,11 +5,11 @@
  *      Author: daisuke
  */
 
-#include "OutputMessage.h"
+#include "OutputMessage_1_0.h"
 
 namespace RL
 {
-void OutputMessage::process(OutputContext& output)
+void OutputMessage_1_0::process(OutputContext& output)
 {
 	output.writeToken("MESSAGE_1.0");
 	output.newLine();

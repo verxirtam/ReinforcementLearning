@@ -14,7 +14,7 @@
 #include <sstream>
 #include <memory>
 
-#include "../Communication/OutputMessage.h"
+#include "../Communication/OutputMessage_1_0.h"
 #include "../Communication/TSVInputContext.h"
 #include "../Communication/TCPClient.h"
 #include "../RLUtility.h"
