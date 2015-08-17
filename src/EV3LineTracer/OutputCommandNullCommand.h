@@ -13,13 +13,13 @@
 namespace RL
 {
 
-class OutputNullCommand: public OutputProcedure
+class OutputCommandNullCommand: public OutputProcedure
 {
 public:
-	OutputNullCommand()
+	OutputCommandNullCommand()
 	{
 	}
-	virtual ~OutputNullCommand()
+	virtual ~OutputCommandNullCommand()
 	{
 	}
 	virtual void process(OutputContext& output);

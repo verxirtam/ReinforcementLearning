@@ -9,7 +9,7 @@
 
 namespace RL
 {
-void OutputNullCommand::process(OutputContext& output)
+void OutputCommandNullCommand::process(OutputContext& output)
 {
 	output.writeToken("NullCommand");
 	output.newLine();

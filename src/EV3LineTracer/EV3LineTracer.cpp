@@ -74,7 +74,7 @@ void EV3LineTracer::execNullCommand()
 	TCPClient tcp_client("localhost",50000,1024);//"192.168.0.8",50000,1024));
 
 	//EV3への送信用のデータ(NULLコマンド)を作成
-	RL::OutputNullCommand o_null_command;
+	RL::OutputCommandNullCommand o_null_command;
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_null_command);
 	RL::OutputMessage o_message(o_ev3_1_0);
 

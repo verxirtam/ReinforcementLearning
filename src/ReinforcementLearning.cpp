@@ -2084,7 +2084,7 @@ TEST(WriteRegularPolicyTest,Process)
 TEST(OutputNullCommandTest,Constractor)
 {
 	//OutputContextの初期化
-	RL::OutputNullCommand onc();
+	RL::OutputCommandNullCommand onc();
 }
 
 TEST(OutputNullCommandTest,Process)
@@ -2092,7 +2092,7 @@ TEST(OutputNullCommandTest,Process)
 	//OutputContextの初期化
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
-	RL::OutputNullCommand onc;
+	RL::OutputCommandNullCommand onc;
 	//処理の実行
 	onc.process(toc);
 
@@ -2101,7 +2101,7 @@ TEST(OutputNullCommandTest,Process)
 TEST(OutputEV3LineTracer_1_0Test,Constractor)
 {
 	//OutputContextの初期化
-	RL::OutputNullCommand onc;
+	RL::OutputCommandNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 }
 
@@ -2110,7 +2110,7 @@ TEST(OutputEV3LineTracer_1_0Test,Process)
 	//OutputContextの初期化
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
-	RL::OutputNullCommand onc;
+	RL::OutputCommandNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 
 	//処理の実行
@@ -2128,7 +2128,7 @@ TEST(OutputEV3LineTracer_1_0Test,Process)
 TEST(OutputMessageTest,Constractor)
 {
 	//OutputContextの初期化
-	RL::OutputNullCommand onc;
+	RL::OutputCommandNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 	RL::OutputMessage om(oelt10);
 }
@@ -2138,7 +2138,7 @@ TEST(OutputMessageTest,Process)
 	//OutputContextの初期化
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
-	RL::OutputNullCommand onc;
+	RL::OutputCommandNullCommand onc;
 	RL::OutputEV3LineTracer_1_0 oelt10(onc);
 	RL::OutputMessage om(oelt10);
 
@@ -2159,10 +2159,10 @@ TEST(OutputMessageTest,Process)
 	EXPECT_EQ(os.str(),output_string.str());
 }
 
-TEST(InputNullCommandTest,Constractor)
+TEST(InputCommandNullCommandTest,Constractor)
 {
 	//InputContextの初期化
-	RL::InputNullCommand inc;
+	RL::InputCommandNullCommand inc;
 }
 
 TEST(InputNullCommandTest,Process)
@@ -2170,7 +2170,7 @@ TEST(InputNullCommandTest,Process)
 	//InputContextの初期化
 	std::istringstream is("NullCommand\nOK\n");
 	RL::TSVInputContext tic(is);
-	RL::InputNullCommand inc;
+	RL::InputCommandNullCommand inc;
 	//処理の実行
 	inc.process(tic);
 
