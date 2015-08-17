@@ -18,9 +18,9 @@ void InputConfigFile::process(InputContext &input)
 	input.skipReturn();
 
 	//バージョン文字列に応じたInputProcedureを実行する
-	if(version == InputEV3Linetracer_1_0::VERSION_STRING)
+	if(version == InputConfigFileEV3Linetracer_1_0::VERSION_STRING)
 	{
-		InputEV3Linetracer_1_0 body(ev3LineTracer);
+		InputConfigFileEV3Linetracer_1_0 body(ev3LineTracer);
 		body.process(input);
 	}
 	else

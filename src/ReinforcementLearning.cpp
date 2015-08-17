@@ -20,7 +20,7 @@
 #include "Communication/TSVInputContext.h"
 #include "Communication/OutputMessage.h"
 #include "EV3LineTracer/EV3LineTracer.h"
-#include "EV3LineTracer/InputEV3Linetracer_1_0.h"
+#include "EV3LineTracer/InputConfigFileEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
 #include "EV3LineTracer/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/OutputCommandNullCommand.h"

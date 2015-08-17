@@ -10,7 +10,7 @@
 
 #include "../Communication/InputContext.h"
 #include "../Communication/InputProcedure.h"
-#include "InputEV3Linetracer_1_0.h"
+#include "InputConfigFileEV3Linetracer_1_0.h"
 
 
 namespace RL

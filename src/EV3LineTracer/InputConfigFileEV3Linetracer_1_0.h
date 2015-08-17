@@ -1,12 +1,12 @@
 /*
- * InputEV3Linetracer_1_0.h
+ * InputConfigFileEV3Linetracer_1_0.h
  *
  *  Created on: 2014/12/21
  *      Author: daisuke
  */
 
-#ifndef INPUTEV3LINETRACER_1_0_H_
-#define INPUTEV3LINETRACER_1_0_H_
+#ifndef INPUTCONFIGFILEEV3LINETRACER_1_0_H_
+#define INPUTCONFIGFILEEV3LINETRACER_1_0_H_
 
 
 #include "../Communication/InputContext.h"
@@ -25,14 +25,14 @@ namespace RL
 // TODO クラス 「InputEV3Linetracer_1_0」がファイル読み込み専用のクラスになっているので
 // EV3のバージョンを読み取る専用のものに改めること。
 // ※「OutputEV3Linetracer_1_0」と揃えるため
-class InputEV3Linetracer_1_0: public InputProcedure
+class InputConfigFileEV3Linetracer_1_0: public InputProcedure
 {
 private:
 	EV3LineTracer& ev3LineTracer;
 public:
 	static const std::string VERSION_STRING;
-	InputEV3Linetracer_1_0(EV3LineTracer &ev3);
-	virtual ~InputEV3Linetracer_1_0();
+	InputConfigFileEV3Linetracer_1_0(EV3LineTracer &ev3);
+	virtual ~InputConfigFileEV3Linetracer_1_0();
 	virtual void process(InputContext &input);
 };
 
