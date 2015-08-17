@@ -21,7 +21,7 @@
 #include "../Policy.h"
 
 #include "OutputEV3LineTracer_1_0.h"
-#include "OutputNullCommand.h"
+#include "OutputCommandNullCommand.h"
 
 namespace RL
 {
@@ -79,8 +79,6 @@ private:
 	std::string ConfigFilePath;
 	//モータに与える速度の最大値
 	static const speed SPEEDMAX=600;
-	//TCP接続のクライアント
-	std::unique_ptr<TCPClient> tcpClient;
 	//メンバ関数
 	/////////////////////////////
 
@@ -176,8 +174,7 @@ public:
 		CurrentPolicy(),
 		RegularPolicy(),
 		CostMax(0.0),
-		ConfigFilePath(),
-		tcpClient()
+		ConfigFilePath()
 	{
 	}
 	//コンストラクタ
@@ -190,8 +187,7 @@ public:
 		CurrentPolicy(),
 		RegularPolicy(),
 		CostMax(0.0),
-		ConfigFilePath(configfilepath),
-		tcpClient()
+		ConfigFilePath(configfilepath)
 	{
 	}
 	//設定ファイル読み込みを行う

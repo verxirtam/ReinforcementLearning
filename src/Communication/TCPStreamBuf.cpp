@@ -35,7 +35,7 @@ TCPStreamBuf::int_type TCPStreamBuf::underflow()
 	return traits_type::to_int_type(*gptr);
 }
 
-TCPStreamBuf::int_type TCPStreamBuf::overflow(int_type __c)
+TCPStreamBuf::int_type TCPStreamBuf::overflow(TCPStreamBuf::int_type __c)
 {
 	//書き込みバッファの内容を送信する
 	//エラーの場合はこの関数内で例外発生

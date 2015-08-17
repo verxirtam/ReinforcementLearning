@@ -53,14 +53,9 @@ void EV3LineTracer::ReadConfigFile()
 //EV3の準備を行う
 void EV3LineTracer::InitEV3()
 {
-	//EV3への接続を確立
-	tcpClient=auto_ptr<TCPClient>(new TCPClient("localhost",50000,1024));//"192.168.0.8",50000,1024));
-	//TODO MDP(State[], Control[][])を送信(CostMaxは-1として送信)
-	//TODO CurrentPolicyをRegularPolicyとする
-	//TODO EV3に1-Episode実行させる(GetEpisode()を実行)
-	//TODO Episodeを取得し、完走できたか確認(Costが-1かどうかで判断)し、成功するまで再実行する
-	//TODO 成功したEpisodeのCostを取得し、CostMaxを取得したCostの10倍として定め、EV3にCostMaxを送信する
-	//TODO (Episodeを終了した時点でEV3はStart地点で待機している)
+	//EV3と通信できるか確認する
+	this->execNullCommand();
+	// TODO CostMaxを取得する処理を書いていたが、INIファイルから取得するように改める
 }
 
 //EV3LineTracer::Init()
@@ -76,17 +71,20 @@ void EV3LineTracer::Init()
 }
 void EV3LineTracer::execNullCommand()
 {
+	//EV3への接続を確立
+	TCPClient tcp_client("localhost",50000,1024);//"192.168.0.8",50000,1024));
+
 	//EV3への送信用のデータ(NULLコマンド)を作成
 	RL::OutputNullCommand o_null_command;
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_null_command);
 	RL::OutputMessage o_message(o_ev3_1_0);
 
 	//EV3へ送信
-	OutputContext &oc = tcpClient->getOutputContext();
+	OutputContext &oc = tcp_client.getOutputContext();
 	o_message.process(oc);
 
 	//TODO EV3からの返信を受信する
-	InputContext &ic = tcpClient->getInputContext();
+	InputContext &ic = tcp_client.getInputContext();
 	string s[5];
 	s[0] = ic.nextToken();ic.skipReturn();
 	s[1] = ic.nextToken();ic.skipReturn();

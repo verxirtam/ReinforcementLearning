@@ -1,12 +1,12 @@
 /*
- * OutputNullCommand.h
+ * OutputCommandNullCommand.h
  *
  *  Created on: 2015/08/17
  *      Author: daisuke
  */
 
-#ifndef OUTPUTNULLCOMMAND_H_
-#define OUTPUTNULLCOMMAND_H_
+#ifndef OUTPUTCOMMANDNULLCOMMAND_H_
+#define OUTPUTCOMMANDNULLCOMMAND_H_
 
 #include "../Communication/OutputProcedure.h"
 

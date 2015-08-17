@@ -23,7 +23,7 @@
 #include "EV3LineTracer/InputEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
 #include "EV3LineTracer/OutputEV3LineTracer_1_0.h"
-#include "EV3LineTracer/OutputNullCommand.h"
+#include "EV3LineTracer/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"

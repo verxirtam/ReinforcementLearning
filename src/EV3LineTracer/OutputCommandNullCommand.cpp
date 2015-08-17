@@ -1,11 +1,11 @@
 /*
- * OutputNullCommand.cpp
+ * OutputCommandNullCommand.cpp
  *
  *  Created on: 2015/08/17
  *      Author: daisuke
  */
 
-#include "OutputNullCommand.h"
+#include "OutputCommandNullCommand.h"
 
 namespace RL
 {
