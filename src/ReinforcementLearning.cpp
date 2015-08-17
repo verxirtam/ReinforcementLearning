@@ -20,8 +20,9 @@
 #include "Communication/TSVInputContext.h"
 #include "Communication/OutputMessage.h"
 #include "EV3LineTracer/EV3LineTracer.h"
-#include "EV3LineTracer/InputConfigFileEV3Linetracer_1_0.h"
 #include "EV3LineTracer/InputConfigFile.h"
+#include "EV3LineTracer/InputConfigFileEV3Linetracer_1_0.h"
+#include "EV3LineTracer/InputCommandNullCommand.h"
 #include "EV3LineTracer/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
@@ -2081,13 +2082,13 @@ TEST(WriteRegularPolicyTest,Process)
 	//想定通りの文字列が出力されているか確認する
 	EXPECT_EQ(os.str(),state_string.str());
 }
-TEST(OutputNullCommandTest,Constractor)
+TEST(OutputCommandNullCommandTest,Constractor)
 {
 	//OutputContextの初期化
 	RL::OutputCommandNullCommand onc();
 }
 
-TEST(OutputNullCommandTest,Process)
+TEST(OutputCommandNullCommandTest,Process)
 {
 	//OutputContextの初期化
 	std::ostringstream os;
@@ -2159,13 +2160,13 @@ TEST(OutputMessageTest,Process)
 	EXPECT_EQ(os.str(),output_string.str());
 }
 
-TEST(InputCommandNullCommandTest,Constractor)
+TEST(InputCommandCommandNullCommandTest,Constractor)
 {
 	//InputContextの初期化
 	RL::InputCommandNullCommand inc;
 }
 
-TEST(InputNullCommandTest,Process)
+TEST(InputCommandNullCommandTest,Process)
 {
 	//InputContextの初期化
 	std::istringstream is("NullCommand\nOK\n");
