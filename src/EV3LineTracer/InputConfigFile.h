@@ -19,10 +19,14 @@ namespace RL
 class InputConfigFile: public InputProcedure
 {
 private:
-	InputProcedure &body;
+	EV3LineTracer& ev3LineTracer;
 public:
-	InputConfigFile(InputProcedure &b);
-	virtual ~InputConfigFile();
+	InputConfigFile(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	{
+	}
+	virtual ~InputConfigFile()
+	{
+	}
 	virtual void process(InputContext &input);
 };
 

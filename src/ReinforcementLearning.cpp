@@ -1742,8 +1742,7 @@ TEST(InputConfigFileTest,Constractor)
 	std::istringstream is(aaa);
 	RL::TSVInputContext tic(is);
 	RL::EV3LineTracer ev3;
-	RL::InputEV3Linetracer_1_0 iev3(ev3);
-	RL::InputConfigFile icf(iev3);
+	RL::InputConfigFile icf(ev3);
 }
 TEST(InputConfigFileTest,process)
 {

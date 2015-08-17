@@ -37,8 +37,7 @@ void EV3LineTracer::ReadConfigFile()
 		//タブ区切りの入力コンテキスト
 		RL::TSVInputContext tic(ifs);
 
-		RL::InputEV3Linetracer_1_0 iev3(*this);
-		RL::InputConfigFile icf(iev3);
+		RL::InputConfigFile icf(*this);
 		icf.process(tic);
 
 		ifs.close();

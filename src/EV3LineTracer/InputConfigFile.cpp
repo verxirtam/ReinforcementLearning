@@ -10,16 +10,24 @@
 namespace RL
 {
 
-InputConfigFile::InputConfigFile(InputProcedure &b):body(b)
-{
-}
 
-InputConfigFile::~InputConfigFile()
-{
-}
 void InputConfigFile::process(InputContext &input)
 {
-	body.process(input);
+	//ファイル一行目のバージョン文字列を取得
+	std::string version = input.nextToken();
+	input.skipReturn();
+
+	//バージョン文字列に応じたInputProcedureを実行する
+	if(version == InputEV3Linetracer_1_0::VERSION_STRING)
+	{
+		InputEV3Linetracer_1_0 body(ev3LineTracer);
+		body.process(input);
+	}
+	else
+	{
+		//バージョンが一致しなかったら例外を投げる
+		throw  std::ios::failure("バージョンが不正です");
+	}
 }
 
 } /* namespace RL */
