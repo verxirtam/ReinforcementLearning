@@ -1636,6 +1636,28 @@ TEST(ReadIntervalTest,Process_Exception)
 	ReadInterval ri(ev3);
 	EXPECT_THROW(ri.process(tic),std::ios_base::failure);
 }
+
+TEST(ReadCostMaxTest,Process)
+{
+	string aaa="10.125\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadCostMax rcm(ev3);
+	rcm.process(tic);
+	EXPECT_EQ(ev3.getInterval(),10.125);
+}
+TEST(ReadCostMaxTest,Process_Exception)
+{
+	string aaa="aa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadCostMax rcm(ev3);
+	EXPECT_THROW(rcm.process(tic),std::ios_base::failure);
+}
+
+
 TEST(ReadStateCountTest,Process)
 {
 	string aaa="11\n";
@@ -2233,47 +2255,48 @@ TEST(OutputCommandSetMDPTest,Constractor)
 TEST(OutputCommandSetMDPTest,Process)
 {
 
-	string expect_string = "11\
-10\
-0	0.1	1\
-1	0.2	2\
-2	0.3	2\
-3	0.4	2\
-4	0.5	2\
-5	0.6	2\
-6	0.7	2\
-7	0.8	2\
-8	0.9	2\
-9	1.0	2\
-0	0	10	10\
-1	0	10	5\
-1	1	5	10\
-2	0	10	5\
-2	1	5	10\
-3	0	10	5\
-3	1	5	10\
-4	0	10	5\
-4	1	5	10\
-5	0	10	5\
-5	1	5	10\
-6	0	10	5\
-6	1	5	10\
-7	0	10	5\
-7	1	5	10\
-8	0	10	5\
-8	1	5	10\
-9	0	10	5\
-9	1	5	10\
-0	0\
-1	1\
-2	1\
-3	0\
-4	0\
-5	1\
-6	1\
-7	0\
-8	1\
-9	1\
+	string expect_string = "SetMDP\n\
+11\n\
+10\n\
+0	0.100000	1\n\
+1	0.200000	2\n\
+2	0.300000	2\n\
+3	0.400000	2\n\
+4	0.500000	2\n\
+5	0.600000	2\n\
+6	0.700000	2\n\
+7	0.800000	2\n\
+8	0.900000	2\n\
+9	1.000000	2\n\
+0	0	10	10\n\
+1	0	10	5\n\
+1	1	5	10\n\
+2	0	10	5\n\
+2	1	5	10\n\
+3	0	10	5\n\
+3	1	5	10\n\
+4	0	10	5\n\
+4	1	5	10\n\
+5	0	10	5\n\
+5	1	5	10\n\
+6	0	10	5\n\
+6	1	5	10\n\
+7	0	10	5\n\
+7	1	5	10\n\
+8	0	10	5\n\
+8	1	5	10\n\
+9	0	10	5\n\
+9	1	5	10\n\
+0	0\n\
+1	1\n\
+2	1\n\
+3	0\n\
+4	0\n\
+5	1\n\
+6	1\n\
+7	0\n\
+8	1\n\
+9	1\n\
 ";
 
 
@@ -2298,7 +2321,7 @@ TEST(InputCommandSetMDPTest,Constractor)
 	RL::InputCommandSetMDP i_setmdp(ev3);
 }
 
-TEST(InputCommandSetMDPTest,Process)
+TEST(InputCommandSetMDPTest,Process_OK)
 {
 	//InputContextの初期化
 	std::istringstream is("SetMDP\nOK\n");
@@ -2310,6 +2333,31 @@ TEST(InputCommandSetMDPTest,Process)
 	//処理の実行
 	i_setmdp.process(tic);
 
+}
+TEST(InputCommandSetMDPTest,Process_NG)
+{
+	//InputContextの初期化
+	std::istringstream is("SetMDP\nNG\n");
+	RL::TSVInputContext tic(is);
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetMDP i_setmdp(ev3);
+
+	//処理の実行
+	EXPECT_THROW(i_setmdp.process(tic),std::ios_base::failure);
+
+}
+TEST(InputCommandSetMDPTest,Process_error)
+{
+	//InputContextの初期化
+	std::istringstream is("SetMDP\nXXX\n");
+	RL::TSVInputContext tic(is);
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetMDP i_setmdp(ev3);
+
+	//処理の実行
+	EXPECT_THROW(i_setmdp.process(tic),std::ios_base::failure);
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -2328,6 +2376,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*INI*";
 	//::testing::GTEST_FLAG(filter)="*Null*:*TSVInputContextTest*:*EV3LineTracerTest*";
 	//::testing::GTEST_FLAG(filter)="*Write*";
+	//::testing::GTEST_FLAG(filter)="*Input*:*Output*";
 
 
 	::testing::InitGoogleTest(&argc,argv);

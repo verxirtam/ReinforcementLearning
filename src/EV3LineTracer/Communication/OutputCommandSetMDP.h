@@ -9,8 +9,13 @@
 #define OUTPUTCOMMANDSETMDP_H_
 
 #include "../../Communication/OutputProcedure.h"
+#include "../../Communication/OutputContext.h"
 #include "../EV3LineTracer.h"
-
+#include "Write/WriteControl.h"
+#include "Write/WriteInterval.h"
+#include "Write/WriteRegularPolicy.h"
+#include "Write/WriteState.h"
+#include "Write/WriteStateCount.h"
 
 namespace RL
 {

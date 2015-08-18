@@ -74,7 +74,7 @@ private:
 	StochasticPolicy currentPolicy;
 	//RegularPolicy コストの基準となるポリシー
 	Policy regularPolicy;
-	//コストの最大値(RegularPolicyの10倍に定める)
+	//コストの最大値
 	real costMax;
 	//設定ファイルのパス
 	std::string configFilePath;
@@ -88,6 +88,12 @@ private:
 	{
 		interval=i;
 	}
+	//Intervalの設定
+	void setCostMax(real c)
+	{
+		costMax = c;
+	}
+
 	//StateCountの設定
 	void setStateCount(idx sc)
 	{

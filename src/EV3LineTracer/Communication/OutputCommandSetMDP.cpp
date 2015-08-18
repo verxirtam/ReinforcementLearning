@@ -7,10 +7,23 @@
 
 #include "OutputCommandSetMDP.h"
 
+
+
 namespace RL
 {
 void OutputCommandSetMDP::process(OutputContext& output)
 {
+	output.writeToken("SetMDP");
+	output.newLine();
 
+	WriteInterval(ev3LineTracer).process(output);
+
+	WriteStateCount(ev3LineTracer).process(output);
+
+	WriteState(ev3LineTracer).process(output);
+
+	WriteControl(ev3LineTracer).process(output);
+
+	WriteRegularPolicy(ev3LineTracer).process(output);
 }
 } /* namespace RL */
