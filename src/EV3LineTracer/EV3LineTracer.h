@@ -170,6 +170,8 @@ private:
 	EV3LineTracer(const EV3LineTracer &);
 	//コピー代入演算子→TCPConnectionのコピーを禁じるため禁止する
 	EV3LineTracer& operator=(const EV3LineTracer &);
+	//コマンドの実行
+	void execCommand(RL::OutputProcedure& o_command,RL::InputProcedure& i_command);
 
 public:
 	//デフォルトコンストラクタ

@@ -77,54 +77,49 @@ void EV3LineTracer::init()
 	this->initEV3();
 
 }
-void EV3LineTracer::execNullCommand()
+
+//コマンドの実行
+void EV3LineTracer::execCommand(RL::OutputProcedure& o_command,
+		RL::InputProcedure& i_command)
 {
 	//EV3への接続を確立
-	TCPClient tcp_client("localhost",50000,1024);//"192.168.0.8",50000,1024));
-
-	//EV3への送信用のデータ(NULLコマンド)を作成
-	RL::OutputCommandNullCommand o_null_command;
-	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_null_command);
+	TCPClient tcp_client("localhost", 50000, 1024); //"192.168.0.8",50000,1024));
+	//EV3への送信用のデータを作成
+	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_command);
 	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
-
 	//EV3へ送信
-	OutputContext &oc = tcp_client.getOutputContext();
+	OutputContext& oc = tcp_client.getOutputContext();
 	o_message.process(oc);
-
 	//EV3からの返信を受信する
-	InputContext &ic = tcp_client.getInputContext();
-
+	InputContext& ic = tcp_client.getInputContext();
 	//メッセージ受信用のInputProcedure
-	RL::InputCommandNullCommand i_null_command;
-	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_null_command);
+	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_command);
 	RL::InputMessage_1_0 i_message(i_ev3_1_0);
-
+	//受信結果に応じた処理
 	i_message.process(ic);
 }
+
+//何もしないコマンド（通信の疎通確認等に使用する）
+void EV3LineTracer::execNullCommand()
+{
+
+	//このコマンド用のInput、Output Procedure
+	RL::OutputCommandNullCommand o_null_command;
+	RL::InputCommandNullCommand i_null_command;
+
+	//コマンド実行
+	execCommand(o_null_command, i_null_command);
+}
+
 //MDPの設定をEV3に反映する
 void EV3LineTracer::execSetMDP()
 {
-	//EV3への接続を確立
-	TCPClient tcp_client("localhost",50000,1024);//"192.168.0.8",50000,1024));
-
-	//EV3への送信用のデータ(NULLコマンド)を作成
+	//このコマンド用のInput、Output Procedure
 	RL::OutputCommandSetMDP o_set_mdp(*this);
-	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_set_mdp);
-	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
-
-	//EV3へ送信
-	OutputContext &oc = tcp_client.getOutputContext();
-	o_message.process(oc);
-
-	//EV3からの返信を受信する
-	InputContext &ic = tcp_client.getInputContext();
-
-	//メッセージ受信用のInputProcedure
 	RL::InputCommandSetMDP i_set_mdp(*this);
-	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_set_mdp);
-	RL::InputMessage_1_0 i_message(i_ev3_1_0);
 
-	i_message.process(ic);
+	//コマンド実行
+	execCommand(o_set_mdp, i_set_mdp);
 }
 
 
