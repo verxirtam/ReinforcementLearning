@@ -56,6 +56,7 @@ class EV3LineTracer
 	friend class ReadSingleState;
 	friend class ReadSingleControl;
 	friend class ReadRegularPolicy;
+	friend class ReadCostMax;
 
 private:
 	//データメンバ

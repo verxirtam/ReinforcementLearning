@@ -32,6 +32,7 @@
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
+#include "EV3LineTracer/Communication/Read/ReadCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleState.h"
@@ -1637,7 +1638,7 @@ TEST(ReadIntervalTest,Process_Exception)
 	EXPECT_THROW(ri.process(tic),std::ios_base::failure);
 }
 
-TEST(ReadCostMaxTest,Process)
+TEST(ReadCostMaxTest,Process1)
 {
 	string aaa="10.125\n";
 	std::istringstream is(aaa);
@@ -1645,7 +1646,17 @@ TEST(ReadCostMaxTest,Process)
 	RL::EV3LineTracer ev3;
 	RL::ReadCostMax rcm(ev3);
 	rcm.process(tic);
-	EXPECT_EQ(ev3.getInterval(),10.125);
+	EXPECT_EQ(ev3.getCostMax(),10.125);
+}
+TEST(ReadCostMaxTest,Process2)
+{
+	string aaa="600\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadCostMax rcm(ev3);
+	rcm.process(tic);
+	EXPECT_EQ(ev3.getCostMax(),600);
 }
 TEST(ReadCostMaxTest,Process_Exception)
 {
@@ -1899,6 +1910,22 @@ TEST(WriteIntervalTest,Process)
 	RL::WriteInterval wi(ev3);
 	wi.process(toc);
 	EXPECT_EQ(os.str(),std::to_string(ev3.getInterval())+"\n");
+}
+TEST(WriteCostMaxTest,Constractor)
+{
+	RL::EV3LineTracer ev3;
+	RL::WriteCostMax wcm(ev3);
+}
+
+TEST(WriteCostMaxTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::WriteCostMax wcm(ev3);
+	wcm.process(toc);
+	EXPECT_EQ(os.str(),std::to_string(ev3.getCostMax())+"\n");
 }
 
 TEST(WriteStateCountTest,Constractor)
