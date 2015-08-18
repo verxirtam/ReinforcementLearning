@@ -65,7 +65,7 @@ TEST(Policy,DefaultConstructor)
 	Policy p0;
 	//デフォルトコンストラクタが呼ばれ、
 	//StateCountが0のPolicyが初期化されていること
-	EXPECT_EQ(0,p0.GetStateCount());
+	EXPECT_EQ(0,p0.getStateCount());
 }
 
 //コピーコンストラクタのテスト
@@ -81,7 +81,7 @@ TEST_P(PolicyTest,CopyConstructor)
 	//コピー元と先の値が等しいことを確認する
 	EXPECT_EQ(p0[0],p1[0]);
 	//コピー元の値を変更する
-	p0.SetPolicy(0,1);
+	p0.setPolicy(0,1);
 	//コピー先の値が変更されていないこと(コピー元と先で値が異なること)を確認
 	//この検証に失敗するとunit testが停止し、ターミナルに下記が出力される
 	//*** glibc detected *** /home/daisuke/workspace/ReinforcementLearning/Debug/ReinforcementLearning:
@@ -101,10 +101,10 @@ TEST_P(PolicyTest,CopyAssignmentOperator)
 	//コピー代入演算子の実行
 	p1=p0;
 	//コピー元と先の値が等しいことを確認する
-	EXPECT_EQ(p0.GetStateCount(),p1.GetStateCount());
+	EXPECT_EQ(p0.getStateCount(),p1.getStateCount());
 	EXPECT_EQ(p0[0],p1[0]);
 	//コピー元の値を変更する
-	p0.SetPolicy(0,1);
+	p0.setPolicy(0,1);
 	//コピー先の値が変更されていないこと(コピー元と先で値が異なること)を確認
 	//この検証に失敗するとunit testが停止し、ターミナルに下記が出力される
 	//*** glibc detected *** /home/daisuke/workspace/ReinforcementLearning/Debug/ReinforcementLearning:
@@ -130,7 +130,7 @@ TEST_P(PolicyTest,EqualityOperator)
 	EXPECT_EQ(p0==p1,true);
 	EXPECT_EQ(p0!=p1,false);
 	//コピー先の値を変更
-	p1.SetPolicy(size/2,2);
+	p1.setPolicy(size/2,2);
 	//等号演算子の実行(falseとなる)
 	EXPECT_EQ(p0==p1,false);
 	EXPECT_EQ(p0!=p1,true);
@@ -148,10 +148,10 @@ TEST_P(PolicyTest,init)
 
 	for(i=0;i<size;i++)
 	{
-		p.SetPolicy(i,i);
+		p.setPolicy(i,i);
 	}
 	//サイズのチェック
-	EXPECT_EQ(size,p.GetStateCount());
+	EXPECT_EQ(size,p.getStateCount());
 	//setterで設定した値が反映されているかのチェック
 	for(i=0;i<size;i++)
 	{
@@ -160,11 +160,11 @@ TEST_P(PolicyTest,init)
 	//添字演算子は例外を返さない
 	EXPECT_NO_THROW(p[size]);
 	//setterは例外を返す
-	EXPECT_THROW(p.SetPolicy(size,0),std::out_of_range);
+	EXPECT_THROW(p.setPolicy(size,0),std::out_of_range);
 	//setterは例外を返す
-	EXPECT_THROW(p.SetPolicy(-1,0),std::out_of_range);
+	EXPECT_THROW(p.setPolicy(-1,0),std::out_of_range);
 	//サイズのチェック
-	EXPECT_EQ(size,p.GetStateCount());
+	EXPECT_EQ(size,p.getStateCount());
 }
 //コンストラクタが例外を例外を投げる契機のテスト
 TEST(Policy,init_exception)
@@ -190,7 +190,7 @@ TEST_P(PolicyTest,change)
 	Policy p(size);
 	for(i=0;i<size;i++)
 	{
-		p.SetPolicy(i,i);
+		p.setPolicy(i,i);
 	}
 	for(i=0;i<size;i++)
 	{
@@ -198,7 +198,7 @@ TEST_P(PolicyTest,change)
 	}
 	for(i=0;i<size;i++)
 	{
-		p.SetPolicy(i,2*i);
+		p.setPolicy(i,2*i);
 	}
 	for(i=0;i<size;i++)
 	{
@@ -240,10 +240,10 @@ TEST(StochasticPolicy,Constructor0)
 	}
 	controlcount[0]=1;
 	StochasticPolicy sp(controlcount);
-	EXPECT_EQ(statecount,sp.GetStateCount());
+	EXPECT_EQ(statecount,sp.getStateCount());
 	for(i=0;i<statecount;i++)
 	{
-		EXPECT_EQ(controlcount[i],sp.GetControlCount(i));
+		EXPECT_EQ(controlcount[i],sp.getControlCount(i));
 	}
 }
 //コンストラクタのテスト
@@ -297,7 +297,7 @@ TEST(StochasticPolicy,init_exception)
 TEST(StochasticPolicy,DefaultConstructor)
 {
 	StochasticPolicy sp;
-	EXPECT_EQ(0,sp.GetStateCount());
+	EXPECT_EQ(0,sp.getStateCount());
 }
 //コピーコンストラクタのテスト
 TEST_P(StochasticPolicyTest,CopyConstructor)
@@ -325,11 +325,11 @@ TEST_P(StochasticPolicyTest,CopyConstructor)
 	EXPECT_EQ(p0,p1);
 	//コピー元の値を変更する
 	idx m=statecount/2;
-	vector<real> prob(p0[m].GetValueMax(),0.0);
+	vector<real> prob(p0[m].getValueMax(),0.0);
 	prob[0]=0.5;
 	prob[1]=0.5;
-	p0.SetProbability(m,prob);
-	EXPECT_NO_THROW(p0.Correct());
+	p0.setProbability(m,prob);
+	EXPECT_NO_THROW(p0.correct());
 	//コピー先の値が変更されていないこと(コピー元と先で値が異なること)を確認
 	//この検証に失敗するとunit testが停止し、ターミナルに下記が出力される
 	//*** glibc detected *** /home/daisuke/workspace/ReinforcementLearning/Debug/ReinforcementLearning:
@@ -363,11 +363,11 @@ TEST_P(StochasticPolicyTest,CopyAssignmentOperator)
 	EXPECT_EQ(p0[0],p1[0]);
 	//コピー元の値を変更する
 	idx m=statecount/2;
-	vector<real> prob(p0[m].GetValueMax(),0.0);
+	vector<real> prob(p0[m].getValueMax(),0.0);
 	prob[0]=0.5;
 	prob[1]=0.5;
-	p0.SetProbability(m,prob);
-	EXPECT_NO_THROW(p0.Correct());
+	p0.setProbability(m,prob);
+	EXPECT_NO_THROW(p0.correct());
 	//コピー先の値が変更されていないこと(コピー元と先で値が異なること)を確認
 	//この検証に失敗するとunit testが停止し、ターミナルに下記が出力される
 	//*** glibc detected *** /home/daisuke/workspace/ReinforcementLearning/Debug/ReinforcementLearning:
@@ -411,11 +411,11 @@ TEST_P(StochasticPolicyTest,EqualityOperator)
 	EXPECT_EQ(p0!=p1,false);
 	//コピー先の値を変更
 	idx m=statecount/2;
-	vector<real> prob(p0[m].GetValueMax(),0.0);
+	vector<real> prob(p0[m].getValueMax(),0.0);
 	prob[0]=0.5;
 	prob[1]=0.5;
-	p1.SetProbability(m,prob);
-	p1.Correct();
+	p1.setProbability(m,prob);
+	p1.correct();
 	//等号演算子の実行(falseとなる)
 	EXPECT_EQ(p0==p1,false);
 	EXPECT_EQ(p0!=p1,true);
@@ -441,29 +441,29 @@ TEST_P(StochasticPolicyTest,SetProbability0)
 
 
 	StochasticPolicy p0(controlcount);
-	vector<real> prob(p0[m].GetValueMax(),0.0);
+	vector<real> prob(p0[m].getValueMax(),0.0);
 	prob[0]=0.5;
 	prob[1]=0.5;
-	p0.SetProbability(m,prob);
-	EXPECT_EQ(p0[m].GetProbability(0),0.5);
-	EXPECT_EQ(p0[m].GetProbability(1),0.5);
+	p0.setProbability(m,prob);
+	EXPECT_EQ(p0[m].getProbability(0),0.5);
+	EXPECT_EQ(p0[m].getProbability(1),0.5);
 
-	prob=vector<real>(p0[m].GetValueMax(),0.0);
+	prob=vector<real>(p0[m].getValueMax(),0.0);
 	prob[0]= 1.0;
 	prob[1]=-1.0;
-	EXPECT_THROW(p0.SetProbability(m,prob),std::invalid_argument);
+	EXPECT_THROW(p0.setProbability(m,prob),std::invalid_argument);
 
-	prob=vector<real>(p0[m].GetValueMax(),0.0);
+	prob=vector<real>(p0[m].getValueMax(),0.0);
 	prob[0]=1.0;
 	prob[1]=1.0;
 	prob[2]=1.0;
 	prob[3]=1.0;
-	p0.SetProbability(m,prob);
-	p0.Correct(m);
-	EXPECT_EQ(p0[m].GetProbability(0),0.25);
-	EXPECT_EQ(p0[m].GetProbability(1),0.25);
-	EXPECT_EQ(p0[m].GetProbability(2),0.25);
-	EXPECT_EQ(p0[m].GetProbability(3),0.25);
+	p0.setProbability(m,prob);
+	p0.correct(m);
+	EXPECT_EQ(p0[m].getProbability(0),0.25);
+	EXPECT_EQ(p0[m].getProbability(1),0.25);
+	EXPECT_EQ(p0[m].getProbability(2),0.25);
+	EXPECT_EQ(p0[m].getProbability(3),0.25);
 }
 TEST_P(StochasticPolicyTest,SetProbability1)
 {
@@ -488,9 +488,9 @@ TEST_P(StochasticPolicyTest,SetProbability1)
 	vector<real> prob(10*(i+1),0.0);
 	prob[0]=1.0;
 	prob[1]=1.0;
-	EXPECT_NO_THROW(p0.SetProbability(i,prob));
-	EXPECT_EQ(p0[i].GetProbability(0),0.5);
-	EXPECT_EQ(p0[i].GetProbability(1),0.5);
+	EXPECT_NO_THROW(p0.setProbability(i,prob));
+	EXPECT_EQ(p0[i].getProbability(0),0.5);
+	EXPECT_EQ(p0[i].getProbability(1),0.5);
 
 
 	StochasticPolicy p1(controlcount);
@@ -499,9 +499,9 @@ TEST_P(StochasticPolicyTest,SetProbability1)
 	prob[0]=1.0;
 	prob[1]=1.0;
 	i=statecount/2;
-	EXPECT_THROW(p1.SetProbability(i,prob),std::out_of_range);
-	EXPECT_EQ(p1[i].GetProbability(0),1.0);
-	EXPECT_EQ(p1[i].GetProbability(1),0.0);
+	EXPECT_THROW(p1.setProbability(i,prob),std::out_of_range);
+	EXPECT_EQ(p1[i].getProbability(0),1.0);
+	EXPECT_EQ(p1[i].getProbability(1),0.0);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -514,9 +514,9 @@ TEST_P(StochasticPolicyTest,SetProbability1)
 TEST(StepTest,EqualityOperator)
 {
 	Step step0;
-	step0.State=0;
-	step0.Control=0;
-	step0.Cost=0.0;
+	step0.state=0;
+	step0.control=0;
+	step0.cost=0.0;
 
 	Step step1=step0;
 
@@ -524,19 +524,19 @@ TEST(StepTest,EqualityOperator)
 	EXPECT_EQ(step0!=step1,false);
 
 
-	step1.State=1;
+	step1.state=1;
 
 	EXPECT_EQ(step0==step1,false);
 	EXPECT_EQ(step0!=step1,true);
 
 	step1=step0;
-	step1.Control=1;
+	step1.control=1;
 
 	EXPECT_EQ(step0==step1,false);
 	EXPECT_EQ(step0!=step1,true);
 
 	step1=step0;
-	step1.Cost=1.0;
+	step1.cost=1.0;
 
 	EXPECT_EQ(step0==step1,false);
 	EXPECT_EQ(step0!=step1,true);
@@ -563,9 +563,9 @@ protected:
 		for(idx i=0;i<imax;i++)
 		{
 			Step s;
-			s.State  =i%13;
-			s.Control=i%5;
-			s.Cost   =i%103;
+			s.state  =i%13;
+			s.control=i%5;
+			s.cost   =i%103;
 			Steps.push_back(s);
 		}
 	}
@@ -590,12 +590,12 @@ TEST_P(EpisodeTest,Constructor0)
 {
 	idx imax=GetParam();
 	Episode episode0(Steps);
-	EXPECT_EQ(episode0.GetStepCount(),imax);
-	for(idx i=0;i<episode0.GetStepCount();i++)
+	EXPECT_EQ(episode0.getStepCount(),imax);
+	for(idx i=0;i<episode0.getStepCount();i++)
 	{
-		EXPECT_EQ(episode0[i].State  ,i% 13);
-		EXPECT_EQ(episode0[i].Control,i%  5);
-		EXPECT_EQ(episode0[i].Cost   ,i%103);
+		EXPECT_EQ(episode0[i].state  ,i% 13);
+		EXPECT_EQ(episode0[i].control,i%  5);
+		EXPECT_EQ(episode0[i].cost   ,i%103);
 	}
 }
 
@@ -607,7 +607,7 @@ TEST(EpisodeTest,init_exception)
 TEST(EpisodeTest,DefaultConstructor)
 {
 	Episode episode0;
-	EXPECT_EQ(episode0.GetStepCount(),0);
+	EXPECT_EQ(episode0.getStepCount(),0);
 }
 //コピーコンストラクタのテスト
 TEST_P(EpisodeTest,CopyConstructor)
@@ -622,7 +622,7 @@ TEST_P(EpisodeTest,CopyConstructor)
 	//コピー元と先の値が等しいことを確認する
 	EXPECT_EQ(episode0,episode1);
 	//コピー元の値を変更する
-	episode0.SetStep(imax/2,14,0,0);
+	episode0.setStep(imax/2,14,0,0);
 	//コピー先の値が変更されていないこと(コピー元と先で値が異なること)を確認
 	//この検証に失敗するとunit testが停止し、ターミナルに下記が出力される
 	//*** glibc detected *** /home/daisuke/workspace/ReinforcementLearning/Debug/ReinforcementLearning:
@@ -645,7 +645,7 @@ TEST_P(EpisodeTest,CopyAssignmentOperator)
 	//コピー元と先の値が等しいことを確認する
 	EXPECT_EQ(episode0,episode1);
 	//コピー元の値を変更する
-	episode0.SetStep(imax/2,14,0,0);
+	episode0.setStep(imax/2,14,0,0);
 	//コピー先の値が変更されていないこと(コピー元と先で値が異なること)を確認
 	//この検証に失敗するとunit testが停止し、ターミナルに下記が出力される
 	//*** glibc detected *** /home/daisuke/workspace/ReinforcementLearning/Debug/ReinforcementLearning:
@@ -659,9 +659,9 @@ TEST_P(EpisodeTest,EqualityOperator)
 	Episode episode0(Steps);
 	for(idx i=0;i<Steps.size();i++)
 	{
-		Steps[i].State  =Steps[i].State+1;
-		Steps[i].Control=Steps[i].Control+1;
-		Steps[i].Cost   =Steps[i].Cost+1;
+		Steps[i].state  =Steps[i].state+1;
+		Steps[i].control=Steps[i].control+1;
+		Steps[i].cost   =Steps[i].cost+1;
 	}
 	//比較対象1
 	Episode episode1(Steps);
@@ -674,66 +674,66 @@ TEST_P(EpisodeTest,EqualityOperator)
 	EXPECT_EQ(episode0==episode1,true);
 	EXPECT_EQ(episode0!=episode1,false);
 	//コピー先の値を変更
-	episode1.SetStep(0,0,0,-1.0);
+	episode1.setStep(0,0,0,-1.0);
 	//等号演算子の実行(falseとなる)
 	EXPECT_EQ(episode0==episode1,false);
 	EXPECT_EQ(episode0!=episode1,true);
 }
 
 //SetStep()のテスト
-TEST_P(EpisodeTest,SetStep)
+TEST_P(EpisodeTest,setStep)
 {
 	//episode[i_mod]の内容をSetStep()で変更して、正しく変更されたかを確認する
 
 	Episode episode0(Steps);
 	Step step;
 	idx i_mod=imax/2;
-	step.State  =Steps[i_mod].State+1;
-	step.Control=Steps[i_mod].Control+1;
-	step.Cost   =Steps[i_mod].Cost+1.0;
+	step.state  =Steps[i_mod].state+1;
+	step.control=Steps[i_mod].control+1;
+	step.cost   =Steps[i_mod].cost+1.0;
 
-	episode0.SetStep(i_mod,step);
+	episode0.setStep(i_mod,step);
 
 	EXPECT_EQ(episode0[i_mod],step);
 
-	step.State  =Steps[i_mod].State+1;
-	step.Control=Steps[i_mod].Control+1;
-	step.Cost   =Steps[i_mod].Cost+1.0;
+	step.state  =Steps[i_mod].state+1;
+	step.control=Steps[i_mod].control+1;
+	step.cost   =Steps[i_mod].cost+1.0;
 
-	episode0.SetStep(i_mod,step);
+	episode0.setStep(i_mod,step);
 
 	EXPECT_EQ(episode0[i_mod],step);
 }
 
 //AddStep()のテスト
-TEST_P(EpisodeTest,AddStep)
+TEST_P(EpisodeTest,addStep)
 {
 	Episode episode0(Steps);
 	Step step;
 
 	//引数の設定
-	step.State  =500;
-	step.Control=500;
-	step.Cost   =500.0;
+	step.state  =500;
+	step.control=500;
+	step.cost   =500.0;
 
 	//AddStep()の実行
-	episode0.AddStep(step.State,step.Control,step.Cost);
+	episode0.addStep(step.state,step.control,step.cost);
 
 	//StepCountが1増加していることを確認
-	EXPECT_EQ(episode0.GetStepCount(),imax+1);
+	EXPECT_EQ(episode0.getStepCount(),imax+1);
 	//末尾のStepがstepと一致していることを確認
 	EXPECT_EQ(episode0[imax],step);
 
 	//Stepの値を変更
-	step.State  =1000;
-	step.Control=1000;
-	step.Cost   =1000.0;
+	step.state  =1000;
+	step.control=1000;
+	step.cost   =1000.0;
 
 	//AddStep()の実行
-	episode0.AddStep(step);
+	episode0.addStep(step);
 
 	//StepCountが1増加していることを確認
-	EXPECT_EQ(episode0.GetStepCount(),imax+2);
+	EXPECT_EQ(episode0.getStepCount(),imax+2);
 	//末尾のStepがstepと一致していることを確認
 	EXPECT_EQ(episode0[imax+1],step);
 
@@ -767,62 +767,62 @@ INSTANTIATE_TEST_CASE_P(InstantiateSimpleMDPTest,SimpleMDPTest,::testing::Values
 TEST(SimpleMDPTest,Constructor0)
 {
 	SimpleMDP smdp;
-	EXPECT_EQ(smdp.GetStateCount(),2);
-	EXPECT_EQ(smdp.GetControlCount(0),1);
-	EXPECT_EQ(smdp.GetControlCount(1),1);
+	EXPECT_EQ(smdp.getStateCount(),2);
+	EXPECT_EQ(smdp.getControlCount(0),1);
+	EXPECT_EQ(smdp.getControlCount(1),1);
 }
 
 TEST_P(SimpleMDPTest,Constructor1)
 {
 	const idx statecount=GetParam();
 	SimpleMDP smdp(statecount);
-	EXPECT_EQ(smdp.GetStateCount(),statecount);
+	EXPECT_EQ(smdp.getStateCount(),statecount);
 
 
-	EXPECT_EQ(smdp.GetControlCount(0),1);
+	EXPECT_EQ(smdp.getControlCount(0),1);
 	for(idx i=1;i<statecount-1;i++)
 	{
-		EXPECT_EQ(smdp.GetControlCount(i),2);
+		EXPECT_EQ(smdp.getControlCount(i),2);
 	}
-	EXPECT_EQ(smdp.GetControlCount(statecount-1),1);
+	EXPECT_EQ(smdp.getControlCount(statecount-1),1);
 
 }
 
-TEST_P(SimpleMDPTest,GetPolicy)
+TEST_P(SimpleMDPTest,getPolicy)
 {
 	const idx statecount=GetParam();
 	SimpleMDP smdp(statecount);
 	Policy p;
-	smdp.GetPolicy(p);
-	EXPECT_EQ(p.GetStateCount(),statecount);
+	smdp.getPolicy(p);
+	EXPECT_EQ(p.getStateCount(),statecount);
 }
-TEST_P(SimpleMDPTest,GetRegularPolicy)
+TEST_P(SimpleMDPTest,getRegularPolicy)
 {
 	const idx statecount=GetParam();
 	SimpleMDP smdp(statecount);
 	Policy p;
-	smdp.GetRegularPolicy(p);
-	EXPECT_EQ(p.GetStateCount(),statecount);
-	for(idx i=0;i<p.GetStateCount();i++)
+	smdp.getRegularPolicy(p);
+	EXPECT_EQ(p.getStateCount(),statecount);
+	for(idx i=0;i<p.getStateCount();i++)
 	{
 		EXPECT_EQ(p[i],0);
 	}
 }
 
-TEST_P(SimpleMDPTest,GetDiscountRate)
+TEST_P(SimpleMDPTest,getDiscountRate)
 {
 	const idx statecount=GetParam();
 	SimpleMDP smdp(statecount);
-	EXPECT_EQ(smdp.GetDiscountRate(),1.0);
+	EXPECT_EQ(smdp.getDiscountRate(),1.0);
 }
 
-TEST_P(SimpleMDPTest,GetNextStep)
+TEST_P(SimpleMDPTest,getNextStep)
 {
 	const idx statecount=GetParam();
 	SimpleMDP smdp(statecount);
 	//EXPECT_NE(smdp.GetEpisode().GetStepCount(),0);
 	Policy p;
-	smdp.GetRegularPolicy(p);
+	smdp.getRegularPolicy(p);
 	Step s;
 	const idx trycount=50000;
 	//state毎に推移確率を推定して実際の確率を近似していることを確認する
@@ -830,14 +830,14 @@ TEST_P(SimpleMDPTest,GetNextStep)
 	{
 		//推移した回数をカウントするvector
 		vector<idx> stat(statecount,0);
-		s.State=i;
-		s.Control=p[i];
-		s.Cost=1.0;
+		s.state=i;
+		s.control=p[i];
+		s.cost=1.0;
 		//試行を行いstate毎に推移した回数をカウントする
 		for(idx t=0;t<trycount;t++)
 		{
-			Step next=smdp.GetNextStep(s);
-			stat[next.State]++;
+			Step next=smdp.getNextStep(s);
+			stat[next.state]++;
 		}
 		//推定値が実際の確率とほぼ一致(誤差0.01以下)となることを確認する
 		if(i==0)
@@ -897,13 +897,13 @@ TEST_P(SimpleMDPTest,GetEpisode0)
 	for(idx i=0;i<10000;i++)
 	{
 		Episode e;
-		smdp.GetEpisode(e);
-		idx stepcount=e.GetStepCount();
+		smdp.getEpisode(e);
+		idx stepcount=e.getStepCount();
 		//S[][], N[]に集計する
 		for(idx n=0;n<stepcount-1;n++)
 		{
-			S[e[n].State][e[n+1].State]++;
-			N[e[n].State]++;
+			S[e[n].state][e[n+1].state]++;
+			N[e[n].state]++;
 		}
 	}
 
@@ -952,17 +952,17 @@ TEST_P(SimpleMDPTest,GetEpisode1)
 	Random::Init();
 	Policy p;
 	StochasticPolicy sp;
-	smdp.GetStochasticPolicy(smdp.GetRegularPolicy(p),sp);
-	for(idx i=0;i<sp.GetStateCount();i++)
+	smdp.getStochasticPolicy(smdp.getRegularPolicy(p),sp);
+	for(idx i=0;i<sp.getStateCount();i++)
 	{
-		vector<real> prob(sp.GetControlCount(i));
-		for(idx u=0;u<sp.GetControlCount(i);u++)
+		vector<real> prob(sp.getControlCount(i));
+		for(idx u=0;u<sp.getControlCount(i);u++)
 		{
-			prob[u]=1.0+Random::UniformReal();
+			prob[u]=1.0+Random::uniformReal();
 		}
-		sp.SetProbability(i,prob);
+		sp.setProbability(i,prob);
 	}
-	smdp.SetCurrentPolicy(sp);
+	smdp.setCurrentPolicy(sp);
 	//S[i][j]:state i の後state jに遷移した回数
 	vector<vector<idx> > S(statecount,vector<idx>(statecount,0));
 	//N[i]stateiを訪れた回数
@@ -971,23 +971,23 @@ TEST_P(SimpleMDPTest,GetEpisode1)
 	for(idx i=0;i<10000;i++)
 	{
 		Episode e;
-		smdp.GetEpisode(e);
-		idx stepcount=e.GetStepCount();
+		smdp.getEpisode(e);
+		idx stepcount=e.getStepCount();
 		//S[][], N[]に集計する
 		for(idx n=0;n<stepcount-1;n++)
 		{
-			S[e[n].State][e[n+1].State]++;
-			N[e[n].State]++;
+			S[e[n].state][e[n+1].state]++;
+			N[e[n].state]++;
 		}
 	}
 
 	//集計した結果を表示する
 	for(idx i=0;i<statecount;i++)
 	{
-		real val0=sp[i].GetProbability(0)*0.75
-				+sp[i].GetProbability(1)*0.25;
-		real val1=sp[i].GetProbability(0)*0.25
-				+sp[i].GetProbability(1)*0.75;
+		real val0=sp[i].getProbability(0)*0.75
+				+sp[i].getProbability(1)*0.25;
+		real val1=sp[i].getProbability(0)*0.25
+				+sp[i].getProbability(1)*0.75;
 		for(idx j=0;j<statecount;j++)
 		{
 			if(N[i]!=0)
@@ -1043,7 +1043,7 @@ protected:
 //正常系のテストを行う要素数の定義
 INSTANTIATE_TEST_CASE_P(InstantiateRandomTest,RandomTest,::testing::Values(2,10,50,100));
 
-TEST_P(RandomTest,UniformIdx)
+TEST_P(RandomTest,uniformIdx)
 {
 	idx max=GetParam();
 	vector<idx> stat(max);
@@ -1053,7 +1053,7 @@ TEST_P(RandomTest,UniformIdx)
 
 	for(idx n=0;n<testcount;n++)
 	{
-		idx i=Random::UniformIdx(max);
+		idx i=Random::uniformIdx(max);
 		stat[i]++;
 	}
 	for(idx i=0;i<max;i++)
@@ -1062,7 +1062,7 @@ TEST_P(RandomTest,UniformIdx)
 	}
 }
 
-TEST_P(RandomTest,UniformReal)
+TEST_P(RandomTest,uniformReal)
 {
 	idx max=GetParam();
 	vector<idx> stat(max);
@@ -1072,7 +1072,7 @@ TEST_P(RandomTest,UniformReal)
 
 	for(idx n=0;n<testcount;n++)
 	{
-		real r=max*Random::UniformReal();
+		real r=max*Random::uniformReal();
 		idx i=(int)r;
 		stat[i]++;
 	}
@@ -1128,7 +1128,7 @@ TEST_P(RandomIdxTest,StatTest)
 	real sum=0.0;
 	for(idx i=0;i<max;i++)
 	{
-		real d=Random::UniformReal();
+		real d=Random::uniformReal();
 		prob[i]=d;
 		sum+=d;
 	}
@@ -1145,7 +1145,7 @@ TEST_P(RandomIdxTest,StatTest)
 
 	for(idx n=0;n<testcount;n++)
 	{
-		idx i=ri.Get();
+		idx i=ri.get();
 		stat[i]++;
 	}
 	for(idx i=0;i<max;i++)
@@ -1177,10 +1177,10 @@ TEST_P(RandomIdxTest,GetProbabilityTest)
 
 	RandomIdx ri(prob, part_count);
 
-	EXPECT_EQ(ri.GetValueMax(),max);
+	EXPECT_EQ(ri.getValueMax(),max);
 	for(idx i=0;i<prob.size();i++)
 	{
-		EXPECT_NEAR(ri.GetProbability(i),prob[i],0.125*0.125*0.125*0.125);
+		EXPECT_NEAR(ri.getProbability(i),prob[i],0.125*0.125*0.125*0.125);
 	}
 }
 
@@ -1213,21 +1213,21 @@ TEST_P(EpsilonSoftOnPolicyMonteCarloTest,PolicyIteration)
 	EpsilonSoftOnPolicyMonteCarlo<SimpleMDP> mc(smdp);
 	//optimal policyを取得
 	Policy p;
-	mc.PolicyIteration(p,10,100);
+	mc.policyIteration(p,10,100);
 	//value function
 	vector<vector<real> > Q;
-	smdp.SetCurrentPolicy(p);
-	smdp.GetControlValueFunction(Q);
+	smdp.setCurrentPolicy(p);
+	smdp.getControlValueFunction(Q);
 
 	//optimal policy と異なるポリシーの価値関数が最適とならないことを確認する。
 	Policy p1=p;
 	vector<vector<real> > Q1;
 	Random::Init();
-	idx state=Random::UniformIdx(p1.GetStateCount()-2)+1;
+	idx state=Random::uniformIdx(p1.getStateCount()-2)+1;
 	idx control=1;//Random::UniformIdx(2);
-	p1.SetPolicy(state,control);
-	smdp.SetCurrentPolicy(p1);
-	smdp.GetControlValueFunction(Q1);
+	p1.setPolicy(state,control);
+	smdp.setCurrentPolicy(p1);
+	smdp.getControlValueFunction(Q1);
 
 	//価値観数の表示
 	//表示しない場合はif文をfalseにする
@@ -1253,26 +1253,26 @@ TEST_P(EpsilonSoftOnPolicyMonteCarloTest,EpsilonGreedy)
 	SimpleMDP smdp(statecount);
 	EpsilonSoftOnPolicyMonteCarlo<SimpleMDP> mc(smdp);
 	Policy rp;
-	smdp.GetRegularPolicy(rp);
+	smdp.getRegularPolicy(rp);
 	real e=0.5;
 	for(idx k=0;k<10;k++)
 	{
 		StochasticPolicy sp;
-		mc.EpsilonGreedy(rp,e,sp);
-		for(idx i=0;i<sp.GetStateCount();i++)
+		mc.epsilonGreedy(rp,e,sp);
+		for(idx i=0;i<sp.getStateCount();i++)
 		{
-			idx controlcount=sp.GetControlCount(i);
+			idx controlcount=sp.getControlCount(i);
 			for(idx u;u<controlcount;u++)
 			{
 				if(u==rp[i])
 				{
 					real prob=1.0 - e + e/((real)controlcount);
-					EXPECT_NEAR(sp[i].GetProbability(u),prob,0.01);
+					EXPECT_NEAR(sp[i].getProbability(u),prob,0.01);
 				}
 				else
 				{
 					real prob=e/((real)controlcount);
-					EXPECT_NEAR(sp[i].GetProbability(u),prob,0.01);
+					EXPECT_NEAR(sp[i].getProbability(u),prob,0.01);
 				}
 			}
 		}
@@ -1289,17 +1289,17 @@ TEST_P(EpsilonSoftOnPolicyMonteCarloTest,PolicyEvaluation)
 	real e=0.0625*0.5;
 	Policy p;
 	StochasticPolicy sp;
-	mc.EpsilonGreedy(smdp.GetRegularPolicy(p),e,sp);
-	mc.SetCurrentPolicy(sp);
+	mc.epsilonGreedy(smdp.getRegularPolicy(p),e,sp);
+	mc.setCurrentPolicy(sp);
 	vector<vector<real> > value;
 
-	mc.PolicyEvaluation(value,10000);
+	mc.policyEvaluation(value,10000);
 	vector<vector<real> > Q;
-	smdp.GetControlValueFunction(Q);
+	smdp.getControlValueFunction(Q);
 
-	for(idx i=0;i<sp.GetStateCount();i++)
+	for(idx i=0;i<sp.getStateCount();i++)
 	{
-		for(idx u=0;u<sp.GetControlCount(i);u++)
+		for(idx u=0;u<sp.getControlCount(i);u++)
 		{
 			real err=0.125;
 			real vmin=value[i][u]*(1.0-err);
@@ -1313,17 +1313,17 @@ TEST_P(EpsilonSoftOnPolicyMonteCarloTest,PolicyEvaluation)
 	{
 		//状態価値関数の取得
 		vector<real> J;
-		smdp.GetStateValueFunction(J);
+		smdp.getStateValueFunction(J);
 
-		for(idx i=0;i<sp.GetStateCount();i++)
+		for(idx i=0;i<sp.getStateCount();i++)
 		{
 			cout<<i<<": ";
-			for(idx u=0;u<sp.GetControlCount(i);u++)
+			for(idx u=0;u<sp.getControlCount(i);u++)
 			{
 				cout<<value[i][u]<<", ";
 			}
 			cout<<"\t";
-			for(idx u=0;u<sp.GetControlCount(i);u++)
+			for(idx u=0;u<sp.getControlCount(i);u++)
 			{
 				cout<<Q[i][u]<<", ";
 			}
@@ -1343,23 +1343,23 @@ TEST_P(EpsilonSoftOnPolicyMonteCarloTest,PolicyImprovement)
 
 	//optimal policyから変化させたpolicyの
 	//control-value functionのImprovement policyが改善されている（u=0）ことを確認する
-	for(idx state=1;state<smdp.GetStateCount()-1;state++)
+	for(idx state=1;state<smdp.getStateCount()-1;state++)
 	{
 		//試験対象のpolicy
 		//RegularPolicyから変位させる
 		Policy p;
-		smdp.GetRegularPolicy(p);
+		smdp.getRegularPolicy(p);
 		idx control=1;
-		p.SetPolicy(state,control);
+		p.setPolicy(state,control);
 
 		//value function
 		vector<vector<real> > Q;
 		//MDPにpを設定する
-		smdp.SetCurrentPolicy(p);
-		smdp.GetControlValueFunction(Q);
+		smdp.setCurrentPolicy(p);
+		smdp.getControlValueFunction(Q);
 		//改善されたpolicyを格納する変数
 		Policy p1;
-		mc.PolicyImprovement(Q,p1);
+		mc.policyImprovement(Q,p1);
 		//変位したことを確認する
 		EXPECT_EQ(p1[state],0);
 	}
@@ -1389,10 +1389,10 @@ TEST(EV3LineTracerTest,Init)
 	EV3LineTracer ev3_2("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	//EXPECT_NO_THROW(ev3_2.Init());
 	ev3_2.Init();
-	EXPECT_EQ(ev3_2.GetInterval(),11);
-	EXPECT_EQ(ev3_2.GetStateCount(),10);
-	EXPECT_EQ(ev3_2.GetControlCount(0),1);
-	EXPECT_EQ(ev3_2.GetControlCount(1),2);
+	EXPECT_EQ(ev3_2.getInterval(),11);
+	EXPECT_EQ(ev3_2.getStateCount(),10);
+	EXPECT_EQ(ev3_2.getControlCount(0),1);
+	EXPECT_EQ(ev3_2.getControlCount(1),2);
 
 }
 
@@ -1435,13 +1435,13 @@ TEST(EV3LineTracerTest,Init_Exception)
 
 }
 
-TEST(EV3LineTracerTest,GetRegularPolicy)
+TEST(EV3LineTracerTest,getRegularPolicy)
 {
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
 	Policy p;
-	ev3.GetRegularPolicy(p);
-	idx statecount=p.GetStateCount();
+	ev3.getRegularPolicy(p);
+	idx statecount=p.getStateCount();
 	vector<idx> c(statecount);
 	c[0]=0;
 	c[1]=1;
@@ -1623,7 +1623,7 @@ TEST(ReadIntervalTest,Process)
 	RL::EV3LineTracer ev3;
 	ReadInterval ri(ev3);
 	ri.process(tic);
-	EXPECT_EQ(ev3.GetInterval(),10);
+	EXPECT_EQ(ev3.getInterval(),10);
 }
 TEST(ReadIntervalTest,Process_Exception)
 {
@@ -1642,7 +1642,7 @@ TEST(ReadStateCountTest,Process)
 	RL::EV3LineTracer ev3;
 	ReadStateCount rsc(ev3);
 	rsc.process(tic);
-	EXPECT_EQ(ev3.GetStateCount(),11);
+	EXPECT_EQ(ev3.getStateCount(),11);
 }
 TEST(ReadStateCountTest,Process_Exception)
 {
@@ -1664,8 +1664,8 @@ TEST(ReadSingleStateTest,Process)
 	ReadStateCount(ev3).process(tic);
 	ReadSingleState rs(ev3,4);
 	rs.process(tic);
-	EXPECT_NEAR(ev3.GetState(4).RefMax,0.5,0.0625);
-	EXPECT_EQ(ev3.GetControlCount(4),2);
+	EXPECT_NEAR(ev3.getState(4).refMax,0.5,0.0625);
+	EXPECT_EQ(ev3.getControlCount(4),2);
 }
 TEST(ReadSingleStateTest,Process_Exception)
 {
@@ -1687,10 +1687,10 @@ TEST(ReadStateTest,Process)
 	ReadStateCount(ev3).process(tic);
 	ReadState rs(ev3);
 	rs.process(tic);
-	EXPECT_NEAR(ev3.GetState(0).RefMax,0.5,0.0625);
-	EXPECT_NEAR(ev3.GetState(1).RefMax,0.5,0.0625);
-	EXPECT_EQ(ev3.GetControlCount(0),2);
-	EXPECT_EQ(ev3.GetControlCount(1),2);
+	EXPECT_NEAR(ev3.getState(0).refMax,0.5,0.0625);
+	EXPECT_NEAR(ev3.getState(1).refMax,0.5,0.0625);
+	EXPECT_EQ(ev3.getControlCount(0),2);
+	EXPECT_EQ(ev3.getControlCount(1),2);
 }
 TEST(ReadStateTest,Process_Exception)
 {
@@ -1724,10 +1724,10 @@ TEST(ReadControlTest,Process)
 	EV3LineTracerControl ev3control[2];
 	ev3control[0] = ev3.getControl(4,0);
 	ev3control[1] = ev3.getControl(4,1);
-	EXPECT_EQ(ev3control[0].LMotorSpeed,10);
-	EXPECT_EQ(ev3control[0].RMotorSpeed, 5);
-	EXPECT_EQ(ev3control[1].LMotorSpeed, 5);
-	EXPECT_EQ(ev3control[1].RMotorSpeed,10);
+	EXPECT_EQ(ev3control[0].lMotorSpeed,10);
+	EXPECT_EQ(ev3control[0].rMotorSpeed, 5);
+	EXPECT_EQ(ev3control[1].lMotorSpeed, 5);
+	EXPECT_EQ(ev3control[1].rMotorSpeed,10);
 }
 TEST(ReadControlTest,Process_Exception)
 {
@@ -1762,18 +1762,18 @@ TEST(InputConfigFileTest,process)
 	RL::EV3LineTracer ev3;
 	RL::InputConfigFile icf(ev3);
 	icf.process(tic);
-	EXPECT_EQ(ev3.GetInterval(),10);
-	EXPECT_EQ(ev3.GetStateCount(),2);
-	EXPECT_EQ(ev3.GetControlCount(0),1);
-	EXPECT_EQ(ev3.GetControlCount(1),2);
-	EXPECT_EQ(ev3.getControl(0,0).LMotorSpeed, 10);
-	EXPECT_EQ(ev3.getControl(0,0).RMotorSpeed,100);
-	EXPECT_EQ(ev3.getControl(1,0).LMotorSpeed, 20);
-	EXPECT_EQ(ev3.getControl(1,0).RMotorSpeed,200);
-	EXPECT_EQ(ev3.getControl(1,1).LMotorSpeed, 21);
-	Policy p(ev3.GetStateCount());
-	ev3.GetRegularPolicy(p);
-	EXPECT_EQ(p.GetStateCount(),2);
+	EXPECT_EQ(ev3.getInterval(),10);
+	EXPECT_EQ(ev3.getStateCount(),2);
+	EXPECT_EQ(ev3.getControlCount(0),1);
+	EXPECT_EQ(ev3.getControlCount(1),2);
+	EXPECT_EQ(ev3.getControl(0,0).lMotorSpeed, 10);
+	EXPECT_EQ(ev3.getControl(0,0).rMotorSpeed,100);
+	EXPECT_EQ(ev3.getControl(1,0).lMotorSpeed, 20);
+	EXPECT_EQ(ev3.getControl(1,0).rMotorSpeed,200);
+	EXPECT_EQ(ev3.getControl(1,1).lMotorSpeed, 21);
+	Policy p(ev3.getStateCount());
+	ev3.getRegularPolicy(p);
+	EXPECT_EQ(p.getStateCount(),2);
 	EXPECT_EQ(p[0],0);
 	EXPECT_EQ(p[1],1);
 
@@ -1785,13 +1785,13 @@ TEST(InputConfigFileTest,process_INIFile)
 	RL::EV3LineTracer ev3;
 	RL::InputConfigFile icf(ev3);
 	icf.process(tic);
-	EXPECT_EQ(ev3.GetInterval()  ,11);
-	EXPECT_EQ(ev3.GetStateCount(),10);
-	EXPECT_EQ(ev3.GetState(4).RefMax,0.5);
-	EXPECT_EQ(ev3.getControl(9,1).LMotorSpeed, 5);
-	EXPECT_EQ(ev3.getControl(9,1).RMotorSpeed,10);
-	Policy p(ev3.GetStateCount());
-	EXPECT_EQ(ev3.GetRegularPolicy(p)[9],1);
+	EXPECT_EQ(ev3.getInterval()  ,11);
+	EXPECT_EQ(ev3.getStateCount(),10);
+	EXPECT_EQ(ev3.getState(4).refMax,0.5);
+	EXPECT_EQ(ev3.getControl(9,1).lMotorSpeed, 5);
+	EXPECT_EQ(ev3.getControl(9,1).rMotorSpeed,10);
+	Policy p(ev3.getStateCount());
+	EXPECT_EQ(ev3.getRegularPolicy(p)[9],1);
 
 }
 
@@ -1874,7 +1874,7 @@ TEST(WriteIntervalTest,Process)
 	ev3.Init();
 	RL::WriteInterval wi(ev3);
 	wi.process(toc);
-	EXPECT_EQ(os.str(),std::to_string(ev3.GetInterval())+"\n");
+	EXPECT_EQ(os.str(),std::to_string(ev3.getInterval())+"\n");
 }
 
 TEST(WriteStateCountTest,Constractor)
@@ -1891,7 +1891,7 @@ TEST(WriteStateCountTest,Process)
 	RL::WriteStateCount wsc(ev3);
 	ev3.Init();
 	wsc.process(toc);
-	EXPECT_EQ(os.str(),std::to_string(ev3.GetStateCount())+"\n");
+	EXPECT_EQ(os.str(),std::to_string(ev3.getStateCount())+"\n");
 }
 TEST(WriteSingleStateTest,Constractor)
 {
@@ -1905,16 +1905,16 @@ TEST(WriteSingleStateTest,Process)
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
-	idx i=ev3.GetStateCount()/2;
+	idx i=ev3.getStateCount()/2;
 	RL::WriteSingleState wss(ev3,i);
 	wss.process(toc);
 	EXPECT_EQ(
 			os.str(),
 			std::to_string(i)
 				+'\t'
-				+std::to_string(ev3.GetState(i).RefMax)
+				+std::to_string(ev3.getState(i).refMax)
 				+'\t'
-				+std::to_string(ev3.GetControlCount(i))
+				+std::to_string(ev3.getControlCount(i))
 				+"\n"
 			);
 }
@@ -1937,15 +1937,15 @@ TEST(WriteStateTest,Process)
 	//出力される想定の文字列
 	std::ostringstream state_string;
 	//state数
-	int state_count = ev3.GetStateCount();
+	int state_count = ev3.getStateCount();
 	//出力される想定の文字列の作成
 	for(int i=0; i<state_count; i++)
 	{
 		state_string<<std::to_string(i);
 		state_string<<'\t';
-		state_string<<std::to_string(ev3.GetState(i).RefMax);
+		state_string<<std::to_string(ev3.getState(i).refMax);
 		state_string<<'\t';
-		state_string<<ev3.GetControlCount(i);
+		state_string<<ev3.getControlCount(i);
 		state_string<<endl;
 	}
 	//想定通りの文字列が出力されているか確認する
@@ -1965,8 +1965,8 @@ TEST(WriteSingleControlTest,Process)
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
-	idx i=ev3.GetStateCount()/2;
-	idx u=ev3.GetControlCount(i)/2;
+	idx i=ev3.getStateCount()/2;
+	idx u=ev3.getControlCount(i)/2;
 	RL::WriteSingleControl wsc(ev3,i,u);
 	wsc.process(toc);
 	EV3LineTracerControl control = ev3.getControl(i,u);
@@ -1976,9 +1976,9 @@ TEST(WriteSingleControlTest,Process)
 				+'\t'
 				+std::to_string(u)
 				+'\t'
-				+std::to_string(control.LMotorSpeed)
+				+std::to_string(control.lMotorSpeed)
 				+'\t'
-				+std::to_string(control.RMotorSpeed)
+				+std::to_string(control.rMotorSpeed)
 				+"\n"
 			);
 }
@@ -2003,11 +2003,11 @@ TEST(WriteControlTest,Process)
 	//出力される想定の文字列
 	std::ostringstream state_string;
 	//state数
-	idx state_count = ev3.GetStateCount();
+	idx state_count = ev3.getStateCount();
 	//出力される想定の文字列の作成
 	for(idx i=0; i<state_count; i++)
 	{
-		idx control_count = ev3.GetControlCount(i);
+		idx control_count = ev3.getControlCount(i);
 		for(idx u = 0; u<control_count; u++)
 		{
 			EV3LineTracerControl control = ev3.getControl(i,u);
@@ -2016,9 +2016,9 @@ TEST(WriteControlTest,Process)
 			state_string<<'\t';
 			state_string<<std::to_string(u);
 			state_string<<'\t';
-			state_string<<std::to_string(control.LMotorSpeed);
+			state_string<<std::to_string(control.lMotorSpeed);
 			state_string<<'\t';
-			state_string<<std::to_string(control.RMotorSpeed);
+			state_string<<std::to_string(control.rMotorSpeed);
 			state_string<<endl;
 		}
 	}
@@ -2038,9 +2038,9 @@ TEST(WriteSinglePolicyTest,Process)
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.Init();
-	idx i=ev3.GetStateCount()/2;
+	idx i=ev3.getStateCount()/2;
 	Policy policy;
-	ev3.GetRegularPolicy(policy);
+	ev3.getRegularPolicy(policy);
 	RL::WriteSinglePolicy wsp(policy,i);
 	wsp.process(toc);
 	EXPECT_EQ(
@@ -2070,9 +2070,9 @@ TEST(WriteRegularPolicyTest,Process)
 	//出力される想定の文字列
 	std::ostringstream state_string;
 	//state数
-	int state_count = ev3.GetStateCount();
+	int state_count = ev3.getStateCount();
 	Policy regular_policy;
-	ev3.GetRegularPolicy(regular_policy);
+	ev3.getRegularPolicy(regular_policy);
 	//出力される想定の文字列の作成
 	for(int i=0; i<state_count; i++)
 	{

@@ -34,7 +34,7 @@ namespace RL
 struct EV3LineTracerState
 {
 	//黒線検知用の光センサの反射率(0.0～1.0)
-	real RefMax;
+	real refMax;
 };
 
 typedef int speed;
@@ -42,9 +42,9 @@ typedef int speed;
 struct EV3LineTracerControl
 {
 	//左モータのスピード(degrees/sec)
-	speed LMotorSpeed;
+	speed lMotorSpeed;
 	//右モータのスピード(degrees/sec)
-	speed RMotorSpeed;
+	speed rMotorSpeed;
 };
 
 
@@ -63,23 +63,23 @@ private:
 	//データメンバ
 	/////////////////////////////
 	//Controlを維持する間隔(msec)
-	idx Interval;
+	idx interval;
 	//状態数
-	idx StateCount;
+	idx stateCount;
 	//状態
-	std::vector<EV3LineTracerState> State;
+	std::vector<EV3LineTracerState> state;
 	//Control数
-	std::vector<idx> ControlCount;
+	std::vector<idx> controlCount;
 	//Control
-	std::vector<std::vector<EV3LineTracerControl> > Control;
+	std::vector<std::vector<EV3LineTracerControl> > control;
 	//現在設定されているPolicy;
-	StochasticPolicy CurrentPolicy;
+	StochasticPolicy currentPolicy;
 	//RegularPolicy コストの基準となるポリシー
-	Policy RegularPolicy;
+	Policy regularPolicy;
 	//コストの最大値(RegularPolicyの10倍に定める)
-	real CostMax;
+	real costMax;
 	//設定ファイルのパス
-	std::string ConfigFilePath;
+	std::string configFilePath;
 	//モータに与える速度の最大値
 	static const speed SPEEDMAX=600;
 	//メンバ関数
@@ -88,19 +88,19 @@ private:
 	//Intervalの設定
 	void setInterval(idx i)
 	{
-		Interval=i;
+		interval=i;
 	}
 	//StateCountの設定
 	void setStateCount(idx sc)
 	{
 		//StateCountの設定
-		StateCount=sc;
+		stateCount=sc;
 		//State[]のサイズを変更
-		State.resize(StateCount);
+		state.resize(stateCount);
 		//ControlCount[]のサイズを変更
-		ControlCount.resize(StateCount);
+		controlCount.resize(stateCount);
 		//Control[]のサイズを変更
-		Control.resize(StateCount);
+		control.resize(stateCount);
 
 	}
 	//State[stateindex]の設定
@@ -118,11 +118,11 @@ private:
 
 		}
 		//State[stateindex]の設定
-		State[stateindex].RefMax = refmax;
+		state[stateindex].refMax = refmax;
 		//ControlCountの設定
-		ControlCount[stateindex] = controlcount;
+		controlCount[stateindex] = controlcount;
 		//Control[stateindex]のサイズを変更
-		Control[stateindex].resize(controlcount);
+		control[stateindex].resize(controlcount);
 
 	}
 	void setControl(idx stateindex,idx controlindex,idx lmoterspeed,idx rmoterspeed)
@@ -130,19 +130,19 @@ private:
 		//stateindex, controlindexのチェック
 		checkIndex(stateindex,controlindex);
 
-		Control[stateindex][controlindex].LMotorSpeed = lmoterspeed;
-		Control[stateindex][controlindex].RMotorSpeed = rmoterspeed;
+		control[stateindex][controlindex].lMotorSpeed = lmoterspeed;
+		control[stateindex][controlindex].rMotorSpeed = rmoterspeed;
 
 	}
 	void setRegularPolicy(const Policy& p)
 	{
-		RegularPolicy=p;
+		regularPolicy=p;
 	}
 
 	void checkStateIndex(idx stateindex)
 	{
 		//stateindexのチェック
-		if (stateindex < 0 || this->StateCount <= stateindex)
+		if (stateindex < 0 || this->stateCount <= stateindex)
 		{
 			std::stringstream msg;
 			msg << "stateindex is valid: stateindex = " << stateindex << ".";
@@ -154,7 +154,7 @@ private:
 		//stateindexのチェック
 		checkStateIndex(stateindex);
 		//controlindexのチェック
-		if (controlindex < 0 || this->ControlCount[stateindex] <= controlindex)
+		if (controlindex < 0 || this->controlCount[stateindex] <= controlindex)
 		{
 			std::stringstream msg;
 			msg << "controlindex is valid: controlindex = " << controlindex << ".";
@@ -169,32 +169,32 @@ private:
 public:
 	//デフォルトコンストラクタ
 	EV3LineTracer():
-		Interval(0),
-		StateCount(0),
-		State(),
-		ControlCount(),
-		Control(),
-		CurrentPolicy(),
-		RegularPolicy(),
-		CostMax(0.0),
-		ConfigFilePath()
+		interval(0),
+		stateCount(0),
+		state(),
+		controlCount(),
+		control(),
+		currentPolicy(),
+		regularPolicy(),
+		costMax(0.0),
+		configFilePath()
 	{
 	}
 	//コンストラクタ
 	EV3LineTracer(std::string configfilepath):
-		Interval(0),
-		StateCount(0),
-		State(),
-		ControlCount(),
-		Control(),
-		CurrentPolicy(),
-		RegularPolicy(),
-		CostMax(0.0),
-		ConfigFilePath(configfilepath)
+		interval(0),
+		stateCount(0),
+		state(),
+		controlCount(),
+		control(),
+		currentPolicy(),
+		regularPolicy(),
+		costMax(0.0),
+		configFilePath(configfilepath)
 	{
 	}
 	//設定ファイル読み込みを行う
-	void ReadConfigFile();
+	void readConfigFile();
 
 	//EV3の準備を行う
 	void InitEV3();
@@ -202,58 +202,58 @@ public:
 	//設定ファイル読み込みを行い、パラメータを初期化する
 	void Init();
 
-	inline idx GetInterval()const
+	inline idx getInterval()const
 	{
-		return Interval;
+		return interval;
 	}
 
-	inline idx GetStateCount()const
+	inline idx getStateCount()const
 	{
-		return StateCount;
+		return stateCount;
 	}
-	inline EV3LineTracerState GetState(idx i)const
+	inline EV3LineTracerState getState(idx i)const
 	{
-		return State[i];
+		return state[i];
 	}
 	inline EV3LineTracerControl getControl(idx i,idx u)const
 	{
-		return Control[i][u];
+		return control[i][u];
 	}
 
-	inline idx GetControlCount(idx i)const
+	inline idx getControlCount(idx i)const
 	{
-		return ControlCount[i];
+		return controlCount[i];
 	}
 	//MDPに適合した標準的なポリシーの取得
-	Policy& GetRegularPolicy(Policy& out)const
+	Policy& getRegularPolicy(Policy& out)const
 	{
-		out=RegularPolicy;
+		out=regularPolicy;
 		return out;
 	}
 	//TODO 下記の関数を作成する
 	//Mdp.GetEpisode(e)
 	//割引率の取得(1.0を返すのみ)
-	inline real GetDiscountRate()const
+	inline real getDiscountRate()const
 	{
 		return 1.0;
 	}
 	//コストの最大値を取得
-	inline real GetCostMax()const
+	inline real getCostMax()const
 	{
-		return CostMax;
+		return costMax;
 	}
 	//PolicyからStochasticPolicyを得る
 	//TODO SimpleMDPと内容が同一の関数。共通化する方法を検討する
 	//案：Policyのメンバ関数(MDPはテンプレートクラス)として作成する：
 	//		template<typename MDP>
 	//		StochasticPolicy& Policy::GetStochasticPolicy(MDP& mdp,StochasticPolicy& out)const
-	StochasticPolicy& GetStochasticPolicy(const Policy& p,StochasticPolicy& out)const
+	StochasticPolicy& getStochasticPolicy(const Policy& p,StochasticPolicy& out)const
 	{
-		p.Verify(*this);
-		StochasticPolicyData data(p.GetStateCount());
+		p.verify(*this);
+		StochasticPolicyData data(p.getStateCount());
 		for(idx i=0;i<data.size();i++)
 		{
-			std::vector<real> prob(this->GetControlCount(i),0.0);
+			std::vector<real> prob(this->getControlCount(i),0.0);
 			prob[p[i]]=1.0;
 			data[i]=RandomIdx(prob,16);
 		}
@@ -263,17 +263,17 @@ public:
 	}
 	//CurrentPolicyの設定
 	//TODO SimpleMDPと内容が同一の関数。共通化する方法を検討する
-	inline void SetCurrentPolicy(const Policy& p)
+	inline void setCurrentPolicy(const Policy& p)
 	{
 		StochasticPolicy sp;
-		this->SetCurrentPolicy(this->GetStochasticPolicy(p,sp));
+		this->setCurrentPolicy(this->getStochasticPolicy(p,sp));
 	}
 	//CurrentPolicyの設定
 	//TODO SimpleMDPと内容が同一の関数。共通化する方法を検討する
-	inline void SetCurrentPolicy(const StochasticPolicy& p)
+	inline void setCurrentPolicy(const StochasticPolicy& p)
 	{
-		p.Verify(*this);
-		this->CurrentPolicy=p;
+		p.verify(*this);
+		this->currentPolicy=p;
 	}
 	inline real getMotorSpeedMax(void) const
 	{

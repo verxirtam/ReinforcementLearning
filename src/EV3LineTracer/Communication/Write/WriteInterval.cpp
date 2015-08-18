@@ -12,7 +12,7 @@ namespace RL
 
 void WriteInterval::process(OutputContext& output)
 {
-	output.writeToken(std::to_string(this->ev3LineTracer.GetInterval()));
+	output.writeToken(std::to_string(this->ev3LineTracer.getInterval()));
 	output.newLine();
 }
 

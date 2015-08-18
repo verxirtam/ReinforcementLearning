@@ -12,7 +12,7 @@ namespace RL
 
 void WriteStateCount::process(OutputContext& output)
 {
-	output.writeToken(std::to_string(this->ev3LineTracer.GetStateCount()));
+	output.writeToken(std::to_string(this->ev3LineTracer.getStateCount()));
 	output.newLine();
 }
 

@@ -24,7 +24,7 @@ ReadState::~ReadState()
 }
 void ReadState::process(InputContext &input)
 {
-	idx statecount = ev3LineTracer.GetStateCount();
+	idx statecount = ev3LineTracer.getStateCount();
 
 	ReadSingleState rss(ev3LineTracer);
 

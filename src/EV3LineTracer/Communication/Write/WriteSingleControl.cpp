@@ -15,8 +15,8 @@ void WriteSingleControl::process(OutputContext& output)
 
 	output.writeToken(std::to_string(stateIndex));
 	output.writeToken(std::to_string(controlIndex));
-	output.writeToken(std::to_string(control.LMotorSpeed));
-	output.writeToken(std::to_string(control.RMotorSpeed));
+	output.writeToken(std::to_string(control.lMotorSpeed));
+	output.writeToken(std::to_string(control.rMotorSpeed));
 	output.newLine();
 
 

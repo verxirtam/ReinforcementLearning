@@ -14,7 +14,7 @@ namespace RL
 
 void WriteState::process(OutputContext& output)
 {
-	idx state_count=ev3LineTracer.GetStateCount();
+	idx state_count=ev3LineTracer.getStateCount();
 	WriteSingleState wss(ev3LineTracer,0);
 
 	for(idx i=0;i<state_count;i++)

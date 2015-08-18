@@ -17,15 +17,15 @@ namespace RL
 //Episodeの1ステップ分の情報を表す構造体
 struct Step
 {
-	idx State;
-	idx Control;
-	real Cost;
+	idx state;
+	idx control;
+	real cost;
 
 	inline bool operator==(const Step& org)const
 	{
-		return (this->State==org.State)
-				&&(this->Control==org.Control)
-				&&(this->Cost==org.Cost);
+		return (this->state==org.state)
+				&&(this->control==org.control)
+				&&(this->cost==org.cost);
 	}
 	inline bool operator!=(const Step& org)const
 	{
@@ -60,7 +60,7 @@ public:
 	{
 	}
 	//エピソードの長さを取得する
-	inline idx GetStepCount()const
+	inline idx getStepCount()const
 	{
 		return Steps.size();
 	}
@@ -84,46 +84,46 @@ public:
 	//整合性が取れていない場合は例外を投げる
 	//発生する例外：
 	template <typename MDP>
-	void Verify(const MDP& mdp)const
+	void verify(const MDP& mdp)const
 	{
 		for(idx i;i<Steps.size();i++)
 		{
-			Episode::Verify(Steps[i],mdp);
+			Episode::verify(Steps[i],mdp);
 		}
 	}
 	//引数で与えたStepが対応するMDPと整合性が取れているかを確認し、
 	//整合性が取れていない場合は例外を投げる
 	//発生する例外：TODO 未定。決めること。
 	template <typename MDP>
-	static void Verify(const Step& step,const MDP& mdp)
+	static void verify(const Step& step,const MDP& mdp)
 	{
 		//TODO: MDP実装後に実装する
 	}
 
 	//指定したステップの設定を行う(Stepの内容を個別に指定)
-	void SetStep(idx stepindex,idx state, idx control, real cost)
+	void setStep(idx stepindex,idx state, idx control, real cost)
 	{
 		Step& step=Steps.at(stepindex);
-		step.State=state;
-		step.Control=control;
-		step.Cost=cost;
+		step.state=state;
+		step.control=control;
+		step.cost=cost;
 	}
 	//指定したステップの設定を行う(Stepで指定)
-	void SetStep(idx stepindex,const Step& step)
+	void setStep(idx stepindex,const Step& step)
 	{
 		Steps.at(stepindex)=step;
 	}
 	//ステップを追加する(Stepの内容を個別に指定)
-	void AddStep(idx state, idx control, real cost)
+	void addStep(idx state, idx control, real cost)
 	{
 		Step step;
-		step.State=state;
-		step.Control=control;
-		step.Cost=cost;
-		this->AddStep(step);
+		step.state=state;
+		step.control=control;
+		step.cost=cost;
+		this->addStep(step);
 	}
 	//ステップを追加する(Stepで指定)
-	void AddStep(const Step& step)
+	void addStep(const Step& step)
 	{
 		Steps.push_back(step);
 	}

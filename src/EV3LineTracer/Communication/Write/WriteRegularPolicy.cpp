@@ -14,9 +14,9 @@ namespace RL
 
 void WriteRegularPolicy::process(OutputContext& output)
 {
-	idx state_count = ev3LineTracer.GetStateCount();
+	idx state_count = ev3LineTracer.getStateCount();
 	Policy p;
-	ev3LineTracer.GetRegularPolicy(p);
+	ev3LineTracer.getRegularPolicy(p);
 	RL::WriteSinglePolicy wsp(p,0);
 	for(idx i = 0; i < state_count; i++)
 	{

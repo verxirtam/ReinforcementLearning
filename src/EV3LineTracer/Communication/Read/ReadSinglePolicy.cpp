@@ -35,7 +35,7 @@ void ReadSinglePolicy::process(InputContext &input)
 		std::string msg("invalid stateIndex");
 		throw std::ios_base::failure(msg);
 	}
-	idx controlcount = ev3LineTracer.GetControlCount(i);
+	idx controlcount = ev3LineTracer.getControlCount(i);
 	idx u = StringToData::parseTo<idx>(input.nextToken());
 	if((u < 0) || (u >= controlcount) )
 	{
@@ -44,7 +44,7 @@ void ReadSinglePolicy::process(InputContext &input)
 	}
 	input.skipReturn();
 
-	policy.SetPolicy(i,u);
+	policy.setPolicy(i,u);
 }
 
 } /* namespace RL */

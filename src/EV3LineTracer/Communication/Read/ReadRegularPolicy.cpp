@@ -24,7 +24,7 @@ ReadRegularPolicy::~ReadRegularPolicy()
 }
 void ReadRegularPolicy::process(InputContext &input)
 {
-	idx statecount = ev3LineTracer.GetStateCount();
+	idx statecount = ev3LineTracer.getStateCount();
 	Policy p(statecount);
 
 	ReadSinglePolicy rsp(ev3LineTracer,p);

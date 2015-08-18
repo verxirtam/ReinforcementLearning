@@ -26,12 +26,12 @@ void ReadControl::process(InputContext &input)
 
 	ReadSingleControl rc(ev3LineTracer);
 
-	idx statecount = ev3LineTracer.GetStateCount();
+	idx statecount = ev3LineTracer.getStateCount();
 	for(idx i=0;i<statecount;i++)
 	{
 		rc.setStateIndex(i);
 
-		idx controlcount = ev3LineTracer.GetControlCount(i);
+		idx controlcount = ev3LineTracer.getControlCount(i);
 
 		for(idx u=0; u < controlcount; u++)
 		{

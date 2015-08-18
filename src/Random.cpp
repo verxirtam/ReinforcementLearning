@@ -23,11 +23,11 @@ namespace RL
 
 
 RandomIdx::RandomIdx(const std::vector<real>& prob, idx part_count):
-		ValueMax(prob.size()),
-		Value(part_count),
-		Decimal(ValueMax+1),
-		PartitionCount(part_count),
-		DecimalTotal()
+		valueMax(prob.size()),
+		value(part_count),
+		decimal(valueMax+1),
+		partitionCount(part_count),
+		decimalTotal()
 {
 
 	//part_countが不正な値なら例外発生
@@ -43,7 +43,7 @@ RandomIdx::RandomIdx(const std::vector<real>& prob, idx part_count):
 	real sum=0.0;
 	//Probability[]の値を正規化する
 	//合わせて各値が正であるかチェックする（負なら例外発生）
-	for(idx i=0;i<ValueMax;i++)
+	for(idx i=0;i<valueMax;i++)
 	{
 		if(probability[i]>=0.0)
 		{
@@ -60,43 +60,43 @@ RandomIdx::RandomIdx(const std::vector<real>& prob, idx part_count):
 	{
 		throw std::invalid_argument("error at RandomIdx::RandomIdx(). : sum==0.0");
 	}
-	for(idx i=0;i<ValueMax;i++)
+	for(idx i=0;i<valueMax;i++)
 	{
 		probability[i]/=sum;
 	}
 
 	//確率を整数部(prob_int[])、小数部(prob_deci[])に分ける
-	vector<idx> prob_int(ValueMax);
-	vector<real> prob_deci(ValueMax);
-	for(idx i=0;i<ValueMax;i++)
+	vector<idx> prob_int(valueMax);
+	vector<real> prob_deci(valueMax);
+	for(idx i=0;i<valueMax;i++)
 	{
-		prob_int[i]=(int)(probability[i]*PartitionCount);
-		prob_deci[i]=probability[i]-((real)prob_int[i])/((real)PartitionCount);
+		prob_int[i]=(int)(probability[i]*partitionCount);
+		prob_deci[i]=probability[i]-((real)prob_int[i])/((real)partitionCount);
 	}
 
 	//Value[],DecimalTotalの初期化
 	idx p=0;
-	for(idx i=0;i<ValueMax;i++)
+	for(idx i=0;i<valueMax;i++)
 	{
 		for(idx j=0;j<prob_int[i];j++)
 		{
-			Value[p]=i;
+			value[p]=i;
 			p++;
 		}
 	}
-	DecimalTotal=((real)PartitionCount-p)/((real)PartitionCount);
-	for(;p<PartitionCount;p++)
+	decimalTotal=((real)partitionCount-p)/((real)partitionCount);
+	for(;p<partitionCount;p++)
 	{
-		Value[p]=ValueMax;
+		value[p]=valueMax;
 	}
 
 	//Decimal[]の初期化
 	sum=0.0;
-	Decimal[0]=0.0;
-	for(idx i=0;i<ValueMax;i++)
+	decimal[0]=0.0;
+	for(idx i=0;i<valueMax;i++)
 	{
 		sum+=prob_deci[i];
-		Decimal[i+1]=sum;
+		decimal[i+1]=sum;
 	}
 
 }

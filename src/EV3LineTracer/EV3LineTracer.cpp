@@ -20,16 +20,16 @@ namespace RL
 
 
 //設定ファイル読み込みを行う
-void EV3LineTracer::ReadConfigFile()
+void EV3LineTracer::readConfigFile()
 {
 
 	//読み込み用に設定ファイルを開く
-	std::ifstream ifs(ConfigFilePath.c_str());
+	std::ifstream ifs(configFilePath.c_str());
 	//ファイルオープンの確認
 	if(!ifs)
 	{
 		std::string msg("EV3LineTracer::ReadConfigFile() : can not open ");
-		msg+=ConfigFilePath;
+		msg+=configFilePath;
 		throw std::ios_base::failure(msg);
 	}
 	try
@@ -62,7 +62,7 @@ void EV3LineTracer::InitEV3()
 void EV3LineTracer::Init()
 {
 	//設定ファイル読み込みを行う
-	ReadConfigFile();
+	readConfigFile();
 
 	//EV3の準備を行う
 	this->InitEV3();
