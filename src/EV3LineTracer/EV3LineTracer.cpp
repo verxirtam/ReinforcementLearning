@@ -61,6 +61,9 @@ void EV3LineTracer::initEV3()
 	//EV3と通信できるか確認する
 	this->execNullCommand();
 
+	//MDPの設定を送信する
+	this->execSetMDP();
+
 }
 
 //EV3LineTracer::Init()

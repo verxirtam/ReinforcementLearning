@@ -13,6 +13,7 @@
 #include "../EV3LineTracer.h"
 #include "Write/WriteControl.h"
 #include "Write/WriteInterval.h"
+#include "Write/WriteCostMax.h"
 #include "Write/WriteRegularPolicy.h"
 #include "Write/WriteState.h"
 #include "Write/WriteStateCount.h"

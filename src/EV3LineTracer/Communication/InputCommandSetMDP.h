@@ -8,8 +8,21 @@
 #ifndef INPUTCOMMANDSETMDP_H_
 #define INPUTCOMMANDSETMDP_H_
 
+#include <sstream>
+#include <string>
+#include <cmath>
+
 #include "../../Communication/InputProcedure.h"
+#include "../../Communication/InputContext.h"
+#include "../../Policy.h"
+#include "../../RLUtility.h"
 #include "../EV3LineTracer.h"
+#include "Read/ReadControl.h"
+#include "Read/ReadCostMax.h"
+#include "Read/ReadInterval.h"
+#include "Read/ReadRegularPolicy.h"
+#include "Read/ReadState.h"
+#include "Read/ReadStateCount.h"
 
 namespace RL
 {
@@ -18,6 +31,10 @@ class InputCommandSetMDP: public InputProcedure
 {
 private:
 	EV3LineTracer& ev3LineTracer;
+
+	bool equalsOfEV3LineTracer(const EV3LineTracer& ev3)const;
+	void processOnNG(InputContext& input);
+
 public:
 	InputCommandSetMDP(EV3LineTracer& ev3):ev3LineTracer(ev3)
 	{

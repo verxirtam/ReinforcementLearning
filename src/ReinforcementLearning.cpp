@@ -2291,6 +2291,7 @@ TEST(OutputCommandSetMDPTest,Process)
 
 	string expect_string = "SetMDP\n\
 11\n\
+600.000000\n\
 10\n\
 0	0.100000	1\n\
 1	0.200000	2\n\
@@ -2358,7 +2359,51 @@ TEST(InputCommandSetMDPTest,Constractor)
 TEST(InputCommandSetMDPTest,Process_OK)
 {
 	//InputContextの初期化
-	std::istringstream is("SetMDP\nOK\n");
+	std::string input_string="SetMDP\nOK\n\
+11\n\
+600.000000\n\
+10\n\
+0	0.100000	1\n\
+1	0.200000	2\n\
+2	0.300000	2\n\
+3	0.400000	2\n\
+4	0.500000	2\n\
+5	0.600000	2\n\
+6	0.700000	2\n\
+7	0.800000	2\n\
+8	0.900000	2\n\
+9	1.000000	2\n\
+0	0	10	10\n\
+1	0	10	5\n\
+1	1	5	10\n\
+2	0	10	5\n\
+2	1	5	10\n\
+3	0	10	5\n\
+3	1	5	10\n\
+4	0	10	5\n\
+4	1	5	10\n\
+5	0	10	5\n\
+5	1	5	10\n\
+6	0	10	5\n\
+6	1	5	10\n\
+7	0	10	5\n\
+7	1	5	10\n\
+8	0	10	5\n\
+8	1	5	10\n\
+9	0	10	5\n\
+9	1	5	10\n\
+0	0\n\
+1	1\n\
+2	1\n\
+3	0\n\
+4	0\n\
+5	1\n\
+6	1\n\
+7	0\n\
+8	1\n\
+9	1\n\
+";
+	std::istringstream is(input_string);
 	RL::TSVInputContext tic(is);
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
