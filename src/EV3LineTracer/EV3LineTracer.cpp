@@ -85,13 +85,39 @@ void EV3LineTracer::execNullCommand()
 	//EV3からの返信を受信する
 	InputContext &ic = tcp_client.getInputContext();
 
-	//メッセージ受信用の
+	//メッセージ受信用のInputProcedure
 	RL::InputCommandNullCommand i_null_command;
 	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_null_command);
 	RL::InputMessage_1_0 i_message(i_ev3_1_0);
 
 	i_message.process(ic);
 }
+//MDPの設定をEV3に反映する
+void EV3LineTracer::execSetMDP()
+{
+	//EV3への接続を確立
+	TCPClient tcp_client("localhost",50000,1024);//"192.168.0.8",50000,1024));
+
+	//EV3への送信用のデータ(NULLコマンド)を作成
+	RL::OutputCommandSetMDP o_set_mdp;
+	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_set_mdp);
+	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
+
+	//EV3へ送信
+	OutputContext &oc = tcp_client.getOutputContext();
+	o_message.process(oc);
+
+	//EV3からの返信を受信する
+	InputContext &ic = tcp_client.getInputContext();
+
+	//メッセージ受信用のInputProcedure
+	RL::InputCommandSetMDP i_set_mdp;
+	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_set_mdp);
+	RL::InputMessage_1_0 i_message(i_ev3_1_0);
+
+	i_message.process(ic);
+}
+
 
 
 }

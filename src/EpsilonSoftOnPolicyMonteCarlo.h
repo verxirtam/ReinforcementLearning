@@ -20,16 +20,16 @@ namespace RL
 	イプシロンソフト方策オン型モンテカルロ法
 
 	typename MDPに必要なメンバ関数
-	Mdp.Init()
-	Mdp.GetStateCount()const
-	Mdp.GetControlCount(i)
-	Mdp.GetRegularPolicy(out)
-	Mdp.GetEpisode(e)
-	Mdp.GetDiscountRate()
-	Mdp.GetCostMax()
-	Mdp.GetStochasticPolicy(p,out)
-	Mdp.SetCurrentPolicy(p)
-	Mdp.SetCurrentPolicy(sp)
+	Mdp.init()
+	Mdp.getStateCount()const
+	Mdp.getControlCount(i)
+	Mdp.getRegularPolicy(out)
+	Mdp.getEpisode(e)
+	Mdp.getDiscountRate()
+	Mdp.getCostMax()
+	Mdp.getStochasticPolicy(p,out)
+	Mdp.setCurrentPolicy(p)
+	Mdp.setCurrentPolicy(sp)
  */
 template <typename MDP>
 class EpsilonSoftOnPolicyMonteCarlo

@@ -2219,7 +2219,94 @@ TEST(InputMessage_1_0Test,Process)
 	im.process(tic);
 
 }
+//OutputCommandSetMDP
+TEST(OutputCommandSetMDPTest,Constractor)
+{
+	//OutputContextの初期化
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::OutputCommandSetMDP o_setmdp(ev3);
+}
 
+TEST(OutputCommandSetMDPTest,Process)
+{
+
+	string expect_string = "11\
+10\
+0	0.1	1\
+1	0.2	2\
+2	0.3	2\
+3	0.4	2\
+4	0.5	2\
+5	0.6	2\
+6	0.7	2\
+7	0.8	2\
+8	0.9	2\
+9	1.0	2\
+0	0	10	10\
+1	0	10	5\
+1	1	5	10\
+2	0	10	5\
+2	1	5	10\
+3	0	10	5\
+3	1	5	10\
+4	0	10	5\
+4	1	5	10\
+5	0	10	5\
+5	1	5	10\
+6	0	10	5\
+6	1	5	10\
+7	0	10	5\
+7	1	5	10\
+8	0	10	5\
+8	1	5	10\
+9	0	10	5\
+9	1	5	10\
+0	0\
+1	1\
+2	1\
+3	0\
+4	0\
+5	1\
+6	1\
+7	0\
+8	1\
+9	1\
+";
+
+
+	//OutputContextの初期化
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::OutputCommandSetMDP o_setmdp(ev3);
+
+
+	//処理の実行
+	o_setmdp.process(toc);
+
+	EXPECT_EQ(os.str(),expect_string);
+}
+TEST(InputCommandSetMDPTest,Constractor)
+{
+	///OutputContextの初期化
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetMDP i_setmdp(ev3);
+}
+
+TEST(InputCommandSetMDPTest,Process)
+{
+	///OutputContextの初期化
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetMDP i_setmdp(ev3);
+
+	//処理の実行
+	i_setmdp.process(tic);
+
+}
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////

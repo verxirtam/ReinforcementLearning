@@ -286,6 +286,9 @@ public:
 	//何もしないコマンドを発行する
 	//通信の確率の確認に使用する
 	void execNullCommand();
+
+	//MDPの設定をEV3に反映する
+	void execSetMDP()
 };
 
 
