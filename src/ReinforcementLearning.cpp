@@ -1375,20 +1375,20 @@ TEST(EV3LineTracerTest,Constructor)
 	EXPECT_NO_THROW(EV3LineTracer ev3("/notexist.ini"));
 
 }
-TEST(EV3LineTracerTest,Init)
+TEST(EV3LineTracerTest,init)
 {
 	//デフォルトコンストラクタの場合→例外発生
 	EV3LineTracer ev3_0;
-	EXPECT_THROW(ev3_0.Init(),std::ios_base::failure);
+	EXPECT_THROW(ev3_0.init(),std::ios_base::failure);
 	//存在しないファイル名を指定したコンストラクタの場合→例外発生
 	EV3LineTracer ev3_1("/notexist.ini");
-	EXPECT_THROW(ev3_1.Init(),std::ios_base::failure);
+	EXPECT_THROW(ev3_1.init(),std::ios_base::failure);
 
 
 	//ファイルが存在する場合は例外発生なし
 	EV3LineTracer ev3_2("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	//EXPECT_NO_THROW(ev3_2.Init());
-	ev3_2.Init();
+	ev3_2.init();
 	EXPECT_EQ(ev3_2.getInterval(),11);
 	EXPECT_EQ(ev3_2.getStateCount(),10);
 	EXPECT_EQ(ev3_2.getControlCount(0),1);
@@ -1430,7 +1430,7 @@ TEST(EV3LineTracerTest,Init_Exception)
 	for(idx i=0;i<testcount;i++)
 	{
 		EV3LineTracer ev3(configfilepath[i]);
-		EXPECT_THROW(ev3.Init(),std::ios_base::failure);
+		EXPECT_THROW(ev3.init(),std::ios_base::failure);
 	}
 
 }
@@ -1438,7 +1438,7 @@ TEST(EV3LineTracerTest,Init_Exception)
 TEST(EV3LineTracerTest,getRegularPolicy)
 {
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	Policy p;
 	ev3.getRegularPolicy(p);
 	idx statecount=p.getStateCount();
@@ -1856,7 +1856,7 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 TEST(ExecNullCommandTest,process)
 {
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	ev3.execNullCommand();
 }
 
@@ -1871,7 +1871,7 @@ TEST(WriteIntervalTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	RL::WriteInterval wi(ev3);
 	wi.process(toc);
 	EXPECT_EQ(os.str(),std::to_string(ev3.getInterval())+"\n");
@@ -1889,7 +1889,7 @@ TEST(WriteStateCountTest,Process)
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	RL::WriteStateCount wsc(ev3);
-	ev3.Init();
+	ev3.init();
 	wsc.process(toc);
 	EXPECT_EQ(os.str(),std::to_string(ev3.getStateCount())+"\n");
 }
@@ -1904,7 +1904,7 @@ TEST(WriteSingleStateTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	idx i=ev3.getStateCount()/2;
 	RL::WriteSingleState wss(ev3,i);
 	wss.process(toc);
@@ -1929,7 +1929,7 @@ TEST(WriteStateTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	//テスト対象：WriteState
 	RL::WriteState wss(ev3);
 	//書き込み処理の実行
@@ -1964,7 +1964,7 @@ TEST(WriteSingleControlTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	idx i=ev3.getStateCount()/2;
 	idx u=ev3.getControlCount(i)/2;
 	RL::WriteSingleControl wsc(ev3,i,u);
@@ -1995,7 +1995,7 @@ TEST(WriteControlTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	//テスト対象：WriteState
 	RL::WriteControl wc(ev3);
 	//書き込み処理の実行
@@ -2037,7 +2037,7 @@ TEST(WriteSinglePolicyTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	idx i=ev3.getStateCount()/2;
 	Policy policy;
 	ev3.getRegularPolicy(policy);
@@ -2062,7 +2062,7 @@ TEST(WriteRegularPolicyTest,Process)
 	std::ostringstream os;
 	RL::TSVOutputContext toc(os);
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
-	ev3.Init();
+	ev3.init();
 	//テスト対象：RegularPolicy
 	RL::WriteRegularPolicy wrp(ev3);
 	//書き込み処理の実行

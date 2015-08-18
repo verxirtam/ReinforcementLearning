@@ -50,7 +50,7 @@ void EV3LineTracer::readConfigFile()
 }
 
 //EV3の準備を行う
-void EV3LineTracer::InitEV3()
+void EV3LineTracer::initEV3()
 {
 	//EV3と通信できるか確認する
 	this->execNullCommand();
@@ -59,13 +59,13 @@ void EV3LineTracer::InitEV3()
 
 //EV3LineTracer::Init()
 //設定ファイル読み込みを行い、パラメータを初期化する
-void EV3LineTracer::Init()
+void EV3LineTracer::init()
 {
 	//設定ファイル読み込みを行う
 	readConfigFile();
 
 	//EV3の準備を行う
-	this->InitEV3();
+	this->initEV3();
 
 }
 void EV3LineTracer::execNullCommand()

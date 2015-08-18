@@ -197,10 +197,10 @@ public:
 	void readConfigFile();
 
 	//EV3の準備を行う
-	void InitEV3();
+	void initEV3();
 
 	//設定ファイル読み込みを行い、パラメータを初期化する
-	void Init();
+	void init();
 
 	inline idx getInterval()const
 	{
