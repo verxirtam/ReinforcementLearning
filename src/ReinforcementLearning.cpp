@@ -34,6 +34,7 @@
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
 #include "EV3LineTracer/Communication/Read/ReadCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
+#include "EV3LineTracer/Communication/Write/WriteCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleState.h"
 #include "EV3LineTracer/Communication/Write/WriteState.h"
