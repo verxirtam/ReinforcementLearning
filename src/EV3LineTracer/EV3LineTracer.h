@@ -22,9 +22,7 @@
 #include "../Policy.h"
 
 #include "Communication/InputEV3LineTracer_1_0.h"
-#include "Communication/InputCommandNullCommand.h"
 #include "Communication/OutputEV3LineTracer_1_0.h"
-#include "Communication/OutputCommandNullCommand.h"
 
 namespace RL
 {
@@ -288,7 +286,7 @@ public:
 	void execNullCommand();
 
 	//MDPの設定をEV3に反映する
-	void execSetMDP()
+	void execSetMDP();
 };
 
 

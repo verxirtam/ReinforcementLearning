@@ -25,8 +25,10 @@
 #include "EV3LineTracer/Communication/InputConfigFileEV3Linetracer_1_0.h"
 #include "EV3LineTracer/Communication/InputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/InputCommandNullCommand.h"
+#include "EV3LineTracer/Communication/InputCommandSetMDP.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/OutputCommandNullCommand.h"
+#include "EV3LineTracer/Communication/OutputCommandSetMDP.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -2298,7 +2300,9 @@ TEST(InputCommandSetMDPTest,Constractor)
 
 TEST(InputCommandSetMDPTest,Process)
 {
-	///OutputContextの初期化
+	//InputContextの初期化
+	std::istringstream is("SetMDP\nOK\n");
+	RL::TSVInputContext tic(is);
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
 	RL::InputCommandSetMDP i_setmdp(ev3);

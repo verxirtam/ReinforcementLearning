@@ -6,8 +6,14 @@
  */
 
 #include "EV3LineTracer.h"
-#include "Communication/InputConfigFileEV3Linetracer_1_0.h"//相互参照防止
-#include "Communication/InputConfigFile.h"//相互参照防止
+//↓相互参照防止
+#include "Communication/InputConfigFileEV3Linetracer_1_0.h"
+#include "Communication/InputConfigFile.h"
+#include "Communication/InputCommandNullCommand.h"
+#include "Communication/InputCommandSetMDP.h"
+#include "Communication/OutputCommandNullCommand.h"
+#include "Communication/OutputCommandSetMDP.h"
+//↑相互参照防止
 
 
 
@@ -99,7 +105,7 @@ void EV3LineTracer::execSetMDP()
 	TCPClient tcp_client("localhost",50000,1024);//"192.168.0.8",50000,1024));
 
 	//EV3への送信用のデータ(NULLコマンド)を作成
-	RL::OutputCommandSetMDP o_set_mdp;
+	RL::OutputCommandSetMDP o_set_mdp(*this);
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_set_mdp);
 	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
 
@@ -111,7 +117,7 @@ void EV3LineTracer::execSetMDP()
 	InputContext &ic = tcp_client.getInputContext();
 
 	//メッセージ受信用のInputProcedure
-	RL::InputCommandSetMDP i_set_mdp;
+	RL::InputCommandSetMDP i_set_mdp(*this);
 	RL::InputEV3LineTracer_1_0 i_ev3_1_0(i_set_mdp);
 	RL::InputMessage_1_0 i_message(i_ev3_1_0);
 
