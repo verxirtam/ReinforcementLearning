@@ -1785,7 +1785,10 @@ TEST(InputConfigFileTest,Constractor)
 }
 TEST(InputConfigFileTest,process)
 {
-	string aaa="EV3LineTracer_1.0\n10\n2\n";
+	string aaa="EV3LineTracer_1.0\n";
+	aaa += "10\n";
+	aaa += "600.0\n";
+	aaa += "2\n";
 	aaa += "0	0.1	1\n";
 	aaa += "1	0.2	2\n";
 	aaa += "0	0	10	100\n";
@@ -1799,6 +1802,7 @@ TEST(InputConfigFileTest,process)
 	RL::InputConfigFile icf(ev3);
 	icf.process(tic);
 	EXPECT_EQ(ev3.getInterval(),10);
+	EXPECT_EQ(ev3.getCostMax(),600.0);
 	EXPECT_EQ(ev3.getStateCount(),2);
 	EXPECT_EQ(ev3.getControlCount(0),1);
 	EXPECT_EQ(ev3.getControlCount(1),2);
@@ -1822,6 +1826,7 @@ TEST(InputConfigFileTest,process_INIFile)
 	RL::InputConfigFile icf(ev3);
 	icf.process(tic);
 	EXPECT_EQ(ev3.getInterval()  ,11);
+	EXPECT_EQ(ev3.getCostMax()  ,600.0);
 	EXPECT_EQ(ev3.getStateCount(),10);
 	EXPECT_EQ(ev3.getState(4).refMax,0.5);
 	EXPECT_EQ(ev3.getControl(9,1).lMotorSpeed, 5);
@@ -1838,7 +1843,7 @@ class InputConfigFileErrorTest : public ::testing::Test , public ::testing::With
 protected:
 	vector<string> configfilepath;
 	void SetUp(){
-		configfilepath.resize(23);
+		configfilepath.resize(24);
 		configfilepath[ 0]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR000_FormatIdentifier.ini";
 		configfilepath[ 1]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR100_StateCount.ini";
 		configfilepath[ 2]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR101_StateCount_UnnecessaryData.ini";
@@ -1862,6 +1867,7 @@ protected:
 		configfilepath[20]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR404_RegularPolicy_InvalidData2.ini";
 		configfilepath[21]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR500_RegularPolicy_InvalidData.ini";
 		configfilepath[22]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR501_RegularPolicy_UnnecessaryData.ini";
+		configfilepath[23]="/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_ERR501_RegularPolicy_UnnecessaryData.ini";
 	}
 	void TearDown(){}
 public:
@@ -1876,7 +1882,7 @@ public:
 INSTANTIATE_TEST_CASE_P(
 		InstantiateInputConfigFileErrorTest,
 		InputConfigFileErrorTest,
-		::testing::Range(0, 23,1)
+		::testing::Range(0, 24,1)
 );
 
 

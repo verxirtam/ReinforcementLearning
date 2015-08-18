@@ -46,6 +46,7 @@
 
 <SetMDPBody>::=
 	<Interval><endl>;Interval(msec)
+	<CostMax><endl>;CostMax
 	<StateCount><endl>;State数
 	<State>;Stateの定義
 	<Control>;Controlの定義(M=全てのStateの全てのControl数の合計)
@@ -63,6 +64,7 @@
 <StateIndex>::=DIGIT
 <RefMax>::=DIGIT"."DIGIT
 <ControlCount>::=DIGIT
+<CostMax>::=DIGIT"."DIGIT
 
 <Control>::=
 	M(<SingleControl>)
