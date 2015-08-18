@@ -8,7 +8,7 @@
 #ifndef INPUTEV3LINETRACER_1_0_H_
 #define INPUTEV3LINETRACER_1_0_H_
 
-#include "../Communication/InputProcedure.h"
+#include "../../Communication/InputProcedure.h"
 
 namespace RL
 {

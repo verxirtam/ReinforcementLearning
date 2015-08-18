@@ -8,8 +8,8 @@
 #ifndef INPUTCONFIGFILE_H_
 #define INPUTCONFIGFILE_H_
 
-#include "../Communication/InputContext.h"
-#include "../Communication/InputProcedure.h"
+#include "../../Communication/InputContext.h"
+#include "../../Communication/InputProcedure.h"
 #include "InputConfigFileEV3Linetracer_1_0.h"
 
 

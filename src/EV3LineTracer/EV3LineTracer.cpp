@@ -6,8 +6,8 @@
  */
 
 #include "EV3LineTracer.h"
-#include "InputConfigFileEV3Linetracer_1_0.h"//相互参照防止
-#include "InputConfigFile.h"//相互参照防止
+#include "Communication/InputConfigFileEV3Linetracer_1_0.h"//相互参照防止
+#include "Communication/InputConfigFile.h"//相互参照防止
 
 
 

@@ -8,7 +8,7 @@
 #ifndef INPUTCOMMANDNULLCOMMAND_H_
 #define INPUTCOMMANDNULLCOMMAND_H_
 
-#include "../Communication/InputProcedure.h"
+#include "../../Communication/InputProcedure.h"
 
 namespace RL
 {

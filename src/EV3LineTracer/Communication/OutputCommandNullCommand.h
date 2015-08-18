@@ -8,7 +8,7 @@
 #ifndef OUTPUTCOMMANDNULLCOMMAND_H_
 #define OUTPUTCOMMANDNULLCOMMAND_H_
 
-#include "../Communication/OutputProcedure.h"
+#include "../../Communication/OutputProcedure.h"
 
 namespace RL
 {

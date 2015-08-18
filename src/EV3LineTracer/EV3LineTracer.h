@@ -21,10 +21,10 @@
 #include "../RLUtility.h"
 #include "../Policy.h"
 
-#include "InputEV3LineTracer_1_0.h"
-#include "InputCommandNullCommand.h"
-#include "OutputEV3LineTracer_1_0.h"
-#include "OutputCommandNullCommand.h"
+#include "Communication/InputEV3LineTracer_1_0.h"
+#include "Communication/InputCommandNullCommand.h"
+#include "Communication/OutputEV3LineTracer_1_0.h"
+#include "Communication/OutputCommandNullCommand.h"
 
 namespace RL
 {

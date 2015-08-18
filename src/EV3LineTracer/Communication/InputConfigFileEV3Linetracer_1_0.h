@@ -9,15 +9,15 @@
 #define INPUTCONFIGFILEEV3LINETRACER_1_0_H_
 
 
-#include "../Communication/InputContext.h"
-#include "../Communication/InputProcedure.h"
+#include "../../Communication/InputContext.h"
+#include "../../Communication/InputProcedure.h"
 #include <string>
-#include "EV3LineTracer.h"
-#include "Communication/Read/ReadInterval.h"
-#include "Communication/Read/ReadStateCount.h"
-#include "Communication/Read/ReadState.h"
-#include "Communication/Read/ReadControl.h"
-#include "Communication/Read/ReadRegularPolicy.h"
+#include "../EV3LineTracer.h"
+#include "Read/ReadInterval.h"
+#include "Read/ReadStateCount.h"
+#include "Read/ReadState.h"
+#include "Read/ReadControl.h"
+#include "Read/ReadRegularPolicy.h"
 
 
 namespace RL

@@ -8,7 +8,7 @@
 #ifndef OUTPUTEV3LINETRACER10_H_
 #define OUTPUTEV3LINETRACER10_H_
 
-#include "../Communication/OutputProcedure.h"
+#include "../../Communication/OutputProcedure.h"
 
 namespace RL
 {
