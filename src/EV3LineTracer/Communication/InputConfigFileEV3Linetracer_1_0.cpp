@@ -7,6 +7,8 @@
 
 #include "InputConfigFileEV3Linetracer_1_0.h"
 
+
+
 namespace RL
 {
 const std::string InputConfigFileEV3Linetracer_1_0::VERSION_STRING = "EV3LineTracer_1.0";
@@ -24,6 +26,10 @@ void InputConfigFileEV3Linetracer_1_0::process(InputContext &input)
 	//Intervalの読み取り
 	ReadInterval ri(ev3LineTracer);
 	ri.process(input);
+
+	//CostMaxの読み取り
+	ReadCostMax rcm(ev3LineTracer);
+	rcm.process(input);
 
 	//State数の読み取り
 	ReadStateCount rsc(ev3LineTracer);

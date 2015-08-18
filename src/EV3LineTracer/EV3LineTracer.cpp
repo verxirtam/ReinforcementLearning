@@ -60,7 +60,7 @@ void EV3LineTracer::initEV3()
 {
 	//EV3と通信できるか確認する
 	this->execNullCommand();
-	// TODO CostMaxを取得する処理を書いていたが、INIファイルから取得するように改める
+
 }
 
 //EV3LineTracer::Init()

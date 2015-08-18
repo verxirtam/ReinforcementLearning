@@ -2393,6 +2393,15 @@ TEST(InputCommandSetMDPTest,Process_error)
 	//処理の実行
 	EXPECT_THROW(i_setmdp.process(tic),std::ios_base::failure);
 }
+
+TEST(ExecSetMDPTest,process)
+{
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	ev3.execSetMDP();
+}
+
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////

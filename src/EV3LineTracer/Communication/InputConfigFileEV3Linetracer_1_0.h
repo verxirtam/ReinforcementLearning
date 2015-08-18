@@ -18,6 +18,7 @@
 #include "Read/ReadState.h"
 #include "Read/ReadControl.h"
 #include "Read/ReadRegularPolicy.h"
+#include "Read/ReadCostMax.h"
 
 
 namespace RL
