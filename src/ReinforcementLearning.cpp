@@ -26,6 +26,7 @@
 #include "EV3LineTracer/Communication/InputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/InputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/InputCommandSetMDP.h"
+#include "EV3LineTracer/Communication/InputCommandExecEpisode.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/OutputCommandSetMDP.h"
@@ -2545,13 +2546,15 @@ TEST(ReadEpisodeTest,Process_Error)
 TEST(InputCommandExecEpisodeTest,Constractor)
 {
 	//InputCommandNullCommandの初期化
-	RL::InputCommandExecEpisode icee;
+	RL::InputCommandExecEpisode icee(Episode());
 }
 
 TEST(InputCommandExecEpisodeTest,Process)
 {
 	//InputCommandNullCommandの初期化
-	std::stringstream ss("ExecEpisode\nOK\n");
+	std::stringstream ss("");
+	ss << "ExecEpisode" << endl;
+	ss << "OK" << endl;
 	ss << "7" << endl;
 	ss << "0	10	20	0.30" << endl;
 	ss << "1	11	21	0.31" << endl;
@@ -2566,7 +2569,6 @@ TEST(InputCommandExecEpisodeTest,Process)
 	//処理の実行
 	icee.process(tic);
 
-	EXPECT_EQ(icee.success(),true);
 	EXPECT_EQ(episode.getStepCount(),7);
 	EXPECT_EQ(episode[0].state,  10);
 	EXPECT_EQ(episode[0].control,20);
@@ -2581,7 +2583,9 @@ TEST(InputCommandExecEpisodeTest,Process)
 TEST(InputCommandExecEpisodeTest,Process_NG)
 {
 	//InputCommandNullCommandの初期化
-	std::stringstream ss("ExecEpisode\nNG\n");
+	std::stringstream ss("");
+	ss << "ExecEpisode" << endl;
+	ss << "NG" << endl;
 	ss << "REASONREASONREASON" << endl;
 	ss << "REASONREASONREASON" << endl;
 	ss << "REASONREASONREASON" << endl;
@@ -2590,8 +2594,7 @@ TEST(InputCommandExecEpisodeTest,Process_NG)
 	RL::Episode episode;
 	RL::InputCommandExecEpisode icee(episode);
 	//処理の実行
-	icee.process(tic);
-	EXPECT_EQ(icee.success(),false);
+	EXPECT_THROW( icee.process(tic),std::ios_base::failure);
 }
 
 
