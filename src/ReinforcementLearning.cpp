@@ -33,6 +33,7 @@
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
 #include "EV3LineTracer/Communication/Read/ReadCostMax.h"
+#include "EV3LineTracer/Communication/Read/ReadStep.h"
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
 #include "EV3LineTracer/Communication/Write/WriteCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
@@ -2452,7 +2453,7 @@ TEST(ReadStepTest,Process)
 	std::istringstream is(i_string);
 	RL::TSVInputContext tic(is);
 	RL::EpisodeData episode_data(10);
-	RL::Episode episode;
+	RL::Episode episode(episode_data);
 	RL::ReadStep(episode,5).process(tic);
 	EXPECT_EQ(episode[5].state,3);
 	EXPECT_EQ(episode[5].control,4);

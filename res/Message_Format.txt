@@ -119,13 +119,13 @@
 <StepCount>::=DIGIT
 
 <Step>::=
-	<EpisodeIndex><tab>
+	<StepIndex><tab>
 	<State><tab>
 	<Control><tab>
 	<Cost>
 	<endl>
 
-<EpisodeIndex>::=DIGIT
+<StepIndex>::=DIGIT
 <State>::=DIGIT
 <Control>::=DIGIT
 <Cost>::=DIGIT"."DIGIT

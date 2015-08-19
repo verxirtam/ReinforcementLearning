@@ -8,6 +8,8 @@
 #ifndef EPISODE_H_
 #define EPISODE_H_
 
+#include <vector>
+
 #include "RLUtility.h"
 
 
@@ -56,7 +58,7 @@ public:
 	}
 	//コンストラクタ
 	//EpisodeData
-	Episode(EpisodeData ed):Steps(ed)
+	Episode(const EpisodeData& ed):Steps(ed)
 	{
 	}
 	//エピソードの長さを取得する
