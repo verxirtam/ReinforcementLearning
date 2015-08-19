@@ -129,6 +129,16 @@ public:
 	{
 		Steps.push_back(step);
 	}
+	//エピソードの内容を空にする
+	void clear(void)
+	{
+		Steps.clear();
+	}
+	//エピソードの長さを変更する
+	void setStepCount(idx n)
+	{
+		Steps.resize(n);
+	}
 };
 
 }//namespace RL

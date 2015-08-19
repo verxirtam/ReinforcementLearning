@@ -1,44 +1,37 @@
 /*
- * ReadStep.h
+ * ReadEpisode.h
  *
  *  Created on: 2015/08/19
  *      Author: daisuke
  */
 
-#ifndef READSTEP_H_
-#define READSTEP_H_
-
-#include <iostream>
+#ifndef READEPISODE_H_
+#define READEPISODE_H_
 
 #include "../../../Communication/InputContext.h"
 #include "../../../Communication/InputProcedure.h"
 #include "../../../Episode.h"
 #include "../../../RLUtility.h"
 #include "../../../StringToData.h"
-
+#include "ReadStep.h"
 
 namespace RL
 {
 
-class ReadStep: public InputProcedure
+class ReadEpisode: public InputProcedure
 {
 private:
-	RL::Episode& episode;
-	idx stepIndex;
+	Episode& episode;
 public:
-	ReadStep(RL::Episode& episode_, idx step_index):episode(episode_),stepIndex(step_index)
+	ReadEpisode(RL::Episode& episode_):episode(episode_)
 	{
 	}
-	virtual ~ReadStep()
+	virtual ~ReadEpisode()
 	{
 	}
 	virtual void process(InputContext &input);
-	void setStepIndex(idx step_index)
-	{
-		stepIndex = step_index;
-	}
 };
 
 } /* namespace RL */
 
-#endif /* READSTEP_H_ */
+#endif /* READEPISODE_H_ */

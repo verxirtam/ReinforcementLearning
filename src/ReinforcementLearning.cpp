@@ -34,6 +34,7 @@
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
 #include "EV3LineTracer/Communication/Read/ReadCostMax.h"
 #include "EV3LineTracer/Communication/Read/ReadStep.h"
+#include "EV3LineTracer/Communication/Read/ReadEpisode.h"
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
 #include "EV3LineTracer/Communication/Write/WriteCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
@@ -2504,6 +2505,7 @@ TEST_P(ReadStepErrorTest,process_error)
 TEST(ReadEpisodeTest,Process)
 {
 	std::stringstream string("");
+	string << "7" << endl;
 	string << "0	10	20	0.30" << endl;
 	string << "1	11	21	0.31" << endl;
 	string << "2	12	22	0.32" << endl;
