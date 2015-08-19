@@ -2597,7 +2597,23 @@ TEST(InputCommandExecEpisodeTest,Process_NG)
 	EXPECT_THROW( icee.process(tic),std::ios_base::failure);
 }
 
+TEST(OutputCommandExecEpisodeTest,Constractor)
+{
+	//OutputContextの初期化
+	RL::OutputCommandExecEpisode ocee;
+}
 
+TEST(OutputCommandExecEpisodeTest,Process)
+{
+	//OutputContextの初期化
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::OutputCommandExecEpisode ocee;
+	//処理の実行
+	ocee.process(toc);
+
+	EXPECT_EQ(os.str(),"ExecEpisode\n");
+}
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
