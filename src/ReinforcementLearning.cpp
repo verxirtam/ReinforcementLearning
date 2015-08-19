@@ -2491,7 +2491,7 @@ INSTANTIATE_TEST_CASE_P(
 );
 
 
-TEST_P(ReadStepErrorTest,process_INIFile_error)
+TEST_P(ReadStepErrorTest,process_error)
 {
 	std::istringstream is(i_string[GetParam()]);
 	RL::TSVInputContext tic(is);
@@ -2500,6 +2500,44 @@ TEST_P(ReadStepErrorTest,process_INIFile_error)
 	EXPECT_THROW(RL::ReadStep(episode,5).process(tic),std::ios_base::failure);
 }
 
+
+TEST(ReadEpisodeTest,Process)
+{
+	std::stringstream string("");
+	string << "0	10	20	0.30" << endl;
+	string << "1	11	21	0.31" << endl;
+	string << "2	12	22	0.32" << endl;
+	string << "3	13	23	0.33" << endl;
+	string << "4	14	24	0.34" << endl;
+	string << "5	15	25	0.35" << endl;
+	string << "6	16	26	0.36" << endl;
+	RL::TSVInputContext tic(string);
+	RL::Episode episode;
+	RL::ReadEpisode(episode).process(tic);
+	EXPECT_EQ(episode[0].state,  10);
+	EXPECT_EQ(episode[0].control,20);
+	EXPECT_EQ(episode[0].cost,    0.30);
+	EXPECT_EQ(episode[3].state,  13);
+	EXPECT_EQ(episode[3].control,23);
+	EXPECT_EQ(episode[3].cost,    0.33);
+	EXPECT_EQ(episode[6].state,  16);
+	EXPECT_EQ(episode[6].control,26);
+	EXPECT_EQ(episode[6].cost,    0.36);
+}
+TEST(ReadEpisodeTest,Process_Error)
+{
+	std::stringstream string("");
+	string << "0	10	20	0.30" << endl;
+	string << "1	11	21	0.31" << endl;
+	string << "2	12	22	0.32" << endl;
+	string << "5	15	25	0.35" << endl;
+	string << "4	14	24	0.34" << endl;
+	string << "3	13	23	0.33" << endl;
+	string << "6	16	26	0.36" << endl;
+	RL::TSVInputContext tic(string);
+	RL::Episode episode;
+	EXPECT_THROW(RL::ReadEpisode(episode).process(tic),std::ios_base::failure);
+}
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
