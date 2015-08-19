@@ -93,12 +93,15 @@
 <SetMDPResult>::=
 	(
 		"OK"<endl>
+		<MDPBody>
 		|
 		(
 			"NG"<endl>
 			<Reason>
 		)
 	)
+
+<MDPBody>::=<SetMDPBody>;設定した内容を返却する(反映の確認のため)
 
 <ExecEpisodeResult>::=
 (

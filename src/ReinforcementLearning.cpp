@@ -2446,6 +2446,31 @@ TEST(ExecSetMDPTest,process)
 	ev3.execSetMDP();
 }
 
+TEST(ReadStepTest,Process)
+{
+	FAIL();//未作成
+	string aaa="11\n10\n4	0.5	2\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadInterval(ev3).process(tic);
+	ReadStateCount(ev3).process(tic);
+	ReadSingleState rs(ev3,4);
+	rs.process(tic);
+	EXPECT_NEAR(ev3.getState(4).refMax,0.5,0.0625);
+	EXPECT_EQ(ev3.getControlCount(4),2);
+}
+TEST(ReadStepTest,Process_Exception)
+{
+	FAIL();//未作成
+	string aaa="aa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	ReadSingleState rs(ev3);
+	EXPECT_THROW(rs.process(tic),std::ios_base::failure);
+}
+
 
 /////////////////////////////////////////////////////////////////////
 
