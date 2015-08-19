@@ -20,6 +20,7 @@
 #include "../Communication/TCPClient.h"
 #include "../RLUtility.h"
 #include "../Policy.h"
+#include "../Episode.h"
 
 #include "Communication/InputEV3LineTracer_1_0.h"
 #include "Communication/OutputEV3LineTracer_1_0.h"
@@ -296,6 +297,10 @@ public:
 
 	//MDPの設定をEV3に反映する
 	void execSetMDP();
+
+	//エピソードを取得する
+	bool getEpisode(Episode& episode);
+
 };
 
 

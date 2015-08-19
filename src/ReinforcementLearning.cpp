@@ -30,6 +30,7 @@
 #include "EV3LineTracer/Communication/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/OutputCommandSetMDP.h"
+#include "EV3LineTracer/Communication/OutputCommandExecEpisode.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -2614,6 +2615,15 @@ TEST(OutputCommandExecEpisodeTest,Process)
 
 	EXPECT_EQ(os.str(),"ExecEpisode\n");
 }
+TEST(GetEpisodeTest,Process)
+{
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
+	ev3.init();
+	RL::Episode episode;
+	ev3.getEpisode(episode);
+	EXPECT_TRUE(episode.getStepCount()>0);
+}
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////

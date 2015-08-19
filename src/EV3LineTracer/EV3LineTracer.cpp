@@ -11,8 +11,10 @@
 #include "Communication/InputConfigFile.h"
 #include "Communication/InputCommandNullCommand.h"
 #include "Communication/InputCommandSetMDP.h"
+#include "Communication/InputCommandExecEpisode.h"
 #include "Communication/OutputCommandNullCommand.h"
 #include "Communication/OutputCommandSetMDP.h"
+#include "Communication/OutputCommandExecEpisode.h"
 //↑相互参照防止
 
 
@@ -83,7 +85,7 @@ void EV3LineTracer::execCommand(RL::OutputProcedure& o_command,
 		RL::InputProcedure& i_command)
 {
 	//EV3への接続を確立
-	TCPClient tcp_client("localhost", 50000, 1024); //"192.168.0.8",50000,1024));
+	TCPClient tcp_client("192.168.0.7",50000,1024);//"localhost", 50000, 1024);
 	//EV3への送信用のデータを作成
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_command);
 	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
@@ -121,8 +123,18 @@ void EV3LineTracer::execSetMDP()
 	//コマンド実行
 	execCommand(o_set_mdp, i_set_mdp);
 }
+//エピソードを取得する
+bool EV3LineTracer::getEpisode(Episode& episode)
+{
+	//このコマンド用のInput、Output Procedure
+	RL::OutputCommandExecEpisode o_exec_episode;
+	RL::InputCommandExecEpisode i_exec_episode(episode);
 
+	//コマンド実行
+	this->execCommand(o_exec_episode, i_exec_episode);
 
+	return true;
+}
 
 }
 
