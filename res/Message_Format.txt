@@ -114,15 +114,16 @@
 
 <EpisodeBody>::=
 	<StepCount><endl>
-	N(<SingleStep><endl>)	;NはStepCountの値
+	N<Step>	;NはStepCountの値
 
 <StepCount>::=DIGIT
 
-<SingleStep>::=
+<Step>::=
 	<EpisodeIndex><tab>
 	<State><tab>
 	<Control><tab>
 	<Cost>
+	<endl>
 
 <EpisodeIndex>::=DIGIT
 <State>::=DIGIT

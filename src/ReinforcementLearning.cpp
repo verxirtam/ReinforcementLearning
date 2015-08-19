@@ -2448,29 +2448,56 @@ TEST(ExecSetMDPTest,process)
 
 TEST(ReadStepTest,Process)
 {
-	FAIL();//未作成
-	string aaa="11\n10\n4	0.5	2\n";
-	std::istringstream is(aaa);
+	string i_string="5	3	4	0.5\n";
+	std::istringstream is(i_string);
 	RL::TSVInputContext tic(is);
-	RL::EV3LineTracer ev3;
-	ReadInterval(ev3).process(tic);
-	ReadStateCount(ev3).process(tic);
-	ReadSingleState rs(ev3,4);
-	rs.process(tic);
-	EXPECT_NEAR(ev3.getState(4).refMax,0.5,0.0625);
-	EXPECT_EQ(ev3.getControlCount(4),2);
-}
-TEST(ReadStepTest,Process_Exception)
-{
-	FAIL();//未作成
-	string aaa="aa\n";
-	std::istringstream is(aaa);
-	RL::TSVInputContext tic(is);
-	RL::EV3LineTracer ev3;
-	ReadSingleState rs(ev3);
-	EXPECT_THROW(rs.process(tic),std::ios_base::failure);
+	RL::EpisodeData episode_data(10);
+	RL::Episode episode;
+	RL::ReadStep(episode,5).process(tic);
+	EXPECT_EQ(episode[5].state,3);
+	EXPECT_EQ(episode[5].control,4);
+	EXPECT_EQ(episode[5].cost,0.5);
 }
 
+//値をパラメータ化したテストのためのクラスの定義
+class ReadStepErrorTest : public ::testing::Test , public ::testing::WithParamInterface<int>
+{
+protected:
+	vector<string> i_string;
+	void SetUp(){
+		i_string.resize(5);
+		i_string[ 0]="aa	3	4	0.5\n";
+		i_string[ 1]="5	aa	4	0.5\n";
+		i_string[ 2]="5	3	aa	0.5\n";
+		i_string[ 3]="5	3	4	aa\n";
+		i_string[ 4]="5	3	4	0.5";
+
+	}
+	void TearDown(){}
+public:
+	ReadStepErrorTest():
+		i_string()
+	{
+	}
+};
+
+//パラメータの定義
+//正常系のテストを行う要素数の定義
+INSTANTIATE_TEST_CASE_P(
+		InstantiateReadStepErrorTest,
+		ReadStepErrorTest,
+		::testing::Range(0, 5,1)
+);
+
+
+TEST_P(ReadStepErrorTest,process_INIFile_error)
+{
+	std::istringstream is(i_string[GetParam()]);
+	RL::TSVInputContext tic(is);
+	RL::EpisodeData episode_data(10);
+	RL::Episode episode;
+	EXPECT_THROW(RL::ReadStep(episode,5).process(tic),std::ios_base::failure);
+}
 
 /////////////////////////////////////////////////////////////////////
 
