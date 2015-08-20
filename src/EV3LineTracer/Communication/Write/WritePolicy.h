@@ -1,17 +1,16 @@
 /*
- * WriteRegularPolicy.h
+ * WritePolicy.h
  *
  *  Created on: 2015/08/16
  *      Author: daisuke
  */
 
-#ifndef WRITEREGULARPOLICY_H_
-#define WRITEREGULARPOLICY_H_
+#ifndef WRITEPOLICY_H_
+#define WRITEPOLICY_H_
 
 #include "../../../Communication/OutputProcedure.h"
 #include "../../../Policy.h"
 #include "../../../RLUtility.h"
-#include "../../EV3LineTracer.h"
 #include "WriteSinglePolicy.h"
 
 namespace RL

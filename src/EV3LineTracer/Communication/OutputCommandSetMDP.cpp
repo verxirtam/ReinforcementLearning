@@ -26,7 +26,6 @@ void OutputCommandSetMDP::process(OutputContext& output)
 
 	WriteControl(ev3LineTracer).process(output);
 
-	Policy rp = ev3LineTracer.getRegularPolicy();
-	WritePolicy(rp).process(output);
+	WriteRegularPolicy(ev3LineTracer).process(output);
 }
 } /* namespace RL */
