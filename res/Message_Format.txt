@@ -103,6 +103,11 @@
 
 <MDPBody>::=<SetMDPBody>;設定した内容を返却する(反映の確認のため)
 
+
+<SetPolicyBody>::=
+		N(<SinglePolicy>);Policyの定義(StateIndexは0からN-1まで順に並ぶ(N=StateCount))
+
+
 <ExecEpisodeResult>::=
 (
 	"OK"<endl>

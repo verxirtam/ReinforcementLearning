@@ -5,19 +5,17 @@
  *      Author: daisuke
  */
 
-#include "WriteRegularPolicy.h"
+#include "WritePolicy.h"
 
 
 
 namespace RL
 {
 
-void WriteRegularPolicy::process(OutputContext& output)
+void WritePolicy::process(OutputContext& output)
 {
-	idx state_count = ev3LineTracer.getStateCount();
-	Policy p;
-	ev3LineTracer.getRegularPolicy(p);
-	RL::WriteSinglePolicy wsp(p,0);
+	idx state_count = policy.getStateCount();
+	RL::WriteSinglePolicy wsp(policy,0);
 	for(idx i = 0; i < state_count; i++)
 	{
 		wsp.setStateIndex(i);

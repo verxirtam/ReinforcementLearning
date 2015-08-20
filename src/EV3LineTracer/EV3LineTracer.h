@@ -238,6 +238,12 @@ public:
 		out=regularPolicy;
 		return out;
 	}
+	//MDPに適合した標準的なポリシーの取得
+	Policy getRegularPolicy()const
+	{
+		Policy out = regularPolicy;
+		return out;
+	}
 	//TODO 下記の関数を作成する
 	//Mdp.GetEpisode(e)
 	//割引率の取得(1.0を返すのみ)

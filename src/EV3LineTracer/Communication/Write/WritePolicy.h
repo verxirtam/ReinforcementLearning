@@ -17,16 +17,16 @@
 namespace RL
 {
 
-class WriteRegularPolicy: public OutputProcedure
+class WritePolicy: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	Policy& policy;
 public:
-	WriteRegularPolicy(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	WritePolicy(Policy& p):policy(p)
 	{
 
 	}
-	virtual ~WriteRegularPolicy()
+	virtual ~WritePolicy()
 	{
 
 	}
