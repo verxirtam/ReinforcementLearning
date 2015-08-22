@@ -13,28 +13,16 @@
 namespace RL
 {
 
-ReadRegularPolicy::ReadRegularPolicy(EV3LineTracer& ev3) : ev3LineTracer(ev3)
-{
-
-}
-
-ReadRegularPolicy::~ReadRegularPolicy()
-{
-	// TODO Auto-generated destructor stub
-}
 void ReadRegularPolicy::process(InputContext &input)
 {
+	//読み取り用ポリシーの設定
 	idx statecount = ev3LineTracer.getStateCount();
 	Policy p(statecount);
 
-	ReadSinglePolicy rsp(p);
+	ReadPolicy rp(p);
 
-	//pへのRegularPolicyの書き込み
-	for(idx i=0; i<statecount; i++)
-	{
-		rsp.setStateIndex(i);
-		rsp.process(input);
-	}
+	//ポリシーの読み取り
+	rp.process(input);
 
 	//pがev3LineTracerと適合しているかチェックする
 	p.verify(ev3LineTracer);

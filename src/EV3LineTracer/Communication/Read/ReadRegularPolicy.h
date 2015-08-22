@@ -9,12 +9,10 @@
 #define READREGULARPOLICY_H_
 
 #include "../../../Communication/InputProcedure.h"
-#include "../../../Communication/InputContext.h"
-#include "../../../Policy.h"
-#include "../../../RLUtility.h"
-#include "../../../StringToData.h"
 #include "../../EV3LineTracer.h"
-#include "ReadSinglePolicy.h"
+#include "ReadPolicy.h"
+
+
 
 
 namespace RL
@@ -25,8 +23,12 @@ class ReadRegularPolicy: public InputProcedure
 private:
 	EV3LineTracer& ev3LineTracer;
 public:
-	ReadRegularPolicy(EV3LineTracer& ev3);
-	virtual ~ReadRegularPolicy();
+	ReadRegularPolicy(EV3LineTracer& ev3) : ev3LineTracer(ev3)
+	{
+	}
+	virtual ~ReadRegularPolicy()
+	{
+	}
 	virtual void process(InputContext &input);
 };
 
