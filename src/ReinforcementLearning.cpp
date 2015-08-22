@@ -1438,7 +1438,7 @@ TEST(EV3LineTracerTest,Init_Exception)
 	for(idx i=0;i<testcount;i++)
 	{
 		EV3LineTracer ev3(configfilepath[i]);
-		EXPECT_THROW(ev3.init(),std::ios_base::failure);
+		EXPECT_ANY_THROW(ev3.init());
 	}
 
 }
@@ -1896,7 +1896,7 @@ TEST_P(InputConfigFileErrorTest,process_INIFile_error)
 	RL::TSVInputContext tic(ifs);
 	RL::EV3LineTracer ev3;
 	RL::InputConfigFile icf(ev3);
-	EXPECT_THROW(icf.process(tic),std::ios_base::failure);
+	EXPECT_ANY_THROW(icf.process(tic));
 }
 
 TEST(ExecNullCommandTest,process)

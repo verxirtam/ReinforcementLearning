@@ -21,14 +21,15 @@ namespace RL
 class ReadSinglePolicy: public InputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
 	Policy& policy;
 	idx stateIndex;
 public:
-	ReadSinglePolicy(EV3LineTracer& ev3, Policy& p, idx i=0);
-	void setPolicy(Policy& p)
+	ReadSinglePolicy(Policy& p, idx i = 0 ):
+			policy(p),
+			stateIndex(0)
 	{
-		policy = p;
+		setStateIndex(i);
+
 	}
 	void setStateIndex(idx i)
 	{

@@ -14,14 +14,7 @@
 namespace RL
 {
 
-ReadSinglePolicy::ReadSinglePolicy(EV3LineTracer& ev3, Policy& p, idx i) :
-		ev3LineTracer(ev3),
-		policy(p),
-		stateIndex(0)
-{
-	setStateIndex(i);
 
-}
 
 ReadSinglePolicy::~ReadSinglePolicy()
 {
@@ -35,13 +28,7 @@ void ReadSinglePolicy::process(InputContext &input)
 		std::string msg("invalid stateIndex");
 		throw std::ios_base::failure(msg);
 	}
-	idx controlcount = ev3LineTracer.getControlCount(i);
 	idx u = StringToData::parseTo<idx>(input.nextToken());
-	if((u < 0) || (u >= controlcount) )
-	{
-		std::string msg("invalid controlIndex");
-		throw std::ios_base::failure(msg);
-	}
 	input.skipReturn();
 
 	policy.setPolicy(i,u);

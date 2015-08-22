@@ -27,7 +27,7 @@ void ReadRegularPolicy::process(InputContext &input)
 	idx statecount = ev3LineTracer.getStateCount();
 	Policy p(statecount);
 
-	ReadSinglePolicy rsp(ev3LineTracer,p);
+	ReadSinglePolicy rsp(p);
 
 	//pへのRegularPolicyの書き込み
 	for(idx i=0; i<statecount; i++)
@@ -36,6 +36,8 @@ void ReadRegularPolicy::process(InputContext &input)
 		rsp.process(input);
 	}
 
+	//pがev3LineTracerと適合しているかチェックする
+	p.verify(ev3LineTracer);
 	//ev3LineTracer.RegularPolicyへの書き込み
 	ev3LineTracer.setRegularPolicy(p);
 
