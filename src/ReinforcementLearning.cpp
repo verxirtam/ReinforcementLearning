@@ -2687,6 +2687,38 @@ TEST(ReadStochasticPolicyTest,process_Error)
 
 }
 
+TEST(WriteStochasticPolicyTest,Process)
+{
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	StochasticPolicy sp;
+	ev3.getStochasticPolicy(ev3.getRegularPolicy(),sp);
+	//テスト対象：WriteStochasticPolicy
+	RL::WriteStochasticPolicy wsp(sp);
+	//書き込み処理の実行
+	wsp.process(toc);
+	//出力される想定の文字列
+	std::ostringstream state_string;
+	//state数
+	int state_count = ev3.getStateCount();
+
+	//出力される想定の文字列の作成
+	for(int i=0; i<state_count; i++)
+	{
+		state_string<<std::to_string(i);
+		idx control_count = sp[i].getValueMax();
+		for(int u=0; u<control_count; u++)
+		{
+			state_string<<'\t';
+			state_string<<std::to_string(sp[i].getProbability(u));
+		}
+		state_string<<endl;
+	}
+	//想定通りの文字列が出力されているか確認する
+	EXPECT_EQ(os.str(),state_string.str());
+}
 
 /////////////////////////////////////////////////////////////////////
 
