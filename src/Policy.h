@@ -118,6 +118,21 @@ public:
 	{
 		correct();
 	}
+	//MDPのstate数、control数に基づいて初期化する
+	template <typename MDP>
+	StochasticPolicy(const MDP& mdp):control()
+	{
+		idx state_count =mdp.getStateCount();
+		control.resize(state_count);
+		for(idx i = 0;i < state_count; i++)
+		{
+			idx control_count = mdp.getControlCount(i);
+			//prob[0]を1.0、それ以外を0.0として初期化する
+			std::vector<real> prob(control_count, 0.0);
+			prob[0]=1.0;
+			control[i]=RandomIdx(prob);
+		}
+	}
 
 	//添字演算子
 	inline const RandomIdx& operator[](idx i)const

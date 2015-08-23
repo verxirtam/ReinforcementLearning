@@ -20,6 +20,7 @@
 #include "Communication/TSVInputContext.h"
 #include "Communication/InputMessage_1_0.h"
 #include "Communication/OutputMessage_1_0.h"
+#include "Communication/Read/ReadStochasticPolicy.h"
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "EV3LineTracer/Communication/InputConfigFile.h"
 #include "EV3LineTracer/Communication/InputConfigFileEV3Linetracer_1_0.h"
@@ -283,7 +284,16 @@ TEST_P(StochasticPolicyTest,Constructor1)
 
 
 }
+//コンストラクタのテスト
+TEST_P(StochasticPolicyTest,Constructor2)
+{
+	//MDPをベースにStochasticPolicyを初期化する
+	RL::SimpleMDP mdp(10);
+	EXPECT_NO_THROW(StochasticPolicy sp1(mdp));
+	StochasticPolicy sp(mdp);
+	EXPECT_NO_THROW(sp.correct());
 
+}
 TEST(StochasticPolicy,init_exception)
 {
 	EXPECT_THROW(StochasticPolicy p0(vector<idx>(10,(idx)-3)),std::bad_alloc);
@@ -2629,9 +2639,7 @@ TEST(ReadStochasticPolicyTest,constructor)
 
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
-	StochasticPolicy sp;
-	Policy rp=ev3.getRegularPolicy();
-	ev3.getStochasticPolicy(rp,sp);
+	StochasticPolicy sp(ev3);
 	RL::ReadStochasticPolicy rsp(sp);
 }
 TEST(ReadStochasticPolicyTest,process)
@@ -2651,9 +2659,7 @@ TEST(ReadStochasticPolicyTest,process)
 
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
-	StochasticPolicy sp;
-	Policy rp=ev3.getRegularPolicy();
-	ev3.getStochasticPolicy(rp,sp);
+	StochasticPolicy sp(ev3);
 	RL::ReadStochasticPolicy rsp(sp);
 	rsp.process(tic);
 }
@@ -2665,7 +2671,7 @@ TEST(ReadStochasticPolicyTest,process_Error)
 	string << "2	0.5	0.5" << endl;
 	string << "3	0.5	0.5" << endl;
 	string << "4	0.5	0.5" << endl;
-	string << "5	0.5	0.75" << endl;//確率の合計が1を超える
+	string << "5	0.0	0.0" << endl;//確率の合計が0.0になる
 	string << "6	0.5	0.5" << endl;
 	string << "7	0.5	0.5" << endl;
 	string << "8	0.5	0.5" << endl;
@@ -2674,12 +2680,10 @@ TEST(ReadStochasticPolicyTest,process_Error)
 
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
-	StochasticPolicy sp;
-	Policy rp=ev3.getRegularPolicy();
-	ev3.getStochasticPolicy(rp,sp);
+	StochasticPolicy sp(ev3);
 	RL::ReadStochasticPolicy rsp(sp);
 
-	EXPECT_THROW(rsp.process(tic),std::ios_base::failure);
+	EXPECT_ANY_THROW(rsp.process(tic));
 
 }
 
