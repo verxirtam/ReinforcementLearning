@@ -2624,6 +2624,66 @@ TEST(GetEpisodeTest,Process)
 	EXPECT_TRUE(episode.getStepCount()>0);
 }
 
+TEST(ReadStochasticPolicyTest,constructor)
+{
+
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	StochasticPolicy sp;
+	Policy rp=ev3.getRegularPolicy();
+	ev3.getStochasticPolicy(rp,sp);
+	RL::ReadStochasticPolicy rsp(sp);
+}
+TEST(ReadStochasticPolicyTest,process)
+{
+	std::stringstream string("");
+	string << "0	1.0" << endl;
+	string << "1	0.5	0.5" << endl;
+	string << "2	0.5	0.5" << endl;
+	string << "3	0.5	0.5" << endl;
+	string << "4	0.5	0.5" << endl;
+	string << "5	0.5	0.5" << endl;
+	string << "6	0.5	0.5" << endl;
+	string << "7	0.5	0.5" << endl;
+	string << "8	0.5	0.5" << endl;
+	string << "9	0.5	0.5" << endl;
+	RL::TSVInputContext tic(string);
+
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	StochasticPolicy sp;
+	Policy rp=ev3.getRegularPolicy();
+	ev3.getStochasticPolicy(rp,sp);
+	RL::ReadStochasticPolicy rsp(sp);
+	rsp.process(tic);
+}
+TEST(ReadStochasticPolicyTest,process_Error)
+{
+	std::stringstream string("");
+	string << "0	1.0" << endl;
+	string << "1	0.5	0.5" << endl;
+	string << "2	0.5	0.5" << endl;
+	string << "3	0.5	0.5" << endl;
+	string << "4	0.5	0.5" << endl;
+	string << "5	0.5	0.75" << endl;//確率の合計が1を超える
+	string << "6	0.5	0.5" << endl;
+	string << "7	0.5	0.5" << endl;
+	string << "8	0.5	0.5" << endl;
+	string << "9	0.5	0.5" << endl;
+	RL::TSVInputContext tic(string);
+
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	StochasticPolicy sp;
+	Policy rp=ev3.getRegularPolicy();
+	ev3.getStochasticPolicy(rp,sp);
+	RL::ReadStochasticPolicy rsp(sp);
+
+	EXPECT_THROW(rsp.process(tic),std::ios_base::failure);
+
+}
+
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
@@ -2647,3 +2707,5 @@ int main(int argc, char** argv)
 	::testing::InitGoogleTest(&argc,argv);
 	return RUN_ALL_TESTS();
 }
+
+
