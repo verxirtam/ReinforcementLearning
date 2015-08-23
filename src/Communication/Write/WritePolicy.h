@@ -8,9 +8,9 @@
 #ifndef WRITEPOLICY_H_
 #define WRITEPOLICY_H_
 
-#include "../../../Communication/OutputProcedure.h"
-#include "../../../Policy.h"
-#include "../../../RLUtility.h"
+#include "../OutputProcedure.h"
+#include "../../Policy.h"
+#include "../../RLUtility.h"
 #include "WriteSinglePolicy.h"
 
 namespace RL

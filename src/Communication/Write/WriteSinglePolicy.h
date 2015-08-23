@@ -10,10 +10,10 @@
 
 #include <string>
 
-#include "../../../Communication/OutputProcedure.h"
-#include "../../../Policy.h"
-#include "../../../RLUtility.h"
-#include "../../../Communication/OutputContext.h"
+#include "../OutputProcedure.h"
+#include "../../Policy.h"
+#include "../../RLUtility.h"
+#include "../OutputContext.h"
 
 namespace RL
 {

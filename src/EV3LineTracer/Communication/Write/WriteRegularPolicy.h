@@ -11,7 +11,7 @@
 #include "../../../Communication/OutputProcedure.h"
 #include "../../../Policy.h"
 #include "../../EV3LineTracer.h"
-#include "WritePolicy.h"
+#include "../../../Communication/Write/WritePolicy.h"
 
 namespace RL
 {

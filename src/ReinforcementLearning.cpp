@@ -21,6 +21,8 @@
 #include "Communication/InputMessage_1_0.h"
 #include "Communication/OutputMessage_1_0.h"
 #include "Communication/Read/ReadStochasticPolicy.h"
+#include "Communication/Write/WriteSinglePolicy.h"
+#include "Communication/Write/WritePolicy.h"
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "EV3LineTracer/Communication/InputConfigFile.h"
 #include "EV3LineTracer/Communication/InputConfigFileEV3Linetracer_1_0.h"
@@ -45,8 +47,6 @@
 #include "EV3LineTracer/Communication/Write/WriteState.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleControl.h"
 #include "EV3LineTracer/Communication/Write/WriteControl.h"
-#include "EV3LineTracer/Communication/Write/WriteSinglePolicy.h"
-#include "EV3LineTracer/Communication/Write/WritePolicy.h"
 
 using namespace std;
 using namespace RL;
