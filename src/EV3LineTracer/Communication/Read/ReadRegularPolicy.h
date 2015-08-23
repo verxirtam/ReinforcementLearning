@@ -10,7 +10,7 @@
 
 #include "../../../Communication/InputProcedure.h"
 #include "../../EV3LineTracer.h"
-#include "ReadPolicy.h"
+#include "../../../Communication/Read/ReadPolicy.h"
 
 
 

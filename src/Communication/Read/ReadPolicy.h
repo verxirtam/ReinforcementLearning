@@ -8,9 +8,9 @@
 #ifndef READPOLICY_H_
 #define READPOLICY_H_
 
-#include "../../../Communication/InputProcedure.h"
-#include "../../../Policy.h"
-#include "../../../RLUtility.h"
+#include "../InputProcedure.h"
+#include "../../Policy.h"
+#include "../../RLUtility.h"
 #include "ReadSinglePolicy.h"
 
 namespace RL

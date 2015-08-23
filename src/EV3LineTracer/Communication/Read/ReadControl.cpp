@@ -18,7 +18,6 @@ ReadControl::ReadControl(EV3LineTracer &ev3) :
 
 ReadControl::~ReadControl()
 {
-	// TODO Auto-generated destructor stub
 }
 void ReadControl::process(InputContext &input)
 {
