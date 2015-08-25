@@ -8,26 +8,31 @@
 #ifndef WRITEREGULARPOLICY_H_
 #define WRITEREGULARPOLICY_H_
 
-#include "../../../Communication/OutputProcedure.h"
-#include "../../../Policy.h"
-#include "../../EV3LineTracer.h"
-#include "../../../Communication/Write/WritePolicy.h"
+#include "..//OutputProcedure.h"
+#include "../../Policy.h"
+#include "WritePolicy.h"
 
 namespace RL
 {
 
+template <typename MDP>
 class WriteRegularPolicy: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	MDP& mdp;
 public:
-	WriteRegularPolicy(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	WriteRegularPolicy(MDP& mdp_):mdp(mdp_)
 	{
 	}
 	virtual ~WriteRegularPolicy()
 	{
 	}
-	virtual void process(OutputContext& output);
+	virtual void process(OutputContext& output)
+	{
+		Policy rp = mdp.getRegularPolicy();
+		WritePolicy(rp).process(output);
+	}
+
 };
 
 } /* namespace RL */

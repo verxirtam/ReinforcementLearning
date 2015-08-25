@@ -2127,7 +2127,7 @@ TEST(WriteSinglePolicyTest,Process)
 TEST(WriteRegularPolicyTest,Constractor)
 {
 	RL::EV3LineTracer ev3;
-	RL::WriteRegularPolicy wrp(ev3);
+	RL::WriteRegularPolicy<EV3LineTracer> wrp(ev3);
 }
 
 TEST(WritePolicyTest,Process)
@@ -2137,7 +2137,7 @@ TEST(WritePolicyTest,Process)
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
 	//テスト対象：RegularPolicy
-	RL::WriteRegularPolicy wrp(ev3);
+	RL::WriteRegularPolicy<EV3LineTracer> wrp(ev3);
 	//書き込み処理の実行
 	wrp.process(toc);
 	//出力される想定の文字列

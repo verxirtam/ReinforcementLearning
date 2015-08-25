@@ -11,10 +11,5 @@
 
 namespace RL
 {
-void WriteRegularPolicy::process(OutputContext& output)
-{
-	Policy rp = ev3LineTracer.getRegularPolicy();
-	WritePolicy(rp).process(output);
-}
 
 } /* namespace RL */

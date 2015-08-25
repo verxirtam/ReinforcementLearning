@@ -10,11 +10,11 @@
 
 #include "../../Communication/OutputProcedure.h"
 #include "../../Communication/OutputContext.h"
+#include "../../Communication/Write/WriteRegularPolicy.h"
 #include "../EV3LineTracer.h"
 #include "Write/WriteControl.h"
 #include "Write/WriteInterval.h"
 #include "Write/WriteCostMax.h"
-#include "Write/WriteRegularPolicy.h"
 #include "Write/WriteState.h"
 #include "Write/WriteStateCount.h"
 
