@@ -2721,6 +2721,42 @@ TEST(WriteStochasticPolicyTest,Process)
 	EXPECT_EQ(os.str(),state_string.str());
 }
 
+
+TEST(ReadCurrentPolicyTest,Process)
+{
+	//テスト用のMDP
+	SimpleMDP mdp(5);
+	//読み込む文字列
+	stringstream string("");
+	string << "0	1.0" << endl;
+	string << "1	0.25	0.75" << endl;
+	string << "2	0.25	0.75" << endl;
+	string << "3	0.25	0.75" << endl;
+	string << "4	0.25	0.75" << endl;
+	//InputContext
+	TSVInputContext tic(string);
+	//テスト対象
+	RL::ReadCurrentPolicy<RL::SimpleMDP> rcp(mdp);
+
+	//読み込み実行
+	rcp.process(tic);
+
+	//CurrentPolicyを取得
+	StochasticPolicy sp(mdp.getCurrentPolicy());
+	//許容誤差
+	real e = 0.0625*0.0625*0.0625*0.0625;
+	//読み込みに成功しているかを確認する
+	EXPECT_NEAR(sp[0].getProbability(0), 1.0 , e);
+	EXPECT_NEAR(sp[1].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[1].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[2].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[2].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[3].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[3].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[4].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[4].getProbability(1), 0.75, e);
+}
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////

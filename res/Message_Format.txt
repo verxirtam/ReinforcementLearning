@@ -19,11 +19,11 @@
 		<SetMDPResult>;コマンドの結果
 	)
 	|
-	"SetPolicy"<endl>;MDPを設定
+	"SetCurrentPolicy"<endl>;MDPを設定
 	(
-		<SetPolicyBody>;コマンドの内容
+		<SetCurrentPolicyBody>;コマンドの内容
 		|
-		<SetPolicyResult>;コマンドの結果
+		<SetCurrentPolicyResult>;コマンドの結果
 	)
 	|
 	"ExecEpisode"<endl>;Episodeを実行
@@ -104,7 +104,7 @@
 <MDPBody>::=<SetMDPBody>;設定した内容を返却する(反映の確認のため)
 
 
-<SetPolicyBody>::=
+<SetCurrentPolicyBody>::=
 		N(<SinglePolicy>);Policyの定義(StateIndexは0からN-1まで順に並ぶ(N=StateCount))
 
 
@@ -173,7 +173,7 @@ MESSAGE_1.0			;メッセージ開始
 ////////////////////////////////////////////////////////
 <CommandCategory>:			;コマンド種別
 	SetMDP			;MDPを設定
-	|SetPolicy		;CurrentPolicyを設定
+	|SetCurrentPolicy		;CurrentPolicyを設定
 	|ExecEpisode	;Episodeを実行
 ////////////////////////////////////////////////////////
 <Result>:			;結果
@@ -235,13 +235,13 @@ SetMDP				;コマンド(この行の下からBody部開始)
 					;(空行)メッセージ終了
 /////////////////////////////////////////////////////
 
-//SetPolicy//////////////////////////////////////////
+//SetCurrentPolicy//////////////////////////////////////////
 //LineTracerのCurrentPolicyを設定する。
 //
 /////////////////////////////////////////////////////
 MESSAGE_1.0			;メッセージ開始
 EV3LineTracer_1.0	;バージョン
-SetPolicy			;コマンド(この行の下からBody部開始)
+SetCurrentPolicy			;コマンド(この行の下からBody部開始)
 0	1.0				;CurrentPolicyの定義：	StateIndex	 Prob[0]	…	Prob[N]
 1	0.25	0.75
 2	0.25	0.75
