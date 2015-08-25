@@ -14,13 +14,13 @@
 
 #include "../../Communication/InputProcedure.h"
 #include "../../Communication/InputContext.h"
+#include "../../Communication/Read/ReadRegularPolicy.h"
 #include "../../Policy.h"
 #include "../../RLUtility.h"
 #include "../EV3LineTracer.h"
 #include "Read/ReadControl.h"
 #include "Read/ReadCostMax.h"
 #include "Read/ReadInterval.h"
-#include "Read/ReadRegularPolicy.h"
 #include "Read/ReadState.h"
 #include "Read/ReadStateCount.h"
 

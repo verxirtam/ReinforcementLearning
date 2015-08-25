@@ -46,6 +46,9 @@ struct EV3LineTracerControl
 	speed rMotorSpeed;
 };
 
+//クラス内のフレンド宣言のための前方宣言
+template <typename T>
+class ReadRegularPolicy;
 
 class EV3LineTracer
 {
@@ -56,7 +59,7 @@ class EV3LineTracer
 	friend class ReadStateCount;
 	friend class ReadSingleState;
 	friend class ReadSingleControl;
-	friend class ReadRegularPolicy;
+	friend class ReadRegularPolicy<EV3LineTracer>;
 	friend class ReadCostMax;
 
 private:
