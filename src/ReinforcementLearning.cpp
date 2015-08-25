@@ -23,6 +23,7 @@
 #include "Communication/Read/ReadStochasticPolicy.h"
 #include "Communication/Write/WriteSinglePolicy.h"
 #include "Communication/Write/WritePolicy.h"
+#include "Communication/Write/WriteStochasticPolicy.h"
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "EV3LineTracer/Communication/InputConfigFile.h"
 #include "EV3LineTracer/Communication/InputConfigFileEV3Linetracer_1_0.h"
@@ -2702,14 +2703,14 @@ TEST(WriteStochasticPolicyTest,Process)
 	//出力される想定の文字列
 	std::ostringstream state_string;
 	//state数
-	int state_count = ev3.getStateCount();
+	idx state_count = ev3.getStateCount();
 
 	//出力される想定の文字列の作成
-	for(int i=0; i<state_count; i++)
+	for(idx i=0; i<state_count; i++)
 	{
 		state_string<<std::to_string(i);
 		idx control_count = sp[i].getValueMax();
-		for(int u=0; u<control_count; u++)
+		for(idx u = 0; u < control_count; u++)
 		{
 			state_string<<'\t';
 			state_string<<std::to_string(sp[i].getProbability(u));
