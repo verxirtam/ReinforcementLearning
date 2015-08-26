@@ -21,6 +21,7 @@
 #include "Communication/InputMessage_1_0.h"
 #include "Communication/OutputMessage_1_0.h"
 #include "Communication/Read/ReadStochasticPolicy.h"
+#include "Communication/Read/ReadCurrentPolicy.h"
 #include "Communication/Write/WriteSinglePolicy.h"
 #include "Communication/Write/WritePolicy.h"
 #include "Communication/Write/WriteStochasticPolicy.h"
@@ -2722,17 +2723,17 @@ TEST(WriteStochasticPolicyTest,Process)
 }
 
 
-TEST(ReadCurrentPolicyTest,Process)
+TEST(ReadCurrentPolicyTest,Process_SimpleMDP)
 {
 	//テスト用のMDP
 	SimpleMDP mdp(5);
 	//読み込む文字列
 	stringstream string("");
-	string << "0	1.0" << endl;
+	string << "0	1.00" << endl;
 	string << "1	0.25	0.75" << endl;
 	string << "2	0.25	0.75" << endl;
 	string << "3	0.25	0.75" << endl;
-	string << "4	0.25	0.75" << endl;
+	string << "4	1.00" << endl;
 	//InputContext
 	TSVInputContext tic(string);
 	//テスト対象
@@ -2753,8 +2754,56 @@ TEST(ReadCurrentPolicyTest,Process)
 	EXPECT_NEAR(sp[2].getProbability(1), 0.75, e);
 	EXPECT_NEAR(sp[3].getProbability(0), 0.25, e);
 	EXPECT_NEAR(sp[3].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[4].getProbability(0), 1.00, e);
+}
+TEST(ReadCurrentPolicyTest,Process_EV3LineTracer)
+{
+	//テスト用のMDP
+	EV3LineTracer mdp("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	//読み込む文字列
+	stringstream string("");
+	string << "0	1.00" << endl;
+	string << "1	0.25	0.75" << endl;
+	string << "2	0.25	0.75" << endl;
+	string << "3	0.25	0.75" << endl;
+	string << "4	0.25	0.75" << endl;
+	string << "5	0.25	0.75" << endl;
+	string << "6	0.25	0.75" << endl;
+	string << "7	0.25	0.75" << endl;
+	string << "8	0.25	0.75" << endl;
+	string << "9	0.25	0.75" << endl;
+	//InputContext
+	TSVInputContext tic(string);
+	//テスト対象
+	RL::ReadCurrentPolicy<RL::EV3LineTracer> rcp(mdp);
+
+	//読み込み実行
+	rcp.process(tic);
+
+	//CurrentPolicyを取得
+	StochasticPolicy sp(mdp.getCurrentPolicy());
+	//許容誤差
+	real e = 0.0625*0.0625*0.0625*0.0625;
+	//読み込みに成功しているかを確認する
+	EXPECT_NEAR(sp[0].getProbability(0), 1.0 , e);
+	EXPECT_NEAR(sp[1].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[1].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[2].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[2].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[3].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[3].getProbability(1), 0.75, e);
 	EXPECT_NEAR(sp[4].getProbability(0), 0.25, e);
 	EXPECT_NEAR(sp[4].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[5].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[5].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[6].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[6].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[7].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[7].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[8].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[8].getProbability(1), 0.75, e);
+	EXPECT_NEAR(sp[9].getProbability(0), 0.25, e);
+	EXPECT_NEAR(sp[9].getProbability(1), 0.75, e);
 }
 
 /////////////////////////////////////////////////////////////////////

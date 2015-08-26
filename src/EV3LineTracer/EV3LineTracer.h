@@ -247,6 +247,18 @@ public:
 		Policy out = regularPolicy;
 		return out;
 	}
+	//MDPに適合した標準的なポリシーの取得
+	StochasticPolicy& getCurrentPolicy(StochasticPolicy& out)const
+	{
+		out=this->currentPolicy;
+		return out;
+	}
+	//MDPに適合した標準的なポリシーの取得
+	StochasticPolicy getCurrentPolicy()const
+	{
+		StochasticPolicy out = this->currentPolicy;
+		return out;
+	}
 	//TODO 下記の関数を作成する
 	//Mdp.GetEpisode(e)
 	//割引率の取得(1.0を返すのみ)

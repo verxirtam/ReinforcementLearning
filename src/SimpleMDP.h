@@ -27,7 +27,7 @@ private:
 	//(state,control)に対する推移確率を格納するvector
 	std::vector<std::vector<RandomIdx> > prob;
 	//現在設定されているPolicy;
-	StochasticPolicy CurrentPolicy;
+	StochasticPolicy currentPolicy;
 public:
 	//コンストラクタ
 	SimpleMDP(idx length=2);
@@ -79,6 +79,17 @@ public:
 
 		return out;
 	}
+
+	StochasticPolicy& getCurrentPolicy(StochasticPolicy& out)const
+	{
+		out = StochasticPolicy(this->currentPolicy);
+		return out;
+	}
+
+	StochasticPolicy getCurrentPolicy()const
+	{
+		return this->currentPolicy;
+	}
 	//割引率の取得(1.0を返すのみ)
 	inline real getDiscountRate()const
 	{
@@ -89,7 +100,7 @@ public:
 		Step next;
 		//現在のstateとPolicyから次の状態を取得
 		next.state=prob[current.state][current.control].get();
-		next.control=CurrentPolicy[next.state].get();
+		next.control=currentPolicy[next.state].get();
 		next.cost=1.0;
 		if(next.state==0)
 		{
@@ -105,7 +116,7 @@ public:
 		//最初のstate
 		current.state=getStateCount()-1;
 		//Policyで決まるcontrolを取得
-		current.control=CurrentPolicy[current.state].get();
+		current.control=currentPolicy[current.state].get();
 		current.cost=1.0;
 
 		episode.addStep(current);
@@ -131,7 +142,7 @@ public:
 	inline void setCurrentPolicy(const StochasticPolicy& p)
 	{
 		p.verify(*this);
-		this->CurrentPolicy=p;
+		this->currentPolicy=p;
 	}
 	inline real getCostMax()const
 	{

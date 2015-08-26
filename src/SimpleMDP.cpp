@@ -17,7 +17,7 @@ SimpleMDP::SimpleMDP(idx length):
 	stateCount(length),//状態数の初期化
 	transitionProb(0.75),//RegularPolicyがterminate stateに向かう推移確率
 	prob(),//(state,control)に対する推移確率を格納するvector
-	CurrentPolicy()//現在設定されているPolicy
+	currentPolicy()//現在設定されているPolicy
 {
 	//(state,control)に対する推移確率を格納するvector
 	std::vector<std::vector<std::vector<real> > > prob0;
@@ -107,8 +107,8 @@ vector<real>& SimpleMDP::getStateValueFunction(vector<real>& J)const
 	d[0]=0.0;
 	for(idx i=1;i<stateCount-1;i++)
 	{
-		real pi0=CurrentPolicy[i].getProbability(0);
-		real pi1=CurrentPolicy[i].getProbability(1);
+		real pi0=currentPolicy[i].getProbability(0);
+		real pi1=currentPolicy[i].getProbability(1);
 		a[i]=-pi0*transitionProb       - pi1*(1.0-transitionProb);
 		c[i]=-pi0*(1.0-transitionProb) - pi1*transitionProb;
 		d[i]=1.0;
@@ -160,7 +160,7 @@ vector<vector<real> >& SimpleMDP::getControlValueFunction(vector<vector<real> >&
 		prob_[i].resize(umax);
 		for(idx u=0;u<umax;u++)
 		{
-			pi[i][u]=CurrentPolicy[i].getProbability(u);
+			pi[i][u]=currentPolicy[i].getProbability(u);
 			if(i==0)
 			{
 				prob_[i][u]=vector<real>(1,0.0);
