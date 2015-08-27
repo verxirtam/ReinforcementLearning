@@ -2727,6 +2727,7 @@ TEST(ReadCurrentPolicyTest,Process_SimpleMDP)
 {
 	//テスト用のMDP
 	SimpleMDP mdp(5);
+	mdp.init();
 	//読み込む文字列
 	stringstream string("");
 	string << "0	1.00" << endl;
@@ -2760,6 +2761,7 @@ TEST(ReadCurrentPolicyTest,Process_EV3LineTracer)
 {
 	//テスト用のMDP
 	EV3LineTracer mdp("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	mdp.init();
 	//読み込む文字列
 	stringstream string("");
 	string << "0	1.00" << endl;
@@ -2804,6 +2806,65 @@ TEST(ReadCurrentPolicyTest,Process_EV3LineTracer)
 	EXPECT_NEAR(sp[8].getProbability(1), 0.75, e);
 	EXPECT_NEAR(sp[9].getProbability(0), 0.25, e);
 	EXPECT_NEAR(sp[9].getProbability(1), 0.75, e);
+}
+
+TEST(WriteCurrentPolicyTest,Construstor_SimpleMDP)
+{
+	RL::SimpleMDP mdp(5);
+	mdp.init();
+	RL::WriteCurrentPolicy<RL::SimpleMDP> wcp(mdp);
+}
+TEST(WriteCurrentPolicyTest,Process_SimpleMDP)
+{
+	RL::SimpleMDP mdp(5);
+	mdp.init();
+	RL::WriteCurrentPolicy<RL::SimpleMDP> wcp(mdp);
+
+	ostringstream oss;
+	RL::TSVOutputContext toc(oss);
+
+	wcp.process(oss);
+
+	stringstream expect_string("");
+	expect_string << "0	1.00" << endl;
+	expect_string << "1	0.75	0.00	0.25	0.00	0.00" << endl;
+	expect_string << "2	0.00	0.75	0.00	0.25	0.00" << endl;
+	expect_string << "3	0.00	0.00	0.75	0.00	0.25" << endl;
+	expect_string << "4	0.00	0.00	0.00	1.00	0.00" << endl;
+
+
+	EXPECT_EQ(oss.str(),expect_string.str());
+}
+TEST(WriteCurrentPolicyTest,Construstor_EV3LineTracer)
+{
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::WriteCurrentPolicy<RL::EV3LineTracer> wcp(ev3);
+}
+TEST(WriteCurrentPolicyTest,Process_EV3LineTracer)
+{
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::WriteCurrentPolicy<RL::EV3LineTracer> wcp(ev3);
+
+	ostringstream oss;
+	RL::TSVOutputContext toc(oss);
+
+	wcp.process(oss);
+
+	stringstream expect_string("");
+	expect_string << "0	1.00" << endl;
+	expect_string << "1	0.00	1.00" << endl;
+	expect_string << "2	0.00	1.00" << endl;
+	expect_string << "3	1.00	0.00" << endl;
+	expect_string << "4	1.00	0.00" << endl;
+	expect_string << "5	0.00	1.00" << endl;
+	expect_string << "6	0.00	1.00" << endl;
+	expect_string << "7	1.00	0.00" << endl;
+	expect_string << "8	0.00	1.00" << endl;
+	expect_string << "9	0.00	1.00" << endl;
+
+	EXPECT_EQ(oss.str(),expect_string.str());
 }
 
 /////////////////////////////////////////////////////////////////////
