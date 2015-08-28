@@ -8,22 +8,19 @@
 #ifndef READINTERVAL_H_
 #define READINTERVAL_H_
 
+#include "../../../Communication/Read/ReadValue.h"
 #include "../../../RLUtility.h"
-#include "../../../StringToData.h"
 #include "../../EV3LineTracer.h"
-#include "../../../Communication/InputProcedure.h"
 
 namespace RL
 {
 
-class ReadInterval: public InputProcedure
+class ReadInterval: public ReadValue<EV3LineTracer, idx>
 {
-private:
-	EV3LineTracer& ev3LineTracer;
 public:
-	ReadInterval(EV3LineTracer &ev3);
-	virtual ~ReadInterval();
-	virtual void process(InputContext &input);
+	ReadInterval(EV3LineTracer &ev3):ReadValue(ev3,&EV3LineTracer::setInterval)
+	{
+	}
 };
 
 } /* namespace RL */
