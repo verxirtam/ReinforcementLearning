@@ -21,6 +21,9 @@ public:
 	ReadInterval(EV3LineTracer &ev3):ReadValue(ev3,&EV3LineTracer::setInterval)
 	{
 	}
+	virtual ~ReadInterval()
+	{
+	}
 };
 
 } /* namespace RL */

@@ -8,23 +8,23 @@
 #ifndef READSTATECOUNT_H_
 #define READSTATECOUNT_H_
 
+#include "../../../Communication/Read/ReadValue.h"
 #include "../../../RLUtility.h"
-#include "../../../StringToData.h"
-#include "../../../Communication/InputProcedure.h"
 #include "../../EV3LineTracer.h"
 
 namespace RL
 {
 
 
-class ReadStateCount: public InputProcedure
+class ReadStateCount: public ReadValue<EV3LineTracer, idx>
 {
-private:
-	EV3LineTracer& ev3LineTracer;
 public:
-	ReadStateCount(EV3LineTracer &ev3);
-	virtual ~ReadStateCount();
-	virtual void process(InputContext &input);
+	ReadStateCount(EV3LineTracer& ev3):ReadValue(ev3, &EV3LineTracer::setStateCount)
+	{
+	}
+	virtual ~ReadStateCount()
+	{
+	}
 };
 
 } /* namespace RL */
