@@ -25,6 +25,7 @@
 #include "Communication/Write/WriteSinglePolicy.h"
 #include "Communication/Write/WritePolicy.h"
 #include "Communication/Write/WriteStochasticPolicy.h"
+#include "Communication/Write/WriteCurrentPolicy.h"
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "EV3LineTracer/Communication/InputConfigFile.h"
 #include "EV3LineTracer/Communication/InputConfigFileEV3Linetracer_1_0.h"
@@ -2823,14 +2824,14 @@ TEST(WriteCurrentPolicyTest,Process_SimpleMDP)
 	ostringstream oss;
 	RL::TSVOutputContext toc(oss);
 
-	wcp.process(oss);
+	wcp.process(toc);
 
 	stringstream expect_string("");
-	expect_string << "0	1.00" << endl;
-	expect_string << "1	0.75	0.00	0.25	0.00	0.00" << endl;
-	expect_string << "2	0.00	0.75	0.00	0.25	0.00" << endl;
-	expect_string << "3	0.00	0.00	0.75	0.00	0.25" << endl;
-	expect_string << "4	0.00	0.00	0.00	1.00	0.00" << endl;
+	expect_string << "0	1.000000" << endl;
+	expect_string << "1	1.000000	0.000000" << endl;
+	expect_string << "2	1.000000	0.000000" << endl;
+	expect_string << "3	1.000000	0.000000" << endl;
+	expect_string << "4	1.000000" << endl;
 
 
 	EXPECT_EQ(oss.str(),expect_string.str());
@@ -2850,19 +2851,19 @@ TEST(WriteCurrentPolicyTest,Process_EV3LineTracer)
 	ostringstream oss;
 	RL::TSVOutputContext toc(oss);
 
-	wcp.process(oss);
+	wcp.process(toc);
 
 	stringstream expect_string("");
-	expect_string << "0	1.00" << endl;
-	expect_string << "1	0.00	1.00" << endl;
-	expect_string << "2	0.00	1.00" << endl;
-	expect_string << "3	1.00	0.00" << endl;
-	expect_string << "4	1.00	0.00" << endl;
-	expect_string << "5	0.00	1.00" << endl;
-	expect_string << "6	0.00	1.00" << endl;
-	expect_string << "7	1.00	0.00" << endl;
-	expect_string << "8	0.00	1.00" << endl;
-	expect_string << "9	0.00	1.00" << endl;
+	expect_string << "0	1.000000" << endl;
+	expect_string << "1	0.000000	1.000000" << endl;
+	expect_string << "2	0.000000	1.000000" << endl;
+	expect_string << "3	1.000000	0.000000" << endl;
+	expect_string << "4	1.000000	0.000000" << endl;
+	expect_string << "5	0.000000	1.000000" << endl;
+	expect_string << "6	0.000000	1.000000" << endl;
+	expect_string << "7	1.000000	0.000000" << endl;
+	expect_string << "8	0.000000	1.000000" << endl;
+	expect_string << "9	0.000000	1.000000" << endl;
 
 	EXPECT_EQ(oss.str(),expect_string.str());
 }
