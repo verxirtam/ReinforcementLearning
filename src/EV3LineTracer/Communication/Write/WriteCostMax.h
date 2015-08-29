@@ -8,27 +8,24 @@
 #ifndef WRITECOSTMAX_H_
 #define WRITECOSTMAX_H_
 
-#include <string>
-#include "../../../Communication/OutputProcedure.h"
-#include "../../../Communication/OutputContext.h"
+#include "../../../Communication/Write/WriteValue.h"
+#include "../../../RLUtility.h"
 #include "../../EV3LineTracer.h"
 
 namespace RL
 {
 
-class WriteCostMax: public OutputProcedure
+class WriteCostMax: public WriteValue<EV3LineTracer, real>
 {
-private:
-	EV3LineTracer& ev3LineTracer;
 public:
-	WriteCostMax(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	WriteCostMax(EV3LineTracer& ev3):WriteValue(ev3, &EV3LineTracer::getCostMax)
 	{
 	}
 	virtual ~WriteCostMax()
 	{
 	}
-	virtual void process(OutputContext& output);
 };
+
 
 } /* namespace RL */
 

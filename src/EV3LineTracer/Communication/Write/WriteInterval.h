@@ -8,22 +8,21 @@
 #ifndef WRITEINTERVAL_H_
 #define WRITEINTERVAL_H_
 
-#include "../../../Communication/OutputProcedure.h"
+#include "../../../Communication/Write/WriteValue.h"
+#include "../../../RLUtility.h"
 #include "../../EV3LineTracer.h"
 
 namespace RL
 {
-
-class WriteInterval: public OutputProcedure
+class WriteInterval: public WriteValue<EV3LineTracer, idx>
 {
-private:
-	EV3LineTracer& ev3LineTracer;
 public:
-	WriteInterval(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	WriteInterval(EV3LineTracer& ev3):WriteValue(ev3,&EV3LineTracer::getInterval)
 	{
 	}
-	virtual ~WriteInterval(){}
-	virtual void process(OutputContext& output);
+	virtual ~WriteInterval()
+	{
+	}
 };
 
 } /* namespace RL */

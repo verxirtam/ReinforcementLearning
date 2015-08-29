@@ -175,7 +175,7 @@ private:
 	//コピー代入演算子→TCPConnectionのコピーを禁じるため禁止する
 	EV3LineTracer& operator=(const EV3LineTracer &);
 	//コマンドの実行
-	void execCommand(RL::OutputProcedure& o_command,RL::InputProcedure& i_command);
+	void execCommand(RL::OutputProcedure& o_command,RL::InputProcedure& i_command)const;
 
 public:
 	//デフォルトコンストラクタ
@@ -320,7 +320,7 @@ public:
 	void execSetMDP();
 
 	//エピソードを取得する
-	bool getEpisode(Episode& episode);
+	bool getEpisode(Episode& episode)const;
 
 };
 

@@ -82,7 +82,7 @@ void EV3LineTracer::init()
 
 //コマンドの実行
 void EV3LineTracer::execCommand(RL::OutputProcedure& o_command,
-		RL::InputProcedure& i_command)
+		RL::InputProcedure& i_command)const
 {
 	//EV3への接続を確立
 	TCPClient tcp_client("localhost", 50000, 1024);//"192.168.0.7",50000,1024);//
@@ -124,7 +124,7 @@ void EV3LineTracer::execSetMDP()
 	execCommand(o_set_mdp, i_set_mdp);
 }
 //エピソードを取得する
-bool EV3LineTracer::getEpisode(Episode& episode)
+bool EV3LineTracer::getEpisode(Episode& episode)const
 {
 	//このコマンド用のInput、Output Procedure
 	RL::OutputCommandExecEpisode o_exec_episode;

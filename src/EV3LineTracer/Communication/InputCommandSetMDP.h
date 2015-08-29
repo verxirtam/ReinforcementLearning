@@ -30,7 +30,7 @@ namespace RL
 class InputCommandSetMDP: public InputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	const EV3LineTracer& ev3LineTracer;
 
 	bool equalsOfEV3LineTracer(const EV3LineTracer& ev3)const;
 	void processOnNG(InputContext& input);
