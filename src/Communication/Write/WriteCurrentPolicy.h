@@ -20,9 +20,9 @@ template<typename MDP>
 class WriteCurrentPolicy: public OutputProcedure
 {
 private:
-	MDP& mdp;
+	const MDP& mdp;
 public:
-	WriteCurrentPolicy(MDP& mdp_):mdp(mdp_)
+	WriteCurrentPolicy(const MDP& mdp_):mdp(mdp_)
 	{
 	}
 	virtual ~WriteCurrentPolicy()

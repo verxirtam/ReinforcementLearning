@@ -19,9 +19,9 @@ namespace RL
 class WriteControl: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	const EV3LineTracer& ev3LineTracer;
 public:
-	WriteControl(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	WriteControl(const EV3LineTracer& ev3):ev3LineTracer(ev3)
 	{
 	}
 	virtual ~WriteControl()

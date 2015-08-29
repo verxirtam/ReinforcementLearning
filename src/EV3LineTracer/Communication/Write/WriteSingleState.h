@@ -18,10 +18,10 @@ namespace RL
 class WriteSingleState: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	const EV3LineTracer& ev3LineTracer;
 	idx index;
 public:
-	WriteSingleState(EV3LineTracer& ev3,idx i):ev3LineTracer(ev3),index(i)
+	WriteSingleState(const EV3LineTracer& ev3,idx i):ev3LineTracer(ev3),index(i)
 	{
 
 	}

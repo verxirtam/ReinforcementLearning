@@ -19,9 +19,9 @@ template <typename MDP>
 class WriteRegularPolicy: public OutputProcedure
 {
 private:
-	MDP& mdp;
+	const MDP& mdp;
 public:
-	WriteRegularPolicy(MDP& mdp_):mdp(mdp_)
+	WriteRegularPolicy(const MDP& mdp_):mdp(mdp_)
 	{
 	}
 	virtual ~WriteRegularPolicy()

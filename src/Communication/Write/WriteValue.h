@@ -21,11 +21,11 @@ private:
 	//書き込みを行いたい変数のゲッターを示す関数ポインタ
 	typedef ValueType (MDP::*GetterType)()const;
 	//セッターを持つMDP
-	MDP& mdp;
+	const MDP& mdp;
 	//ゲッター
 	GetterType getter;
 public:
-	WriteValue(MDP& mdp_, GetterType getter_) :
+	WriteValue(const MDP& mdp_, GetterType getter_) :
 			mdp(mdp_), getter(getter_)
 	{
 	}

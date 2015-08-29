@@ -18,11 +18,11 @@ namespace RL
 class WriteSingleControl: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	const EV3LineTracer& ev3LineTracer;
 	idx stateIndex;
 	idx controlIndex;
 public:
-	WriteSingleControl(EV3LineTracer& ev3,idx i,idx u):
+	WriteSingleControl(const EV3LineTracer& ev3,idx i,idx u):
 		ev3LineTracer(ev3),stateIndex(i),controlIndex(u)
 	{
 

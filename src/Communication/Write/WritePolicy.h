@@ -19,7 +19,7 @@ namespace RL
 class WritePolicy: public OutputProcedure
 {
 private:
-	Policy& policy;
+	const Policy& policy;
 public:
 	WritePolicy(Policy& p):policy(p)
 	{

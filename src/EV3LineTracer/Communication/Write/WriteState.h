@@ -19,9 +19,9 @@ namespace RL
 class WriteState: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	const EV3LineTracer& ev3LineTracer;
 public:
-	WriteState(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	WriteState(const EV3LineTracer& ev3):ev3LineTracer(ev3)
 	{
 	}
 	virtual ~WriteState()

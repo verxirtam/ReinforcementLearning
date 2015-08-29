@@ -21,10 +21,10 @@ namespace RL
 class WriteSinglePolicy: public OutputProcedure
 {
 private:
-	Policy& policy;
+	const Policy& policy;
 	idx stateIndex;
 public:
-	WriteSinglePolicy(Policy& p,idx i):policy(p),stateIndex(i)
+	WriteSinglePolicy(const Policy& p,idx i):policy(p),stateIndex(i)
 	{
 	}
 	virtual ~WriteSinglePolicy()

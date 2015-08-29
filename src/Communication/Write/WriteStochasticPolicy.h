@@ -24,9 +24,9 @@ namespace RL
 class WriteStochasticPolicy: public OutputProcedure
 {
 private:
-	StochasticPolicy& stochasticPolicy;
+	const StochasticPolicy& stochasticPolicy;
 public:
-	WriteStochasticPolicy(StochasticPolicy& sp):stochasticPolicy(sp)
+	WriteStochasticPolicy(const StochasticPolicy& sp):stochasticPolicy(sp)
 	{
 	}
 	virtual ~WriteStochasticPolicy()
