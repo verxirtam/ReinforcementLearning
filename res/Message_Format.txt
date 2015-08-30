@@ -107,6 +107,18 @@
 <SetCurrentPolicyBody>::=
 		N(<SinglePolicy>);Policyの定義(StateIndexは0からN-1まで順に並ぶ(N=StateCount))
 
+<SetCurrentPolicyResult>::=
+	(
+		"OK"<endl>
+		<CurrentPolicyBody>
+		|
+		(
+			"NG"<endl>
+			<Reason>
+		)
+	)
+
+<CurrentPolicyBody>::=<SetCurrentPolicyBody>;設定した内容を返却する(反映の確認のため)
 
 <ExecEpisodeResult>::=
 (

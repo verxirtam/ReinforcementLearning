@@ -37,6 +37,7 @@
 #include "EV3LineTracer/Communication/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/OutputCommandSetMDP.h"
 #include "EV3LineTracer/Communication/OutputCommandExecEpisode.h"
+#include "EV3LineTracer/Communication/OutputCommandSetCurrentPolicy.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -2868,41 +2869,21 @@ TEST(WriteCurrentPolicyTest,Process_EV3LineTracer)
 	EXPECT_EQ(oss.str(),expect_string.str());
 }
 
-//OutputCommandSetMDP
+//OutputCommandCurrentPolicy
 TEST(OutputCommandCurrentPolicyTest,Constractor)
 {
-	//OutputContextの初期化
-	RL::OutputCommandCurrentPolicy ocp(SimpleMDP(5));
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::OutputCommandSetCurrentPolicy ocp(ev3);
+
 }
 
-TEST(OutputCommandCurrentPolicyTest,Process_SimpleMDP)
-{
-
-	ostringstream expect_string("");
-	expect_string << "0	1.000000" << endl;
-	expect_string << "1	1.000000	0.000000" << endl;
-	expect_string << "2	1.000000	0.000000" << endl;
-	expect_string << "3	1.000000	0.000000" << endl;
-	expect_string << "4	1.000000" << endl;
-
-	//OutputContextの初期化
-	std::ostringstream os;
-	RL::TSVOutputContext toc(os);
-	SimpleMDP mdp(5);
-	mdp.init();
-	RL::OutputCommandCurrentPolicy ocp(mdp);
-
-
-	//処理の実行
-	ocp.process(toc);
-
-	EXPECT_EQ(os.str(),expect_string);
-}
 
 TEST(OutputCommandCurrentPolicyTest,Process_EV3LineTracer)
 {
 
 	ostringstream expect_string("");
+	expect_string << "SetCurrentPolicy" << endl;
 	expect_string << "0	1.000000" << endl;
 	expect_string << "1	0.000000	1.000000" << endl;
 	expect_string << "2	0.000000	1.000000" << endl;
@@ -2919,13 +2900,61 @@ TEST(OutputCommandCurrentPolicyTest,Process_EV3LineTracer)
 	RL::TSVOutputContext toc(os);
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
-	RL::OutputCommandCurrentPolicy ocp(ev3);
+	RL::OutputCommandSetCurrentPolicy ocp(ev3);
 
 
 	//処理の実行
 	ocp.process(toc);
 
-	EXPECT_EQ(os.str(),expect_string);
+	EXPECT_EQ(os.str(),expect_string.str());
+}
+TEST(InputCommandSetCurrentPolicyTest,Constractor)
+{
+	///OutputContextの初期化
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetCurrentPolicy iscp(ev3);
+}
+
+TEST(InputCommandSetCurrentPolicyTest,Process_OK)
+{
+	//InputContextの初期化
+	std::stringstream input_string("");
+	input_string << "SetCurrentPolicy" << endl;
+	input_string << "OK" << endl;
+	input_string << "0	1.000000" << endl;
+	input_string << "1	0.000000	1.000000" << endl;
+	input_string << "2	0.000000	1.000000" << endl;
+	input_string << "3	1.000000	0.000000" << endl;
+	input_string << "4	1.000000	0.000000" << endl;
+	input_string << "5	0.000000	1.000000" << endl;
+	input_string << "6	0.000000	1.000000" << endl;
+	input_string << "7	1.000000	0.000000" << endl;
+	input_string << "8	0.000000	1.000000" << endl;
+	input_string << "9	0.000000	1.000000" << endl;
+
+	std::istringstream is(input_string);
+	RL::TSVInputContext tic(is);
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetCurrentPolicy iscp(ev3);
+
+	//処理の実行
+	iscp.process(tic);
+
+}
+TEST(InputCommandSetCurrentPolicyTest,Process_NG)
+{
+	//InputContextの初期化
+	std::istringstream is("SetCurrentPolicy\nNG\n");
+	RL::TSVInputContext tic(is);
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::InputCommandSetCurrentPolicy iscp(ev3);
+
+	//処理の実行
+	EXPECT_THROW(iscp.process(tic),std::ios_base::failure);
+
 }
 
 /////////////////////////////////////////////////////////////////////

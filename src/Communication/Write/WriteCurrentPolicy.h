@@ -9,8 +9,7 @@
 #define WRITECURRENTPOLICY_H_
 
 #include "../../Policy.h"
-#include "../OutputProcedure.h"
-#include "../Read/ReadStochasticPolicy.h"
+#include "WriteStochasticPolicy.h"
 
 
 namespace RL
