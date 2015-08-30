@@ -33,6 +33,7 @@
 #include "EV3LineTracer/Communication/InputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/InputCommandSetMDP.h"
 #include "EV3LineTracer/Communication/InputCommandExecEpisode.h"
+#include "EV3LineTracer/Communication/InputCommandSetCurrentPolicy.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracer_1_0.h"
 #include "EV3LineTracer/Communication/OutputCommandNullCommand.h"
 #include "EV3LineTracer/Communication/OutputCommandSetMDP.h"
@@ -2933,7 +2934,7 @@ TEST(InputCommandSetCurrentPolicyTest,Process_OK)
 	input_string << "8	0.000000	1.000000" << endl;
 	input_string << "9	0.000000	1.000000" << endl;
 
-	std::istringstream is(input_string);
+	std::istringstream is(input_string.str());
 	RL::TSVInputContext tic(is);
 	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
 	ev3.init();
@@ -2954,6 +2955,60 @@ TEST(InputCommandSetCurrentPolicyTest,Process_NG)
 
 	//処理の実行
 	EXPECT_THROW(iscp.process(tic),std::ios_base::failure);
+
+}
+//StochasticPolicyに丸め誤差が生じる場合
+TEST(InputCommandSetCurrentPolicyTest,Process_OK2)
+{
+
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+
+	//ev3にCurrentPolicyとして設定する
+	//StochasticPlicyの設定
+	vector<vector<real> > prob(10);
+	prob[0].resize(1);
+	for(idx i = 1; i < 10; i++)
+	{
+		prob[i].resize(2);
+	}
+	prob[0][0]=1.0;
+	prob[1][0]=0.1;prob[1][1]=0.9;
+	prob[2][0]=0.2;prob[2][1]=0.8;
+	prob[3][0]=0.3;prob[3][1]=0.7;
+	prob[4][0]=0.4;prob[4][1]=0.6;
+	prob[5][0]=0.5;prob[5][1]=0.5;
+	prob[6][0]=0.6;prob[6][1]=0.4;
+	prob[7][0]=0.7;prob[7][1]=0.3;
+	prob[8][0]=0.8;prob[8][1]=0.2;
+	prob[9][0]=0.9;prob[9][1]=0.1;
+	RL::StochasticPolicy cp(prob);
+
+	//ev3へのCurrentPolicyの設定
+	ev3.setCurrentPolicy(cp);
+
+	//InputContextの初期化
+	std::stringstream input_string("");
+	input_string << "SetCurrentPolicy" << endl;
+	input_string << "OK" << endl;
+	input_string << "0	1.000000" << endl;
+	input_string << "1	0.100000	0.900000" << endl;
+	input_string << "2	0.200000	0.800000" << endl;
+	input_string << "3	0.300000	0.700000" << endl;
+	input_string << "4	0.400000	0.600000" << endl;
+	input_string << "5	0.500000	0.500000" << endl;
+	input_string << "6	0.600000	0.400000" << endl;
+	input_string << "7	0.700000	0.300000" << endl;
+	input_string << "8	0.800000	0.200000" << endl;
+	input_string << "9	0.900000	0.100000" << endl;
+
+
+	std::istringstream is(input_string.str());
+	RL::TSVInputContext tic(is);
+	RL::InputCommandSetCurrentPolicy iscp(ev3);
+
+	//処理の実行
+	iscp.process(tic);
 
 }
 

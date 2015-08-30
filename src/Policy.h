@@ -118,6 +118,20 @@ public:
 	{
 		correct();
 	}
+	//コンストラクタ 引数：選択確率のvector (const std::vector<std::vector<real> >&)
+	StochasticPolicy(const std::vector<std::vector<real> >& prob):control()
+	{
+		idx state_count = prob.size();
+
+		control.resize(state_count);
+
+		for(idx i = 0; i < state_count; i++)
+		{
+			control[i] = RandomIdx(prob[i]);
+		}
+
+		correct();
+	}
 	//MDPのstate数、control数に基づいて初期化する
 	template <typename MDP>
 	StochasticPolicy(const MDP& mdp):control()
@@ -159,6 +173,45 @@ public:
 	inline bool operator!=(const StochasticPolicy& org)const
 	{
 		return !((*this) == org);
+	}
+	inline bool isNear(const StochasticPolicy& org,real error = 0.03125 * 0.03125 * 0.03125 * 0.03125)
+	{
+		//stateCount,conrolCountが一致しており、
+		//選択確率の誤差がerror未満の場合にtrueを返す
+
+		//stateCountの確認
+		if(this->getStateCount()!=org.getStateCount())
+		{
+			//一致しなかったのでfalseを返す
+			return false;
+		}
+		idx state_count = this->getStateCount();
+		for(idx i = 0; i< state_count; i++)
+		{
+			//controlCountの確認
+			if(this->getControlCount(i)!=org.getControlCount(i))
+			{
+				//一致しなかったのでfalseを返す
+				return false;
+			}
+			idx control_count = getControlCount(i);
+			for(idx u = 0; u < control_count; u++)
+			{
+				//選択確率の確認
+				real diff = (*this)[i].getProbability(u)-org[i].getProbability(u);
+				if((diff <= -error)||(error <= diff))
+				{
+					//誤差がerror以上なのでfalseを返す
+					return false;
+				}
+			}
+		}
+		//全ての確認で問題なければtrueを返す
+		return true;
+	}
+	inline bool isFar(const StochasticPolicy& org,real error = 0.03125 * 0.03125 * 0.03125 * 0.03125)
+	{
+		return !(this->isNear(org,error));
 	}
 	//stateに対する発生確率probを設定する
 	void setProbability(idx state,const std::vector<real>& prob);
