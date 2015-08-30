@@ -13,7 +13,10 @@
 
 namespace RL
 {
-
+//下記を書き込むtemplate class
+//<value><endl>
+//getterの引数がvoidでgetter自体がconstの場合に対応している
+//getterが引数を持つ場合には非対応
 template<class MDP, typename ValueType>
 class WriteValue: public OutputProcedure
 {

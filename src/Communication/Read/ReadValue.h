@@ -14,7 +14,8 @@
 
 namespace RL
 {
-
+//下記を読み込むtemplate class
+//<value><endl>
 template<class MDP, typename ValueType, typename ReturnType = void>
 class ReadValue: public InputProcedure
 {

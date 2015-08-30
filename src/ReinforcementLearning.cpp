@@ -2868,6 +2868,66 @@ TEST(WriteCurrentPolicyTest,Process_EV3LineTracer)
 	EXPECT_EQ(oss.str(),expect_string.str());
 }
 
+//OutputCommandSetMDP
+TEST(OutputCommandCurrentPolicyTest,Constractor)
+{
+	//OutputContextの初期化
+	RL::OutputCommandCurrentPolicy ocp(SimpleMDP(5));
+}
+
+TEST(OutputCommandCurrentPolicyTest,Process_SimpleMDP)
+{
+
+	ostringstream expect_string("");
+	expect_string << "0	1.000000" << endl;
+	expect_string << "1	1.000000	0.000000" << endl;
+	expect_string << "2	1.000000	0.000000" << endl;
+	expect_string << "3	1.000000	0.000000" << endl;
+	expect_string << "4	1.000000" << endl;
+
+	//OutputContextの初期化
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	SimpleMDP mdp(5);
+	mdp.init();
+	RL::OutputCommandCurrentPolicy ocp(mdp);
+
+
+	//処理の実行
+	ocp.process(toc);
+
+	EXPECT_EQ(os.str(),expect_string);
+}
+
+TEST(OutputCommandCurrentPolicyTest,Process_EV3LineTracer)
+{
+
+	ostringstream expect_string("");
+	expect_string << "0	1.000000" << endl;
+	expect_string << "1	0.000000	1.000000" << endl;
+	expect_string << "2	0.000000	1.000000" << endl;
+	expect_string << "3	1.000000	0.000000" << endl;
+	expect_string << "4	1.000000	0.000000" << endl;
+	expect_string << "5	0.000000	1.000000" << endl;
+	expect_string << "6	0.000000	1.000000" << endl;
+	expect_string << "7	1.000000	0.000000" << endl;
+	expect_string << "8	0.000000	1.000000" << endl;
+	expect_string << "9	0.000000	1.000000" << endl;
+
+	//OutputContextの初期化
+	std::ostringstream os;
+	RL::TSVOutputContext toc(os);
+	EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::OutputCommandCurrentPolicy ocp(ev3);
+
+
+	//処理の実行
+	ocp.process(toc);
+
+	EXPECT_EQ(os.str(),expect_string);
+}
+
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
