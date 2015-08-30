@@ -3012,6 +3012,12 @@ TEST(InputCommandSetCurrentPolicyTest,Process_OK2)
 
 }
 
+TEST(ExecSetCurrentPolicyTest,process)
+{
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	ev3.setCurrentPolicy(ev3.getRegularPolicy());
+}
 /////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////

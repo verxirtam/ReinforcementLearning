@@ -48,6 +48,6 @@ void InputConfigFileEV3Linetracer_1_0::process(InputContext &input)
 	rrp.process(input);
 
 	//CurrentPolicyをRegularPolicyとして設定する
-	ev3LineTracer.setCurrentPolicy(ev3LineTracer.getRegularPolicy());
+	ev3LineTracer.setCurrentPolicyLocal(ev3LineTracer.getRegularPolicy());
 }
 } /* namespace RL */

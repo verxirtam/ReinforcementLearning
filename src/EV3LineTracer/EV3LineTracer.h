@@ -25,6 +25,7 @@
 #include "Communication/InputEV3LineTracer_1_0.h"
 #include "Communication/OutputEV3LineTracer_1_0.h"
 
+
 namespace RL
 {
 
@@ -61,6 +62,7 @@ class EV3LineTracer
 	friend class ReadSingleControl;
 	friend class ReadRegularPolicy<EV3LineTracer>;
 	friend class ReadCostMax;
+	friend class InputConfigFileEV3Linetracer_1_0;
 
 private:
 	//データメンバ
@@ -176,6 +178,20 @@ private:
 	EV3LineTracer& operator=(const EV3LineTracer &);
 	//コマンドの実行
 	void execCommand(RL::OutputProcedure& o_command,RL::InputProcedure& i_command)const;
+	//データメンバのcurrentPolicyを更新する
+	//EV3側は変更しない
+	void setCurrentPolicyLocal(const Policy& p)
+	{
+		StochasticPolicy sp;
+		this->setCurrentPolicyLocal(this->getStochasticPolicy(p,sp));
+	}
+	//データメンバのcurrentPolicyを更新する
+	//EV3側は変更しない
+	void setCurrentPolicyLocal(const StochasticPolicy& p)
+	{
+		p.verify(*this);
+		this->currentPolicy = p;
+	}
 
 public:
 	//デフォルトコンストラクタ
@@ -291,19 +307,15 @@ public:
 		return out;
 	}
 	//CurrentPolicyの設定
-	//TODO SimpleMDPと内容が同一の関数。共通化する方法を検討する
 	inline void setCurrentPolicy(const Policy& p)
 	{
+		//this->currentPolicyを設定
 		StochasticPolicy sp;
 		this->setCurrentPolicy(this->getStochasticPolicy(p,sp));
 	}
 	//CurrentPolicyの設定
-	//TODO SimpleMDPと内容が同一の関数。共通化する方法を検討する
-	inline void setCurrentPolicy(const StochasticPolicy& p)
-	{
-		p.verify(*this);
-		this->currentPolicy=p;
-	}
+	void setCurrentPolicy(const StochasticPolicy& p);
+
 	inline real getMotorSpeedMax(void) const
 	{
 		return SPEEDMAX;

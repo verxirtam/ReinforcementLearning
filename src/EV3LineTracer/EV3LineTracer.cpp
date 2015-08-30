@@ -12,9 +12,11 @@
 #include "Communication/InputCommandNullCommand.h"
 #include "Communication/InputCommandSetMDP.h"
 #include "Communication/InputCommandExecEpisode.h"
+#include "Communication/InputCommandSetCurrentPolicy.h"
 #include "Communication/OutputCommandNullCommand.h"
 #include "Communication/OutputCommandSetMDP.h"
 #include "Communication/OutputCommandExecEpisode.h"
+#include "Communication/OutputCommandSetCurrentPolicy.h"
 //↑相互参照防止
 
 
@@ -134,6 +136,22 @@ bool EV3LineTracer::getEpisode(Episode& episode)const
 	this->execCommand(o_exec_episode, i_exec_episode);
 
 	return true;
+}
+
+
+//CurrentPolicyの設定
+void EV3LineTracer::setCurrentPolicy(const StochasticPolicy& p)
+{
+	//データメンバのcurrentPolicyを更新する
+	setCurrentPolicyLocal(p);
+
+	//EV3へのコマンドを作成
+	OutputCommandSetCurrentPolicy ocscp(*this);
+	InputCommandSetCurrentPolicy icscp(*this);
+
+	//EV3へのコマンド「SetCurrentPolicy」を作成
+	this->execCommand(ocscp,icscp);
+
 }
 
 }
