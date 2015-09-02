@@ -275,12 +275,13 @@ public:
 		StochasticPolicy out = this->currentPolicy;
 		return out;
 	}
-	//TODO 下記の関数を作成する
 	//Mdp.GetEpisode(e)
-	//割引率の取得(1.0を返すのみ)
+	//割引率の取得
+	//costがterminate stateに達した時点でしか
+	//与えられないので1より小さい値(0.984375 = 1-1/64)を設定
 	inline real getDiscountRate()const
 	{
-		return 1.0;
+		return 0.984375;
 	}
 	//コストの最大値を取得
 	inline real getCostMax()const
