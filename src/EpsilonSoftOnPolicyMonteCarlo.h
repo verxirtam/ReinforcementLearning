@@ -35,14 +35,17 @@ template <typename MDP>
 class EpsilonSoftOnPolicyMonteCarlo
 {
 private:
-	MDP mdp;
+	//control-value functionを表すコンテナ
+	typedef std::vector<std::vector<real> > ControlValueFunction;
+	//処理対象のMDP
+	MDP& mdp;
 public:
-	EpsilonSoftOnPolicyMonteCarlo(const MDP& mdp_):mdp(mdp_)
+	EpsilonSoftOnPolicyMonteCarlo(MDP& mdp_):mdp(mdp_)
 	{
 	}
 	//CurrentPolicyを
 	//control-value functionに基づいて改善したPolicyを求める
-	Policy& policyImprovement(const std::vector<std::vector<real> >& Q,Policy& out)const
+	Policy& policyImprovement(const ControlValueFunction& Q,Policy& out)const
 	{
 		//state数の取得
 		idx statecount=mdp.getStateCount();
@@ -93,7 +96,7 @@ public:
 		for(idx k=0;k<pi_count;k++)
 		{
 			setCurrentPolicy(epsilonGreedy(out,e,mu_e));
-			std::vector<std::vector<real> > Q;
+			ControlValueFunction Q;
 			policyEvaluation(Q,episode_count);
 			Policy policy_new;
 			this->policyImprovement(Q,policy_new);
@@ -106,7 +109,7 @@ public:
 
 		return out;
 	}
-	std::vector<std::vector<real> >& policyEvaluation(std::vector<std::vector<real> >& value, idx episodecount=10000)const
+	ControlValueFunction& policyEvaluation(ControlValueFunction& value, idx episodecount=10000)const
 	{
 		//集計用変数((i,u)のコストを集計する)
 		std::vector<std::vector<real> > S(mdp.getStateCount());
@@ -132,7 +135,8 @@ public:
 			}
 			//コストの集計
 			real t=0.0;
-			for(idx m=e.getStepCount()-1;m>=0;m--)
+			idx step_count = e.getStepCount();
+			for(idx m = step_count -1; m >= 0; m--)
 			{
 				t=e[m].cost+mdp.getDiscountRate()*t;
 				S[e[m].state][e[m].control]+=t;
@@ -145,13 +149,15 @@ public:
 
 		}
 
-		value.resize(mdp.getStateCount());
+		idx state_count = mdp.getStateCount();
+		value.resize(state_count);
 		//価値観数の近似値の算出
-		for(idx i=0;i<mdp.getStateCount();i++)
+		for(idx i=0; i < state_count ;i++)
 		{
-			value[i].resize(mdp.getControlCount(i));
+			idx control_count = mdp.getControlCount(i);
+			value[i].resize(control_count);
 
-			for(idx u=0;u<mdp.getControlCount(i);u++)
+			for(idx u = 0; u < control_count; u++)
 			{
 				if(N[i][u]!=0)
 				{
@@ -170,20 +176,21 @@ public:
 		//policy pと同値なStochastic Policyを作成
 		mdp.getStochasticPolicy(p,out);
 
+		idx state_count = out.getStateCount();
 		//p[]に対するe-greedyポリシーを作成する
-		for(idx i=0;i<out.getStateCount();i++)
+		for(idx i=0;i<state_count;i++)
 		{
-			const idx controlcount=out[i].getValueMax();
-			std::vector<real> prob(controlcount, 0.0);
-			for(idx u=0;u<controlcount;u++)
+			const idx control_count=out[i].getValueMax();
+			std::vector<real> prob(control_count, 0.0);
+			for(idx u=0;u<control_count;u++)
 			{
 				if(u==p[i])
 				{
-					prob[u]=1.0 - e + e/((real)controlcount);
+					prob[u]=1.0 - e + e/((real)control_count);
 				}
 				else
 				{
-					prob[u]=e/((real)controlcount);
+					prob[u]=e/((real)control_count);
 				}
 			}
 			out.setProbability(i,prob);
