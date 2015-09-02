@@ -17,7 +17,7 @@ namespace RL
 class WriteInterval: public WriteValue<EV3LineTracer, idx>
 {
 public:
-	WriteInterval(EV3LineTracer& ev3):WriteValue(ev3,&EV3LineTracer::getInterval)
+	WriteInterval(const EV3LineTracer& ev3):WriteValue(ev3,&EV3LineTracer::getInterval)
 	{
 	}
 	virtual ~WriteInterval()

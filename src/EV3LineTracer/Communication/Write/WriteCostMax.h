@@ -18,7 +18,7 @@ namespace RL
 class WriteCostMax: public WriteValue<EV3LineTracer, real>
 {
 public:
-	WriteCostMax(EV3LineTracer& ev3):WriteValue(ev3, &EV3LineTracer::getCostMax)
+	WriteCostMax(const EV3LineTracer& ev3):WriteValue(ev3, &EV3LineTracer::getCostMax)
 	{
 	}
 	virtual ~WriteCostMax()

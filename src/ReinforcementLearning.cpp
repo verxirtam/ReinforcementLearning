@@ -3020,7 +3020,7 @@ TEST(ExecSetCurrentPolicyTest,process)
 }
 
 
-TEST(EpsilonSoftOnPolicyMonteCarlo,EV3LineTracer)
+TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 {
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
 
@@ -3047,7 +3047,9 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Null*:*TSVInputContextTest*:*EV3LineTracerTest*";
 	//::testing::GTEST_FLAG(filter)="*Write*";
 	//::testing::GTEST_FLAG(filter)="*Input*:*Output*";
-	::testing::GTEST_FLAG(filter)="*EpsilonSoftOnPolicyMonteCarlo*";
+	//::testing::GTEST_FLAG(filter)="*EpsilonSoftOnPolicyMonteCarlo*";
+	::testing::GTEST_FLAG(filter)="-*ActualMachineTest*";
+
 
 
 	::testing::InitGoogleTest(&argc,argv);

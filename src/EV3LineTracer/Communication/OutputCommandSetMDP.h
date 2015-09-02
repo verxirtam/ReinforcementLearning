@@ -24,9 +24,9 @@ namespace RL
 class OutputCommandSetMDP: public OutputProcedure
 {
 private:
-	EV3LineTracer& ev3LineTracer;
+	const EV3LineTracer& ev3LineTracer;
 public:
-	OutputCommandSetMDP(EV3LineTracer& ev3):ev3LineTracer(ev3)
+	OutputCommandSetMDP(const EV3LineTracer& ev3):ev3LineTracer(ev3)
 	{
 	}
 	virtual ~OutputCommandSetMDP()

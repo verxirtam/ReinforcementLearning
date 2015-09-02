@@ -17,7 +17,7 @@ namespace RL
 class WriteStateCount: public WriteValue<EV3LineTracer, idx>
 {
 public:
-	WriteStateCount(EV3LineTracer& ev3):WriteValue(ev3, &EV3LineTracer::getStateCount)
+	WriteStateCount(const EV3LineTracer& ev3):WriteValue(ev3, &EV3LineTracer::getStateCount)
 	{
 	}
 	virtual ~WriteStateCount(){}
