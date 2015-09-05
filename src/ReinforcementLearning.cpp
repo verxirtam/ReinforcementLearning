@@ -3142,6 +3142,38 @@ TEST(OutputEV3LineTracerDestructFileTest,process)
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
 }
+TEST(OutputEV3LineTracerSettingFileTest,process)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	std::string inifilepath("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	std::string logdirpath("/home/daisuke/git/ReinforcementLearning/log/");
+	RL::EV3LineTracer ev3(inifilepath,true,logdirpath);
+	ev3.init();
+	RL::OutputEV3LineTracerSettingFile oev3sf(ev3);
+
+	::sleep(2);
+
+	oev3sf.process(toc);
+
+	//期待される出力
+	stringstream expect_string("");
+	expect_string << ev3.getConstructTimeString() << endl;
+	TSVOutputContext toc2(expect_string);
+	WriteInterval(ev3).process(toc2);
+	WriteCostMax(ev3).process(toc2);
+	WriteStateCount(ev3).process(toc2);
+	WriteState(ev3).process(toc2);
+	WriteControl(ev3).process(toc2);
+	WriteRegularPolicy<EV3LineTracer>(ev3).process(toc2);
+
+	std::cout << ev3.getConstructTimeString() << endl;
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+}
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////
