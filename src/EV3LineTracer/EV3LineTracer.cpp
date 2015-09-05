@@ -17,6 +17,7 @@
 #include "Communication/OutputCommandSetMDP.h"
 #include "Communication/OutputCommandExecEpisode.h"
 #include "Communication/OutputCommandSetCurrentPolicy.h"
+#include "Communication/OutputEV3LineTracerConstructFile.h"
 //↑相互参照防止
 
 
@@ -156,6 +157,46 @@ void EV3LineTracer::setCurrentPolicy(const StochasticPolicy& p)
 std::string EV3LineTracer::getConstructTimeString()const
 {
 	return RL::TimeToString::toString(constructTime);
+}
+
+void EV3LineTracer::writeFile(const std::string& logfilepath,
+		RL::OutputProcedure& output)const
+{
+	std::ofstream ofs(logfilepath);
+	//ファイルオープンの確認
+	if (!ofs)
+	{
+		std::string msg("EV3LineTracer::writeFile() : can not open ");
+		msg += logfilepath;
+		throw std::ios_base::failure(msg);
+	}
+	try
+	{
+		RL::TSVOutputContext toc(ofs);
+		output.process(toc);
+		ofs.close();
+	} catch (...)
+	{
+		ofs.close();
+		throw;
+	}
+}
+
+void EV3LineTracer::writeConstructFile(void)const
+{
+	//ファイルパスの作成
+	std::stringstream logfilepath("");
+	logfilepath << this->logDirectoryPath;
+	logfilepath << "EV3LineTracer_";
+	logfilepath << TimeToString::toStringForFileName(this->constructTime);
+	logfilepath << "_00Construct";
+	logfilepath << ".log";
+
+
+	//出力用OutputProcedureを初期化
+	RL::OutputEV3LineTracerConstructFile output(*this);
+
+	writeFile(logfilepath.str(), output);
 }
 
 }

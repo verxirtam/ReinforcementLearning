@@ -26,6 +26,7 @@
 #include "Communication/InputEV3LineTracer_1_0.h"
 #include "Communication/OutputEV3LineTracer_1_0.h"
 
+
 namespace RL
 {
 class OutputProcedure;
@@ -95,6 +96,8 @@ private:
 	static const speed SPEEDMAX=600;
 	//ログファイル出力を行うかどうかを表す
 	bool loggingEnable;
+	//ログファイルを格納するパス(末尾に'/'を付けること)
+	std::string logDirectoryPath;
 	//インスタンス生成時刻
 	std::time_t constructTime;
 
@@ -209,6 +212,9 @@ private:
 		p.verify(*this);
 		this->currentPolicy = p;
 	}
+	void writeConstructFile(void)const;
+	void writeFile(const std::string& logfilepath,
+			RL::OutputProcedure& output)const;
 
 public:
 	//デフォルトコンストラクタ
@@ -223,11 +229,12 @@ public:
 		costMax(0.0),
 		configFilePath(),
 		loggingEnable(false),
+		logDirectoryPath(),
 		constructTime(0)
 	{
 	}
 	//コンストラクタ
-	EV3LineTracer(std::string configfilepath,bool logging = false):
+	EV3LineTracer(std::string configfilepath,bool logging = false, const std::string& logdirpath = std::string("")):
 		interval(0),
 		stateCount(0),
 		state(),
@@ -238,13 +245,16 @@ public:
 		costMax(0.0),
 		configFilePath(configfilepath),
 		loggingEnable(logging),
+		logDirectoryPath(logdirpath),
 		constructTime(0)
 	{
 		if(loggingEnable)
 		{
 			setConstrustTime();
+			writeConstructFile();
 		}
 	}
+
 	//設定ファイル読み込みを行う
 	void readConfigFile();
 

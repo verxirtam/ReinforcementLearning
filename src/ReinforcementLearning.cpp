@@ -3097,7 +3097,9 @@ TEST(OutputEV3LineTracerConstructFileTest,constructor)
 	stringstream ss("");
 	RL::TSVOutputContext toc(ss);
 
-	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini",true);
+	std::string inifilepath("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	std::string logdirpath("/home/daisuke/git/ReinforcementLearning/log/");
+	RL::EV3LineTracer ev3(inifilepath,true,logdirpath);
 	ev3.init();
 	RL::OutputEV3LineTracerConstructFile oev3cf(ev3);
 
