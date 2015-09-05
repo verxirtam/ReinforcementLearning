@@ -10,16 +10,10 @@
 
 #include <string>
 
-#include "../../Communication/OutputProcedure.h"
 #include "../../Communication/OutputContext.h"
-#include "../../Communication/Write/WriteRegularPolicy.h"
-#include "../../Communication/Write/WriteValue.h"
+#include "../../Communication/OutputProcedure.h"
 #include "../EV3LineTracer.h"
-#include "Write/WriteControl.h"
-#include "Write/WriteCostMax.h"
-#include "Write/WriteInterval.h"
-#include "Write/WriteState.h"
-#include "Write/WriteStateCount.h"
+#include "Write/WriteEV3LineTracerSetting.h"
 
 namespace RL
 {
@@ -35,7 +29,7 @@ public:
 	virtual ~OutputEV3LineTracerSettingFile()
 	{
 	}
-	void process(OutputContext& output);
+	virtual void process(OutputContext& output);
 };
 
 } /* namespace RL */

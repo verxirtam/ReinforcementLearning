@@ -59,6 +59,7 @@
 #include "EV3LineTracer/Communication/Write/WriteState.h"
 #include "EV3LineTracer/Communication/Write/WriteSingleControl.h"
 #include "EV3LineTracer/Communication/Write/WriteControl.h"
+#include "EV3LineTracer/Communication/Write/WriteEV3LineTracerSetting.h"
 
 using namespace std;
 using namespace RL;
@@ -3163,12 +3164,7 @@ TEST(OutputEV3LineTracerSettingFileTest,process)
 	stringstream expect_string("");
 	expect_string << ev3.getConstructTimeString() << endl;
 	TSVOutputContext toc2(expect_string);
-	WriteInterval(ev3).process(toc2);
-	WriteCostMax(ev3).process(toc2);
-	WriteStateCount(ev3).process(toc2);
-	WriteState(ev3).process(toc2);
-	WriteControl(ev3).process(toc2);
-	WriteRegularPolicy<EV3LineTracer>(ev3).process(toc2);
+	WriteEV3LineTracerSetting(ev3).process(toc2);
 
 	std::cout << ev3.getConstructTimeString() << endl;
 
