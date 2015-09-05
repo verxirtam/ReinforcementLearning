@@ -23,6 +23,10 @@ struct Step
 	idx control;
 	real cost;
 
+	Step():state(),control(),cost()
+	{
+	}
+
 	Step(int state_, int control_, real cost_):state(state_),control(control_),cost(cost_)
 	{
 	}

@@ -8,11 +8,12 @@
 #ifndef READEPISODE_H_
 #define READEPISODE_H_
 
-#include "../../../Communication/InputContext.h"
-#include "../../../Communication/InputProcedure.h"
-#include "../../../Episode.h"
-#include "../../../RLUtility.h"
-#include "../../../StringToData.h"
+
+#include "../../Episode.h"
+#include "../../RLUtility.h"
+#include "../../StringToData.h"
+#include "../InputProcedure.h"
+#include "../InputContext.h"
 #include "ReadStep.h"
 
 namespace RL

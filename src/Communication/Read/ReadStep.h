@@ -10,11 +10,11 @@
 
 #include <iostream>
 
-#include "../../../Communication/InputContext.h"
-#include "../../../Communication/InputProcedure.h"
-#include "../../../Episode.h"
-#include "../../../RLUtility.h"
-#include "../../../StringToData.h"
+#include "../../StringToData.h"
+#include "../../Episode.h"
+#include "../../RLUtility.h"
+#include "../InputProcedure.h"
+#include "../InputContext.h"
 
 
 namespace RL

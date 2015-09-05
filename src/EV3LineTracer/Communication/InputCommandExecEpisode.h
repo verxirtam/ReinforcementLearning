@@ -13,7 +13,7 @@
 #include <string>
 
 #include "../../Communication/InputContext.h"
-#include "Read/ReadEpisode.h"
+#include "../../Communication/Read/ReadEpisode.h"
 
 namespace RL
 {

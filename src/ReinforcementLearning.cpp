@@ -22,10 +22,14 @@
 #include "Communication/OutputMessage_1_0.h"
 #include "Communication/Read/ReadStochasticPolicy.h"
 #include "Communication/Read/ReadCurrentPolicy.h"
+#include "Communication/Read/ReadStep.h"
+#include "Communication/Read/ReadEpisode.h"
 #include "Communication/Write/WriteSinglePolicy.h"
 #include "Communication/Write/WritePolicy.h"
 #include "Communication/Write/WriteStochasticPolicy.h"
 #include "Communication/Write/WriteCurrentPolicy.h"
+#include "Communication/Write/WriteEpisode.h"
+#include "Communication/Write/WriteStep.h"
 #include "EV3LineTracer/EV3LineTracer.h"
 #include "EV3LineTracer/Communication/InputConfigFile.h"
 #include "EV3LineTracer/Communication/InputConfigFileEV3Linetracer_1_0.h"
@@ -43,8 +47,6 @@
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
 #include "EV3LineTracer/Communication/Read/ReadCostMax.h"
-#include "EV3LineTracer/Communication/Read/ReadStep.h"
-#include "EV3LineTracer/Communication/Read/ReadEpisode.h"
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
 #include "EV3LineTracer/Communication/Write/WriteCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
@@ -3019,6 +3021,30 @@ TEST(ExecSetCurrentPolicyTest,process)
 	ev3.setCurrentPolicy(ev3.getRegularPolicy());
 }
 
+TEST(WriteStepTest,constructor)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	//stepの準備
+	RL::Step s(15,25,35.000000);
+
+	//WriteEpisodeの初期化
+	RL::WriteStep ws(s,0);
+
+	ws.setStepIndex(5);
+
+	//OutputContextへの書き込み
+	ws.process(toc);
+
+	//期待される出力
+	stringstream expect_string("");
+	expect_string << "15	25	35.000000" << endl;
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+}
 
 TEST(WriteEpisodeTest,constructor)
 {

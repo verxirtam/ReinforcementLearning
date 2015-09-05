@@ -7,7 +7,6 @@
 
 #include "ReadEpisode.h"
 
-
 namespace RL
 {
 void ReadEpisode::process(InputContext &input)
