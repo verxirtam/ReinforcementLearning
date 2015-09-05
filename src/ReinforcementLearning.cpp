@@ -3040,7 +3040,7 @@ TEST(WriteStepTest,constructor)
 
 	//期待される出力
 	stringstream expect_string("");
-	expect_string << "15	25	35.000000" << endl;
+	expect_string << "5	15	25	35.000000" << endl;
 
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
@@ -3074,16 +3074,16 @@ TEST(WriteEpisodeTest,constructor)
 	//期待される出力
 	stringstream expect_string("");
 	expect_string << "10" << endl;
-	expect_string << "10	20	30.000000" << endl;
-	expect_string << "11	21	31.000000" << endl;
-	expect_string << "12	22	32.000000" << endl;
-	expect_string << "13	23	33.000000" << endl;
-	expect_string << "14	24	34.000000" << endl;
-	expect_string << "15	25	35.000000" << endl;
-	expect_string << "16	26	36.000000" << endl;
-	expect_string << "17	27	37.000000" << endl;
-	expect_string << "18	28	38.000000" << endl;
-	expect_string << "19	29	39.000000" << endl;
+	expect_string << "0	10	20	30.000000" << endl;
+	expect_string << "1	11	21	31.000000" << endl;
+	expect_string << "2	12	22	32.000000" << endl;
+	expect_string << "3	13	23	33.000000" << endl;
+	expect_string << "4	14	24	34.000000" << endl;
+	expect_string << "5	15	25	35.000000" << endl;
+	expect_string << "6	16	26	36.000000" << endl;
+	expect_string << "7	17	27	37.000000" << endl;
+	expect_string << "8	18	28	38.000000" << endl;
+	expect_string << "9	19	29	39.000000" << endl;
 
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());

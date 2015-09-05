@@ -16,6 +16,7 @@ void WriteEpisode::process(OutputContext& output)
 	idx step_count = episode.getStepCount();
 	//ステップ数の書き込み
 	output.writeToken(std::to_string(step_count));
+	output.newLine();
 
 	RL::WriteStep ws(episode[0],0);
 	//各ステップの書き込み
