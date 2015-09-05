@@ -11,14 +11,10 @@
 
 #include "../../Communication/InputContext.h"
 #include "../../Communication/InputProcedure.h"
-#include "../../Communication/Read/ReadRegularPolicy.h"
 #include <string>
 #include "../EV3LineTracer.h"
-#include "Read/ReadInterval.h"
-#include "Read/ReadStateCount.h"
-#include "Read/ReadState.h"
-#include "Read/ReadControl.h"
-#include "Read/ReadCostMax.h"
+#include "Read/ReadEV3LineTracerSetting.h"
+
 
 
 namespace RL

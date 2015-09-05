@@ -71,12 +71,8 @@ void InputCommandSetMDP::process(InputContext &input)
 	if(result == "OK")
 	{
 		EV3LineTracer ev3;
-		RL::ReadInterval(ev3).process(input);
-		RL::ReadCostMax(ev3).process(input);
-		RL::ReadStateCount(ev3).process(input);
-		RL::ReadState(ev3).process(input);
-		RL::ReadControl(ev3).process(input);
-		RL::ReadRegularPolicy<RL::EV3LineTracer>(ev3).process(input);
+		RL::ReadEV3LineTracerSetting(ev3).process(input);
+
 		if(!equalsOfEV3LineTracer(ev3))
 		{
 			throw std::ios_base::failure("SetMDPに失敗しました");
