@@ -26,8 +26,8 @@ void ReadStep::process(InputContext &input)
 	real cost = StringToData::parseTo<real>(input.nextToken());
 	input.skipReturn();
 
-	//stepのepisodeへの書き込み
-	episode.setStep(stepIndex,state,control,cost);
+	//stepの書き込み
+	step=Step(state,control,cost);
 
 }
 } /* namespace RL */

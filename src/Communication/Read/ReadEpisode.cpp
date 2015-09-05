@@ -18,12 +18,15 @@ void ReadEpisode::process(InputContext &input)
 	episode.clear();
 	//エピソードの長さを確保する
 	episode.setStepCount(step_count);
+	//読み取り用Stepの初期化
+	Step step;
+	ReadStep rs(step,0);
 	//エピソードの読み込み
-	RL::ReadStep read_step(episode,0);
 	for(idx n = 0; n < step_count; n++)
 	{
-		read_step.setStepIndex(n);
-		read_step.process(input);
+		rs.setStepIndex(n);
+		rs.process(input);
+		episode.setStep(n,step);
 	}
 }
 } /* namespace RL */

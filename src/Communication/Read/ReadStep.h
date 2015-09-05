@@ -23,10 +23,10 @@ namespace RL
 class ReadStep: public InputProcedure
 {
 private:
-	RL::Episode& episode;
+	Step& step;
 	idx stepIndex;
 public:
-	ReadStep(RL::Episode& episode_, idx step_index):episode(episode_),stepIndex(step_index)
+	ReadStep(Step& step_, idx step_index):step(step_),stepIndex(step_index)
 	{
 	}
 	virtual ~ReadStep()

@@ -2474,10 +2474,11 @@ TEST(ReadStepTest,Process)
 	RL::TSVInputContext tic(is);
 	RL::EpisodeData episode_data(10);
 	RL::Episode episode(episode_data);
-	RL::ReadStep(episode,5).process(tic);
-	EXPECT_EQ(episode[5].state,3);
-	EXPECT_EQ(episode[5].control,4);
-	EXPECT_EQ(episode[5].cost,0.5);
+	Step step=episode[5];
+	RL::ReadStep(step,5).process(tic);
+	EXPECT_EQ(step.state,3);
+	EXPECT_EQ(step.control,4);
+	EXPECT_EQ(step.cost,0.5);
 }
 
 //値をパラメータ化したテストのためのクラスの定義
@@ -2516,8 +2517,8 @@ TEST_P(ReadStepErrorTest,process_error)
 	std::istringstream is(i_string[GetParam()]);
 	RL::TSVInputContext tic(is);
 	RL::EpisodeData episode_data(10);
-	RL::Episode episode;
-	EXPECT_THROW(RL::ReadStep(episode,5).process(tic),std::ios_base::failure);
+	Step step;
+	EXPECT_THROW(ReadStep(step,5).process(tic),std::ios_base::failure);
 }
 
 
