@@ -3090,6 +3090,27 @@ TEST(WriteEpisodeTest,constructor)
 	EXPECT_EQ(ss.str(),expect_string.str());
 }
 
+TEST(OutputEV3LineTracerConstructFileTest,constructor)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	ev3.init();
+	RL::OutputEV3LineTracerConstructFile oev3cf(ev3);
+
+
+	oev3cf.process(toc);
+
+	//期待される出力
+	stringstream expect_string("");
+	expect_string << ev3.getConstructTimeString() << endl;
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+}
+
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////

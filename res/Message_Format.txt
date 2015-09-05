@@ -154,8 +154,55 @@
 
 <NullCommandResult>="OK"
 
+////////////////////////////////////
+// EV3LineTracerConstructファイル
+////////////////////////////////////
+ファイル名：
+"EV3LineTracer_"<ConstractTime>"_00Construct.log"
+<ConstractTime>::=YYYYMMDDHHMMSS
+ファイル内容：
+<EV3LineTracerStart>
+::=
+<ConstractTime><endl>
 
+////////////////////////////////////
+// EV3LineTracerSettingファイル
+////////////////////////////////////
+ファイル名：
+"EV3LineTracer_"<ConstractTime>"_10Setting"".log"
+<ConstractTime>::=YYYYMMDDHHMMSS
+ファイル内容：
+<EV3LineTracerSetting>
+::=
+<ConstractTime><endl>
+<SetMDPBody>
 
+////////////////////////////////////
+// Episodeのログファイル
+////////////////////////////////////
+ファイル名：
+"EV3LineTracer_"<ConstractTime>"_20Episode_"<EpisodeStarTime>".log"
+<ConstractTime>::=YYYYMMDDHHMMSS
+<EpisodeStarTime>::=YYYYMMDDHHMMSS
+ファイル内容：
+<EpisodeLog>
+::=
+<StartTime><endl>
+<FinishTIme><endl>
+<ElapsedTime><endl>
+<EV3LineTracerSettingFileName><endl>
+<CurrentPolicy>
+<EpisodeBody>
+////////////////////////////////////
+// EV3LineTracerDestructファイル
+////////////////////////////////////
+ファイル名：
+"EV3LineTracer_"<ConstractTime>"_99End_"<DestructTime>".log"
+<ConstractTime>::=YYYYMMDDHHMMSS
+ファイル内容：
+<EV3LineTracer<DestructTime>
+::=
+<DestructTime><endl>
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////
