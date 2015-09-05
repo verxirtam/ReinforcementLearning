@@ -28,10 +28,6 @@
 #include "Communication/OutputEV3LineTracerDestructFile.h"
 
 
-namespace RL
-{
-class OutputProcedure;
-} /* namespace RL */
 
 
 namespace RL
@@ -260,8 +256,11 @@ public:
 	{
 		try
 		{
-			//EV3LineTracerDestructファイルを出力する
-			writeDestructFile();
+			if(loggingEnable)
+			{
+				//EV3LineTracerDestructファイルを出力する
+				writeDestructFile();
+			}
 		}
 		catch(...)
 		{
