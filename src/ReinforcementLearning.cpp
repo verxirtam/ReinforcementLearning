@@ -44,6 +44,7 @@
 #include "EV3LineTracer/Communication/OutputCommandExecEpisode.h"
 #include "EV3LineTracer/Communication/OutputCommandSetCurrentPolicy.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracerConstructFile.h"
+#include "EV3LineTracer/Communication/OutputEV3LineTracerDestructFile.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -3091,7 +3092,7 @@ TEST(WriteEpisodeTest,constructor)
 	EXPECT_EQ(ss.str(),expect_string.str());
 }
 
-TEST(OutputEV3LineTracerConstructFileTest,constructor)
+TEST(OutputEV3LineTracerConstructFileTest,process)
 {
 	//outputcontextの初期化
 	stringstream ss("");
@@ -3115,7 +3116,29 @@ TEST(OutputEV3LineTracerConstructFileTest,constructor)
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
 }
+TEST(OutputEV3LineTracerDestructFileTest,process)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
 
+	time_t dest_time;
+	std::time(&dest_time);
+
+	RL::OutputEV3LineTracerDestructFile oev3df(dest_time);
+
+
+	oev3df.process(toc);
+
+	//期待される出力
+	stringstream expect_string("");
+	expect_string << TimeToString::toString(dest_time) << endl;
+
+	std::cout << TimeToString::toString(dest_time) << endl;
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+}
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////

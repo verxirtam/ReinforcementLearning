@@ -254,7 +254,10 @@ public:
 			writeConstructFile();
 		}
 	}
+	virtual ~EV3LineTracer()
+	{
 
+	}
 	//設定ファイル読み込みを行う
 	void readConfigFile();
 
