@@ -11,6 +11,7 @@ namespace RL
 {
 void OutputEV3LineTracerConstructFile::process(OutputContext& output)
 {
+	output.writeToken("ConstractTime");
 	output.writeToken(ev3LineTracer.getConstructTimeString());
 	output.newLine();
 }

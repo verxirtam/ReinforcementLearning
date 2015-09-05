@@ -12,6 +12,7 @@ namespace RL
 {
 void OutputEV3LineTracerDestructFile::process(OutputContext& output)
 {
+	output.writeToken("DestructTime");
 	output.writeToken(TimeToString::toString(destructTime));
 	output.newLine();
 }

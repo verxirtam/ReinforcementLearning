@@ -29,7 +29,6 @@
 
 
 
-
 namespace RL
 {
 
@@ -211,6 +210,9 @@ private:
 	}
 	void writeConstructFile(void)const;
 	void writeDestructFile(void)const;
+	void writeEV3LineTracerSettingFile(void)const;
+
+
 	void writeFile(const std::string& logfilepath,
 			RL::OutputProcedure& output)const;
 

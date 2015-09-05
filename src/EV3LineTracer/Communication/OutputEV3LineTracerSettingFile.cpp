@@ -14,6 +14,8 @@ namespace RL
 {
 void OutputEV3LineTracerSettingFile::process(OutputContext& output)
 {
+	output.writeToken("ConstractTime");
+
 	std::string construct_time = ev3LineTracer.getConstructTimeString();
 	output.writeToken(construct_time);
 	output.newLine();

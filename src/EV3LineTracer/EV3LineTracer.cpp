@@ -18,6 +18,7 @@
 #include "Communication/OutputCommandExecEpisode.h"
 #include "Communication/OutputCommandSetCurrentPolicy.h"
 #include "Communication/OutputEV3LineTracerConstructFile.h"
+#include "Communication/OutputEV3LineTracerSettingFile.h"
 //↑相互参照防止
 
 
@@ -81,6 +82,11 @@ void EV3LineTracer::init()
 	//EV3の準備を行う
 	this->initEV3();
 
+	//設定をファイル出力する
+	if(loggingEnable)
+	{
+		writeEV3LineTracerSettingFile();
+	}
 }
 
 //コマンドの実行
@@ -217,6 +223,23 @@ void EV3LineTracer::writeDestructFile(void)const
 	RL::OutputEV3LineTracerDestructFile output(destruct_time);
 
 	writeFile(logfilepath.str(), output);
+}
+void EV3LineTracer::writeEV3LineTracerSettingFile(void)const
+{
+	//ファイルパスの作成
+	std::stringstream logfilepath("");
+	logfilepath << this->logDirectoryPath;
+	logfilepath << "EV3LineTracer_";
+	logfilepath << TimeToString::toStringForFileName(this->constructTime);
+	logfilepath << "_10Setting";
+	logfilepath << ".log";
+
+
+	//出力用OutputProcedureを初期化
+	RL::OutputEV3LineTracerSettingFile output(*this);
+
+	writeFile(logfilepath.str(), output);
+
 }
 
 }

@@ -45,6 +45,9 @@
 
 
 <SetMDPBody>::=
+<EV3LineTracerSetting>
+
+<EV3LineTracerSetting>::=
 	<Interval><endl>;Interval(msec)
 	<CostMax><endl>;CostMax
 	<StateCount><endl>;State数
@@ -163,7 +166,7 @@
 ファイル内容：
 <EV3LineTracerStart>
 ::=
-<ConstractTime><endl>
+"ConstractTime"<tab><ConstractTime><endl>
 
 ////////////////////////////////////
 // EV3LineTracerSettingファイル
@@ -174,7 +177,7 @@
 ファイル内容：
 <EV3LineTracerSetting>
 ::=
-<ConstractTime><endl>
+"ConstractTime"<tab><ConstractTime><endl>
 <SetMDPBody>
 
 ////////////////////////////////////
@@ -187,9 +190,9 @@
 ファイル内容：
 <EpisodeLog>
 ::=
-<StartTime><endl>
-<FinishTIme><endl>
-<ElapsedTime><endl>
+"StartTime"<tab><StartTime><endl>
+"FinishTIme"<tab><FinishTIme><endl>
+"ElapsedTime"<tab><ElapsedTime><endl>
 <EV3LineTracerSettingFileName><endl>
 <CurrentPolicy>
 <EpisodeBody>
@@ -202,7 +205,7 @@
 ファイル内容：
 <EV3LineTracer<DestructTime>
 ::=
-<DestructTime><endl>
+"DestructTime"<tab><DestructTime><endl>
 
 /////////////////////////////////////////////////////
 /////////////////////////////////////////////////////

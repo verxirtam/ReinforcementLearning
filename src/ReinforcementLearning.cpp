@@ -3114,6 +3114,7 @@ TEST(OutputEV3LineTracerConstructFileTest,process)
 
 	//期待される出力
 	stringstream expect_string("");
+	expect_string << "ConstractTime" << "\t";
 	expect_string << ev3.getConstructTimeString() << endl;
 
 	std::cout << ev3.getConstructTimeString() << endl;
@@ -3137,6 +3138,7 @@ TEST(OutputEV3LineTracerDestructFileTest,process)
 
 	//期待される出力
 	stringstream expect_string("");
+	expect_string << "DestructTime" << "\t";
 	expect_string << TimeToString::toString(dest_time) << endl;
 
 	std::cout << TimeToString::toString(dest_time) << endl;
@@ -3162,6 +3164,7 @@ TEST(OutputEV3LineTracerSettingFileTest,process)
 
 	//期待される出力
 	stringstream expect_string("");
+	expect_string << "ConstractTime" << "\t";
 	expect_string << ev3.getConstructTimeString() << endl;
 	TSVOutputContext toc2(expect_string);
 	WriteEV3LineTracerSetting(ev3).process(toc2);
