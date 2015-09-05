@@ -47,6 +47,7 @@
 #include "EV3LineTracer/Communication/OutputCommandSetCurrentPolicy.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracerConstructFile.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracerDestructFile.h"
+#include "EV3LineTracer/Communication/OutputEV3LineTracerSettingFile.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
