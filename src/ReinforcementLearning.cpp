@@ -8,6 +8,8 @@
 
 #include <gtest/gtest.h>
 
+#include <unistd.h>
+
 #include <iostream>
 #include <sstream>
 
@@ -3104,6 +3106,7 @@ TEST(OutputEV3LineTracerConstructFileTest,process)
 	ev3.init();
 	RL::OutputEV3LineTracerConstructFile oev3cf(ev3);
 
+	::sleep(2);
 
 	oev3cf.process(toc);
 

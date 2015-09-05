@@ -25,6 +25,7 @@
 
 #include "Communication/InputEV3LineTracer_1_0.h"
 #include "Communication/OutputEV3LineTracer_1_0.h"
+#include "Communication/OutputEV3LineTracerDestructFile.h"
 
 
 namespace RL
@@ -213,6 +214,7 @@ private:
 		this->currentPolicy = p;
 	}
 	void writeConstructFile(void)const;
+	void writeDestructFile(void)const;
 	void writeFile(const std::string& logfilepath,
 			RL::OutputProcedure& output)const;
 
@@ -256,7 +258,15 @@ public:
 	}
 	virtual ~EV3LineTracer()
 	{
-
+		try
+		{
+			//EV3LineTracerDestructファイルを出力する
+			writeDestructFile();
+		}
+		catch(...)
+		{
+			//デストラクタから例外発出を防止する
+		}
 	}
 	//設定ファイル読み込みを行う
 	void readConfigFile();

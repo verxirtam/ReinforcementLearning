@@ -197,7 +197,7 @@
 // EV3LineTracerDestructファイル
 ////////////////////////////////////
 ファイル名：
-"EV3LineTracer_"<ConstractTime>"_99End_"<DestructTime>".log"
+"EV3LineTracer_"<ConstractTime>"_99Destruct_"<DestructTime>".log"
 <ConstractTime>::=YYYYMMDDHHMMSS
 ファイル内容：
 <EV3LineTracer<DestructTime>

@@ -198,6 +198,26 @@ void EV3LineTracer::writeConstructFile(void)const
 
 	writeFile(logfilepath.str(), output);
 }
+void EV3LineTracer::writeDestructFile(void)const
+{
+	time_t destruct_time;
+	std::time(&destruct_time);
+
+	//ファイルパスの作成
+	std::stringstream logfilepath("");
+	logfilepath << this->logDirectoryPath;
+	logfilepath << "EV3LineTracer_";
+	logfilepath << TimeToString::toStringForFileName(this->constructTime);
+	logfilepath << "_99Destruct_";
+	logfilepath << TimeToString::toStringForFileName(destruct_time);
+	logfilepath << ".log";
+
+
+	//出力用OutputProcedureを初期化
+	RL::OutputEV3LineTracerDestructFile output(destruct_time);
+
+	writeFile(logfilepath.str(), output);
+}
 
 }
 
