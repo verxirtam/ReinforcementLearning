@@ -43,6 +43,7 @@
 #include "EV3LineTracer/Communication/OutputCommandSetMDP.h"
 #include "EV3LineTracer/Communication/OutputCommandExecEpisode.h"
 #include "EV3LineTracer/Communication/OutputCommandSetCurrentPolicy.h"
+#include "EV3LineTracer/Communication/OutputEV3LineTracerConstructFile.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -3096,7 +3097,7 @@ TEST(OutputEV3LineTracerConstructFileTest,constructor)
 	stringstream ss("");
 	RL::TSVOutputContext toc(ss);
 
-	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini",true);
 	ev3.init();
 	RL::OutputEV3LineTracerConstructFile oev3cf(ev3);
 
@@ -3106,6 +3107,8 @@ TEST(OutputEV3LineTracerConstructFileTest,constructor)
 	//期待される出力
 	stringstream expect_string("");
 	expect_string << ev3.getConstructTimeString() << endl;
+
+	std::cout << ev3.getConstructTimeString() << endl;
 
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());

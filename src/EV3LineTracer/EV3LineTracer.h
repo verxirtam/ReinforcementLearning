@@ -21,9 +21,15 @@
 #include "../RLUtility.h"
 #include "../Policy.h"
 #include "../Episode.h"
+#include "../TimeToString.h"
 
 #include "Communication/InputEV3LineTracer_1_0.h"
 #include "Communication/OutputEV3LineTracer_1_0.h"
+
+namespace RL
+{
+class OutputProcedure;
+} /* namespace RL */
 
 
 namespace RL
@@ -87,6 +93,11 @@ private:
 	std::string configFilePath;
 	//モータに与える速度の最大値
 	static const speed SPEEDMAX=600;
+	//ログファイル出力を行うかどうかを表す
+	bool loggingEnable;
+	//インスタンス生成時刻
+	std::time_t constructTime;
+
 	//メンバ関数
 	/////////////////////////////
 
@@ -149,7 +160,13 @@ private:
 	{
 		regularPolicy=p;
 	}
-
+	//インスタンス生成時の時刻を取得する
+	//コンストラクタで実行する
+	void setConstrustTime()
+	{
+		//現在時刻をconstructTimeに取得
+		std::time(&constructTime);
+	}
 	void checkStateIndex(idx stateindex)
 	{
 		//stateindexのチェック
@@ -204,11 +221,13 @@ public:
 		currentPolicy(),
 		regularPolicy(),
 		costMax(0.0),
-		configFilePath()
+		configFilePath(),
+		loggingEnable(false),
+		constructTime(0)
 	{
 	}
 	//コンストラクタ
-	EV3LineTracer(std::string configfilepath):
+	EV3LineTracer(std::string configfilepath,bool logging = false):
 		interval(0),
 		stateCount(0),
 		state(),
@@ -217,8 +236,14 @@ public:
 		currentPolicy(),
 		regularPolicy(),
 		costMax(0.0),
-		configFilePath(configfilepath)
+		configFilePath(configfilepath),
+		loggingEnable(logging),
+		constructTime(0)
 	{
+		if(loggingEnable)
+		{
+			setConstrustTime();
+		}
 	}
 	//設定ファイル読み込みを行う
 	void readConfigFile();
@@ -325,6 +350,8 @@ public:
 	{
 		return -SPEEDMAX;
 	}
+	std::string getConstructTimeString()const;
+
 	//何もしないコマンドを発行する
 	//通信の確率の確認に使用する
 	void execNullCommand();

@@ -153,6 +153,10 @@ void EV3LineTracer::setCurrentPolicy(const StochasticPolicy& p)
 	this->execCommand(ocscp,icscp);
 
 }
+std::string EV3LineTracer::getConstructTimeString()const
+{
+	return RL::TimeToString::toString(constructTime);
+}
 
 }
 
