@@ -3020,6 +3020,52 @@ TEST(ExecSetCurrentPolicyTest,process)
 }
 
 
+TEST(WriteEpisodeTest,constructor)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	//episodeの準備
+	RL::Episode e;
+	e.addStep(Step(10,20,30.000000));
+	e.addStep(Step(11,21,31.000000));
+	e.addStep(Step(12,22,32.000000));
+	e.addStep(Step(13,23,33.000000));
+	e.addStep(Step(14,24,34.000000));
+	e.addStep(Step(15,25,35.000000));
+	e.addStep(Step(16,26,36.000000));
+	e.addStep(Step(17,27,37.000000));
+	e.addStep(Step(18,28,38.000000));
+	e.addStep(Step(19,29,39.000000));
+
+	//WriteEpisodeの初期化
+	RL::WriteEpisode we(e);
+
+	//OutputContextへの書き込み
+	we.process(toc);
+
+	//期待される出力
+	stringstream expect_string("");
+	expect_string << "10" << endl;
+	expect_string << "10	20	30.000000" << endl;
+	expect_string << "11	21	31.000000" << endl;
+	expect_string << "12	22	32.000000" << endl;
+	expect_string << "13	23	33.000000" << endl;
+	expect_string << "14	24	34.000000" << endl;
+	expect_string << "15	25	35.000000" << endl;
+	expect_string << "16	26	36.000000" << endl;
+	expect_string << "17	27	37.000000" << endl;
+	expect_string << "18	28	38.000000" << endl;
+	expect_string << "19	29	39.000000" << endl;
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+}
+
+/////////////////////////////////////////////////////////////////////
+// 実機でのテスト
+/////////////////////////////////////////////////////////////////////
 TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 {
 	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
