@@ -20,6 +20,8 @@ void OutputEV3LineTracerSettingFile::process(OutputContext& output)
 	output.writeToken(construct_time);
 	output.newLine();
 
+	WriteDiscountRate(ev3LineTracer).process(output);
+
 	WriteEV3LineTracerSetting(ev3LineTracer).process(output);
 }
 

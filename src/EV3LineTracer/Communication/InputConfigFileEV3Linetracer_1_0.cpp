@@ -23,6 +23,10 @@ InputConfigFileEV3Linetracer_1_0::~InputConfigFileEV3Linetracer_1_0()
 }
 void InputConfigFileEV3Linetracer_1_0::process(InputContext &input)
 {
+	//DiscountRateの読み取り
+	ReadDiscountRate rd(ev3LineTracer);
+	rd.process(input);
+
 	//EV3LineTracerSettingの読み取り
 	ReadEV3LineTracerSetting r(ev3LineTracer);
 	r.process(input);

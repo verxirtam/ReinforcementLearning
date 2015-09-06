@@ -1862,6 +1862,7 @@ TEST(InputConfigFileTest,Constractor)
 TEST(InputConfigFileTest,process)
 {
 	string aaa="EV3LineTracer_1.0\n";
+	aaa += "0.984375\n";
 	aaa += "10\n";
 	aaa += "600.0\n";
 	aaa += "2\n";
@@ -2367,7 +2368,6 @@ TEST(OutputCommandSetMDPTest,Process)
 
 	string expect_string = "SetMDP\n\
 11\n\
-0.984375\n\
 600.000000\n\
 10\n\
 0	0.100000	1\n\
@@ -2438,7 +2438,6 @@ TEST(InputCommandSetMDPTest,Process_OK)
 	//InputContextの初期化
 	std::string input_string="SetMDP\nOK\n\
 11\n\
-0.984375\n\
 600.000000\n\
 10\n\
 0	0.100000	1\n\
@@ -3218,6 +3217,7 @@ TEST(OutputEV3LineTracerSettingFileTest,process)
 	expect_string << "ConstractTime" << "\t";
 	expect_string << ev3.getConstructTimeString() << endl;
 	TSVOutputContext toc2(expect_string);
+	WriteDiscountRate(ev3).process(toc2);
 	WriteEV3LineTracerSetting(ev3).process(toc2);
 
 	std::cout << ev3.getConstructTimeString() << endl;

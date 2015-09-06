@@ -16,10 +16,6 @@ void ReadEV3LineTracerSetting::process(InputContext &input)
 	ReadInterval ri(ev3LineTracer);
 	ri.process(input);
 
-	//DiscountRateの読み取り
-	ReadDiscountRate rd(ev3LineTracer);
-	rd.process(input);
-
 	//CostMaxの読み取り
 	ReadCostMax rcm(ev3LineTracer);
 	rcm.process(input);
