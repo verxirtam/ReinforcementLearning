@@ -317,6 +317,10 @@ public:
 	{
 		return controlCount[i];
 	}
+	inline const std::string& getSettingFilePath(void)const
+	{
+		return settingFilePath;
+	}
 	//MDPに適合した標準的なポリシーの取得
 	Policy& getRegularPolicy(Policy& out)const
 	{

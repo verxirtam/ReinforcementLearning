@@ -3174,6 +3174,57 @@ TEST(OutputEV3LineTracerSettingFileTest,process)
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
 }
+TEST(OutputEV3LineTracerEpisodeLogFileTest,process)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	std::string inifilepath("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	std::string logdirpath("/home/daisuke/git/ReinforcementLearning/log/");
+	RL::EV3LineTracer ev3(inifilepath,true,logdirpath);
+	ev3.init();
+
+	time_t start_time;
+	time_t finish_time;
+	double elapsed_time;
+	std::time(&start_time);
+	::sleep(2);
+	std::time(&finish_time);
+	elapsed_time = std::difftime(start_time,finish_time);
+	RL::Episode e;
+	e.addStep(11,21,31.0);
+	e.addStep(12,22,32.0);
+	e.addStep(13,23,33.0);
+	e.addStep(14,24,34.0);
+	e.addStep( 0, 0, 0.0);
+	RL::OutputEV3LineTracerEpisodeLogFile oev3ef(ev3,start_time,finish_time,e);
+
+
+	oev3ef.process(toc);
+
+	//期待される出力
+	stringstream expect_string("");
+	expect_string << "StartTime" << "\t";
+	expect_string << TimeToString::toString(start_time) << endl;
+	expect_string << "FinishTime" << "\t";
+	expect_string << TimeToString::toString(finish_time) << endl;
+	expect_string << "ElapsedTime" << "\t";
+	expect_string << std::to_string(elapsed_time) << endl;
+	expect_string << ev3.getSettingFilePath() << endl;
+	TSVOutputContext toc2(expect_string);
+	WriteCurrentPolicy<EV3LineTracer>(ev3).process(toc2);
+	WriteEpisode(e).process(toc2);
+
+
+	TSVOutputContext toc2(expect_string);
+	WriteEV3LineTracerSetting(ev3).process(toc2);
+
+	std::cout << ev3.getConstructTimeString() << endl;
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+}
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////
