@@ -3192,7 +3192,7 @@ TEST(OutputEV3LineTracerEpisodeLogFileTest,process)
 	std::time(&start_time);
 	::sleep(2);
 	std::time(&finish_time);
-	elapsed_time = std::difftime(start_time,finish_time);
+	elapsed_time = std::difftime(finish_time, start_time);
 	RL::Episode e;
 	e.addStep(11,21,31.0);
 	e.addStep(12,22,32.0);
@@ -3224,12 +3224,27 @@ TEST(OutputEV3LineTracerEpisodeLogFileTest,process)
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
 }
+TEST(EV3LineTracerTest,writeEpisodeLogFile)
+{
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	std::string inifilepath("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer.ini");
+	std::string logdirpath("/home/daisuke/git/ReinforcementLearning/log/");
+	RL::EV3LineTracer ev3(inifilepath,true,logdirpath);
+	ev3.init();
+	Episode e;
+	ev3.getEpisode(e);
+}
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////
 TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 {
-	RL::EV3LineTracer ev3("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
+	std::string inifilepath("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
+	std::string logdirpath("/home/daisuke/git/ReinforcementLearning/log/");
+	RL::EV3LineTracer ev3(inifilepath,true,logdirpath);
 
 	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3);
 
@@ -3255,7 +3270,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Write*";
 	//::testing::GTEST_FLAG(filter)="*Input*:*Output*";
 	//::testing::GTEST_FLAG(filter)="*EpsilonSoftOnPolicyMonteCarlo*";
-	::testing::GTEST_FLAG(filter)="-*ActualMachineTest*";
+	::testing::GTEST_FLAG(filter)="*ActualMachineTest*";
 
 
 

@@ -12,7 +12,7 @@ namespace RL
 {
 void OutputEV3LineTracerEpisodeLogFile::process(OutputContext& output)
 {
-	double elapsed_time =std::difftime(startTime,finishTime);
+	double elapsed_time =std::difftime(finishTime, startTime);
 
 	output.writeToken("StartTime");
 	output.writeToken(TimeToString::toString(startTime));

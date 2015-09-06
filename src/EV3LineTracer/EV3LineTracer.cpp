@@ -19,6 +19,7 @@
 #include "Communication/OutputCommandSetCurrentPolicy.h"
 #include "Communication/OutputEV3LineTracerConstructFile.h"
 #include "Communication/OutputEV3LineTracerSettingFile.h"
+#include "Communication/OutputEV3LineTracerEpisodeLogFile.h"
 //↑相互参照防止
 
 
@@ -95,7 +96,7 @@ void EV3LineTracer::execCommand(RL::OutputProcedure& o_command,
 		RL::InputProcedure& i_command)const
 {
 	//EV3への接続を確立
-	TCPClient tcp_client("localhost", 50000, 1024);//"192.168.0.9",50000,1024);//
+	TCPClient tcp_client("192.168.0.8",50000,1024);//"localhost", 50000, 1024);//
 	//EV3への送信用のデータを作成
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_command);
 	RL::OutputMessage_1_0 o_message(o_ev3_1_0);
@@ -140,8 +141,22 @@ bool EV3LineTracer::getEpisode(Episode& episode)const
 	RL::OutputCommandExecEpisode o_exec_episode;
 	RL::InputCommandExecEpisode i_exec_episode(episode);
 
+	std::time_t start_time;
+	if(loggingEnable)
+	{
+		std::time(&start_time);
+	}
+
 	//コマンド実行
 	this->execCommand(o_exec_episode, i_exec_episode);
+
+	if(loggingEnable)
+	{
+		std::time_t finish_time;
+		std::time(&finish_time);
+
+		writeEpisodeLogFile(start_time,finish_time,episode);
+	}
 
 	return true;
 }
@@ -241,6 +256,25 @@ void EV3LineTracer::writeEV3LineTracerSettingFile(void)
 
 	//出力用OutputProcedureを初期化
 	RL::OutputEV3LineTracerSettingFile output(*this);
+
+	writeFile(logfilepath.str(), output);
+
+}
+
+void EV3LineTracer::writeEpisodeLogFile(const std::time_t& start_time,const std::time_t&finish_time,const Episode& episode)const
+{
+	//ファイルパスの作成
+	std::stringstream logfilepath("");
+	logfilepath << this->logDirectoryPath;
+	logfilepath << "EV3LineTracer_";
+	logfilepath << TimeToString::toStringForFileName(this->constructTime);
+	logfilepath << "_20Episode_";
+	logfilepath << TimeToString::toStringForFileName(start_time);
+	logfilepath << ".log";
+
+
+	//出力用OutputProcedureを初期化
+	RL::OutputEV3LineTracerEpisodeLogFile output(*this,start_time,finish_time,episode);
 
 	writeFile(logfilepath.str(), output);
 

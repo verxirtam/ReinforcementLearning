@@ -224,6 +224,7 @@ private:
 	void writeConstructFile(void)const;
 	void writeDestructFile(void)const;
 	void writeEV3LineTracerSettingFile(void);
+	void writeEpisodeLogFile(const std::time_t& start_time,const std::time_t&finish_time,const Episode& episode)const;
 
 
 	void writeFile(const std::string& logfilepath,
