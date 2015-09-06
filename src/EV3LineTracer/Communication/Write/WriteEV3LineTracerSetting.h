@@ -13,6 +13,7 @@
 #include "../../../Communication/Write/WriteValue.h"
 #include "../../EV3LineTracer.h"
 #include "WriteControl.h"
+#include "WriteDiscountRate.h"
 #include "WriteCostMax.h"
 #include "WriteInterval.h"
 #include "WriteState.h"

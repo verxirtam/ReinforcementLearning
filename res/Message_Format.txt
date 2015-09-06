@@ -49,6 +49,7 @@
 
 <EV3LineTracerSetting>::=
 	<Interval><endl>;Interval(msec)
+	<DiscountRate><endl>;DiscountRate
 	<CostMax><endl>;CostMax
 	<StateCount><endl>;State数
 	<State>;Stateの定義
@@ -64,6 +65,7 @@
 	<ControlCount>;ControlCount
 	<endl>
 
+<DiscountRate>::=DIGIT"."DIGIT
 <StateIndex>::=DIGIT
 <RefMax>::=DIGIT"."DIGIT
 <ControlCount>::=DIGIT
@@ -192,7 +194,7 @@
 <EpisodeLog>
 ::=
 "StartTime"<tab><StartTime><endl>
-"FinishTIme"<tab><FinishTIme><endl>
+"FinishTime"<tab><FinishTIme><endl>
 "ElapsedTime"<tab><ElapsedTime><endl>
 <EV3LineTracerSettingFileName><endl>
 <CurrentPolicy>

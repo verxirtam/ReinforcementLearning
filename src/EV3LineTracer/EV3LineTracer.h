@@ -65,6 +65,7 @@ class EV3LineTracer
 	friend class ReadSingleControl;
 	friend class ReadRegularPolicy<EV3LineTracer>;
 	friend class ReadCostMax;
+	friend class ReadDiscountRate;
 	friend class ReadEV3LineTracerSetting;
 
 private:
@@ -72,6 +73,8 @@ private:
 	/////////////////////////////
 	//Controlを維持する間隔(msec)
 	idx interval;
+	//割引率
+	real discountRate;
 	//状態数
 	idx stateCount;
 	//状態
@@ -110,7 +113,24 @@ private:
 	{
 		interval=i;
 	}
-	//Intervalの設定
+	//discountRateの設定
+	void setDiscountRate(real r)
+	{
+		if(r < 0.0)
+		{
+			discountRate = 0.0;
+		}
+		else if(r >= 1.0)
+		{
+			discountRate = 1.0;
+		}
+		else
+		{
+			discountRate = r;
+		}
+	}
+
+	//costMaxの設定
 	void setCostMax(real c)
 	{
 		costMax = c;
@@ -234,6 +254,7 @@ public:
 	//デフォルトコンストラクタ
 	EV3LineTracer():
 		interval(0),
+		discountRate(1.0),
 		stateCount(0),
 		state(),
 		controlCount(),
@@ -252,6 +273,7 @@ public:
 	//コンストラクタ
 	EV3LineTracer(std::string configfilepath,bool logging = false, const std::string& logdirpath = std::string("")):
 		interval(0),
+		discountRate(1.0),
 		stateCount(0),
 		state(),
 		controlCount(),
@@ -352,7 +374,7 @@ public:
 	//与えられないので1より小さい値(0.984375 = 1-1/64)を設定
 	inline real getDiscountRate()const
 	{
-		return 0.984375;
+		return discountRate;//0.984375;
 	}
 	//コストの最大値を取得
 	inline real getCostMax()const

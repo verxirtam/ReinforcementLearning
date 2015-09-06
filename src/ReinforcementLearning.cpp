@@ -53,6 +53,7 @@
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
 #include "EV3LineTracer/Communication/Read/ReadCostMax.h"
+#include "EV3LineTracer/Communication/Read/ReadDiscountRate.h"
 #include "EV3LineTracer/Communication/Write/WriteInterval.h"
 #include "EV3LineTracer/Communication/Write/WriteCostMax.h"
 #include "EV3LineTracer/Communication/Write/WriteStateCount.h"
@@ -1666,6 +1667,53 @@ TEST(ReadIntervalTest,Process_Exception)
 	ReadInterval ri(ev3);
 	EXPECT_THROW(ri.process(tic),std::ios_base::failure);
 }
+TEST(ReadDiscountRate,Constractor)
+{
+	string aaa="1.0\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadDiscountRate rd(ev3);
+}
+TEST(ReadDiscountRate,Process0)
+{
+	string aaa="0.125\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadDiscountRate rd(ev3);
+	rd.process(tic);
+	EXPECT_EQ(ev3.getDiscountRate(),0.125);
+}
+TEST(ReadDiscountRate,Process1)
+{
+	string aaa="-0.5\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadDiscountRate rd(ev3);
+	rd.process(tic);
+	EXPECT_EQ(ev3.getDiscountRate(),0.0);
+}
+TEST(ReadDiscountRate,Process2)
+{
+	string aaa="1.125\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadDiscountRate rd(ev3);
+	rd.process(tic);
+	EXPECT_EQ(ev3.getDiscountRate(),1.0);
+}
+TEST(ReadDiscountRate,Process_Exception)
+{
+	string aaa="aa\n";
+	std::istringstream is(aaa);
+	RL::TSVInputContext tic(is);
+	RL::EV3LineTracer ev3;
+	RL::ReadDiscountRate rd(ev3);
+	EXPECT_THROW(rd.process(tic),std::ios_base::failure);
+}
 
 TEST(ReadCostMaxTest,Process1)
 {
@@ -2319,6 +2367,7 @@ TEST(OutputCommandSetMDPTest,Process)
 
 	string expect_string = "SetMDP\n\
 11\n\
+0.984375\n\
 600.000000\n\
 10\n\
 0	0.100000	1\n\
@@ -2389,6 +2438,7 @@ TEST(InputCommandSetMDPTest,Process_OK)
 	//InputContextの初期化
 	std::string input_string="SetMDP\nOK\n\
 11\n\
+0.984375\n\
 600.000000\n\
 10\n\
 0	0.100000	1\n\
@@ -3237,6 +3287,7 @@ TEST(EV3LineTracerTest,writeEpisodeLogFile)
 	Episode e;
 	ev3.getEpisode(e);
 }
+
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////
@@ -3270,7 +3321,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Write*";
 	//::testing::GTEST_FLAG(filter)="*Input*:*Output*";
 	//::testing::GTEST_FLAG(filter)="*EpsilonSoftOnPolicyMonteCarlo*";
-	::testing::GTEST_FLAG(filter)="*ActualMachineTest*";
+	::testing::GTEST_FLAG(filter)="-*ActualMachineTest*";
 
 
 

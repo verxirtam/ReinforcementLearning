@@ -14,6 +14,7 @@
 #include "../../../Policy.h"
 #include "../../EV3LineTracer.h"
 #include "ReadControl.h"
+#include "ReadDiscountRate.h"
 #include "ReadCostMax.h"
 #include "ReadInterval.h"
 #include "ReadState.h"

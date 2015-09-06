@@ -14,6 +14,8 @@ void WriteEV3LineTracerSetting::process(OutputContext& output)
 {
 	WriteInterval(ev3LineTracer).process(output);
 
+	WriteDiscountRate(ev3LineTracer).process(output);
+
 	WriteCostMax(ev3LineTracer).process(output);
 
 	WriteStateCount(ev3LineTracer).process(output);
