@@ -1,0 +1,61 @@
+
+EpsilonSoftOnPolicyMonteCarloでの途中経過のファイル出力について
+
+●	policyEvaluation()で計算している
+
+○	policyEvaluation()で計算していない、かつEpisode毎に計算が必要
+
+◎	policyEvaluation()で計算しなくても、ファイル出力時に計算すれば求められる
+
+●→修正不要
+○→policyEvaluation()中に計算する処理を追加する必要あり
+ 	→ログ出力有効時：定義のみして初期化・集計はしない
+ 	→ログ出力無効時：集計を行う。●のデータに影響を与えないようにする
+◎→policyEvaluation()に計算する処理は含めず、ファイル出力時に算出する
+ 	→ログ出力有効時：ファイル出力の処理内で算出するため何もしない
+ 	→ログ出力無効時：ファイル出力の処理内で算出する
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+○S[i][u][k]
+	=(第kエピソードにおけるcontrol[i][u]を選択した時のcostの合計)
+
+○N[i][u][k]
+	=(第kエピソードにおけるcontrol[i][u]を選択した回数)
+
+○S_SQ[i][u][k]
+	=(第kエピソードにおけるcontrol[i][u]を選択した時のcostの2乗の合計)
+
+◎M[i][u][k]=S[i][u][k]/N[i][u][k]
+	=(control[i][u][k]を選択した時のcostの平均)
+
+◎V[i][u][k]=S_SQ[i][u][k]/N[i][u][k]-(S[i][u][k]/N[i][u][k])^2
+	=(control[i][u][k]を選択した時のcostの分散)
+
+
+
+S[i][u]=Sum_k{S[i][u][k]}
+N[i][u]=Sum_k{N[i][u][k]}
+S_SQ[i][u]=Sum_k{S_SQ[i][u][k]}
+
+
+●S[i][u]=(control[i][u]を選択した時のcostの合計)
+
+●N[i][u]=(control[i][u]を選択した回数)
+
+○S_SQ[i][u]=(control[i][u]を選択した時のcostの2乗の合計)
+
+●M[i][u]=S[i][u]/N[i][u]
+	=(control[i][u]を選択した時のcostの平均)
+	→価値単数Q[i][u]を近似する
+
+◎V[i][u]=S_SQ[i][u]/N[i][u]-(S[i][u]/N[i][u])^2
+	=(control[i][u]を選択した時のcostの分散)
+
+
+
+
+
+i	u	S[i][u][k]	N[i][u][k]	M[i][u][k]	V[i][u][k]	S[i][u]	N[i][u]	M[i][u]	V[i][u]
+
+
