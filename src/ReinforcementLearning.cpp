@@ -48,6 +48,7 @@
 #include "EV3LineTracer/Communication/OutputEV3LineTracerConstructFile.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracerDestructFile.h"
 #include "EV3LineTracer/Communication/OutputEV3LineTracerSettingFile.h"
+#include "EV3LineTracer/Communication/OutputEV3LineTracerEpisodeLogFile.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleControl.h"
 #include "EV3LineTracer/Communication/Read/ReadSingleState.h"
 #include "EV3LineTracer/Communication/Read/ReadStateCount.h"
@@ -3217,8 +3218,6 @@ TEST(OutputEV3LineTracerEpisodeLogFileTest,process)
 	WriteEpisode(e).process(toc2);
 
 
-	TSVOutputContext toc2(expect_string);
-	WriteEV3LineTracerSetting(ev3).process(toc2);
 
 	std::cout << ev3.getConstructTimeString() << endl;
 
