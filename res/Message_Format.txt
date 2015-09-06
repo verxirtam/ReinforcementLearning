@@ -172,12 +172,13 @@
 // EV3LineTracerSettingファイル
 ////////////////////////////////////
 ファイル名：
-"EV3LineTracer_"<ConstractTime>"_10Setting"".log"
+"EV3LineTracer_"<ConstractTime>"_10Setting_"<SettingTime>".log"
 <ConstractTime>::=YYYYMMDDHHMMSS
 ファイル内容：
 <EV3LineTracerSetting>
 ::=
 "ConstractTime"<tab><ConstractTime><endl>
+"SettingTime"<tab><SettingTime><endl>
 <SetMDPBody>
 
 ////////////////////////////////////

@@ -96,6 +96,11 @@ private:
 	std::string logDirectoryPath;
 	//インスタンス生成時刻
 	std::time_t constructTime;
+	//設定ファイル読み込み時刻
+	std::time_t settingTime;
+	//EV3LineTracerSettingファイル(設定のログファイル)パス
+	std::string settingFilePath;
+
 
 	//メンバ関数
 	/////////////////////////////
@@ -166,6 +171,14 @@ private:
 		//現在時刻をconstructTimeに取得
 		std::time(&constructTime);
 	}
+	//設定ファイル読み込み時の時刻を取得する
+	//init()で実行する
+	void setSettingTime()
+	{
+		//現在時刻をconstructTimeに取得
+		std::time(&settingTime);
+	}
+
 	void checkStateIndex(idx stateindex)
 	{
 		//stateindexのチェック
@@ -210,7 +223,7 @@ private:
 	}
 	void writeConstructFile(void)const;
 	void writeDestructFile(void)const;
-	void writeEV3LineTracerSettingFile(void)const;
+	void writeEV3LineTracerSettingFile(void);
 
 
 	void writeFile(const std::string& logfilepath,
@@ -230,7 +243,9 @@ public:
 		configFilePath(),
 		loggingEnable(false),
 		logDirectoryPath(),
-		constructTime(0)
+		constructTime(0),
+		settingTime(0),
+		settingFilePath()
 	{
 	}
 	//コンストラクタ
@@ -246,7 +261,9 @@ public:
 		configFilePath(configfilepath),
 		loggingEnable(logging),
 		logDirectoryPath(logdirpath),
-		constructTime(0)
+		constructTime(0),
+		settingTime(0),
+		settingFilePath()
 	{
 		if(loggingEnable)
 		{

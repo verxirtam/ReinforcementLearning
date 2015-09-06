@@ -85,6 +85,7 @@ void EV3LineTracer::init()
 	//設定をファイル出力する
 	if(loggingEnable)
 	{
+		setSettingTime();
 		writeEV3LineTracerSettingFile();
 	}
 }
@@ -224,16 +225,19 @@ void EV3LineTracer::writeDestructFile(void)const
 
 	writeFile(logfilepath.str(), output);
 }
-void EV3LineTracer::writeEV3LineTracerSettingFile(void)const
+void EV3LineTracer::writeEV3LineTracerSettingFile(void)
 {
 	//ファイルパスの作成
 	std::stringstream logfilepath("");
 	logfilepath << this->logDirectoryPath;
 	logfilepath << "EV3LineTracer_";
 	logfilepath << TimeToString::toStringForFileName(this->constructTime);
-	logfilepath << "_10Setting";
+	logfilepath << "_10Setting_";
+	logfilepath << TimeToString::toStringForFileName(this->settingTime);
 	logfilepath << ".log";
 
+	//ファイルパスを保存
+	settingFilePath=logfilepath.str();
 
 	//出力用OutputProcedureを初期化
 	RL::OutputEV3LineTracerSettingFile output(*this);

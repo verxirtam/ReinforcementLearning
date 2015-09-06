@@ -23,7 +23,7 @@ InputConfigFileEV3Linetracer_1_0::~InputConfigFileEV3Linetracer_1_0()
 }
 void InputConfigFileEV3Linetracer_1_0::process(InputContext &input)
 {
-	//Intervalの読み取り
+	//EV3LineTracerSettingの読み取り
 	ReadEV3LineTracerSetting r(ev3LineTracer);
 	r.process(input);
 }
