@@ -23,34 +23,34 @@ EpsilonSoftOnPolicyMonteCarloでの途中経過のファイル出力について
 ○N[i][u][k]
 	=(第kエピソードにおけるcontrol[i][u]を選択した回数)
 
-○S_SQ[i][u][k]
+○SQ[i][u][k]
 	=(第kエピソードにおけるcontrol[i][u]を選択した時のcostの2乗の合計)
 
 ◎M[i][u][k]=S[i][u][k]/N[i][u][k]
 	=(control[i][u][k]を選択した時のcostの平均)
 
-◎V[i][u][k]=S_SQ[i][u][k]/N[i][u][k]-(S[i][u][k]/N[i][u][k])^2
-	=(control[i][u][k]を選択した時のcostの分散)
+◎V[i][u][k]=((N[i][u][k])/(N[i][u][k]-1))*(SQ[i][u][k]/N[i][u][k]-(S[i][u][k]/N[i][u][k])^2)
+	=(control[i][u][k]を選択した時のcostの普遍分散)
 
 
 
 S[i][u]=Sum_k{S[i][u][k]}
 N[i][u]=Sum_k{N[i][u][k]}
-S_SQ[i][u]=Sum_k{S_SQ[i][u][k]}
+SQ[i][u]=Sum_k{SQ[i][u][k]}
 
 
 ●S[i][u]=(control[i][u]を選択した時のcostの合計)
 
 ●N[i][u]=(control[i][u]を選択した回数)
 
-○S_SQ[i][u]=(control[i][u]を選択した時のcostの2乗の合計)
+○SQ[i][u]=(control[i][u]を選択した時のcostの2乗の合計)
 
 ●M[i][u]=S[i][u]/N[i][u]
 	=(control[i][u]を選択した時のcostの平均)
 	→価値単数Q[i][u]を近似する
 
-◎V[i][u]=S_SQ[i][u]/N[i][u]-(S[i][u]/N[i][u])^2
-	=(control[i][u]を選択した時のcostの分散)
+◎V[i][u]=((N[i][u])/(N[i][u]-1))*(SQ[i][u]/N[i][u]-(S[i][u]/N[i][u])^2)
+	=(control[i][u]を選択した時のcostの普遍分散)
 
 
 
