@@ -22,6 +22,7 @@
 #include "Communication/TSVInputContext.h"
 #include "Communication/InputMessage_1_0.h"
 #include "Communication/OutputMessage_1_0.h"
+#include "Communication/OutputPolicyEvaluationLogFile.h"
 #include "Communication/Read/ReadStochasticPolicy.h"
 #include "Communication/Read/ReadCurrentPolicy.h"
 #include "Communication/Read/ReadStep.h"
@@ -3303,7 +3304,7 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 	Nk[1]=vector< idx>(2);Nk[1][0]=2;Nk[1][1]=3;
 	Nk[2]=vector< idx>(2);Nk[2][0]=4;Nk[2][1]=5;
 	SQk[0]=vector<real>(1);SQk[0][0]= 0.0;
-	SQk[1]=vector<real>(2);SQk[1][0]=16.0;SQk[1][1]=6.0;
+	SQk[1]=vector<real>(2);SQk[1][0]=32.0;SQk[1][1]=6.0;
 	SQk[2]=vector<real>(2);SQk[2][0]= 1.0;SQk[2][1]=0.2;
 	S[0]=vector<real>(1);S[0][0]=0.0;
 	S[1]=vector<real>(2);S[1][0]=16.0;S[1][1]=8.0;
@@ -3312,7 +3313,7 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 	N[1]=vector< idx>(2);N[1][0]= 4;N[1][1]= 6;
 	N[2]=vector< idx>(2);N[2][0]= 8;N[2][1]=10;
 	SQ[0]=vector<real>(1);SQ[0][0]= 0.0;
-	SQ[1]=vector<real>(2);SQ[1][0]=32.0;SQ[1][1]=12.0;
+	SQ[1]=vector<real>(2);SQ[1][0]=64.0;SQ[1][1]=12.0;
 	SQ[2]=vector<real>(2);SQ[2][0]= 2.0;SQ[2][1]= 0.4;
 
 	RL::PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,SQ);
@@ -3359,6 +3360,8 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
+
+	cout << ss.str();
 
 }
 /*

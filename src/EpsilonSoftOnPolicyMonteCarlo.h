@@ -8,12 +8,50 @@
 #ifndef EPSILONSOFTONPOLICYMONTECARLO_H_
 #define EPSILONSOFTONPOLICYMONTECARLO_H_
 
-#include "RLUtility.h"
+#include <vector>
+
+#include "Episode.h"
 #include "Policy.h"
+#include "Random.h"
+#include "RLUtility.h"
 
 
 namespace RL
 {
+
+class PolicyEvaluationStatistics
+{
+public:
+	typedef std::vector<std::vector<real> > TotalControlCostType;
+	typedef std::vector<std::vector< idx> > TotalControlCountType;
+
+	const TotalControlCostType& totalControlCostAtEpisode;//Sk;//Episode中のcontrolのcostの合計
+	const TotalControlCountType& totalControlSelectCountAtEpisode;//Nk;//Episode中のcontrolを選択した回数
+	const TotalControlCostType& totalControlCostSqureAtEpisode;//SQk;//Episode中のcontrolのcost^2の合計
+	const TotalControlCostType& totalControlCost;//S;//controlのcostの合計
+	const TotalControlCountType& totalControlSelectCount;//N;//controlを選択した回数
+	const TotalControlCostType& totalControlCostSqure;//SQ;//controlのcost^2の合計
+
+	PolicyEvaluationStatistics(
+			const TotalControlCostType& totalCostOfControlAtEpisode_,//Sk;//Episode中のcontrolのcostの合計
+			const TotalControlCountType& totalControlSelectCountAtEpisode_,//Nk;//Episode中のcontrolを選択した回数
+			const TotalControlCostType& totalControlCostSqureAtEpisode_,//SQk;//Episode中のcontrolのcost^2の合計
+			const TotalControlCostType& totalControlCost_,//S;//controlのcostの合計
+			const TotalControlCountType& totalControlSelectCount_,//N;//controlを選択した回数
+			const TotalControlCostType& totalControlCostSqure_//SQ;//controlのcost^2の合計
+	):
+		totalControlCostAtEpisode(totalCostOfControlAtEpisode_),
+		totalControlSelectCountAtEpisode(totalControlSelectCountAtEpisode_),
+		totalControlCostSqureAtEpisode(totalControlCostSqureAtEpisode_),
+		totalControlCost(totalControlCost_),
+		totalControlSelectCount(totalControlSelectCount_),
+		totalControlCostSqure(totalControlCostSqure_)
+	{
+	}
+};
+
+
+
 
 /*
 	class EpsilonSoftOnPolicyMonteCarlo
