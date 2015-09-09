@@ -1263,20 +1263,18 @@ TEST_P(EpsilonSoftOnPolicyMonteCarloTest,PolicyIteration)
 	smdp.getControlValueFunction(Q1);
 
 	//価値観数の表示
-	//表示しない場合はif文をfalseにする
-	if(false)
+	//表示しない場合は変数showをfalseにする
+	bool show=true;
+	if(show){cout<<"state="<<state<<endl;}
+	for(idx i=0;i<Q.size();i++)
 	{
-		cout<<"state="<<state<<endl;
-		for(idx i=0;i<Q.size();i++)
+		if(show){cout<<i<<": ";}
+		for(idx u=0;u<Q[i].size();u++)
 		{
-			cout<<i<<": ";
-			for(idx u=0;u<Q[i].size();u++)
-			{
-				EXPECT_EQ(Q[i][u]<=Q1[i][u],true);
-				cout<<Q[i][u]<<", "<<Q1[i][u]<<" | ";
-			}
-			cout<<endl;
+			EXPECT_EQ(Q[i][u]<=Q1[i][u],true);
+			if(show){cout<<Q[i][u]<<", "<<Q1[i][u]<<" | ";}
 		}
+		if(show){cout<<endl;}
 	}
 }
 
@@ -3288,6 +3286,91 @@ TEST(EV3LineTracerTest,writeEpisodeLogFile)
 	ev3.getEpisode(e);
 }
 
+TEST(OutputPolicyEvaluationLogFileTest,process)
+{
+
+	//出力する統計量の初期化
+	vector<vector<real> > Sk(3);//Episode中のcontrolのcostの合計
+	vector<vector<idx> > Nk(3);//Episode中のcontrolを選択した回数
+	vector<vector<real> > SQk(3);//Episode中のcontrolのcost^2の合計
+	vector<vector<real> > S(3);//controlのcostの合計
+	vector<vector<idx> > N(3);//controlを選択した回数
+	vector<vector<real> > SQ(3);//controlのcost^2の合計
+	Sk[0]=vector<real>(1);Sk[0][0]=0.0;
+	Sk[1]=vector<real>(2);Sk[1][0]=8.0;Sk[1][1]=4.0;
+	Sk[2]=vector<real>(2);Sk[2][0]=2.0;Sk[2][1]=1.0;
+	Nk[0]=vector< idx>(1);Nk[0][0]=1;
+	Nk[1]=vector< idx>(2);Nk[1][0]=2;Nk[1][1]=3;
+	Nk[2]=vector< idx>(2);Nk[2][0]=4;Nk[2][1]=5;
+	SQk[0]=vector<real>(1);SQk[0][0]= 0.0;
+	SQk[1]=vector<real>(2);SQk[1][0]=16.0;SQk[1][1]=6.0;
+	SQk[2]=vector<real>(2);SQk[2][0]= 1.0;SQk[2][1]=0.2;
+	S[0]=vector<real>(1);S[0][0]=0.0;
+	S[1]=vector<real>(2);S[1][0]=16.0;S[1][1]=8.0;
+	S[2]=vector<real>(2);S[2][0]= 4.0;S[2][1]=2.0;
+	N[0]=vector< idx>(1);N[0][0]=2;
+	N[1]=vector< idx>(2);N[1][0]= 4;N[1][1]= 6;
+	N[2]=vector< idx>(2);N[2][0]= 8;N[2][1]=10;
+	SQ[0]=vector<real>(1);SQ[0][0]= 0.0;
+	SQ[1]=vector<real>(2);SQ[1][0]=32.0;SQ[1][1]=12.0;
+	SQ[2]=vector<real>(2);SQ[2][0]= 2.0;SQ[2][1]= 0.4;
+
+	RL::PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,SQ);
+
+	RL::OutputPolicyEvaluationLogFile out(pes);
+
+
+	//outputcontextの初期化
+	stringstream ss("");
+	RL::TSVOutputContext toc(ss);
+
+	out.process(toc);
+
+
+	//期待される出力
+	stringstream expect_string("");
+	idx state_count = S.size();
+	for(idx i = 0; i < state_count; i++)
+	{
+		idx control_count = S[i].size();
+		for(idx u = 0; u < control_count; u++)
+		{
+			//Episode中のcostの平均
+			real Mkiu= Sk[i][u]/Nk[i][u];
+			//Episode中のcostの普遍分散
+			real Vkiu=(SQk[i][u]/Nk[i][u] - (Mkiu * Mkiu)) * (Nk[i][u])/(Nk[i][u]-1);
+			//costの平均
+			real Miu= S[i][u]/N[i][u];
+			//costの普遍分散
+			real Viu=(SQ[i][u]/N[i][u] - (Miu * Miu)) * (N[i][u])/(N[i][u]-1);
+
+			//////////////////
+			expect_string << i << "\t" << u << "\t";
+			expect_string << std::to_string(Sk[i][u]) << "\t";
+			expect_string << std::to_string(Nk[i][u]) << "\t";
+			expect_string << std::to_string(Mkiu) << "\t";
+			expect_string << std::to_string(Vkiu) << "\t";
+			expect_string << std::to_string( S[i][u]) << "\t";
+			expect_string << std::to_string( N[i][u]) << "\t";
+			expect_string << std::to_string( Miu) << "\t";
+			expect_string << std::to_string( Viu) << endl;
+		}
+	}
+
+	//出力結果のチェック
+	EXPECT_EQ(ss.str(),expect_string.str());
+
+}
+/*
+TEST_P(EpsilonSoftOnPolicyMonteCarloTest,OutputLogFile)
+{
+	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
+	SimpleMDP smdp(10);
+	EpsilonSoftOnPolicyMonteCarlo<SimpleMDP> mc(smdp,true,log_dir_path);
+	Policy p;
+	mc.policyIteration(p);
+}
+*/
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////
