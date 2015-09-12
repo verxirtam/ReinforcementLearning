@@ -3289,7 +3289,6 @@ TEST(EV3LineTracerTest,writeEpisodeLogFile)
 
 TEST(OutputPolicyEvaluationLogFileTest,process)
 {
-
 	//出力する統計量の初期化
 	vector<vector<real> > Sk(3);//Episode中のcontrolのcostの合計
 	vector<vector<idx> > Nk(3);//Episode中のcontrolを選択した回数
@@ -3316,9 +3315,14 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 	SQ[1]=vector<real>(2);SQ[1][0]=64.0;SQ[1][1]=12.0;
 	SQ[2]=vector<real>(2);SQ[2][0]= 2.0;SQ[2][1]= 0.4;
 
+	const real t_dist_95 = 3.182446;
+	const real t_dist_99 = 5.840909;
+
+	idx episode_index = 3;
+
 	RL::PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,SQ);
 
-	RL::OutputPolicyEvaluationLogFile out(pes);
+	RL::OutputPolicyEvaluationLogFile out(pes,episode_index);
 
 
 	//outputcontextの初期化
@@ -3330,6 +3334,23 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 
 	//期待される出力
 	stringstream expect_string("");
+	expect_string << "episodeIndex" << "\t";
+	expect_string << std::to_string(episode_index) << endl;
+	expect_string << "state" << "\t";
+	expect_string << "control" << "\t";
+	expect_string << "total_cost_at_episode" << "\t";
+	expect_string << "total_count_at_episode" << "\t";
+	expect_string << "mean_cost_at_episode" << "\t";
+	expect_string << "unbiased_variance_cost_at_episode" << "\t";
+	expect_string << "total_cost" << "\t";
+	expect_string << "total_count" << "\t";
+	expect_string << "mean_cost" << "\t";
+	expect_string << "unbiased_variance_cost" << "\t";
+	expect_string << "95%_confidence_interval_min" << "\t";
+	expect_string << "95%_confidence_interval_max" << "\t";
+	expect_string << "99%_confidence_interval_min" << "\t";
+	expect_string << "99%_confidence_interval_max" << endl;
+
 	idx state_count = S.size();
 	for(idx i = 0; i < state_count; i++)
 	{
@@ -3345,6 +3366,21 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 			//costの普遍分散
 			real Viu=(SQ[i][u]/N[i][u] - (Miu * Miu)) * (N[i][u])/(N[i][u]-1);
 
+			//母平均の95%区間の半分
+			real diff_95 = t_dist_95 * std::sqrt((long double)(Viu / ((real)N[i][u])));
+			//母平均の95%点（下限）
+			real mean_95_min = Miu - diff_95;
+			//母平均の95%点（上限）
+			real mean_95_max = Miu + diff_95;
+
+			//母平均の99%区間の半分
+			real diff_99 = t_dist_99 * std::sqrt((long double)(Viu / ((real)N[i][u])));
+			//母平均の99%点（下限）
+			real mean_99_min = Miu - diff_99;
+			//母平均の99%点（上限）
+			real mean_99_max = Miu + diff_99;
+
+
 			//////////////////
 			expect_string << i << "\t" << u << "\t";
 			expect_string << std::to_string(Sk[i][u]) << "\t";
@@ -3354,18 +3390,26 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 			expect_string << std::to_string( S[i][u]) << "\t";
 			expect_string << std::to_string( N[i][u]) << "\t";
 			expect_string << std::to_string( Miu) << "\t";
-			expect_string << std::to_string( Viu) << endl;
+			expect_string << std::to_string( Viu) << "\t";
+			expect_string << std::to_string(mean_95_min) << "\t";
+			expect_string << std::to_string(mean_95_max) << "\t";
+			expect_string << std::to_string(mean_99_min) << "\t";
+			expect_string << std::to_string(mean_99_max) << endl;
 		}
 	}
 
 	//出力結果のチェック
 	EXPECT_EQ(ss.str(),expect_string.str());
 
+	cout << "ss.str()" << endl;
 	cout << ss.str();
+	cout << endl;
+	cout << "expect_string.str()" << endl;
+	cout << expect_string.str();
 
 }
 /*
-TEST_P(EpsilonSoftOnPolicyMonteCarloTest,OutputLogFile)
+TEST(EpsilonSoftOnPolicyMonteCarloTest,OutputLogFile)
 {
 	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
 	SimpleMDP smdp(10);

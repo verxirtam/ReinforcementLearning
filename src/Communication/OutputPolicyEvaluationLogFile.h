@@ -24,9 +24,17 @@ class OutputPolicyEvaluationLogFile: public OutputProcedure
 {
 private:
 	const RL::PolicyEvaluationStatistics& policyEvaluationStatistics;
+	idx episodeIndex;
+	std::vector<real> tDistribution95PercentPoint;
+	std::vector<real> tDistribution99PercentPoint;
+	idx tDistributionMaxIndex;
+	void ConstructTDist(void);
 public:
-	OutputPolicyEvaluationLogFile(const RL::PolicyEvaluationStatistics& pes):policyEvaluationStatistics(pes)
+	OutputPolicyEvaluationLogFile(const RL::PolicyEvaluationStatistics& pes,
+			idx k) :
+			policyEvaluationStatistics(pes), episodeIndex(k), tDistribution95PercentPoint(), tDistribution99PercentPoint(),tDistributionMaxIndex(50)
 	{
+		ConstructTDist();
 	}
 	virtual ~OutputPolicyEvaluationLogFile()
 	{
