@@ -8,72 +8,32 @@
 #ifndef EPSILONSOFTONPOLICYMONTECARLO_H_
 #define EPSILONSOFTONPOLICYMONTECARLO_H_
 
+#include <ctime>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <typeinfo>
 #include <vector>
 
+#include "Communication/OutputPolicyEvaluationLogFile.h"
+#include "Communication/TSVOutputContext.h"
 #include "Episode.h"
 #include "Policy.h"
 #include "Random.h"
 #include "RLUtility.h"
+#include "TimeToString.h"
+
+namespace RL
+{
+class PolicyEvaluationStatistics;
+} /* namespace RL */
 
 
 namespace RL
 {
 
-class PolicyEvaluationStatistics
-{
-public:
-	typedef std::vector<std::vector<real> > TotalControlCostType;
-	typedef std::vector<std::vector< idx> > TotalControlCountType;
-
-	const TotalControlCostType& totalControlCostAtEpisode;//Sk;//Episode中のcontrolのcostの合計
-	const TotalControlCountType& totalControlSelectCountAtEpisode;//Nk;//Episode中のcontrolを選択した回数
-	const TotalControlCostType& totalControlCostSqureAtEpisode;//SQk;//Episode中のcontrolのcost^2の合計
-	const TotalControlCostType& totalControlCost;//S;//controlのcostの合計
-	const TotalControlCountType& totalControlSelectCount;//N;//controlを選択した回数
-	const TotalControlCostType& totalControlCostSqure;//SQ;//controlのcost^2の合計
-
-	PolicyEvaluationStatistics(
-			const TotalControlCostType& totalControlCostAtEpisode_,//Sk;//Episode中のcontrolのcostの合計
-			const TotalControlCountType& totalControlSelectCountAtEpisode_,//Nk;//Episode中のcontrolを選択した回数
-			const TotalControlCostType& totalControlCostSqureAtEpisode_,//SQk;//Episode中のcontrolのcost^2の合計
-			const TotalControlCostType& totalControlCost_,//S;//controlのcostの合計
-			const TotalControlCountType& totalControlSelectCount_,//N;//controlを選択した回数
-			const TotalControlCostType& totalControlCostSqure_//SQ;//controlのcost^2の合計
-	):
-		totalControlCostAtEpisode(totalControlCostAtEpisode_),
-		totalControlSelectCountAtEpisode(totalControlSelectCountAtEpisode_),
-		totalControlCostSqureAtEpisode(totalControlCostSqureAtEpisode_),
-		totalControlCost(totalControlCost_),
-		totalControlSelectCount(totalControlSelectCount_),
-		totalControlCostSqure(totalControlCostSqure_)
-	{
-		//各メンバの要素数が一致していることを確認する
-		idx state_count = totalControlCostAtEpisode.size();
-		if ((state_count != totalControlSelectCountAtEpisode.size())
-				|| (state_count != totalControlCostSqureAtEpisode.size())
-				|| (state_count != totalControlCost.size())
-				|| (state_count != totalControlSelectCount.size())
-				|| (state_count != totalControlCostSqure.size()))
-		{
-			throw std::range_error("state_countが一致しません\n");
-		}
-		for(idx i = 0; i < state_count; i++)
-		{
-			idx control_count = totalControlCostAtEpisode[i].size();
-			if ((control_count != totalControlSelectCountAtEpisode[i].size())
-					|| (control_count
-							!= totalControlCostSqureAtEpisode[i].size())
-					|| (control_count != totalControlCost[i].size())
-					|| (control_count != totalControlSelectCount[i].size())
-					|| (control_count != totalControlCostSqure[i].size()))
-			{
-				throw std::range_error(
-						std::string("") + "control_count[" + std::to_string(i)
-								+ "]が一致しません\n");
-			}
-		}
-	}
-};
 
 
 
@@ -102,8 +62,18 @@ private:
 	typedef std::vector<std::vector<real> > ControlValueFunction;
 	//処理対象のMDP
 	MDP& mdp;
+	//ログファイル出力を行うかどうかを表す
+	bool loggingEnable;
+	//ログファイルを格納するパス(末尾に'/'を付けること)
+	std::string logDirectoryPath;
+	//PolicyEvaluation()開始時刻
+	std::time_t startPolicyEvaluationTime;
 public:
-	EpsilonSoftOnPolicyMonteCarlo(MDP& mdp_):mdp(mdp_)
+	EpsilonSoftOnPolicyMonteCarlo(MDP& mdp_, bool logging_enable = false,
+			std::string log_directory_path = "") :
+			mdp(mdp_), loggingEnable(logging_enable),
+			logDirectoryPath(log_directory_path),
+			startPolicyEvaluationTime(0)
 	{
 	}
 	//CurrentPolicyを
@@ -150,7 +120,7 @@ public:
 		//e-greedy policy
 		StochasticPolicy mu_e;
 		//epsilonの初期化
-		real e=0.125;
+		real e=0.125;//0.50;//
 
 		//初期ポリシーの設定(RegularPolicy)
 		mdp.getRegularPolicy(out);
@@ -172,17 +142,45 @@ public:
 
 		return out;
 	}
-	ControlValueFunction& policyEvaluation(ControlValueFunction& value, idx episodecount=10000)const
+	ControlValueFunction& policyEvaluation(ControlValueFunction& value, idx episodecount=10000)
 	{
+		if(loggingEnable)
+		{
+			//現在時刻をstartPolicyEvaluationTimeに取得
+			std::time(&startPolicyEvaluationTime);
+		}
 		//集計用変数((i,u)のコストを集計する)
 		std::vector<std::vector<real> > S(mdp.getStateCount());
 		//集計用変数((i,u)に遭遇した回数を集計)
 		std::vector<std::vector<idx> > N(mdp.getStateCount());
+
+		//ログ出力用変数
+		//集計用変数((i,u)のコストの2乗を集計する)
+		std::vector<std::vector<real> > SQ(0);
+		//集計用変数(1エピソードあたりの(i,u)のコストを集計する)
+		std::vector<std::vector<real> > Sk(0);
+		//集計用変数(1エピソードあたりの(i,u)に遭遇した回数を集計)
+		std::vector<std::vector<idx> > Nk(0);
+		//集計用変数(1エピソードあたりの(i,u)のコストの2乗を集計する)
+		std::vector<std::vector<real> > SQk(0);
+		//ログ出力用変数の初期化(ログ出力設定時のみ実行)
+		if(loggingEnable)
+		{
+			SQ.resize(mdp.getStateCount());
+			Sk.resize(mdp.getStateCount());
+			Nk.resize(mdp.getStateCount());
+			SQk.resize(mdp.getStateCount());
+		}
+
 		//0で初期化する
 		for(idx i=0;i<S.size();i++)
 		{
 			S[i].resize(mdp.getControlCount(i),0.0);
 			N[i].resize(mdp.getControlCount(i),0);
+			if(loggingEnable)
+			{
+				SQ[i].resize(mdp.getControlCount(i),0.0);
+			}
 		}
 
 		//Episodeの実行（最大episodecount回）
@@ -196,6 +194,17 @@ public:
 			{
 				break;
 			}
+			//エピソードごとの初期化
+			if(loggingEnable)
+			{
+				for(idx i=0;i<S.size();i++)
+				{
+					Sk[i]=std::vector<real>(mdp.getControlCount(i),0.0);
+					Nk[i]=std::vector<idx>(mdp.getControlCount(i),0);
+					SQk[i]=std::vector<real>(mdp.getControlCount(i),0.0);
+				}
+			}
+
 			//コストの集計
 			real t=0.0;
 			idx step_count = e.getStepCount();
@@ -204,12 +213,25 @@ public:
 				t=e[m].cost+mdp.getDiscountRate()*t;
 				S[e[m].state][e[m].control]+=t;
 				N[e[m].state][e[m].control]++;
+				//ログ出力用変数の算出
+				if(loggingEnable)
+				{
+					SQ[e[m].state][e[m].control]+=t*t;
+					Sk[e[m].state][e[m].control]+=t;
+					Nk[e[m].state][e[m].control]++;
+					SQk[e[m].state][e[m].control]+=t*t;
+				}
 				if(m==0)
 				{
 					break;
 				}
 			}
-
+			//ログファイルへの書き込み
+			if(loggingEnable)
+			{
+				PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,SQ);
+				writePolicyEvaluationLogfile(pes,k);
+			}
 		}
 
 		idx state_count = mdp.getStateCount();
@@ -270,8 +292,52 @@ public:
 	{
 		mdp.setCurrentPolicy(sp);
 	}
-};
+	void writeFile(const std::string& logfilepath,
+			RL::OutputProcedure& output)const
+	{
+		std::ofstream ofs(logfilepath);
+		//ファイルオープンの確認
+		if (!ofs)
+		{
+			std::string msg("writeFile() : can not open ");
+			msg += logfilepath;
+			throw std::ios_base::failure(msg);
+		}
+		try
+		{
+			RL::TSVOutputContext toc(ofs);
+			output.process(toc);
+			ofs.close();
+		} catch (...)
+		{
+			ofs.close();
+			throw;
+		}
+	}
+	void writePolicyEvaluationLogfile(RL::PolicyEvaluationStatistics& pes,idx episodeIndex)const
+	{
+		RL::OutputPolicyEvaluationLogFile ope(pes,episodeIndex);
 
+		std::stringstream log_file_path("");
+
+		log_file_path << this->logDirectoryPath;
+		log_file_path << "EpsilonSoftOnPolicyMonteCarlo";
+		log_file_path << "_";
+		log_file_path << (typeid (&mdp)).name();
+		log_file_path << "_";
+		log_file_path << "PolicyEvaluation";
+		log_file_path << "_";
+		log_file_path << RL::TimeToString::toStringForFileName(startPolicyEvaluationTime);
+		log_file_path << "_";
+		log_file_path << "Episode";
+		log_file_path << "_";
+		log_file_path << std::setw(3) << std::setfill('0') << std::to_string(episodeIndex);
+		log_file_path << "_";
+		log_file_path << ".log";
+
+		writeFile(log_file_path.str(),ope);
+	}
+};
 
 
 

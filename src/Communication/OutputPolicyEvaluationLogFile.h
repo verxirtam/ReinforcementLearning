@@ -9,13 +9,13 @@
 #define OUTPUTPOLICYEVALUATIONLOGFILE_H_
 
 
-#include <string>
 #include <vector>
 
-#include "../EpsilonSoftOnPolicyMonteCarlo.h"
 #include "../RLUtility.h"
-#include "OutputContext.h"
 #include "OutputProcedure.h"
+#include "../PolicyEvaluationStatistics.h"
+
+
 
 namespace RL
 {

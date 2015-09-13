@@ -3408,16 +3408,16 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 	cout << expect_string.str();
 
 }
-/*
+
 TEST(EpsilonSoftOnPolicyMonteCarloTest,OutputLogFile)
 {
 	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
 	SimpleMDP smdp(10);
 	EpsilonSoftOnPolicyMonteCarlo<SimpleMDP> mc(smdp,true,log_dir_path);
 	Policy p;
-	mc.policyIteration(p);
+	mc.policyIteration(p,5,1000);
 }
-*/
+
 /////////////////////////////////////////////////////////////////////
 // 実機でのテスト
 /////////////////////////////////////////////////////////////////////
