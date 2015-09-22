@@ -1,0 +1,2 @@
+plot [0:10] "input.txt" using ($1+$2*0.1):($9):($11):($12) with errorbars
+
