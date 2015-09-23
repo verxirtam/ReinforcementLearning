@@ -1,0 +1,2 @@
+echo  "plot 'EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20150923190713_Episode_014_.log' every ::3 using (\$1+\$2*0.1):9:13:14 with errorbars" | gnuplot -persist
+

@@ -1,0 +1,21 @@
+episodeIndex	2
+state	control	total_cost_at_episode	total_count_at_episode	mean_cost_at_episode	unbiased_variance_cost_at_episode	total_cost	total_count	mean_cost	unbiased_variance_cost	95%_confidence_interval_min	95%_confidence_interval_max	99%_confidence_interval_min	99%_confidence_interval_max
+0	0	0.000000	1	0.000000	-nan	600.000000	4	150.000000	90000.000000	-495.397950	795.397950	-1338.726450	1638.726450
+1	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+1	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+2	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+2	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+3	0	0.000000	0	-nan	-nan	36001.819590	273	131.874797	23276.976969	92.144822	171.604772	40.230465	223.519129
+3	1	0.000000	0	-nan	-nan	1907.284892	16	119.205306	20126.971836	-33.398565	271.809177	-232.802970	471.213581
+4	0	0.000000	0	-nan	-nan	7.649458	1	7.649458	-nan	-nan	-nan	-nan	-nan
+4	1	8079.255808	15	538.617054	1437.627473	8332.612835	50	166.652257	60918.440455	16.467551	316.836963	-179.775779	513.080293
+5	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+5	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+6	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+6	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+7	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+7	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+8	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+8	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+9	0	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan
+9	1	0.000000	0	-nan	-nan	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan

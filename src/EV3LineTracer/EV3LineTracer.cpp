@@ -96,7 +96,7 @@ void EV3LineTracer::execCommand(RL::OutputProcedure& o_command,
 		RL::InputProcedure& i_command)const
 {
 	//EV3への接続を確立
-	TCPClient tcp_client("localhost", 50000, 1024);//"192.168.0.8",50000,1024);//"localhost", 50000, 1024);//
+	TCPClient tcp_client("192.168.0.10",50000,1024);//"localhost", 50000, 1024);//
 	//EV3への送信用のデータを作成
 	RL::OutputEV3LineTracer_1_0 o_ev3_1_0(o_command);
 	RL::OutputMessage_1_0 o_message(o_ev3_1_0);

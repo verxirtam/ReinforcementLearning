@@ -3423,14 +3423,14 @@ TEST(EpsilonSoftOnPolicyMonteCarloTest,OutputLogFile)
 /////////////////////////////////////////////////////////////////////
 TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 {
-	std::string inifilepath("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
-	std::string logdirpath("/home/daisuke/git/ReinforcementLearning/log/");
-	RL::EV3LineTracer ev3(inifilepath,true,logdirpath);
+	std::string ini_file_path("/home/daisuke/git/ReinforcementLearning/res/EV3LineTracer_execEpisode.ini");
+	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
+	RL::EV3LineTracer ev3(ini_file_path,true,log_dir_path);
 
-	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3);
+	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3,true,log_dir_path);
 
 	Policy p;
-	esopmc.policyIteration(p,10,5);
+	esopmc.policyIteration(p,10,30);
 }
 /////////////////////////////////////////////////////////////////////
 
@@ -3451,7 +3451,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Write*";
 	//::testing::GTEST_FLAG(filter)="*Input*:*Output*";
 	//::testing::GTEST_FLAG(filter)="*EpsilonSoftOnPolicyMonteCarlo*";
-	::testing::GTEST_FLAG(filter)="-*ActualMachineTest*";
+	::testing::GTEST_FLAG(filter)="*ActualMachineTest*";
 
 
 
