@@ -174,7 +174,7 @@ public:
 	{
 		return !((*this) == org);
 	}
-	inline bool isNear(const StochasticPolicy& org,real error = 0.03125 * 0.03125 * 0.03125 * 0.03125)
+	inline bool isNear(const StochasticPolicy& org,real error = 0.03125 * 0.03125 * 0.03125)
 	{
 		//stateCount,conrolCountが一致しており、
 		//選択確率の誤差がerror未満の場合にtrueを返す
@@ -209,7 +209,7 @@ public:
 		//全ての確認で問題なければtrueを返す
 		return true;
 	}
-	inline bool isFar(const StochasticPolicy& org,real error = 0.03125 * 0.03125 * 0.03125 * 0.03125)
+	inline bool isFar(const StochasticPolicy& org,real error = 0.03125 * 0.03125 * 0.03125)
 	{
 		return !(this->isNear(org,error));
 	}
