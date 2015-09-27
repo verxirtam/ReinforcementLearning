@@ -1,0 +1,2 @@
+convert -delay 10 EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20150927165643_*.png EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20150927165643.gif
+
