@@ -1,0 +1,24 @@
+
+//(2, 4)の推移を取得する
+ls -1 EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151001210719_Episode_*_.log | awk '{print "cat "$1" | head -12 | tail -1"}' | bash > ESOPMC_20151001210719_2_4.txt
+
+
+accum_NonDiscount.awk
+
+DiscountRate=1.0の時のCostの推定
+
+awk -f accum_NonDiscount.awk ESOPMC_20151001210719_2_4.txt > ESOPMC_20151001210719_2_4_MeanCost.txt
+
+※多分違う。異なる（i,u）同士のCostの差がつかないと思われる。（2,4）以外のでも試してみればわかると思う
+
+
+実際そうだった。
+$ ls -1 EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151001210719_Episode_*_.log | awk '{print "cat "$1" | head -11 | tail -1"}' | bash > ESOPMC_20151001210719_2_3.txt
+$ 
+$ 
+$ awk -f accum_NonDiscount.awk ESOPMC_20151001210719_2_3.txt > ESOPMC_20151001210719_2_3_MeanCost.txt
+$ 
+$ 
+$ diff ESOPMC_20151001210719_2_3_MeanCost.txt ESOPMC_20151001210719_2_4_MeanCost.txt
+$ 
+$ 
