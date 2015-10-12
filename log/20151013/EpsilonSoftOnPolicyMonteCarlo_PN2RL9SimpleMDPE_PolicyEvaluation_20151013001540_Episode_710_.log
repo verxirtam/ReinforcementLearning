@@ -1,0 +1,20 @@
+episodeIndex	710
+01_state	02_control	03_total_cost_at_episode	04_total_count_at_episode	05_mean_cost_at_episode	06_unbiased_variance_cost_at_episode	07_total_select_episode_count	08_total_cost	09_total_count	10_total_mean_cost_sum	11_total_unbiased_variance_cost_sum	12_total_mean_count	13_total_unbiased_variance_count	14_mean_cost	15_95%_confidence_interval_min	16_95%_confidence_interval_max	17_99%_confidence_interval_min	18_99%_confidence_interval_max
+0	0	0.000000	1	0.000000	-nan	0	0.000000	711	-nan	-nan	inf	-inf	0.000000	-nan	-nan	-nan	-nan
+1	0	4.000000	2	2.000000	2.000000	0	1880.000000	930	inf	-inf	inf	-inf	2.021505	-nan	-nan	-nan	-nan
+1	1	0.000000	0	-nan	-nan	0	232.000000	58	inf	-inf	inf	-inf	4.000000	-nan	-nan	-nan	-nan
+2	0	6.000000	2	3.000000	2.000000	0	5318.000000	1296	inf	-inf	inf	-inf	4.103395	-nan	-nan	-nan	-nan
+2	1	0.000000	0	-nan	-nan	0	498.000000	80	inf	-inf	inf	-inf	6.225000	-nan	-nan	-nan	-nan
+3	0	5.000000	1	5.000000	-nan	0	8837.000000	1421	inf	-inf	inf	-inf	6.218860	-nan	-nan	-nan	-nan
+3	1	0.000000	0	-nan	-nan	0	817.000000	93	inf	-inf	inf	-inf	8.784946	-nan	-nan	-nan	-nan
+4	0	6.000000	1	6.000000	-nan	0	12448.000000	1449	inf	-inf	inf	-inf	8.590752	-nan	-nan	-nan	-nan
+4	1	0.000000	0	-nan	-nan	0	1026.000000	98	inf	-inf	inf	-inf	10.469388	-nan	-nan	-nan	-nan
+5	0	7.000000	1	7.000000	-nan	0	16602.000000	1498	inf	-inf	inf	-inf	11.082777	-nan	-nan	-nan	-nan
+5	1	0.000000	0	-nan	-nan	0	1030.000000	80	inf	-inf	inf	-inf	12.875000	-nan	-nan	-nan	-nan
+6	0	8.000000	1	8.000000	-nan	0	20342.000000	1518	inf	-inf	inf	-inf	13.400527	-nan	-nan	-nan	-nan
+6	1	0.000000	0	-nan	-nan	0	1370.000000	89	inf	-inf	inf	-inf	15.393258	-nan	-nan	-nan	-nan
+7	0	20.000000	2	10.000000	2.000000	0	24048.000000	1534	inf	-inf	inf	-inf	15.676662	-nan	-nan	-nan	-nan
+7	1	0.000000	0	-nan	-nan	0	1482.000000	88	inf	-inf	inf	-inf	16.840909	-nan	-nan	-nan	-nan
+8	0	22.000000	2	11.000000	2.000000	0	27166.000000	1553	inf	-inf	inf	-inf	17.492595	-nan	-nan	-nan	-nan
+8	1	0.000000	0	-nan	-nan	0	2002.000000	101	inf	-inf	inf	-inf	19.821782	-nan	-nan	-nan	-nan
+9	0	13.000000	1	13.000000	-nan	0	22137.000000	1193	inf	-inf	inf	-inf	18.555742	-nan	-nan	-nan	-nan

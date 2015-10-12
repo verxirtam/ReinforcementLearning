@@ -1,0 +1,20 @@
+episodeIndex	95
+01_state	02_control	03_total_cost_at_episode	04_total_count_at_episode	05_mean_cost_at_episode	06_unbiased_variance_cost_at_episode	07_total_select_episode_count	08_total_cost	09_total_count	10_total_mean_cost_sum	11_total_unbiased_variance_cost_sum	12_total_mean_count	13_total_unbiased_variance_count	14_mean_cost	15_95%_confidence_interval_min	16_95%_confidence_interval_max	17_99%_confidence_interval_min	18_99%_confidence_interval_max
+0	0	0.000000	1	0.000000	-nan	0	0.000000	96	-nan	-nan	inf	-inf	0.000000	-nan	-nan	-nan	-nan
+1	0	1.000000	1	1.000000	-nan	0	197.000000	119	inf	-inf	inf	-inf	1.655462	-nan	-nan	-nan	-nan
+1	1	0.000000	0	-nan	-nan	0	34.000000	8	inf	-inf	inf	-inf	4.250000	-nan	-nan	-nan	-nan
+2	0	6.000000	2	3.000000	2.000000	0	648.000000	168	inf	-inf	inf	-inf	3.857143	-nan	-nan	-nan	-nan
+2	1	0.000000	0	-nan	-nan	0	42.000000	9	inf	-inf	inf	-inf	4.666667	-nan	-nan	-nan	-nan
+3	0	15.000000	3	5.000000	4.000000	0	1118.000000	188	inf	-inf	inf	-inf	5.946809	-nan	-nan	-nan	-nan
+3	1	0.000000	0	-nan	-nan	0	117.000000	13	inf	-inf	inf	-inf	9.000000	-nan	-nan	-nan	-nan
+4	0	14.000000	2	7.000000	2.000000	0	1726.000000	208	inf	-inf	inf	-inf	8.298077	-nan	-nan	-nan	-nan
+4	1	0.000000	0	-nan	-nan	0	156.000000	14	inf	-inf	inf	-inf	11.142857	-nan	-nan	-nan	-nan
+5	0	9.000000	1	9.000000	-nan	0	2331.000000	219	inf	-inf	inf	-inf	10.643836	-nan	-nan	-nan	-nan
+5	1	0.000000	0	-nan	-nan	0	195.000000	15	inf	-inf	inf	-inf	13.000000	-nan	-nan	-nan	-nan
+6	0	10.000000	1	10.000000	-nan	0	2438.000000	191	inf	-inf	inf	-inf	12.764398	-nan	-nan	-nan	-nan
+6	1	0.000000	0	-nan	-nan	0	130.000000	10	inf	-inf	inf	-inf	13.000000	-nan	-nan	-nan	-nan
+7	0	24.000000	2	12.000000	2.000000	0	2267.000000	157	inf	-inf	inf	-inf	14.439490	-nan	-nan	-nan	-nan
+7	1	0.000000	0	-nan	-nan	0	157.000000	11	inf	-inf	inf	-inf	14.272727	-nan	-nan	-nan	-nan
+8	0	26.000000	2	13.000000	2.000000	0	2570.000000	159	inf	-inf	inf	-inf	16.163522	-nan	-nan	-nan	-nan
+8	1	0.000000	0	-nan	-nan	0	190.000000	11	inf	-inf	inf	-inf	17.272727	-nan	-nan	-nan	-nan
+9	0	15.000000	1	15.000000	-nan	0	2350.000000	136	inf	-inf	inf	-inf	17.279412	-nan	-nan	-nan	-nan

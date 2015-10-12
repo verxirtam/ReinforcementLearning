@@ -155,18 +155,25 @@ public:
 		std::vector<std::vector<idx> > N(mdp.getStateCount());
 
 		//ログ出力用変数
-		//集計用変数((i,u)のコストの2乗を集計する)
+		//集計用変数((i,u)のコストの和の2乗を集計する)
 		std::vector<std::vector<real> > SQ(0);
+		//集計用変数((i,u)の選択回数の2乗を集計する)
+		std::vector<std::vector<idx> > NQ(0);
+		//集計用変数((i,u)を選択したエピソード数を集計する)
+		std::vector<std::vector<idx> > K(0);
 		//集計用変数(1エピソードあたりの(i,u)のコストを集計する)
 		std::vector<std::vector<real> > Sk(0);
 		//集計用変数(1エピソードあたりの(i,u)に遭遇した回数を集計)
 		std::vector<std::vector<idx> > Nk(0);
 		//集計用変数(1エピソードあたりの(i,u)のコストの2乗を集計する)
 		std::vector<std::vector<real> > SQk(0);
+
 		//ログ出力用変数の初期化(ログ出力設定時のみ実行)
 		if(loggingEnable)
 		{
 			SQ.resize(mdp.getStateCount());
+			NQ.resize(mdp.getStateCount());
+			K.resize(mdp.getStateCount());
 			Sk.resize(mdp.getStateCount());
 			Nk.resize(mdp.getStateCount());
 			SQk.resize(mdp.getStateCount());
@@ -180,6 +187,8 @@ public:
 			if(loggingEnable)
 			{
 				SQ[i].resize(mdp.getControlCount(i),0.0);
+				NQ[i].resize(mdp.getControlCount(i),0.0);
+				K[i].resize(mdp.getControlCount(i),0);
 			}
 		}
 
@@ -208,6 +217,7 @@ public:
 			//コストの集計
 			real t=0.0;
 			idx step_count = e.getStepCount();
+			//Step単位の集計
 			for(idx m = step_count -1; m >= 0; m--)
 			{
 				t=e[m].cost+mdp.getDiscountRate()*t;
@@ -216,7 +226,7 @@ public:
 				//ログ出力用変数の算出
 				if(loggingEnable)
 				{
-					SQ[e[m].state][e[m].control]+=t*t;
+					//SQ[e[m].state][e[m].control]+=t*t;
 					Sk[e[m].state][e[m].control]+=t;
 					Nk[e[m].state][e[m].control]++;
 					SQk[e[m].state][e[m].control]+=t*t;
@@ -226,10 +236,31 @@ public:
 					break;
 				}
 			}
+			//Episode単位の集計
+			if(loggingEnable)
+			{
+				for(idx i=0;i<S.size();i++)
+				{
+					idx control_count=mdp.getControlCount(i);
+					for(idx u=0;u<control_count;u++)
+					{
+						//SQ[i][u]の集計
+						SQ[i][u] += Sk[i][u]*Sk[i][u];
+						//NQ[i][u]の集計
+						NQ[i][u] += Nk[i][u]*Nk[i][u];
+						//K[i][u]を集計する
+						//エピソード中に1回以上(i,u)を選択していたらK[i][u]を1加える
+						if(Nk[i][u]>=1)
+						{
+							K[i][u]++;
+						}
+					}
+				}
+			}
 			//ログファイルへの書き込み
 			if(loggingEnable)
 			{
-				PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,SQ);
+				PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,K,SQ,NQ);
 				writePolicyEvaluationLogfile(pes,k);
 			}
 		}

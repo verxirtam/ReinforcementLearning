@@ -26,40 +26,34 @@ void OutputPolicyEvaluationLogFile::process(OutputContext& output)
 	//記述の簡略化のための参照定義(全Episodeの統計量)
 	const PES::TotalControlCostType& S = pes.totalControlCost;
 	const PES::TotalControlCountType& N = pes.totalControlSelectCount;
+	const PES::TotalControlCountType& K = pes.totalControlSelectEpisodeCount;
 	const PES::TotalControlCostType& SQ = pes.totalControlCostSqure;
+	const PES::TotalControlCountType& NQ = pes.totalControlSelectCountSqure;
 
-	const real t_dist_95 =
-			episodeIndex > 0 ?
-					(episodeIndex > tDistributionMaxIndex ?
-							tDistribution95PercentPoint[tDistributionMaxIndex] :
-							tDistribution95PercentPoint[episodeIndex]) :
-					0.0;
-	const real t_dist_99 =
-			episodeIndex > 0 ?
-					(episodeIndex > tDistributionMaxIndex ?
-							tDistribution99PercentPoint[tDistributionMaxIndex] :
-							tDistribution99PercentPoint[episodeIndex]) :
-					0.0;
 
 	//episodeIndexの表示
 	output.writeToken("episodeIndex");
 	output.writeToken(std::to_string(episodeIndex));
 	output.newLine();
 
-	output.writeToken("state");
-	output.writeToken("control");
-	output.writeToken("total_cost_at_episode");
-	output.writeToken("total_count_at_episode");
-	output.writeToken("mean_cost_at_episode");
-	output.writeToken("unbiased_variance_cost_at_episode");
-	output.writeToken("total_cost");
-	output.writeToken("total_count");
-	output.writeToken("mean_cost");
-	output.writeToken("unbiased_variance_cost");
-	output.writeToken("95%_confidence_interval_min");
-	output.writeToken("95%_confidence_interval_max");
-	output.writeToken("99%_confidence_interval_min");
-	output.writeToken("99%_confidence_interval_max");
+	output.writeToken("01_state");
+	output.writeToken("02_control");
+	output.writeToken("03_total_cost_at_episode");
+	output.writeToken("04_total_count_at_episode");
+	output.writeToken("05_mean_cost_at_episode");
+	output.writeToken("06_unbiased_variance_cost_at_episode");
+	output.writeToken("07_total_select_episode_count");
+	output.writeToken("08_total_cost");
+	output.writeToken("09_total_count");
+	output.writeToken("10_total_mean_cost_sum");
+	output.writeToken("11_total_unbiased_variance_cost_sum");
+	output.writeToken("12_total_mean_count");
+	output.writeToken("13_total_unbiased_variance_count");
+	output.writeToken("14_mean_cost");
+	output.writeToken("15_95%_confidence_interval_min");
+	output.writeToken("16_95%_confidence_interval_max");
+	output.writeToken("17_99%_confidence_interval_min");
+	output.writeToken("18_99%_confidence_interval_max");
 	output.newLine();
 
 	idx state_count = S.size();
@@ -71,44 +65,98 @@ void OutputPolicyEvaluationLogFile::process(OutputContext& output)
 			//Episode中のcostの平均
 			real Mkiu= Sk[i][u]/Nk[i][u];
 			//Episode中のcostの普遍分散
-			real Vkiu=(SQk[i][u] - Nk[i][u] * (Mkiu * Mkiu)) /((real)(Nk[i][u]-1));
+			real Uk2iu=(SQk[i][u] - Nk[i][u] * (Mkiu * Mkiu)) /((real)(Nk[i][u]-1));
 			//全Episodeのcostの平均
 			real Miu= S[i][u]/N[i][u];
-			//全Episodeのcostの普遍分散
-			real Viu=(SQ[i][u] - N[i][u] * (Miu * Miu)) /((real)(N[i][u]-1));
 
-			//母平均の95%区間の半分
-			real diff_95 = t_dist_95 * std::sqrt((long double)(Viu / ((real)N[i][u])));
-			//母平均の95%点（下限）
-			real mean_95_min = Miu - diff_95;
-			//母平均の95%点（上限）
-			real mean_95_max = Miu + diff_95;
+			//自由度
+			idx freedom = K[i][u]-1;
+			//t分布の95%点
+			const real t_dist_95 =
+					freedom > 0 ?
+							(freedom > tDistributionMaxIndex ?
+									tDistribution95PercentPoint[tDistributionMaxIndex] :
+									tDistribution95PercentPoint[freedom]) :
+							0.0;
+			//t分布の99%点
+			const real t_dist_99 =
+					freedom > 0 ?
+							(freedom > tDistributionMaxIndex ?
+									tDistribution99PercentPoint[tDistributionMaxIndex] :
+									tDistribution99PercentPoint[freedom]) :
+							0.0;
+			/////////////////////
+			//Skの平均
+			real MSiu = S[i][u]/((real)(K[i][u]));
+			//Skの不偏分散
+			real US2iu=SQ[i][u]/((real)(K[i][u]-1))-S[i][u]*S[i][u]/((real)(K[i][u]*(K[i][u]-1)));
 
-			//母平均の99%区間の半分
-			real diff_99 = t_dist_99 * std::sqrt((long double)(Viu / ((real)N[i][u])));
-			//母平均の99%点（下限）
-			real mean_99_min = Miu - diff_99;
-			//母平均の99%点（上限）
-			real mean_99_max = Miu + diff_99;
+
+			//Sの95%信頼区間の幅の半分
+			real Siu_95_width_half = t_dist_95 * std::sqrt((long double)(US2iu/((real)(K[i][u]))));
+			//Sの99%信頼区間の幅の半分
+			real Siu_99_width_half = t_dist_99 * std::sqrt((long double)(US2iu/((real)(K[i][u]))));
+
+			//Sの95%信頼区間の最小値
+			real Siu_95_min = MSiu - Siu_95_width_half;
+			//Sの95%信頼区間の最大値
+			real Siu_95_max = MSiu + Siu_95_width_half;
+			//Sの99%信頼区間の最小値
+			real Siu_99_min = MSiu - Siu_99_width_half;
+			//Sの99%信頼区間の最大値
+			real Siu_99_max = MSiu + Siu_99_width_half;
+			/////////////////////
+			//Nkの平均
+			real MNiu = ((real)(N[i][u]))/((real)(K[i][u]));
+			//Nkの不偏分散
+			real UN2iu=((real)(NQ[i][u]))/((real)(K[i][u]-1))-((real)(N[i][u]*N[i][u]))/((real)(K[i][u]*(K[i][u]-1)));
+
+
+			//Nの95%信頼区間の幅の半分
+			real Niu_95_width_half = t_dist_95 * std::sqrt((long double)(UN2iu/((real)(K[i][u]))));
+			//Nの99%信頼区間の幅の半分
+			real Niu_99_width_half = t_dist_99 * std::sqrt((long double)(UN2iu/((real)(K[i][u]))));
+
+			//Nの95%信頼区間の最小値
+			real Niu_95_min = MNiu - Niu_95_width_half;
+			//Nの95%信頼区間の最大値
+			real Niu_95_max = MNiu + Niu_95_width_half;
+			//Nの99%信頼区間の最小値
+			real Niu_99_min = MNiu - Niu_99_width_half;
+			//Nの99%信頼区間の最大値
+			real Niu_99_max = MNiu + Niu_99_width_half;
+			////////////////////////
+
+			//価値関数の95%信頼区間の最小値
+			real Miu_95_min = Siu_95_min / Niu_95_max;
+			//価値関数の95%信頼区間の最大値
+			real Miu_95_max = Siu_95_max / Niu_95_min;
+
+			//価値関数の99%信頼区間の最小値
+			real Miu_99_min = Siu_99_min / Niu_99_max;
+			//価値関数の99%信頼区間の最大値
+			real Miu_99_max = Siu_99_max / Niu_99_min;
+
+
 			//////////////////
 			output.writeToken(std::to_string(i));
 			output.writeToken(std::to_string(u));
 			output.writeToken(std::to_string(Sk[i][u]));
 			output.writeToken(std::to_string(Nk[i][u]));
 			output.writeToken(std::to_string(Mkiu));
-			output.writeToken(std::to_string(Vkiu));
+			output.writeToken(std::to_string(Uk2iu));
+			output.writeToken(std::to_string(K[i][u]));
 			output.writeToken(std::to_string(S[i][u]));
 			output.writeToken(std::to_string(N[i][u]));
+			output.writeToken(std::to_string(MSiu));
+			output.writeToken(std::to_string(US2iu));
+			output.writeToken(std::to_string(MNiu));
+			output.writeToken(std::to_string(UN2iu));
 			output.writeToken(std::to_string(Miu));
-			output.writeToken(std::to_string(Viu));
-			//標本数が1の時は信頼区間を出力しない
-			if(episodeIndex > 0)
-			{
-				output.writeToken(std::to_string(mean_95_min));
-				output.writeToken(std::to_string(mean_95_max));
-				output.writeToken(std::to_string(mean_99_min));
-				output.writeToken(std::to_string(mean_99_max));
-			}
+			output.writeToken(std::to_string(Miu_95_min));
+			output.writeToken(std::to_string(Miu_95_max));
+			output.writeToken(std::to_string(Miu_99_min));
+			output.writeToken(std::to_string(Miu_99_max));
 			output.newLine();
 		}
 	}

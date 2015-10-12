@@ -106,7 +106,7 @@ BEGIN{
 
 }
 {
-	N++;
+	if($4>0){N++;}
 	CostSum+=$3;
 	CostSq += $3*$3;
 	CountSum += $4;
@@ -116,14 +116,14 @@ BEGIN{
 
 	CostMean=CostSum/N;
 	CostUV=CostSq/(N-1)-CostMean*CostMean*N/(N-1);
-	CostIntWidth2=TDist95Point[N-1]*sqrt(CostUV)/sqrt(N);
+	CostIntWidth2=TDist95Point[(N-1>100)?(100):(N-1)]*sqrt(CostUV)/sqrt(N);
 	CostIntMin=CostMean-CostIntWidth2;
 	CostIntMax=CostMean+CostIntWidth2;
 	#print CostMean" "CostUV" "sqrt(CostUV)" ["CostIntMin", "CostIntMax"]";
 
 	CountMean=CountSum/N;
 	CountUV=CountSq/(N-1)-CountMean*CountMean*N/(N-1);
-	CountIntWidth2=TDist95Point[N-1]*sqrt(CountUV)/sqrt(N);
+	CountIntWidth2=TDist95Point[(N-1>100)?(100):(N-1)]*sqrt(CountUV)/sqrt(N);
 	CountIntMin=CountMean-CountIntWidth2;
 	CountIntMax=CountMean+CountIntWidth2;
 	#print CountMean" "CountUV" "sqrt(CountUV)" ["CountIntMin", "CountIntMax"]";
