@@ -62,6 +62,8 @@ private:
 	typedef std::vector<std::vector<real> > ControlValueFunction;
 	//処理対象のMDP
 	MDP& mdp;
+	//ポリシー以外のcontrolを選択する確率を示す
+	real epsilon;
 	//ログファイル出力を行うかどうかを表す
 	bool loggingEnable;
 	//ログファイルを格納するパス(末尾に'/'を付けること)
@@ -69,9 +71,9 @@ private:
 	//PolicyEvaluation()開始時刻
 	std::time_t startPolicyEvaluationTime;
 public:
-	EpsilonSoftOnPolicyMonteCarlo(MDP& mdp_, bool logging_enable = false,
+	EpsilonSoftOnPolicyMonteCarlo(MDP& mdp_,double epsilon_ = 0.125, bool logging_enable = false,
 			std::string log_directory_path = "") :
-			mdp(mdp_), loggingEnable(logging_enable),
+			mdp(mdp_),epsilon(epsilon_), loggingEnable(logging_enable),
 			logDirectoryPath(log_directory_path),
 			startPolicyEvaluationTime(0)
 	{
@@ -120,7 +122,7 @@ public:
 		//e-greedy policy
 		StochasticPolicy mu_e;
 		//epsilonの初期化
-		real e=0.125;//0.50;//
+		real e=epsilon;//0.50;//
 
 		//初期ポリシーの設定(RegularPolicy)
 		mdp.getRegularPolicy(out);

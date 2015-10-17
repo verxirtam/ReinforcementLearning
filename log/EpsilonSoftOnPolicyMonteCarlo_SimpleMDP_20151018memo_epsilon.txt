@@ -1,0 +1,5 @@
+EpsilonSoftOnPolicyMonteCarlo_PN2RL9SimpleMDPE_PolicyEvaluation_20151017230143	epsilon = 0.125
+EpsilonSoftOnPolicyMonteCarlo_PN2RL9SimpleMDPE_PolicyEvaluation_20151017230322	epsilon = 0.25
+EpsilonSoftOnPolicyMonteCarlo_PN2RL9SimpleMDPE_PolicyEvaluation_20151018002434	epsilon = 0.5
+EpsilonSoftOnPolicyMonteCarlo_PN2RL9SimpleMDPE_PolicyEvaluation_20151018002640	epsilon = 0.5
+

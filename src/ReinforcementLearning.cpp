@@ -3422,9 +3422,9 @@ TEST(EpsilonSoftOnPolicyMonteCarloTest,OutputLogFile)
 {
 	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
 	SimpleMDP smdp(10);
-	EpsilonSoftOnPolicyMonteCarlo<SimpleMDP> mc(smdp,true,log_dir_path);
+	EpsilonSoftOnPolicyMonteCarlo<SimpleMDP> mc(smdp,0.5,true,log_dir_path);
 	Policy p;
-	mc.policyIteration(p,5,1000);
+	mc.policyIteration(p,5,100);
 }
 
 /////////////////////////////////////////////////////////////////////
@@ -3436,7 +3436,7 @@ TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
 	RL::EV3LineTracer ev3(ini_file_path,true,log_dir_path);
 
-	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3,true,log_dir_path);
+	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3,0.125,true,log_dir_path);
 
 	Policy p;
 	esopmc.policyIteration(p,10,100);
