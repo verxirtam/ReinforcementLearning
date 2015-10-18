@@ -1,0 +1,23 @@
+gnuplotコマンドメモ
+
+#Control (2,*)の推移（PolicyIteration一回分）
+plot \
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151019011912_Episode_*_.log | grep -P \"^2\\t0\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151019011912_Episode_*_.log | grep -P \"^2\\t1\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151019011912_Episode_*_.log | grep -P \"^2\\t2\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151019011912_Episode_*_.log | grep -P \"^2\\t3\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151019011912_Episode_*_.log | grep -P \"^2\\t4\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_20151019011912_Episode_*_.log | grep -P \"^2\\t5\"" using :14 with line
+
+
+#Control (2,*)の推移（PolicyIteration全体）
+plot \
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t0\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t1\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t2\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t3\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t4\"" using :14 with line,\
+"< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t5\"" using :14 with line
+
+#Episodeのコストの推移
+plot "<  ls -1 *_20Episode_* | sort | awk '{print \"tail -2 \"$1\" | head -1\"}' | bash" using :4
