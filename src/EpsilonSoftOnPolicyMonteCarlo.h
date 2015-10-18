@@ -63,6 +63,7 @@ private:
 	//処理対象のMDP
 	MDP& mdp;
 	//ポリシー以外のcontrolを選択する確率を示す
+	//(PolicyIterationによって変化しない)
 	real epsilon;
 	//ログファイル出力を行うかどうかを表す
 	bool loggingEnable;
@@ -121,8 +122,6 @@ public:
 
 		//e-greedy policy
 		StochasticPolicy mu_e;
-		//epsilonの初期化
-		real e=epsilon;//0.50;//
 
 		//初期ポリシーの設定(RegularPolicy)
 		mdp.getRegularPolicy(out);
@@ -130,7 +129,7 @@ public:
 		//Policy Iterationの実行
 		for(idx k=0;k<pi_count;k++)
 		{
-			setCurrentPolicy(epsilonGreedy(out,e,mu_e));
+			setCurrentPolicy(epsilonGreedy(out,epsilon,mu_e));
 			ControlValueFunction Q;
 			policyEvaluation(Q,episode_count);
 			Policy policy_new;
@@ -246,8 +245,8 @@ public:
 					idx control_count=mdp.getControlCount(i);
 					for(idx u=0;u<control_count;u++)
 					{
-						//SQ[i][u]の集計
 						SQ[i][u] += Sk[i][u]*Sk[i][u];
+						//SQ[i][u]の集計
 						//NQ[i][u]の集計
 						NQ[i][u] += Nk[i][u]*Nk[i][u];
 						//K[i][u]を集計する
@@ -349,7 +348,7 @@ public:
 	}
 	void writePolicyEvaluationLogfile(RL::PolicyEvaluationStatistics& pes,idx episodeIndex)const
 	{
-		RL::OutputPolicyEvaluationLogFile ope(pes,episodeIndex);
+		RL::OutputPolicyEvaluationLogFile ope(pes,episodeIndex,epsilon);
 
 		std::stringstream log_file_path("");
 

@@ -36,6 +36,11 @@ void OutputPolicyEvaluationLogFile::process(OutputContext& output)
 	output.writeToken(std::to_string(episodeIndex));
 	output.newLine();
 
+	//episodeIndexの表示
+	output.writeToken("epsilon");
+	output.writeToken(std::to_string(epsilon));
+	output.newLine();
+
 	output.writeToken("01_state");
 	output.writeToken("02_control");
 	output.writeToken("03_total_cost_at_episode");

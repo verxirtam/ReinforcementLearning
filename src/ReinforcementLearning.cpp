@@ -3329,9 +3329,11 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 
 	idx episode_index = 3;
 
+	real epsilon = 0.125;
+
 	RL::PolicyEvaluationStatistics pes(Sk,Nk,SQk,S,N,K,SQ,NQ);
 
-	RL::OutputPolicyEvaluationLogFile out(pes,episode_index);
+	RL::OutputPolicyEvaluationLogFile out(pes,episode_index,epsilon);
 
 
 	//outputcontextの初期化

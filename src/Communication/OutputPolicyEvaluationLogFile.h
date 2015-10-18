@@ -25,14 +25,15 @@ class OutputPolicyEvaluationLogFile: public OutputProcedure
 private:
 	const RL::PolicyEvaluationStatistics& policyEvaluationStatistics;
 	idx episodeIndex;
+	real epsilon;
 	std::vector<real> tDistribution95PercentPoint;
 	std::vector<real> tDistribution99PercentPoint;
 	idx tDistributionMaxIndex;
 	void ConstructTDist(void);
 public:
 	OutputPolicyEvaluationLogFile(const RL::PolicyEvaluationStatistics& pes,
-			idx k) :
-			policyEvaluationStatistics(pes), episodeIndex(k), tDistribution95PercentPoint(), tDistribution99PercentPoint(),tDistributionMaxIndex(50)
+			idx k,real epsilon_) :
+			policyEvaluationStatistics(pes), episodeIndex(k), epsilon(epsilon_), tDistribution95PercentPoint(), tDistribution99PercentPoint(),tDistributionMaxIndex(50)
 	{
 		ConstructTDist();
 	}
