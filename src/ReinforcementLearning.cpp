@@ -3438,7 +3438,7 @@ TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 	std::string log_dir_path("/home/daisuke/git/ReinforcementLearning/log/");
 	RL::EV3LineTracer ev3(ini_file_path,true,log_dir_path);
 
-	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3,0.125,true,log_dir_path);
+	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3,0.25,true,log_dir_path);
 
 	Policy p;
 	esopmc.policyIteration(p,10,100);
