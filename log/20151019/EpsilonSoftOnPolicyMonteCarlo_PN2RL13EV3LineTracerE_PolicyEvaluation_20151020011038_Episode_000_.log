@@ -1,0 +1,30 @@
+episodeIndex	0
+epsilon	0.250000
+01_state	02_control	03_total_cost_at_episode	04_total_count_at_episode	05_mean_cost_at_episode	06_unbiased_variance_cost_at_episode	07_total_select_episode_count	08_total_cost	09_total_count	10_total_mean_cost_sum	11_total_unbiased_variance_cost_sum	12_total_mean_count	13_total_unbiased_variance_count	14_mean_cost	15_95%_confidence_interval_min	16_95%_confidence_interval_max	17_99%_confidence_interval_min	18_99%_confidence_interval_max
+0	0	0.000000	1	0.000000	-nan	1	0.000000	1	0.000000	-nan	1.000000	-nan	0.000000	-nan	-nan	-nan	-nan
+1	0	169.395585	108	1.568478	44.322407	1	169.395585	108	169.395585	-nan	108.000000	-nan	1.568478	-nan	-nan	-nan	-nan
+1	1	1638.831901	1374	1.192745	37.043013	1	1638.831901	1374	1638.831901	-nan	1374.000000	-nan	1.192745	-nan	-nan	-nan	-nan
+1	2	69.835817	107	0.652671	18.682169	1	69.835817	107	69.835817	-nan	107.000000	-nan	0.652671	-nan	-nan	-nan	-nan
+1	3	102.626531	102	1.006142	18.000177	1	102.626531	102	102.626531	-nan	102.000000	-nan	1.006142	-nan	-nan	-nan	-nan
+2	0	55.527149	72	0.771210	18.972628	1	55.527149	72	55.527149	-nan	72.000000	-nan	0.771210	-nan	-nan	-nan	-nan
+2	1	26.903500	74	0.363561	3.580200	1	26.903500	74	26.903500	-nan	74.000000	-nan	0.363561	-nan	-nan	-nan	-nan
+2	2	1443.995154	1373	1.051708	29.616655	1	1443.995154	1373	1443.995154	-nan	1373.000000	-nan	1.051708	-nan	-nan	-nan	-nan
+2	3	60.884938	62	0.982015	16.722950	1	60.884938	62	60.884938	-nan	62.000000	-nan	0.982015	-nan	-nan	-nan	-nan
+2	4	97.618155	56	1.743181	66.204507	1	97.618155	56	97.618155	-nan	56.000000	-nan	1.743181	-nan	-nan	-nan	-nan
+2	5	71.609040	75	0.954787	20.000650	1	71.609040	75	71.609040	-nan	75.000000	-nan	0.954787	-nan	-nan	-nan	-nan
+3	0	1.178262	48	0.024547	0.009276	1	1.178262	48	1.178262	-nan	48.000000	-nan	0.024547	-nan	-nan	-nan	-nan
+3	1	1.278356	50	0.025567	0.010667	1	1.278356	50	1.278356	-nan	50.000000	-nan	0.025567	-nan	-nan	-nan	-nan
+3	2	10.432844	588	0.017743	0.007765	1	10.432844	588	10.432844	-nan	588.000000	-nan	0.017743	-nan	-nan	-nan	-nan
+3	3	0.757099	43	0.017607	0.006411	1	0.757099	43	0.757099	-nan	43.000000	-nan	0.017607	-nan	-nan	-nan	-nan
+4	0	17.719607	530	0.033433	0.004721	1	17.719607	530	17.719607	-nan	530.000000	-nan	0.033433	-nan	-nan	-nan	-nan
+4	1	1.023550	28	0.036555	0.005714	1	1.023550	28	1.023550	-nan	28.000000	-nan	0.036555	-nan	-nan	-nan	-nan
+4	2	1.452612	42	0.034586	0.003989	1	1.452612	42	1.452612	-nan	42.000000	-nan	0.034586	-nan	-nan	-nan	-nan
+4	3	0.961899	44	0.021861	0.003159	1	0.961899	44	0.961899	-nan	44.000000	-nan	0.021861	-nan	-nan	-nan	-nan
+5	0	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+5	1	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+5	2	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+5	3	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	0	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	1	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	2	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	3	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
