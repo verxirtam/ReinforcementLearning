@@ -151,15 +151,15 @@ set fontpath
 set psdir
 set fit noerrorvariables
 GNUTERM = "wxt"
-set multiplot layout 3,2
+set multiplot layout 6,1
 
-plot [][0:]\
+plot \
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^1\\t0\"" using :14 with line title "ex. cost of (1,0)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^1\\t1\"" using :14 with line title "ex. cost of (1,1)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^1\\t2\"" using :14 with line title "ex. cost of (1,2)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^1\\t3\"" using :14 with line title "ex. cost of (1,3)"
 
-plot [][0:]\
+plot \
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t0\"" using :14 with line title "ex. cost of (2,0)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t1\"" using :14 with line title "ex. cost of (2,1)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t2\"" using :14 with line title "ex. cost of (2,2)",\
@@ -167,13 +167,13 @@ plot [][0:]\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t4\"" using :14 with line title "ex. cost of (2,4)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^2\\t5\"" using :14 with line title "ex. cost of (2,5)"
 
-plot [][0:]\
+plot \
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^3\\t0\"" using :14 with line title "ex. cost of (3,0)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^3\\t1\"" using :14 with line title "ex. cost of (3,1)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^3\\t2\"" using :14 with line title "ex. cost of (3,2)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^3\\t3\"" using :14 with line title "ex. cost of (3,3)"
 
-plot [][0:]\
+plot \
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^4\\t0\"" using :14 with line title "ex. cost of (4,0)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^4\\t1\"" using :14 with line title "ex. cost of (4,1)",\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^4\\t2\"" using :14 with line title "ex. cost of (4,2)",\
@@ -182,11 +182,7 @@ plot [][0:]\
 
 plot "<  ls -1 *_20Episode_* | sort | awk '{print \"tail -2 \"$1\" | head -1\"}' | bash" using :4 with line title "total cost"
 
-plot \
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*099*.log | tail -3 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 3rd the last 99th episode",\
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*099*.log | tail -2 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 2nd the last 99th episode",\
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*099*.log | tail -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the last 99th episode",\
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*.log | tail -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval"
+plot "<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*.log | tail -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval"
 
 unset multiplot
 

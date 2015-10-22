@@ -1,0 +1,12 @@
+分布はまばら。おそらく曲がり角に来る時だけ4になっている。
+
+gnuplot> 
+gnuplot> 
+gnuplot> 
+gnuplot> plot "< ls -1 EV3LineTracer_20151021232930_20Episode_*.log | awk '{print \"tail --lines=+13 \"$1}' | bash" every ::13 using (int($1/100)*100):(($2==4)?1:0) smooth frequency
+gnuplot> 
+gnuplot> pwd
+/home/daisuke/git/ReinforcementLearning/log
+gnuplot> 
+gnuplot> 
+
