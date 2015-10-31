@@ -1,5 +1,5 @@
 BEGIN{
-	discountRate = 0.500000
+	discountRate = 1.000000
 }
 {
 	#項目数が1の行に達したらスクリプト終了
