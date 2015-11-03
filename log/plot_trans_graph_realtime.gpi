@@ -182,11 +182,12 @@ plot [][0:]\
 
 plot "<  ls -1 *_20Episode_* | sort | awk '{print \"tail -2 \"$1\" | head -1\"}' | bash" using :4 with line title "total cost"
 
-plot \
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*099*.log | tail -3 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 3rd the last 99th episode",\
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*099*.log | tail -2 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 2nd the last 99th episode",\
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*099*.log | tail -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the last 99th episode",\
-"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*_Episode_*.log | tail -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval"
+#plot \
+#"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*EV3LineTracer*_Episode_*099*.log | tail -3 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 3rd the last 99th episode",\
+#"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*EV3LineTracer*_Episode_*099*.log | tail -2 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 2nd the last 99th episode",\
+#"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*EV3LineTracer*_Episode_*099*.log | tail -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the last 99th episode",\
+
+plot "<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*EV3LineTracer*_Episode_*.log | tail -1`" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval"
 
 unset multiplot
 

@@ -1,0 +1,30 @@
+episodeIndex	0
+epsilon	0.125000
+01_state	02_control	03_total_cost_at_episode	04_total_count_at_episode	05_mean_cost_at_episode	06_unbiased_variance_cost_at_episode	07_total_select_episode_count	08_total_cost	09_total_count	10_total_mean_cost_sum	11_total_unbiased_variance_cost_sum	12_total_mean_count	13_total_unbiased_variance_count	14_mean_cost	15_95%_confidence_interval_min	16_95%_confidence_interval_max	17_99%_confidence_interval_min	18_99%_confidence_interval_max
+0	0	0.000000	1	0.000000	-nan	1	0.000000	1	0.000000	-nan	1.000000	-nan	0.000000	-nan	-nan	-nan	-nan
+1	0	718.027119	255	2.815793	3.104402	1	718.027119	255	718.027119	-nan	255.000000	-nan	2.815793	-nan	-nan	-nan	-nan
+1	1	10.110263	5	2.022053	0.002345	1	10.110263	5	10.110263	-nan	5.000000	-nan	2.022053	-nan	-nan	-nan	-nan
+1	2	27.197097	11	2.472463	0.718870	1	27.197097	11	27.197097	-nan	11.000000	-nan	2.472463	-nan	-nan	-nan	-nan
+1	3	30.828007	9	3.425334	9.228451	1	30.828007	9	30.828007	-nan	9.000000	-nan	3.425334	-nan	-nan	-nan	-nan
+2	0	422.739973	83	5.093253	11.381142	1	422.739973	83	422.739973	-nan	83.000000	-nan	5.093253	-nan	-nan	-nan	-nan
+2	1	13224.344905	3066	4.313224	7.595755	1	13224.344905	3066	13224.344905	-nan	3066.000000	-nan	4.313224	-nan	-nan	-nan	-nan
+2	2	304.002643	81	3.753119	7.349696	1	304.002643	81	304.002643	-nan	81.000000	-nan	3.753119	-nan	-nan	-nan	-nan
+2	3	338.475167	65	5.207310	11.874556	1	338.475167	65	338.475167	-nan	65.000000	-nan	5.207310	-nan	-nan	-nan	-nan
+2	4	251.167081	57	4.406440	6.612484	1	251.167081	57	251.167081	-nan	57.000000	-nan	4.406440	-nan	-nan	-nan	-nan
+2	5	248.335527	58	4.281647	8.353818	1	248.335527	58	248.335527	-nan	58.000000	-nan	4.281647	-nan	-nan	-nan	-nan
+3	0	456.271673	43	10.610969	17.971583	1	456.271673	43	456.271673	-nan	43.000000	-nan	10.610969	-nan	-nan	-nan	-nan
+3	1	14099.218567	1337	10.545414	18.879725	1	14099.218567	1337	14099.218567	-nan	1337.000000	-nan	10.545414	-nan	-nan	-nan	-nan
+3	2	437.385245	42	10.413934	23.427966	1	437.385245	42	437.385245	-nan	42.000000	-nan	10.413934	-nan	-nan	-nan	-nan
+3	3	477.276392	50	9.545528	21.390590	1	477.276392	50	477.276392	-nan	50.000000	-nan	9.545528	-nan	-nan	-nan	-nan
+4	0	182.842020	12	15.236835	1.118278	1	182.842020	12	182.842020	-nan	12.000000	-nan	15.236835	-nan	-nan	-nan	-nan
+4	1	2725.603402	179	15.226835	1.555708	1	2725.603402	179	2725.603402	-nan	179.000000	-nan	15.226835	-nan	-nan	-nan	-nan
+4	2	124.577095	8	15.572137	0.494191	1	124.577095	8	124.577095	-nan	8.000000	-nan	15.572137	-nan	-nan	-nan	-nan
+4	3	125.655349	8	15.706919	0.231399	1	125.655349	8	125.655349	-nan	8.000000	-nan	15.706919	-nan	-nan	-nan	-nan
+5	0	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+5	1	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+5	2	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+5	3	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	0	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	1	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	2	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
+6	3	0.000000	0	-nan	-nan	0	0.000000	0	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan	-nan
