@@ -129,7 +129,7 @@ BEGIN{
 	#print CountMean" "CountUV" "sqrt(CountUV)" ["CountIntMin", "CountIntMax"]";
 
 	#print "["CostIntMin/CountIntMax", "CostIntMax/CountIntMin"]";
-	print CostIntMin/CountIntMax"\t"CostIntMax/CountIntMin;
+	print CostSum/CountSum"\t"CostIntMin/CountIntMax"\t"CostIntMax/CountIntMin;
 	#################################################
 }
 END{

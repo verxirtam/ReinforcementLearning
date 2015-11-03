@@ -1,0 +1,22 @@
+
+set multiplot layout 3,5
+
+plot "< cat step100_plan0_05000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan1_05000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan2_05000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan3_05000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan4_05000.txt" using :(($1+$2)*0.5):1:2 with err
+
+plot "< cat step100_plan0_09375.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan1_09375.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan2_09375.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan3_09375.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan4_09375.txt" using :(($1+$2)*0.5):1:2 with err
+
+plot "< cat step100_plan0_10000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan1_10000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan2_10000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan3_10000.txt" using :(($1+$2)*0.5):1:2 with err
+plot "< cat step100_plan4_10000.txt" using :(($1+$2)*0.5):1:2 with err
+
+unset multiplot

@@ -1,5 +1,7 @@
+#
+#discountRate,episodeIndexを引数で指定すること
+#
 BEGIN{
-	discountRate = 1.000000
 }
 {
 	#項目数が1の行に達したらスクリプト終了
@@ -16,24 +18,29 @@ BEGIN{
 	c=$4
 	#訪問回数の算出
 	count[i"\t"u]++
-	#もともとのcostの算出
+	
+	#もともとのcostの算出(案0)
 	cost = c + discountRate * cost
 	calcCost[i"\t"u] += cost
+	
 	#案1のcostの算出
-	plan1Cost = 0.01 + discountRate * plan1Cost
-	plan1CalcCost[i"\t"u] += plan1Cost
-	#案2のコストの算出
 	#pre_iはエピソードを逆順に走査しているので
 	#時間的には次のステップでのstateになる
-	plan2Cost = pre_i + discountRate * plan2Cost
+	plan1Cost = pre_i + discountRate * plan1Cost
+	plan1CalcCost[i"\t"u] += plan1Cost
+	
+	#案2のコストの算出
+	plan2Cost = pre_i * pre_i + discountRate * plan2Cost
 	plan2CalcCost[i"\t"u] += plan2Cost
+	
 	#案3のコストの算出
-	plan3LocalCost = pre_i > 2 ? 1 :0
+	plan3LocalCost = pre_i > 2 ? 1 : 0
 	plan3Cost = plan3LocalCost + discountRate * plan3Cost
 	plan3CalcCost[i"\t"u] += plan3Cost
 	
 	#案4のコストの算出
-	plan4Cost = pre_i * pre_i + discountRate * plan4Cost
+	plan4LocalCost = pre_i > 2 ? 1 : 0.125
+	plan4Cost = plan4LocalCost + discountRate * plan4Cost
 	plan4CalcCost[i"\t"u] += plan4Cost
 
 	#次のステップのための初期化
@@ -44,7 +51,11 @@ BEGIN{
 END{
 	for( iu in calcCost )
 	{
-		print iu "\t" count[iu] "\t" calcCost[iu] "\t" plan1CalcCost[iu] "\t" plan2CalcCost[iu] "\t" plan3CalcCost[iu] "\t" plan4CalcCost[iu]
+		print discountRate "\t" episodeIndex "\t" iu "\t" 0 "\t" count[iu] "\t" calcCost[iu]
+	       	print discountRate "\t" episodeIndex "\t" iu "\t" 1 "\t"  count[iu] "\t" plan1CalcCost[iu]
+		print discountRate "\t" episodeIndex "\t" iu "\t" 2 "\t"  count[iu] "\t" plan2CalcCost[iu] 
+		print discountRate "\t" episodeIndex "\t" iu "\t" 3 "\t"  count[iu] "\t" plan3CalcCost[iu] 
+		print discountRate "\t" episodeIndex "\t" iu "\t" 4 "\t"  count[iu] "\t" plan4CalcCost[iu] 
 	}
 
 }
