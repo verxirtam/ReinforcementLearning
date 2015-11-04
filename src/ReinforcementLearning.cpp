@@ -3291,38 +3291,38 @@ TEST(OutputPolicyEvaluationLogFileTest,process)
 {
 	//出力する統計量の初期化
 	vector<vector<real> > Sk(3);//Episode中のcontrolのcostの合計
-	vector<vector<idx> > Nk(3);//Episode中のcontrolを選択した回数
+	vector<vector<lcount> > Nk(3);//Episode中のcontrolを選択した回数
 	vector<vector<real> > SQk(3);//Episode中のcontrolのcost^2の合計
-	vector<vector<idx> > K(3);//controlを選択したEpisodeの個数
+	vector<vector<lcount> > K(3);//controlを選択したEpisodeの個数
 	vector<vector<real> > S(3);//controlのcostの合計
-	vector<vector<idx> > N(3);//controlを選択した回数
+	vector<vector<lcount> > N(3);//controlを選択した回数
 	vector<vector<real> > SQ(3);//controlのcost^2の合計
-	vector<vector<idx> > NQ(3);//controlを選択した回数の2乗
+	vector<vector<lcount> > NQ(3);//controlを選択した回数の2乗
 
 	Sk[0]=vector<real>(1);Sk[0][0]=0.0;
 	Sk[1]=vector<real>(2);Sk[1][0]=8.0;Sk[1][1]=4.0;
 	Sk[2]=vector<real>(2);Sk[2][0]=2.0;Sk[2][1]=1.0;
-	Nk[0]=vector< idx>(1);Nk[0][0]=1;
-	Nk[1]=vector< idx>(2);Nk[1][0]=2;Nk[1][1]=3;
-	Nk[2]=vector< idx>(2);Nk[2][0]=4;Nk[2][1]=5;
+	Nk[0]=vector<lcount>(1);Nk[0][0]=1;
+	Nk[1]=vector<lcount>(2);Nk[1][0]=2;Nk[1][1]=3;
+	Nk[2]=vector<lcount>(2);Nk[2][0]=4;Nk[2][1]=5;
 	SQk[0]=vector<real>(1);SQk[0][0]= 0.0;
 	SQk[1]=vector<real>(2);SQk[1][0]=32.0;SQk[1][1]=6.0;
 	SQk[2]=vector<real>(2);SQk[2][0]= 1.0;SQk[2][1]=0.2;
 	S[0]=vector<real>(1);S[0][0]=0.0;
 	S[1]=vector<real>(2);S[1][0]=16.0;S[1][1]=8.0;
 	S[2]=vector<real>(2);S[2][0]= 4.0;S[2][1]=2.0;
-	K[0]=vector< idx>(1);K[0][0]= 2;
-	K[1]=vector< idx>(2);K[1][0]= 4;K[1][1]= 5;
-	K[2]=vector< idx>(2);K[2][0]= 6;K[2][1]= 7;
-	N[0]=vector< idx>(1);N[0][0]= 2;
-	N[1]=vector< idx>(2);N[1][0]= 4;N[1][1]= 6;
-	N[2]=vector< idx>(2);N[2][0]= 8;N[2][1]=10;
+	K[0]=vector<lcount>(1);K[0][0]= 2;
+	K[1]=vector<lcount>(2);K[1][0]= 4;K[1][1]= 5;
+	K[2]=vector<lcount>(2);K[2][0]= 6;K[2][1]= 7;
+	N[0]=vector<lcount>(1);N[0][0]= 2;
+	N[1]=vector<lcount>(2);N[1][0]= 4;N[1][1]= 6;
+	N[2]=vector<lcount>(2);N[2][0]= 8;N[2][1]=10;
 	SQ[0]=vector<real>(1);SQ[0][0]= 0.0;
 	SQ[1]=vector<real>(2);SQ[1][0]=64.0;SQ[1][1]=12.0;
 	SQ[2]=vector<real>(2);SQ[2][0]= 2.0;SQ[2][1]= 0.4;
-	NQ[0]=vector< idx>(1);NQ[0][0]= 2;
-	NQ[1]=vector< idx>(2);NQ[1][0]= 4;NQ[1][1]= 8;
-	NQ[2]=vector< idx>(2);NQ[2][0]=14;NQ[2][1]=22;
+	NQ[0]=vector<lcount>(1);NQ[0][0]= 2;
+	NQ[1]=vector<lcount>(2);NQ[1][0]= 4;NQ[1][1]= 8;
+	NQ[2]=vector<lcount>(2);NQ[2][0]=14;NQ[2][1]=22;
 
 	const real t_dist_95 = 3.182446;
 	const real t_dist_99 = 5.840909;

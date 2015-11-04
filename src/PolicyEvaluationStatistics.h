@@ -21,7 +21,7 @@ class PolicyEvaluationStatistics
 {
 public:
 	typedef std::vector<std::vector<real> > TotalControlCostType;
-	typedef std::vector<std::vector< idx> > TotalControlCountType;
+	typedef std::vector<std::vector<lcount> > TotalControlCountType;
 
 	const TotalControlCostType& totalControlCostAtEpisode;//Sk;//Episode中のcontrolのcostの合計
 	const TotalControlCountType& totalControlSelectCountAtEpisode;//Nk;//Episode中のcontrolを選択した回数

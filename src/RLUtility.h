@@ -12,6 +12,7 @@ namespace RL
 {
 	typedef unsigned int idx;
 	typedef double real;
+	typedef long long lcount;
 }
 
 

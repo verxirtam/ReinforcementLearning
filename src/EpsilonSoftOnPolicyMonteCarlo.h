@@ -153,19 +153,19 @@ public:
 		//集計用変数((i,u)のコストを集計する)
 		std::vector<std::vector<real> > S(mdp.getStateCount());
 		//集計用変数((i,u)に遭遇した回数を集計)
-		std::vector<std::vector<idx> > N(mdp.getStateCount());
+		std::vector<std::vector<lcount> > N(mdp.getStateCount());
 
 		//ログ出力用変数
 		//集計用変数((i,u)のコストの和の2乗を集計する)
 		std::vector<std::vector<real> > SQ(0);
 		//集計用変数((i,u)の選択回数の2乗を集計する)
-		std::vector<std::vector<idx> > NQ(0);
+		std::vector<std::vector<lcount> > NQ(0);
 		//集計用変数((i,u)を選択したエピソード数を集計する)
-		std::vector<std::vector<idx> > K(0);
+		std::vector<std::vector<lcount> > K(0);
 		//集計用変数(1エピソードあたりの(i,u)のコストを集計する)
 		std::vector<std::vector<real> > Sk(0);
 		//集計用変数(1エピソードあたりの(i,u)に遭遇した回数を集計)
-		std::vector<std::vector<idx> > Nk(0);
+		std::vector<std::vector<lcount> > Nk(0);
 		//集計用変数(1エピソードあたりの(i,u)のコストの2乗を集計する)
 		std::vector<std::vector<real> > SQk(0);
 
@@ -210,7 +210,7 @@ public:
 				for(idx i=0;i<S.size();i++)
 				{
 					Sk[i]=std::vector<real>(mdp.getControlCount(i),0.0);
-					Nk[i]=std::vector<idx>(mdp.getControlCount(i),0);
+					Nk[i]=std::vector<lcount>(mdp.getControlCount(i),0);
 					SQk[i]=std::vector<real>(mdp.getControlCount(i),0.0);
 				}
 			}
