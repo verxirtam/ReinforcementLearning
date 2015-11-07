@@ -3441,7 +3441,7 @@ TEST(ActualMachineTest,EpsilonSoftOnPolicyMonteCarlo)
 	EpsilonSoftOnPolicyMonteCarlo<RL::EV3LineTracer> esopmc(ev3,0.125,true,log_dir_path);
 
 	Policy p;
-	esopmc.policyIteration(p,10,100);
+	esopmc.policyIteration(p,10,50);
 }
 /////////////////////////////////////////////////////////////////////
 
