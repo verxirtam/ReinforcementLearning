@@ -11,7 +11,7 @@
 #    	gnuplot home:     http://www.gnuplot.info
 #    	faq, bugs, etc:   type "help FAQ"
 #    	immediate help:   type "help"  (plot window: hit 'h')
-set terminal wxt 0 noraise
+# set terminal wxt 0
 # set output
 unset clip points
 set clip one
@@ -150,7 +150,7 @@ set loadpath
 set fontpath 
 set psdir
 set fit noerrorvariables
-#GNUTERM = "wxt"
+GNUTERM = "wxt"
 set multiplot layout 3,2
 
 plot [][0:]\

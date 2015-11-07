@@ -11,7 +11,7 @@
 #    	gnuplot home:     http://www.gnuplot.info
 #    	faq, bugs, etc:   type "help FAQ"
 #    	immediate help:   type "help"  (plot window: hit 'h')
-set terminal wxt 0 noraise
+# set terminal wxt 0
 # set output
 unset clip points
 set clip one
@@ -150,7 +150,7 @@ set loadpath
 set fontpath 
 set psdir
 set fit noerrorvariables
-#GNUTERM = "wxt"
+GNUTERM = "wxt"
 set multiplot layout 3,2
 
 plot [][0:]\
@@ -180,7 +180,7 @@ plot [][0:]\
 "< cat EpsilonSoftOnPolicyMonteCarlo_PN2RL13EV3LineTracerE_PolicyEvaluation_*_.log | grep -P \"^4\\t3\"" using :14 with line title "ex. cost of (4,3)"
 
 
-plot [][0:]"<  ls -1 *_20Episode_* | sort | awk '{print \"tail -1 \"$1}' | bash" using :1 with line title "step count at episode"
+plot [][0:]"<  ls -1 *_20Episode_* | sort | awk '{print \"tail -2 \"$1\" | head -1\"}' | bash" using :4 with line title "total cost"
 
 #plot \
 #"<cat `ls -1 EpsilonSoftOnPolicyMonteCarlo_*EV3LineTracer*_Episode_*099*.log | tail -3 | head -1 `" every ::3 using ($1+0.1*$2):14:15:16 with err title "95% confidence interval of the 3rd the last 99th episode",\
