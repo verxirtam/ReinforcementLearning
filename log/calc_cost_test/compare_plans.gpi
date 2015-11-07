@@ -1,7 +1,7 @@
 
 rgb(r,g,b) = sprintf("#%02x%02x%02x",r%256,g%256,b%256);
 
-set multiplot layout 5,5
+set multiplot layout 5,6
 
 #set palette define (0 "white", 1 "black")
 #plot [][0:]  "< cat calc_cost_result.txt | awk '$1==\"0.9375\"&& $2<100 && $5==\"0\"'" using ($3+0.1*$4-0.001*(99-$2)):8:9:10:2 with err title "(0.0,*,*,*,0)" lc palette
@@ -14,30 +14,35 @@ plot "< cat calc_cost_result.txt | awk '$1==\"0.0\" && $2==\"99\" && $5==\"1\"'"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.0\" && $2==\"99\" && $5==\"2\"'" using ($3+0.1*$4):8:9:10 with err title "(0.0,99,*,*,2)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.0\" && $2==\"99\" && $5==\"3\"'" using ($3+0.1*$4):8:9:10 with err title "(0.0,99,*,*,3)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.0\" && $2==\"99\" && $5==\"4\"'" using ($3+0.1*$4):8:9:10 with err title "(0.0,99,*,*,4)"
+plot "< cat calc_cost_result.txt | awk '$1==\"0.0\" && $2==\"99\" && $5==\"5\"'" using ($3+0.1*$4):8:9:10 with err title "(0.0,99,*,*,5)"
 
 plot "< cat calc_cost_result.txt | awk '$1==\"0.25\" && $2==\"99\" && $5==\"0\"'" using ($3+0.1*$4):8:9:10 with err title "(0.25,99,*,*,0)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.25\" && $2==\"99\" && $5==\"1\"'" using ($3+0.1*$4):8:9:10 with err title "(0.25,99,*,*,1)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.25\" && $2==\"99\" && $5==\"2\"'" using ($3+0.1*$4):8:9:10 with err title "(0.25,99,*,*,2)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.25\" && $2==\"99\" && $5==\"3\"'" using ($3+0.1*$4):8:9:10 with err title "(0.25,99,*,*,3)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.25\" && $2==\"99\" && $5==\"4\"'" using ($3+0.1*$4):8:9:10 with err title "(0.25,99,*,*,4)"
+plot "< cat calc_cost_result.txt | awk '$1==\"0.25\" && $2==\"99\" && $5==\"5\"'" using ($3+0.1*$4):8:9:10 with err title "(0.25,99,*,*,5)"
 
 plot "< cat calc_cost_result.txt | awk '$1==\"0.5\" && $2==\"99\" && $5==\"0\"'" using ($3+0.1*$4):8:9:10 with err title "(0.5,99,*,*,0)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.5\" && $2==\"99\" && $5==\"1\"'" using ($3+0.1*$4):8:9:10 with err title "(0.5,99,*,*,1)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.5\" && $2==\"99\" && $5==\"2\"'" using ($3+0.1*$4):8:9:10 with err title "(0.5,99,*,*,2)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.5\" && $2==\"99\" && $5==\"3\"'" using ($3+0.1*$4):8:9:10 with err title "(0.5,99,*,*,3)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.5\" && $2==\"99\" && $5==\"4\"'" using ($3+0.1*$4):8:9:10 with err title "(0.5,99,*,*,4)"
+plot "< cat calc_cost_result.txt | awk '$1==\"0.5\" && $2==\"99\" && $5==\"5\"'" using ($3+0.1*$4):8:9:10 with err title "(0.5,99,*,*,5)"
 
 plot "< cat calc_cost_result.txt | awk '$1==\"0.9375\" && $2==\"99\" && $5==\"0\"'" using ($3+0.1*$4):8:9:10 with err title "(0.9375,99,*,*,0)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.9375\" && $2==\"99\" && $5==\"1\"'" using ($3+0.1*$4):8:9:10 with err title "(0.9375,99,*,*,1)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.9375\" && $2==\"99\" && $5==\"2\"'" using ($3+0.1*$4):8:9:10 with err title "(0.9375,99,*,*,2)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.9375\" && $2==\"99\" && $5==\"3\"'" using ($3+0.1*$4):8:9:10 with err title "(0.9375,99,*,*,3)"
 plot "< cat calc_cost_result.txt | awk '$1==\"0.9375\" && $2==\"99\" && $5==\"4\"'" using ($3+0.1*$4):8:9:10 with err title "(0.9375,99,*,*,4)"
+plot "< cat calc_cost_result.txt | awk '$1==\"0.9375\" && $2==\"99\" && $5==\"5\"'" using ($3+0.1*$4):8:9:10 with err title "(0.9375,99,*,*,5)"
 
 plot "< cat calc_cost_result.txt | awk '$1==\"1.0\" && $2==\"99\" && $5==\"0\"'" using ($3+0.1*$4):8:9:10 with err title "(1.0,99,*,*,0)"
 plot "< cat calc_cost_result.txt | awk '$1==\"1.0\" && $2==\"99\" && $5==\"1\"'" using ($3+0.1*$4):8:9:10 with err title "(1.0,99,*,*,1)"
 plot "< cat calc_cost_result.txt | awk '$1==\"1.0\" && $2==\"99\" && $5==\"2\"'" using ($3+0.1*$4):8:9:10 with err title "(1.0,99,*,*,2)"
 plot "< cat calc_cost_result.txt | awk '$1==\"1.0\" && $2==\"99\" && $5==\"3\"'" using ($3+0.1*$4):8:9:10 with err title "(1.0,99,*,*,3)"
 plot "< cat calc_cost_result.txt | awk '$1==\"1.0\" && $2==\"99\" && $5==\"4\"'" using ($3+0.1*$4):8:9:10 with err title "(1.0,99,*,*,4)"
+plot "< cat calc_cost_result.txt | awk '$1==\"1.0\" && $2==\"99\" && $5==\"5\"'" using ($3+0.1*$4):8:9:10 with err title "(1.0,99,*,*,5)"
 
 unset multiplot
 

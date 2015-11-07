@@ -43,6 +43,13 @@ BEGIN{
 	plan4Cost = plan4LocalCost + discountRate * plan4Cost
 	plan4CalcCost[i"\t"u] += plan4Cost
 
+	#案5のコストの算出
+	#stateに応じたコストと、
+	#ゴール時の経過時間に応じたコスト(もともとのコスト)を加算
+	plan5LocalCost = pre_c + ( pre_i > 2 ? 1 : 0.125 )
+	plan5Cost = plan5LocalCost + discountRate * plan5Cost
+	plan5CalcCost[i"\t"u] += plan5Cost
+
 	#次のステップのための初期化
 	pre_i=i
 	pre_u=u
@@ -52,10 +59,11 @@ END{
 	for( iu in calcCost )
 	{
 		print discountRate "\t" episodeIndex "\t" iu "\t" 0 "\t" count[iu] "\t" calcCost[iu]
-	       	print discountRate "\t" episodeIndex "\t" iu "\t" 1 "\t"  count[iu] "\t" plan1CalcCost[iu]
-		print discountRate "\t" episodeIndex "\t" iu "\t" 2 "\t"  count[iu] "\t" plan2CalcCost[iu] 
-		print discountRate "\t" episodeIndex "\t" iu "\t" 3 "\t"  count[iu] "\t" plan3CalcCost[iu] 
-		print discountRate "\t" episodeIndex "\t" iu "\t" 4 "\t"  count[iu] "\t" plan4CalcCost[iu] 
+	       	print discountRate "\t" episodeIndex "\t" iu "\t" 1 "\t" count[iu] "\t" plan1CalcCost[iu]
+		print discountRate "\t" episodeIndex "\t" iu "\t" 2 "\t" count[iu] "\t" plan2CalcCost[iu] 
+		print discountRate "\t" episodeIndex "\t" iu "\t" 3 "\t" count[iu] "\t" plan3CalcCost[iu] 
+		print discountRate "\t" episodeIndex "\t" iu "\t" 4 "\t" count[iu] "\t" plan4CalcCost[iu] 
+		print discountRate "\t" episodeIndex "\t" iu "\t" 5 "\t" count[iu] "\t" plan5CalcCost[iu] 
 	}
 
 }
