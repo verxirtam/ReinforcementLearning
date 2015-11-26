@@ -1,0 +1,104 @@
+//////////////////////////////////////////////
+EV3LineTracer_1.0
+暗黙的にMDPManagerRefMaxを使用する
+//////////////////////////////////////////////
+EV3LineTracer_1.0
+SetMDP
+<MDPManagerRefMaxSettings>
+///////////////////////////////////////////////
+EV3LineTracer_1.0
+SetCurrentPolicy
+(
+	<SetCurrentPolicyBody>;コマンドの内容
+	|
+	<SetCurrentPolicyResult>;コマンドの結果
+)
+///////////////////////////////////////////////
+EV3LineTracer_1.0
+"ExecEpisode"<endl>;Episodeを実行
+(
+	<Null>;コマンドの内容(無し)
+	|
+	<ExecEpisodeResult>;コマンドの結果
+)
+///////////////////////////////////////////////
+
+
+
+
+
+
+///////////////////////////////////////////////
+EV3LineTracer_1.1
+SetMDP
+<MDPManagerName>
+<MDPManagerSettings>
+///////////////////////////////////////////////
+<MDPManagerName>::=
+	"MDPManagerRefMax"
+	|
+	"MDPManagerPathLengthRefMax"
+	|
+	"MDPManagerCoordinateDirectionRefMax"
+<MDPManagerSettings>::=
+	<MDPManagerRefMaxSettings>
+	|
+	<MDPManagerPathLengthRefMaxSettings>
+	|
+	<MDPManagerCoordinateDirectionRefMaxSettings>
+
+
+
+<MDPManagerRefMaxSettings>::=
+	<Interval><endl>;Interval(msec)
+	<CostMax><endl>;CostMax
+	<StateCount><endl>;State数
+	<StateRefMax>;Stateの定義
+	<ControlNormal>;Controlの定義(M=全てのStateの全てのControl数の合計)
+	<RegularPolicy>;RegularPolicyの定義
+
+
+<MDPManagerPathLengthRefMaxSettings>::=
+	<Interval><endl>;Interval(msec)
+	<CostMax><endl>;CostMax
+	<PathLengthInterval><endl>;
+	<PathLengthIntervalCount><endl>;
+	<RefMaxInterval><endl>;
+	<RefMaxCount><endl>;
+	<ControlCountPerState>;1 stateあたりのcontrol数
+	<SingleControlNormalCommon>;Controlの定義(全state共通)
+	<RegularPolicy>;RegularPolicyの定義
+
+<StateCount> = <PathLengthCount> * <RefMaxCount> + 1
+<StateIndex> = <PathLengthIndex> * <RefMaxCount> + <RefMaxIndex> + 1
+(「1」(StateIndex = 0)はterminate　state向け)
+
+<SingleControlNormalCommon>::=
+	<ControlIndex><tab>	;ControlIndex
+	<LMotorSpeed><tab>	;LMotorSpeed
+	<RMotorSpeed>		;RMotorSpeed
+	<endl>
+
+
+<MDPManagerCoordinateDirectionRefMaxSettings>::=
+	
+
+///////////////////////////////////////////////
+EV3LineTracer_1.1
+SetCurrentPolicy;EV3LineTracer_1.0と変更なし
+(
+	<SetCurrentPolicyBody>;コマンドの内容
+	|
+	<SetCurrentPolicyResult>;コマンドの結果
+)
+///////////////////////////////////////////////
+EV3LineTracer_1.1
+"ExecEpisode"<endl>;Episodeを実行;EV3LineTracer_1.0と変更なし
+(
+	<Null>;コマンドの内容(無し)
+	|
+	<ExecEpisodeResult>;コマンドの結果
+)
+///////////////////////////////////////////////
+
+
