@@ -3462,7 +3462,7 @@ int main(int argc, char** argv)
 	//::testing::GTEST_FLAG(filter)="*Write*";
 	//::testing::GTEST_FLAG(filter)="*Input*:*Output*";
 	//::testing::GTEST_FLAG(filter)="*EpsilonSoftOnPolicyMonteCarlo*";
-	::testing::GTEST_FLAG(filter)="*ActualMachineTest*";
+	::testing::GTEST_FLAG(filter)="-*ActualMachineTest*";
 
 
 
