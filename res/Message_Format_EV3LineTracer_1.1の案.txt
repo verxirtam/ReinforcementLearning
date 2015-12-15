@@ -100,5 +100,12 @@ EV3LineTracer_1.1
 	<ExecEpisodeResult>;コマンドの結果
 )
 ///////////////////////////////////////////////
-
+EV3LineTracer_1.1
+"NullCommand"<endl>;何もしないコマンド;EV3LineTracer_1.0と変更なし
+(
+	<Null>;コマンドの内容(無し)
+	|
+	<NullCommandResult>;コマンドの結果
+)
+///////////////////////////////////////////////
 
